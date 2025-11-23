@@ -20,7 +20,6 @@ export function Layout({ children }: LayoutProps) {
             <MobileNavbar opened={mobileHeaderOpened} />
 
             <AppShell.Main className="main-layout">{children}</AppShell.Main>
-            <Footer />
         </AppShell>
     );
 }
