@@ -1,0 +1,47 @@
+.download-button {
+    position: relative;
+    padding: 1.5rem 3rem !important;
+    border-radius: var(--mantine-radius-md) !important;
+    border: none !important;
+    cursor: pointer !important;
+    overflow: hidden !important;
+
+    background: linear-gradient(0deg,
+            (var(--mantine-color-primary-2))20%,
+            (var(--mantine-color-primary-light)) 300%);
+
+    color: var(--mantine-color-black) !important;
+
+    // Smooth transitions for all effects
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        scale 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    // Base transform
+    transform: translateY(0) scale(1);
+
+    // Hover effects
+    &:hover {
+        transform: translateY(-2px) scale(1.01);
+    }
+
+    // Active state
+    &:active {
+        transform: translateY(0) scale(0.99);
+        transition: transform 0.1s ease;
+    }
+
+    // Focus state for accessibility
+    &:focus-visible {
+        outline: 2px solid var(--mantine-color-primary-2);
+        outline-offset: 2px;
+    }
+}
+
+.platform-links {
+    .platform-link {
+        &:hover {
+            color: var(--mantine-color-primary-2) !important;
+        }
+    }
+}

@@ -1,6 +1,7 @@
 import { Box, Button, Card, Group, Stack, Text, Title } from "@mantine/core";
 import { IconDownload } from "@tabler/icons-react";
 import { Logo } from "../base/Logo";
+import DownloadButton from "./DownloadButton";
 
 export function HeroSection() {
     return (
@@ -16,14 +17,7 @@ export function HeroSection() {
                     <Text size="lg" c="dimmed">
                         The #1 osu! modding tool. Catch issues before they become problems.
                     </Text>
-                    <Button
-                        size="lg"
-                        color="primary.2"
-                        autoContrast
-                        variant="filled"
-                        leftSection={<IconDownload size={20} />}>
-                        Download Latest Release
-                    </Button>
+                    <DownloadButton />
                 </Stack>
             </Stack>
 
