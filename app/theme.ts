@@ -14,16 +14,16 @@ const primary: MantineColorsTuple = [
 ] as const;
 
 const dark: MantineColorsTuple = [
-    "#A5B6CC",
-    "#8FA0BA",
-    "#6C809D",
-    "#566A84",
-    "#3E4E63",
-    "#354356",
-    "#283443",
-    "#202A36",
-    "#19212C",
-    "#10161D",
+    "#8591A8",
+    "#6D7A93",
+    "#535F78",
+    "#424C63",
+    "#31394D",
+    "#283042",
+    "#1E2533",
+    "#171C27",
+    "#0F141C",
+    "#090B10",
 ] as const;
 
 export const theme = createTheme({
