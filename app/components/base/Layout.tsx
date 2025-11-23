@@ -1,17 +1,24 @@
 import { AppShell } from "@mantine/core";
-import { useWindowScroll } from "@mantine/hooks";
+import { useDisclosure } from "@mantine/hooks";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
-import { useEffect, useMemo, useState } from "react";
+import MobileNavbar from "./MobileNavbar";
 
 interface LayoutProps {
     children: React.ReactNode;
 }
 
 export function Layout({ children }: LayoutProps) {
+    const [mobileHeaderOpened, { toggle: toggleMobileHeader }] = useDisclosure(false);
     return (
-        <AppShell header={{ height: 60 }} footer={{ height: 60 }} padding="md">
-            <Header />
+        <AppShell
+            header={{ height: 60 }}
+            navbar={{ width: 300, breakpoint: "sm", collapsed: { desktop: true, mobile: !mobileHeaderOpened } }}
+            footer={{ height: 60 }}
+            padding="md">
+            <Header mobileHeaderOpened={mobileHeaderOpened} toggleMobileHeader={toggleMobileHeader} />
+            <MobileNavbar opened={mobileHeaderOpened} />
+
             <AppShell.Main className="main-layout">{children}</AppShell.Main>
             <Footer />
         </AppShell>

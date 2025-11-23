@@ -1,3 +1,10 @@
+.header-base {
+    background: color-mix(in srgb, var(--mantine-color-body) 70%, transparent) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
 .header-container {
     display: flex;
     width: 100%;

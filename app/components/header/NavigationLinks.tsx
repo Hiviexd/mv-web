@@ -9,10 +9,11 @@ export function NavigationLinks() {
             {navigationLinks.map((link) => (
                 <Button
                     variant={activePath === link.href ? "filled" : "subtle"}
-                    color="default"
+                    color="primary.2"
                     component={Link}
                     key={link.href}
-                    to={link.href}>
+                    to={link.href}
+                    leftSection={link.icon}>
                     {link.label}
                 </Button>
             ))}
