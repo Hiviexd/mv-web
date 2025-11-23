@@ -87,7 +87,7 @@ export function ComparisonSection() {
             <Title order={1} ta="center" c="primary.2">
                 <i>Why</i> Mapset Verifier?
             </Title>
-            <Text ta="center" c="dimmed">
+            <Text ta="center">
                 Here's how it fares against other modding tools.
             </Text>
             <Table.ScrollContainer minWidth={600}>

@@ -14,7 +14,7 @@ export function HeroSection() {
                     </Title>
                 </Group>
                 <Stack gap="lg">
-                    <Text size="lg" c="dimmed">
+                    <Text size="lg">
                         The #1 osu! modding tool. Catch issues before they become problems.
                     </Text>
                     <DownloadButton />
