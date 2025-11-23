@@ -24,14 +24,7 @@ body {
 
 /* Scrollbar */
 html {
-    /* Firefox */
-    scrollbar-width: thin;
     scrollbar-color: var(--mantine-color-primary-2) var(--mantine-color-body);
-}
-
-/* Chrome/Edge/Safari */
-::-webkit-scrollbar {
-    width: 12px;
 }
 
 ::-webkit-scrollbar-track {
