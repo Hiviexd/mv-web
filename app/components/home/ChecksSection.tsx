@@ -15,7 +15,7 @@ export function ChecksSection() {
     ];
 
     return (
-        <Stack gap="xl">
+        <Stack gap="xl" mb="xl">
             <Title order={1} ta="center" c="primary.2">
                 Over <Mark color="primary.2">150</Mark> unique beatmap checks
             </Title>
