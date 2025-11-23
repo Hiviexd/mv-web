@@ -3,6 +3,7 @@ import { Layout } from "../components/base/Layout";
 import { HeroSection } from "../components/home/HeroSection";
 import { FeatureSection } from "../components/home/FeatureSection";
 import { ChecksSection } from "../components/home/ChecksSection";
+import { ComparisonSection } from "../components/home/ComparisonSection";
 import { Stack } from "@mantine/core";
 
 export function meta({}: Route.MetaArgs) {
@@ -21,7 +22,7 @@ export default function Home() {
             <Stack gap="xl">
                 <HeroSection />
                 <ChecksSection />
-                <FeatureSection />
+                <ComparisonSection />
             </Stack>
         </Layout>
     );
