@@ -1,10 +1,23 @@
 import type { Route } from "./+types/home";
-import { Welcome } from "../welcome/welcome";
+import { Layout } from "../components/base/Layout";
+import { HeroSection } from "../components/home/HeroSection";
+import { FeatureSection } from "../components/home/FeatureSection";
 
 export function meta({}: Route.MetaArgs) {
-    return [{ title: "New React Router App" }, { name: "description", content: "Welcome to React Router!" }];
+    return [
+        { title: "Mapset Verifier - Automated Quality Assurance for osu! Beatmaps" },
+        {
+            name: "description",
+            content: "Automated quality assurance tool for osu! beatmaps. Catch issues before they become problems.",
+        },
+    ];
 }
 
 export default function Home() {
-    return <Welcome />;
+    return (
+        <Layout>
+            <HeroSection />
+            <FeatureSection />
+        </Layout>
+    );
 }

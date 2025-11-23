@@ -1,0 +1,31 @@
+.header-container {
+    display: flex;
+    width: 100%;
+    height: auto;
+    align-items: center;
+    margin: 0 auto;
+
+
+    @media (max-width: 62em) {
+        // Below md breakpoint
+        justify-content: space-between;
+    }
+
+    @media (min-width: 62em) {
+        // md and above
+        justify-content: space-between;
+        max-width: 75em;
+    }
+
+    @media (min-width: 75em) {
+        // lg and above
+        max-width: 88em;
+    }
+
+    /*
+    * xl - 88em
+    @media (min-width: 88em) {
+        max-width: 88em;
+    }
+    */
+}

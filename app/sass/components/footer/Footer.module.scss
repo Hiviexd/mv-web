@@ -1,0 +1,19 @@
+.footer {
+    border-top: 1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-5));
+}
+
+.container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.link {
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.2s ease;
+
+    &:hover {
+        color: light-dark(var(--mantine-color-gray-9), var(--mantine-color-gray-1)) !important;
+    }
+}
