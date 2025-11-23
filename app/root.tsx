@@ -5,6 +5,7 @@ import "./sass/app.scss";
 
 import { ColorSchemeScript, MantineProvider, mantineHtmlProps } from "@mantine/core";
 import "@mantine/core/styles.css";
+import "@gfazioli/mantine-marquee/styles.css";
 import { theme } from "./theme";
 
 export const links: Route.LinksFunction = () => [

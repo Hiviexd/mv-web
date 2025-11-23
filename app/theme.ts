@@ -63,6 +63,14 @@ export const theme = createTheme({
                 },
             },
         },
+        Mark: {
+            styles: {
+                root: {
+                    borderRadius: "0.25rem",
+                    padding: "0 0.5rem",
+                },
+            },
+        },
         Tooltip: {
             defaultProps: {
                 withArrow: true,
