@@ -14,9 +14,9 @@ const primary: MantineColorsTuple = [
 ] as const;
 
 const dark: MantineColorsTuple = [
-    "#7E8897",
-    "#687385",
-    "#535E73",
+    "#c5cad3",
+    "#a3adbd",
+    "#8695ab",
     "#424D61",
     "#353F52",
     "#283243",
