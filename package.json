@@ -9,6 +9,7 @@
         "typecheck": "react-router typegen && tsc"
     },
     "dependencies": {
+        "@gfazioli/mantine-marquee": "^2.6.6",
         "@mantine/core": "^8.3.8",
         "@mantine/hooks": "^8.3.8",
         "@react-router/node": "^7.9.2",
