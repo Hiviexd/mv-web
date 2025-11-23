@@ -40,7 +40,7 @@ const comparisons: FeatureComparison[] = [
     {
         feature: "Timeline Comparison",
         mapsetVerifier: { supported: true },
-        moddingAssistant: { supported: true, note: "osu!aiko-only" },
+        moddingAssistant: { supported: true, note: "osu!taiko-only" },
         aiMod: { supported: false },
     },
     {
