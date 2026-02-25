@@ -17,13 +17,13 @@ const dark: MantineColorsTuple = [
     "#c5cad3",
     "#a3adbd",
     "#8695ab",
-    "#424D61",
-    "#353F52",
-    "#283243",
-    "#212B39",
-    "#1E2734",
-    "#161D28",
-    "#0D121A",
+    "#363f50",
+    "#2d3544",
+    "#232b38",
+    "#1c232e",
+    "#161d28",
+    "#0f141c",
+    "#080b0f",
 ] as const;
 
 export const theme = createTheme({

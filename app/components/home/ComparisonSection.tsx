@@ -87,11 +87,9 @@ export function ComparisonSection() {
             <Title order={1} ta="center" c="primary.2">
                 <i>Why</i> Mapset Verifier?
             </Title>
-            <Text ta="center">
-                Here's how it fares against other modding tools.
-            </Text>
+            <Text ta="center">Here's how it fares against other modding tools.</Text>
             <Table.ScrollContainer minWidth={600}>
-                <Table verticalSpacing="sm" horizontalSpacing="md" withTableBorder withColumnBorders>
+                <Table verticalSpacing="sm" horizontalSpacing="md" borderColor="gray.7">
                     <Table.Thead>
                         <Table.Tr>
                             <Table.Th>Feature</Table.Th>
@@ -100,6 +98,7 @@ export function ComparisonSection() {
                                     textAlign: "center",
                                     backgroundColor: "var(--mantine-color-primary-2)",
                                     color: "var(--mantine-color-black)",
+                                    borderRadius: "1rem 1rem 0 0",
                                 }}>
                                 Mapset Verifier
                             </Table.Th>
@@ -117,6 +116,7 @@ export function ComparisonSection() {
                                     supported={comparison.mapsetVerifier.supported}
                                     note={comparison.mapsetVerifier.note}
                                     highlight
+                                    isLast={index === comparisons.length - 1}
                                 />
                                 <FeatureCell
                                     supported={comparison.moddingAssistant.supported}
