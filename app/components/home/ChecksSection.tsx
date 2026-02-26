@@ -1,47 +1,35 @@
-import { Card, Container, Stack, Text, Title, Mark } from "@mantine/core";
+import { Stack, Title, Mark } from "@mantine/core";
+import { useMemo } from "react";
 import { Marquee } from "@gfazioli/mantine-marquee";
+import checksMetadata from "../../data/checks-metadata.json";
+import { CheckCard } from "./checks/CheckCard";
 
 export function ChecksSection() {
-    // Placeholder check data
-    const checks = [
-        { title: "Timing Check", description: "Verifies beatmap timing accuracy" },
-        { title: "Metadata Validation", description: "Ensures all metadata is correct" },
-        { title: "Difficulty Settings", description: "Validates difficulty configurations" },
-        { title: "Hitsound Verification", description: "Checks hitsound implementation" },
-        { title: "Slider Validation", description: "Verifies slider path integrity" },
-        { title: "Spinner Check", description: "Validates spinner timing" },
-        { title: "Storyboard Check", description: "Ensures storyboard compatibility" },
-        { title: "Audio Sync", description: "Verifies audio synchronization" },
-    ];
+    const checks = checksMetadata.checks;
+    const totalChecks = checks.length;
+    const shuffledChecks = useMemo(() => {
+        return checks
+            .map((check) => ({ check, sort: Math.random() }))
+            .sort((a, b) => a.sort - b.sort)
+            .map(({ check }) => check);
+    }, [checks]);
+    const marqueeChecks = shuffledChecks.slice(0, 24);
+    const marqueeChecksReverse = marqueeChecks.slice().reverse();
 
     return (
         <Stack gap="xl" mb="xl">
             <Title order={1} ta="center" c="primary.2">
-                Over <Mark color="primary.2">110</Mark> unique beatmap checks
+                Over <Mark color="primary.2">{totalChecks}</Mark> unique beatmap checks
             </Title>
             <Stack gap="md">
-                <Marquee w="100%" fadeEdges duration={40}>
-                    {checks.map((check, index) => (
-                        <Card key={index} shadow="sm" padding="lg" radius="md" withBorder maw={300} miw={250} mr="md">
-                            <Title order={4} mb="xs">
-                                {check.title}
-                            </Title>
-                            <Text size="sm" c="dimmed">
-                                {check.description}
-                            </Text>
-                        </Card>
+                <Marquee w="100%" fadeEdges duration={120}>
+                    {marqueeChecks.map((check, index) => (
+                        <CheckCard key={index} check={check} />
                     ))}
                 </Marquee>
-                <Marquee w="100%" fadeEdges reverse duration={40}>
-                    {checks.map((check, index) => (
-                        <Card key={index} shadow="sm" padding="lg" radius="md" withBorder maw={300} miw={250} mr="md">
-                            <Title order={4} mb="xs">
-                                {check.title}
-                            </Title>
-                            <Text size="sm" c="dimmed">
-                                {check.description}
-                            </Text>
-                        </Card>
+                <Marquee w="100%" fadeEdges reverse duration={120}>
+                    {marqueeChecksReverse.map((check, index) => (
+                        <CheckCard key={index} check={check} />
                     ))}
                 </Marquee>
             </Stack>

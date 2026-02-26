@@ -1,0 +1,3754 @@
+{
+  "generatedAt": "2026-02-25T18:14:53.2605222Z",
+  "version": "1.0.0.0",
+  "checks": [
+    {
+      "name": "CheckBarlineUnaffectedBySv",
+      "fullName": "MapsetVerifier.Checks.Taiko.Timing.CheckBarlineUnaffectedBySv",
+      "checkType": "Beatmap",
+      "category": "Timing",
+      "message": "Barline is unaffected by a line very close to it.",
+      "author": "Nostril",
+      "applicableModes": "Taiko",
+      "documentation": {
+        "Purpose": "\r\n                    Preventing unintentional barline slider velocities caused by timing lines being slightly unsnapped.",
+        "Reasoning": "\r\n                    Barlines before a timing line (even if just by 1 ms or less), will not be affected by its slider velocity. With 1 ms unsnaps being common due to rounding errors when copy-pasting, this in turn becomes a common issue."
+      },
+      "templates": {
+        "Warning": {
+          "level": "Warning",
+          "formatString": "{0} Barline is snapped {1} ms before a line which would modify its slider velocity.",
+          "defaultArguments": [
+            "timestamp -",
+            "unsnap"
+          ],
+          "cause": "The spinner/slider end is unsnapped 1ms early."
+        },
+        "roundingErrorWarning": {
+          "level": "Warning",
+          "formatString": "{0} Barline may not have slider velocity properly applied due to rounding error. Double-check manually.",
+          "defaultArguments": [
+            "timestamp -"
+          ],
+          "cause": "Rounding error."
+        }
+      },
+      "modes": [
+        "Taiko"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckDoubleBarlines",
+      "fullName": "MapsetVerifier.Checks.Taiko.Timing.CheckDoubleBarlines",
+      "checkType": "Beatmap",
+      "category": "Timing",
+      "message": "Double barlines",
+      "author": "Hivie, Phob",
+      "applicableModes": "Taiko",
+      "documentation": {
+        "Purpose": "\r\n                    Ensuring that there are no two barlines within 50ms of each other.",
+        "Reasoning": "\r\n                    Double barlines are caused by rounding errors. They are visually disruptive and confusing in the representation of a song\u0027s downbeat."
+      },
+      "templates": {
+        "Problem": {
+          "level": "Problem",
+          "formatString": "{0} Double barline",
+          "defaultArguments": [
+            "timestamp -"
+          ],
+          "cause": "Red line is extremely close to a downbeat from the previous red line"
+        },
+        "Warning": {
+          "level": "Warning",
+          "formatString": "{0} Potential double barline, doublecheck manually",
+          "defaultArguments": [
+            "timestamp -"
+          ],
+          "cause": "Red line is extremely close to a downbeat from the previous red line"
+        },
+        "roundingErrorWarning": {
+          "level": "Warning",
+          "formatString": "{0} Potential double barline due to rounding error, doublecheck manually",
+          "defaultArguments": [
+            "timestamp -"
+          ],
+          "cause": "Rounding error"
+        }
+      },
+      "modes": [
+        "Taiko"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckInconsistentBarLines",
+      "fullName": "MapsetVerifier.Checks.Taiko.Timing.CheckInconsistentBarLines",
+      "checkType": "BeatmapSet",
+      "category": "Timing",
+      "message": "Inconsistent omitted bar lines.",
+      "author": "Naxess",
+      "applicableModes": "Taiko",
+      "documentation": {
+        "Purpose": "\r\n                    Ensuring that bar lines are consistent between all difficulties.",
+        "Reasoning": "\r\n                    Since all difficulties in a set are based around a single song, and bar lines are meant to act as a point of reference\r\n                    for timing in gameplay, it would make the most sense if all difficulties would use the same bar lines. For this reason,\r\n                    if one difficulty skips one, others probably should too."
+      },
+      "templates": {
+        "Inconsistent": {
+          "level": "Problem",
+          "formatString": "{0} Inconsistent omitted bar line, see {1}.",
+          "defaultArguments": [
+            "timestamp -",
+            "difficulty"
+          ],
+          "cause": "A beatmap does not omit bar line where the reference beatmap does, or visa versa."
+        }
+      },
+      "modes": [
+        "Taiko"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckKiaiConsistency",
+      "fullName": "MapsetVerifier.Checks.Taiko.Timing.CheckKiaiConsistency",
+      "checkType": "General",
+      "category": "Compose",
+      "message": "Kiai inconsistencies",
+      "author": "SN707, Nostril",
+      "applicableModes": "Taiko",
+      "documentation": {
+        "Purpose": "\r\n                    Kiais should be consistent between difficulties.",
+        "Reasoning": "\r\n                    Kiais in osu!taiko have more impact than in other modes (illuminates entire playfield, slight score boost), so consistency is important unless there\u0027s a valid reason to break it (i.e. GDs)."
+      },
+      "templates": {
+        "Inconsistent": {
+          "level": "Minor",
+          "formatString": "Group {0}: ({1})",
+          "defaultArguments": [
+            "Kiai Group #",
+            "List of Difficulties"
+          ],
+          "cause": "Kiai start and end times are not aligned across difficulties."
+        }
+      },
+      "modes": [
+        "Taiko"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckKiaiFlash",
+      "fullName": "MapsetVerifier.Checks.Taiko.Timing.CheckKiaiFlash",
+      "checkType": "Beatmap",
+      "category": "Timing",
+      "message": "Kiai flashes",
+      "author": "Hivie",
+      "applicableModes": "Taiko",
+      "documentation": {
+        "Purpose": "\r\n                    Ensuring that kiai flash usage is not too drastic.",
+        "Reasoning": "\r\n                    Kiai flashes in osu!taiko cause the entire playfield to flash, which can cause performance problems, alongside potentially causing epileptic effects if abused."
+      },
+      "templates": {
+        "Minor": {
+          "level": "Minor",
+          "formatString": "{0} Kiai flash ",
+          "defaultArguments": [
+            "timestamp -"
+          ],
+          "cause": "A kiai flash exists, but is not too drastic"
+        },
+        "Warning": {
+          "level": "Warning",
+          "formatString": "{0} Kiai flash",
+          "defaultArguments": [
+            "timestamp -"
+          ],
+          "cause": "A kiai flash that\u0027s too drastic exists"
+        }
+      },
+      "modes": [
+        "Taiko"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckDiffSettings",
+      "fullName": "MapsetVerifier.Checks.Taiko.Settings.CheckDiffSettings",
+      "checkType": "Beatmap",
+      "category": "Settings",
+      "message": "OD/HP values too high/low",
+      "author": "Hivie",
+      "applicableModes": "Taiko",
+      "documentation": {
+        "Purpose": "\r\n                        Preventing difficulties from going beyond or below the\r\n                        recommended OD/HP values present in the ranking criteria.\r\n                        ",
+        "Reasoning": "\r\n                    OD/HP values that are too high or low can cause gameplay imbalances.\r\n\r\n                    \u003E The recommended settings below are based on the current ranking criteria with adjustments based on mapping standards and drain time, so make sure you apply your own judgment as well.\r\n\r\n### Recommended OD settings\r\n\r\n| Difficulty | Overall Difficulty |\r\n|---|---|\r\n| Kantan | 3 |\r\n| Futsuu | 4 |\r\n| Muzukashii | 5 |\r\n| Oni | 5.5 |\r\n\r\n### Recommended HP settings\r\n\r\n| Difficulty | Drain \u003C= 1:00 | 1:00 \u003C Drain \u003C 3:45  | 3:45 \u003C= Drain \u003C 4:45 | Drain \u003E= 4:45  |\r\n| ---------- | ------------- | -------------------- | -------------------- | -------------- |\r\n| Kantan     | 9~10          | 8~9                  | 7~8                  | 6~7            |\r\n| Futsuu     | 8~9           | 7~8                  | 6~7                  | 5~6            |\r\n| Muzukashii | 7~8           | 6~7                  | 5~6                  | 4~5            |\r\n| Oni        | 7~8           | 5.5~6.5              | 5~6                  | 4~5            |"
+      },
+      "templates": {
+        "hpMinor": {
+          "level": "Minor",
+          "formatString": "HP is different from suggested value {0}, currently {1}.",
+          "defaultArguments": [
+            "limit",
+            "current"
+          ],
+          "cause": "Current value is slightly different from the recommended limits."
+        },
+        "hpWarning": {
+          "level": "Warning",
+          "formatString": "HP is different from suggested value {0}, currently {1}. Ensure this makes sense.",
+          "defaultArguments": [
+            "limit",
+            "current"
+          ],
+          "cause": "Current value is considerably different from the recommended limits."
+        },
+        "odMinor": {
+          "level": "Minor",
+          "formatString": "OD is different from suggested value {0}, currently {1}.",
+          "defaultArguments": [
+            "limit",
+            "current"
+          ],
+          "cause": "Current value is slightly different from the recommended limits."
+        },
+        "odWarning": {
+          "level": "Warning",
+          "formatString": "OD is different from suggested value {0}, currently {1}. Ensure this makes sense.",
+          "defaultArguments": [
+            "limit",
+            "current"
+          ],
+          "cause": "Current value is considerably different from the recommended limits."
+        }
+      },
+      "modes": [
+        "Taiko"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane"
+      ]
+    },
+    {
+      "name": "CheckBgOffsetConsistency",
+      "fullName": "MapsetVerifier.Checks.Taiko.Design.CheckBgOffsetConsistency",
+      "checkType": "General",
+      "category": "Design",
+      "message": "Background offset inconsistencies",
+      "author": "Nostril",
+      "applicableModes": "Taiko",
+      "documentation": {
+        "Purpose": "\r\n                    Pointing out background offset inconsistencies between osu!taikodifficulties.",
+        "Reasoning": "\r\n                    Background offset should generally be consistent across osu!taiko difficulties that share the same background."
+      },
+      "templates": {
+        "Minor": {
+          "level": "Minor",
+          "formatString": "\u0022{0}\u0022 {1}: ({2})",
+          "defaultArguments": [
+            "Filename",
+            "Offset Coordinates",
+            "List of Difficulties"
+          ],
+          "cause": "Background offset is inconsistent across difficulties. Make sure this is intentional."
+        }
+      },
+      "modes": [
+        "Taiko"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckLastNoteHidingBarline",
+      "fullName": "MapsetVerifier.Checks.Taiko.Compose.CheckLastNoteHidingBarline",
+      "checkType": "Beatmap",
+      "category": "Compose",
+      "message": "Unsnapped last note hiding barline",
+      "author": "Nostril",
+      "applicableModes": "Taiko",
+      "documentation": {
+        "Purpose": "\r\n                    Check if the last object in the beatmap is not 1ms earlier than a barline.",
+        "Reasoning": "\r\n                    This causes the last barline in the map to not be rendered."
+      },
+      "templates": {
+        "Minor": {
+          "level": "Minor",
+          "formatString": "{0} Last spinner/slider end in the map is hiding its barline, due to being unsnapped 1ms early",
+          "defaultArguments": [
+            "timestamp -"
+          ],
+          "cause": "The spinner/slider end is unsnapped 1ms early."
+        },
+        "Problem": {
+          "level": "Problem",
+          "formatString": "{0} Last note in the map is hiding its barline, due to being unsnapped 1ms early",
+          "defaultArguments": [
+            "timestamp -"
+          ],
+          "cause": "The note is unsnapped 1ms early."
+        },
+        "roundingErrorWarning": {
+          "level": "Warning",
+          "formatString": "{0} Last note in the map may have its barline hidden, due to rounding error. Doublecheck manually.",
+          "defaultArguments": [
+            "timestamp -"
+          ],
+          "cause": "Rounding error."
+        }
+      },
+      "modes": [
+        "Taiko"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckPatternLength",
+      "fullName": "MapsetVerifier.Checks.Taiko.Compose.CheckPatternLength",
+      "checkType": "BeatmapSet",
+      "category": "Compose",
+      "message": "Pattern Lengths",
+      "author": "SN707",
+      "applicableModes": "Taiko",
+      "documentation": {
+        "Purpose": "\r\n                    Preventing patterns from being too long based on each difficulty\u0027s Ranking Criteria.",
+        "Reasoning": "\r\n                    On lower difficulties, patterns that use smaller snaps should be avoided as they can become straining if they exceed an unreasonable length."
+      },
+      "templates": {
+        "Minor": {
+          "level": "Minor",
+          "formatString": "{0} {1} {2} pattern is {3} notes long.",
+          "defaultArguments": [
+            "start",
+            "end",
+            "snap",
+            "number"
+          ],
+          "cause": "Pattern length is equal to the RC guideline"
+        },
+        "Warning": {
+          "level": "Warning",
+          "formatString": "{0} {1} {2} pattern is {3} notes long, ensure this makes sense.",
+          "defaultArguments": [
+            "start",
+            "end",
+            "snap",
+            "number"
+          ],
+          "cause": "Pattern length is surpassing the RC guideline."
+        }
+      },
+      "modes": [
+        "Taiko"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane"
+      ]
+    },
+    {
+      "name": "CheckRestMoments",
+      "fullName": "MapsetVerifier.Checks.Taiko.Compose.CheckRestMoments",
+      "checkType": "Beatmap",
+      "category": "Compose",
+      "message": "Rest moments",
+      "author": "Hivie, Phob, Nostril",
+      "applicableModes": "Taiko",
+      "documentation": {
+        "Purpose": "\r\n                    Ensuring that a chain of objects doesn\u0027t exceed a certain threshold without a required rest moment.",
+        "Reasoning": "\r\n                    Abnormally long chains without proper rest moments can be very straining to play."
+      },
+      "templates": {
+        "Minor": {
+          "level": "Minor",
+          "formatString": "{0} {1} No {2} rest moments for {3}, ensure this makes sense",
+          "defaultArguments": [
+            "start",
+            "end",
+            "break",
+            "length"
+          ],
+          "cause": "Chain length is surpassing the RC guideline, but not excessively"
+        },
+        "Warning": {
+          "level": "Warning",
+          "formatString": "{0} {1} No {2} rest moments for {3}, ensure this makes sense",
+          "defaultArguments": [
+            "start",
+            "end",
+            "break",
+            "length"
+          ],
+          "cause": "Chain length is excessively surpassing the RC guideline"
+        }
+      },
+      "modes": [
+        "Taiko"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane"
+      ]
+    },
+    {
+      "name": "CheckSmallestSnap",
+      "fullName": "MapsetVerifier.Checks.Taiko.Compose.CheckSmallestSnap",
+      "checkType": "Beatmap",
+      "category": "Compose",
+      "message": "Unrankable snapping",
+      "author": "Hivie, Phob",
+      "applicableModes": "Taiko",
+      "documentation": {
+        "Purpose": "\r\n                    Preventing patterns with abnormally small snaps based on each difficulty\u0027s Ranking Criteria.",
+        "Reasoning": "\r\n                    Certain snaps are too difficult/unreasonable for certain difficulties."
+      },
+      "templates": {
+        "Warning": {
+          "level": "Warning",
+          "formatString": "{0} abnormally small gap, ensure it makes sense",
+          "defaultArguments": [
+            "timestamp -"
+          ],
+          "cause": "Gap between notes may be too small"
+        }
+      },
+      "modes": [
+        "Taiko"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane"
+      ]
+    },
+    {
+      "name": "CheckSpinnerReadability",
+      "fullName": "MapsetVerifier.Checks.Taiko.Compose.CheckSpinnerReadability",
+      "checkType": "Beatmap",
+      "category": "Compose",
+      "message": "Spinner readability",
+      "author": "Hivie, Phob",
+      "applicableModes": "Taiko",
+      "documentation": {
+        "Purpose": "\r\n                    Pointing out spinners that may be very close to their preceding object.",
+        "Reasoning": "\r\n                    Spinners can cause reading issues when being too close to their preceding object due to the visual overlap, especially in lower difficulties."
+      },
+      "templates": {
+        "Minor": {
+          "level": "Minor",
+          "formatString": "{0} Note is too close to spinner",
+          "defaultArguments": [
+            "timestamp -"
+          ],
+          "cause": "The note is too close to the spinner"
+        }
+      },
+      "modes": [
+        "Taiko"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane"
+      ]
+    },
+    {
+      "name": "CheckUnrankableFinishers",
+      "fullName": "MapsetVerifier.Checks.Taiko.Compose.CheckUnrankableFinishers",
+      "checkType": "Beatmap",
+      "category": "Compose",
+      "message": "Unrankable finishers",
+      "author": "Hivie, Nostril",
+      "applicableModes": "Taiko",
+      "documentation": {
+        "Purpose": "\r\n                    Ensuring that finishers abide by each difficulty\u0027s Ranking Criteria.",
+        "Reasoning": "\r\n                    Improper finisher usage can lead to significant gameplay issues."
+      },
+      "templates": {
+        "Warning": {
+          "level": "Warning",
+          "formatString": "{0} Abnormal finisher, ensure this makes sense",
+          "defaultArguments": [
+            "timestamp -"
+          ],
+          "cause": "Finisher is potentially violating the Ranking Criteria"
+        },
+        "Problem": {
+          "level": "Problem",
+          "formatString": "{0} Unrankable finisher",
+          "defaultArguments": [
+            "timestamp -"
+          ],
+          "cause": "Finisher is violating the Ranking Criteria"
+        }
+      },
+      "modes": [
+        "Taiko"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckCloseOverlap",
+      "fullName": "MapsetVerifier.Checks.Standard.Spread.CheckCloseOverlap",
+      "checkType": "BeatmapSet",
+      "category": "Spread",
+      "message": "Objects close in time not overlapping.",
+      "author": "Naxess",
+      "applicableModes": "Standard",
+      "documentation": {
+        "Purpose": "\r\n                        Ensuring that objects close in time are indiciated as such in easy and lowest normal difficulties.\r\n\r\n                        ![](https://i.imgur.com/rnIi6Pj.png)\r\n                        Right image is harder to distinguish time distance in, despite spacings still clearly being different.",
+        "Reasoning": "\r\n                        Newer players often have trouble reading how far apart objects are in time, which is why enabling distance spacing for lower difficulties is often recommended. However, if two spacings for different snappings look similar, it\u0027s possible to confuse them. By forcing an overlap between objects close in time and discouraging it for objects further apart, the difference in snappings become more apparent."
+      },
+      "templates": {
+        "Problem": {
+          "level": "Problem",
+          "formatString": "{0} {1} ms apart, should either be overlapped or at least {2} ms apart.",
+          "defaultArguments": [
+            "timestamp -",
+            "gap",
+            "threshold"
+          ],
+          "cause": "Two objects with a time gap less than 125 ms (240 bpm 1/2) are not overlapping."
+        },
+        "Warning": {
+          "level": "Warning",
+          "formatString": "{0} {1} ms apart.",
+          "defaultArguments": [
+            "timestamp -",
+            "gap"
+          ],
+          "cause": "Two objects with a time gap less than 167 ms (180 bpm 1/2) are not overlapping."
+        }
+      },
+      "modes": [
+        "Standard"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckMultipleReverses",
+      "fullName": "MapsetVerifier.Checks.Standard.Spread.CheckMultipleReverses",
+      "checkType": "Beatmap",
+      "category": "Spread",
+      "message": "Multiple reverses on too short sliders.",
+      "author": "Naxess",
+      "applicableModes": "Standard",
+      "documentation": {
+        "Purpose": "\r\n                        Preventing sliders from having multiple reverses in easy and normal difficulties.",
+        "Reasoning": "\r\n                        Assuming we do this on a short slider, the reverse would be visible for so short of a time that it \r\n                        would be difficult to react to. If we instead do this on a long slider where they can react, it\u0027s \r\n                        going to be really boring gameplay-wise due to how long the slider becomes. So no matter how it\u0027s \r\n                        done, it\u0027ll be worse than alternatives."
+      },
+      "templates": {
+        "Problem": {
+          "level": "Problem",
+          "formatString": "{0} This slider is way too short to have multiple reverses.",
+          "defaultArguments": [
+            "timestamp -"
+          ],
+          "cause": "A slider has at least 2 reverses and is 250 ms or shorter (240 bpm 1/1) in an Easy, or 125 ms or shorter (240 bpm 1/2) in a Normal."
+        },
+        "Warning": {
+          "level": "Warning",
+          "formatString": "{0} This slider is very short to have multiple reverses.",
+          "defaultArguments": [
+            "timestamp -"
+          ],
+          "cause": "A slider has at least 2 reverses and is 333 ms or shorter (180 bpm 1/1) in an Easy, or 167 ms or shorter (180 bpm 1/2) in a Normal."
+        }
+      },
+      "modes": [
+        "Standard"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal"
+      ]
+    },
+    {
+      "name": "CheckShortSliders",
+      "fullName": "MapsetVerifier.Checks.Standard.Spread.CheckShortSliders",
+      "checkType": "Beatmap",
+      "category": "Spread",
+      "message": "Too short sliders.",
+      "author": "Naxess",
+      "applicableModes": "Standard",
+      "documentation": {
+        "Purpose": "\r\n                        Preventing slider head and tail from being too close in time for easy difficulties.",
+        "Reasoning": "\r\n                        Newer players need time to comprehend when to hold down and let go of sliders. If a slider ends too quickly, \r\n                        the action of pressing the slider and very shortly afterwards letting it go will sometimes be difficult to \r\n                        handle. The action of lifting a key is similar in difficulty to pressing a key for newer players. So any \r\n                        distance in time you wouldn\u0027t place circles apart, you shouldn\u0027t place slider head and tail apart either."
+      },
+      "templates": {
+        "Too Short": {
+          "level": "Warning",
+          "formatString": "{0} {1} ms, expected at least {2}.",
+          "defaultArguments": [
+            "timestamp -",
+            "duration",
+            "threshold"
+          ],
+          "cause": "A slider in an Easy difficulty is less than 125 ms (240 bpm 1/2)."
+        }
+      },
+      "modes": [
+        "Standard"
+      ],
+      "difficulties": [
+        "Easy"
+      ]
+    },
+    {
+      "name": "CheckSpaceVariation",
+      "fullName": "MapsetVerifier.Checks.Standard.Spread.CheckSpaceVariation",
+      "checkType": "Beatmap",
+      "category": "Spread",
+      "message": "Object too close or far away from previous.",
+      "author": "Naxess",
+      "applicableModes": "Standard",
+      "documentation": {
+        "Purpose": "\r\n                        Ensuring spacing between objects with the same snapping is recognizable, and objects with different snappings are distinguishable, for easy and normal difficulties.",
+        "Reasoning": "\r\n                        Time distance equality is a fundamental concept used in low difficulties to teach newer players how to interpret rhythm easier. By trivializing reading, these maps can better teach how base mechanics work, like approach circles, slider follow circles, object fading, hit bursts, hit sounds, etc.\r\n\r\n                        Once these are learnt, and by the time players move on to hard difficulties, more advanced concepts and elements can begin to be introduced, like multiple reverses, spacing as a form of emphasis, complex rhythms, streams, and so on."
+      },
+      "templates": {
+        "Distance": {
+          "level": "Warning",
+          "formatString": "{0} Distance is {1} px, expected {2}, see {3}.",
+          "defaultArguments": [
+            "timestamp -",
+            "distance",
+            "distance",
+            "example objects"
+          ],
+          "cause": "The distance between two hit objects noticeably contradicts a recent use of time distance balance between another two hit objects using a similar time gap."
+        },
+        "Ratio": {
+          "level": "Warning",
+          "formatString": "{0} Distance/time ratio is {1}, expected {2}.",
+          "defaultArguments": [
+            "timestamp -",
+            "ratio",
+            "ratio"
+          ],
+          "cause": "The distance/time ratio between the previous hit objects greatly contradicts a following use of distance/time ratio."
+        }
+      },
+      "modes": [
+        "Standard"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal"
+      ]
+    },
+    {
+      "name": "CheckSpinnerRecovery",
+      "fullName": "MapsetVerifier.Checks.Standard.Spread.CheckSpinnerRecovery",
+      "checkType": "Beatmap",
+      "category": "Spread",
+      "message": "Too short spinner time or spinner recovery time.",
+      "author": "Naxess",
+      "applicableModes": "Standard",
+      "documentation": {
+        "Purpose": "\r\n                        Preventing spinners or objects following them from being too fast to react to.",
+        "Reasoning": "\r\n                        Newer players need time to recognize that they should begin spinning, as well as time to regain control of their \r\n                        cursor after spinning. Hence, too short spinners will often lose them accuracy or combo, and objects very close \r\n                        to the end of spinners will probably be missed or clicked on in panic before the spinner has ended."
+      },
+      "templates": {
+        "Problem Length": {
+          "level": "Problem",
+          "formatString": "{0} Spinner length is too short ({1} ms, expected {2}).",
+          "defaultArguments": [
+            "timestamp -",
+            "duration",
+            "duration"
+          ],
+          "cause": "A spinner is shorter than 4, 3 or 2 beats for Easy, Normal and Hard respectively, assuming 240 bpm."
+        },
+        "Warning Length": {
+          "level": "Warning",
+          "formatString": "{0} Spinner length is probably too short ({1} ms, expected {2}).",
+          "defaultArguments": [
+            "timestamp -",
+            "duration",
+            "duration"
+          ],
+          "cause": "Same as the first check, except 20% more lenient, implying that 200 bpm is assumed instead."
+        },
+        "Problem Recovery": {
+          "level": "Problem",
+          "formatString": "{0} Spinner recovery time is too short ({1} ms, expected {2}).",
+          "defaultArguments": [
+            "timestamp -",
+            "duration",
+            "duration"
+          ],
+          "cause": "The time after a spinner ends to the next object is shorter than 4, 3 or 2 beats for Easy, Normal and Hard respectively, assuming 240 bpm, where both the non-scaled and bpm-scaled thresholds must be exceeded."
+        },
+        "Warning Recovery": {
+          "level": "Warning",
+          "formatString": "{0} Spinner recovery time is probably too short ({1} ms, expected {2}).",
+          "defaultArguments": [
+            "timestamp -",
+            "duration",
+            "duration"
+          ],
+          "cause": "Same as the other recovery check, except 20% more lenient, implying that 200 bpm is assumed instead."
+        }
+      },
+      "modes": [
+        "Standard"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckStackLeniency",
+      "fullName": "MapsetVerifier.Checks.Standard.Spread.CheckStackLeniency",
+      "checkType": "Beatmap",
+      "category": "Spread",
+      "message": "Perfect stacks too close in time.",
+      "author": "Naxess",
+      "applicableModes": "Standard",
+      "documentation": {
+        "Purpose": "\r\n                        Preventing objects from perfectly, or almost perfectly, overlapping when close in time for easy to insane difficulties.",
+        "Reasoning": "\r\n                        Objects stacked perfectly on top of each other close in time is read almost ambiguously to a single object, even for moderately \r\n                        experienced players. The lower in difficulty you get, the more beneficial it is to simply use a regular stack or overlap instead\r\n                        as trivializing readability gets more important."
+      },
+      "templates": {
+        "Problem": {
+          "level": "Problem",
+          "formatString": "{0} Stack leniency should be at least {1}.",
+          "defaultArguments": [
+            "timestamp -",
+            "stack leniency"
+          ],
+          "cause": "Two objects are overlapping perfectly and are less than 1/1, 1/1, 1/2, or 1/4 apart (assuming 160 BPM), for E/N/H/I respectively."
+        },
+        "Problem Failed Stack": {
+          "level": "Problem",
+          "formatString": "{0} Failed stack, objects are {1} px apart, which is basically a perfect stack.",
+          "defaultArguments": [
+            "timestamp -",
+            "gap"
+          ],
+          "cause": "Same as the other check, except applies to non-stacked objects within 1/14th of a circle radius of one another."
+        },
+        "Warning": {
+          "level": "Warning",
+          "formatString": "{0} Stack leniency should be at least {1}.",
+          "defaultArguments": [
+            "timestamp -",
+            "stack leniency"
+          ],
+          "cause": "Same as the other check, except only appears for insane difficulties, as this becomes a guideline."
+        }
+      },
+      "modes": [
+        "Standard"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane"
+      ]
+    },
+    {
+      "name": "CheckAbnormalSpacing",
+      "fullName": "MapsetVerifier.Checks.Standard.Compose.CheckAbnormalSpacing",
+      "checkType": "Beatmap",
+      "category": "Compose",
+      "message": "Abnormally large spacing.",
+      "author": "Naxess",
+      "applicableModes": "Standard",
+      "documentation": {
+        "Purpose": "\r\n                        Prevent the time/distance ratio of hit objects from being absurdly large, even for higher difficulties.\r\n                        This is often a cause of an object being snapped a 1/4th tick earlier, and has been a common reason for unranks.",
+        "Reasoning": "\r\n                        With two objects being spaced way further than previous objects of the same snapping, it can be extremely difficult to expect, much less play.\r\n\r\n                        When combined with incorrect snappings (which abnormal spacing is often a cause of), this can really throw players off to the point where the map is pretty much considered unplayable."
+      },
+      "templates": {
+        "Problem": {
+          "level": "Problem",
+          "formatString": "{0} Space/time ratio is {1} times the expected, see e.g. {2}.",
+          "defaultArguments": [
+            "timestamp -",
+            "times",
+            "example objects"
+          ],
+          "cause": "The space/time ratio between two objects is absurdly large in comparison to other objects with the same snapping prior.\r\n                                    \u003E Accounts for slider leniency by assuming that the gap is a circle\u0027s diameter smaller."
+        },
+        "Warning": {
+          "level": "Warning",
+          "formatString": "{0} Space/time ratio is {1} times the expected, see e.g. {2}.",
+          "defaultArguments": [
+            "timestamp -",
+            "times",
+            "example objects"
+          ],
+          "cause": "Same as the first check, but with slightly less absurd, yet often still extreme, differences."
+        },
+        "Minor": {
+          "level": "Minor",
+          "formatString": "{0} Space/time ratio is {1} times the expected, see e.g. {2}.",
+          "defaultArguments": [
+            "timestamp -",
+            "times",
+            "example objects"
+          ],
+          "cause": "Same as the first check, but with more common differences."
+        }
+      },
+      "modes": [
+        "Standard"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckAmbiguity",
+      "fullName": "MapsetVerifier.Checks.Standard.Compose.CheckAmbiguity",
+      "checkType": "Beatmap",
+      "category": "Compose",
+      "message": "Ambiguous slider intersection.",
+      "author": "Naxess",
+      "applicableModes": "Standard",
+      "documentation": {
+        "Purpose": "\r\n                        Preventing sliders from being excessively difficult, or even impossible, to read in gameplay.\r\n\r\n                        ![](https://i.imgur.com/Y3TB2m7.png)\r\n                        A slider with a 3-way intersection in the middle. Considered readable if and only if the middle section goes up to the left and down on the right.",
+        "Reasoning": "\r\n                        Giving the player little to no hints as to how to move their cursor through the slider makes for an unfair gameplay experience. This means the majority of the difficulty does not stem from how well the player can click on and move through the slider, but from how well they can guess how to move through it. If implemented well, however, it is possible for the player to learn how to move through the sliders before they are able to fail from guessing wrong.\r\n\r\n                        Particularly slow sliders, for instance, may move their follow circle slow enough for players to correct themselves if they guessed wrong, whereas fast sliders often do not include as many slider ticks and are as such more lenient. Sliders that do not require that the player move their cursor are also hard to fail from guessing wrong since there it often doesn\u0027t matter if they know how to position their cursor.\r\n\r\n                        ![](https://i.imgur.com/LPVmy81.png)\r\n                        Two sliders which are practically the same in gameplay. The left one has a much higher chance of players guessing wrong on due to the tail not being visible."
+      },
+      "templates": {
+        "Warning": {
+          "level": "Warning",
+          "formatString": "{0} Slider edges are almost perfectly overlapping.",
+          "defaultArguments": [
+            "timestamp -"
+          ],
+          "cause": "The edges of a slider curve are 5 px or less apart, and a slider tick is 2 circle radii from the head."
+        },
+        "Anchor": {
+          "level": "Warning",
+          "formatString": "{0} {1} and red anchor overlap is possibly ambigious.",
+          "defaultArguments": [
+            "timestamp -",
+            "Head/tail"
+          ],
+          "cause": "The head or tail of a slider is a distance of 10 px or less to a red node, having been more than 30 px away at a point in time between the two."
+        }
+      },
+      "modes": [
+        "Standard"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckBurai",
+      "fullName": "MapsetVerifier.Checks.Standard.Compose.CheckBurai",
+      "checkType": "Beatmap",
+      "category": "Compose",
+      "message": "Burai slider.",
+      "author": "Naxess",
+      "applicableModes": "Standard",
+      "documentation": {
+        "Purpose": "\r\n                        Preventing sliders from being excessively difficult, or even impossible, to read in gameplay.\r\n\r\n                        ![](https://i.imgur.com/fMa1hWR.png)\r\n                        A slider which may be considered readable if it goes right, up, and then down, but would mean going through the same slider path twice for the right and top parts.",
+        "Reasoning": "\r\n                        Largely follows the same reasoning as the overlapping slider tail/head/anchor check; if the player needs to rely on guessing, and guessing wrong results in a slider break, then that\u0027s an unfair gameplay experience.\r\n\r\n                        A single path going back on itself far enough for the follow circle to not cover everything, is neither lenient nor something players will expect considering that sliders are expected to have a clear path. When the follow circle does cover the whole path, however, it\u0027s generally acceptable since even if the player misreads it, it usually doesn\u0027t cause any slider breaks.\r\n\r\n                        Should a slider go back on itself and end before it creates its own borders, players without slider tails enabled will have a hard time seeing how far back into itself it goes, or even if it goes back on itself at all.\r\n\r\n                        ![](https://i.imgur.com/StRTQzZ.png)\r\n                        A slider which goes back on itself multiple times and is impossible to read for players with slider tails hidden, which is common in skinning."
+      },
+      "templates": {
+        "Definitely": {
+          "level": "Warning",
+          "formatString": "{0} Burai.",
+          "defaultArguments": [
+            "timestamp -"
+          ],
+          "cause": "The burai score of a slider shape, based on the distance and delta angle between intersecting parts of the curve, is very high."
+        },
+        "Potentially": {
+          "level": "Warning",
+          "formatString": "{0} Potentially burai.",
+          "defaultArguments": [
+            "timestamp -"
+          ],
+          "cause": "Same as the other check, but with a lower score threshold."
+        }
+      },
+      "modes": [
+        "Standard"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckNinjaSpinner",
+      "fullName": "MapsetVerifier.Checks.Standard.Compose.CheckNinjaSpinner",
+      "checkType": "Beatmap",
+      "category": "Compose",
+      "message": "Too short spinner.",
+      "author": "Naxess",
+      "applicableModes": "Standard",
+      "documentation": {
+        "Purpose": "\r\n                        Preventing spinners from being so short that you almost need to memorize them in order to react \r\n                        to them before they end.",
+        "Reasoning": "\r\n                        Players generally react much slower than auto, so if auto can\u0027t even achieve 1000 points on the \r\n                        spinner, players will likely not get any points at all, much less pass it without losing accuracy. \r\n                        In general, these are just not fun to play due to needing to memorize them for a fair experience."
+      },
+      "templates": {
+        "Problem": {
+          "level": "Problem",
+          "formatString": "{0} Spinner is too short, auto cannot achieve 1000 points on this.",
+          "defaultArguments": [
+            "timestamp -"
+          ],
+          "cause": "A spinner is predicted to, based on the OD and BPM, not be able to achieve 1000 points on this, and by a margin to account for any inconsistencies."
+        },
+        "Warning": {
+          "level": "Warning",
+          "formatString": "{0} Spinner may be too short, ensure auto can achieve 1000 points on this.",
+          "defaultArguments": [
+            "timestamp -"
+          ],
+          "cause": "Same as the other check, but without the margin, meaning the threshold is lower."
+        }
+      },
+      "modes": [
+        "Standard"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckObscuredReverse",
+      "fullName": "MapsetVerifier.Checks.Standard.Compose.CheckObscuredReverse",
+      "checkType": "Beatmap",
+      "category": "Compose",
+      "message": "Obscured reverse arrows.",
+      "author": "Naxess",
+      "applicableModes": "Standard",
+      "documentation": {
+        "Purpose": "\r\n                        Preventing slider reverses from being covered up by other objects or combo bursts before players can react to them.\r\n\r\n                        ![](https://i.imgur.com/BS8BkT7.png)\r\n                        Although many skins remove combo bursts, these can hide reverses under them in the same way other objects can in gameplay, so only looking at the editor is a bit misleading.",
+        "Reasoning": "\r\n                        Some mappers like to stack objects on upcoming slider ends to make everything seem more coherent, but in doing so, reverses can become obscured and impossible to read unless you know they\u0027re there. For more experienced players, however, this isn\u0027t as much of a problem since you learn to hold sliders more efficiently and can react faster."
+      },
+      "templates": {
+        "Obscured": {
+          "level": "Warning",
+          "formatString": "{0} Reverse arrow {1} obscured.",
+          "defaultArguments": [
+            "timestamp -",
+            "(potentially)"
+          ],
+          "cause": "An object before a reverse arrow ends over where it appears close in time."
+        }
+      },
+      "modes": [
+        "Standard"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane"
+      ]
+    },
+    {
+      "name": "CheckOffscreen",
+      "fullName": "MapsetVerifier.Checks.Standard.Compose.CheckOffscreen",
+      "checkType": "Beatmap",
+      "category": "Compose",
+      "message": "Offscreen hit objects.",
+      "author": "Naxess",
+      "applicableModes": "Standard",
+      "documentation": {
+        "Purpose": "\r\n                        Preventing the border of hit objects from even partially becoming offscreen in 4:3 aspect ratios.\r\n\r\n                        \u003E 4:3 is included in 16:9 and 16:10, the only difference is the width, so you can check for offscreens along the top and bottom in any of these aspect ratios and it will look the same.\r\n\r\n                        ![](https://i.imgur.com/zXT4Zwr.png)\r\n                        A slider end which is partially offscreen along the bottom of the screen.",
+        "Reasoning": "\r\n                        Although everything is technically readable and playable if an object is only partially offscreen, it trips up players using relative movement input (for example mouse) when their cursor hits the side of the screen, since the game will offset the cursor back into the screen which is difficult to correct while in the middle of gameplay.\r\n\r\n                        Since objects partially offscreen also have a smaller area to hit, if not hitting the screen causing the problems above, it makes those objects need more precision to play which isn\u0027t consistent with how the rest of the game works, especially considering that the punishment for overshooting is getting your cursor offset slightly but still hitting the object and not missing like you probably would otherwise."
+      },
+      "templates": {
+        "Offscreen": {
+          "level": "Problem",
+          "formatString": "{0} {1} is offscreen.",
+          "defaultArguments": [
+            "timestamp -",
+            "object"
+          ],
+          "cause": "The border of a hit object is partially off the screen in 4:3 aspect ratios."
+        },
+        "Prevented": {
+          "level": "Warning",
+          "formatString": "{0} {1} would be offscreen, but the game prevents it.",
+          "defaultArguments": [
+            "timestamp -",
+            "object"
+          ],
+          "cause": "The .osu code implies the hit object is in a place where it would be off the 512x512 playfield area, but the game has moved it back inside the screen automatically."
+        },
+        "Bezier Margin": {
+          "level": "Warning",
+          "formatString": "{0} Slider body is possibly offscreen, ensure the entire white border is visible on a 4:3 aspect ratio.",
+          "defaultArguments": [
+            "timestamp -"
+          ],
+          "cause": "The slider body of a bezier slider is approximated to be 1 osu!pixel away from being offscreen at some point on its curve."
+        }
+      },
+      "modes": [
+        "Standard"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckConsecutiveHyperdash",
+      "fullName": "MapsetVerifier.Checks.Catch.Compose.CheckConsecutiveHyperdash",
+      "checkType": "Beatmap",
+      "category": "Compose",
+      "message": "Too many consecutive hyperdashes.",
+      "author": "Greaper",
+      "applicableModes": "Catch",
+      "documentation": {
+        "Purpose": "\r\n                    **Rain** : \r\n                    Hyperdashes that are basic-snapped must not be used more than four times between consecutive fruits.\r\n\r\n                    **Platter** : \r\n                    Hyperdashes that are basic-snapped must not be used more than two times between consecutive fruits.",
+        "Reasoning": "\r\n                    The amount of hyperdashes used in a difficulty should be increasing which each difficulty level.\r\n                    In platters the maximum amount of hyperdashes is set to two because the difficulty is meant to be an introduction to hypers."
+      },
+      "templates": {
+        "BasicConsecutive": {
+          "level": "Problem",
+          "formatString": "{0} Too many consecutive basic-snapped hyperdashes were used and should be at most {1}, currently {2}.",
+          "defaultArguments": [
+            "timestamp -",
+            "rule amount",
+            "amount"
+          ],
+          "cause": "Too many consecutive basic-snapped hyperdash are used."
+        },
+        "HigherConsecutive": {
+          "level": "Problem",
+          "formatString": "{0} Too many consecutive higher-snapped hyperdashes were used and should be at most {1}, currently {2}.",
+          "defaultArguments": [
+            "timestamp -",
+            "rule amount",
+            "amount"
+          ],
+          "cause": "Too many consecutive higher-snapped hyperdash are used."
+        },
+        "RainBasicConsecutiveSlider": {
+          "level": "Problem",
+          "formatString": "{0} Too many consecutive basic-snapped hyperdashes were used within a slider and should be at most {1}, currently {2}.",
+          "defaultArguments": [
+            "timestamp -",
+            "rule amount",
+            "amount"
+          ],
+          "cause": "Too many consecutive hyperdash are used in a Slider body."
+        }
+      },
+      "modes": [
+        "Catch"
+      ],
+      "difficulties": [
+        "Hard",
+        "Insane"
+      ]
+    },
+    {
+      "name": "CheckHasEdgeDash",
+      "fullName": "MapsetVerifier.Checks.Catch.Compose.CheckHasEdgeDash",
+      "checkType": "Beatmap",
+      "category": "Compose",
+      "message": "Edge dashes.",
+      "author": "Greaper",
+      "applicableModes": "Catch",
+      "documentation": {
+        "Purpose": "\r\n                Edge dashes are hard and shouldn\u0027t be used on lower difficulties. \r\n                They can be used on Rains and Overdoses, although if they are used they mush be used properly.",
+        "Reasoning": "\r\n                Edge dashes require precise movement, on lower difficulties we cannot expect such accuracy from players.\r\n\r\n                On Rains edge dashes may only be used singularly. \r\n\r\n                On Overdose they may be used with caution for a maximum of three consecutive objects, and should not be used after hyperdashes."
+      },
+      "templates": {
+        "StrongDash": {
+          "level": "Minor",
+          "formatString": "{0} {1} is {2} away from becoming a hyper.",
+          "defaultArguments": [
+            "timestamp -",
+            "object",
+            "x"
+          ],
+          "cause": "X amount of pixels off to become a hyperdash."
+        },
+        "EdgeDashMinor": {
+          "level": "Minor",
+          "formatString": "{0} {1} is {2} away from becoming a hyper.",
+          "defaultArguments": [
+            "timestamp -",
+            "object",
+            "x"
+          ],
+          "cause": "X amount of pixels off to become a hyperdash."
+        },
+        "EdgeDash": {
+          "level": "Warning",
+          "formatString": "{0} {1} is {2} away from becoming a hyper.",
+          "defaultArguments": [
+            "timestamp -",
+            "object",
+            "x"
+          ],
+          "cause": "X amount of pixels off to become a hyperdash."
+        },
+        "EdgeDashProblem": {
+          "level": "Problem",
+          "formatString": "{0} {1} is {2} away from becoming a hyper.",
+          "defaultArguments": [
+            "timestamp -",
+            "object",
+            "x"
+          ],
+          "cause": "Usage of edge dashes on lower diffs."
+        }
+      },
+      "modes": [
+        "Catch"
+      ],
+      "difficulties": [
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckHasHyperdash",
+      "fullName": "MapsetVerifier.Checks.Catch.Compose.CheckHasHyperdash",
+      "checkType": "Beatmap",
+      "category": "Compose",
+      "message": "Contains hyperdashes.",
+      "author": "Greaper",
+      "applicableModes": "Catch",
+      "documentation": {
+        "Purpose": "\r\n                    Hyperdashes are not allowed in Cups and Salads.\r\n\r\n                    And hyperdashes can\u0027t be used on drops and/or slider repetitions in Platters.",
+        "Reasoning": "\r\n                    This is to ensure an easy starting experience to beginner players in Cups.\r\n\r\n                    This is to ensure a manageable step in difficulty for novice players in Salads.\r\n\r\n                    For Platters the accuracy and control required is unreasonable and can create a situation where the player potentially fails to read the slider path."
+      },
+      "templates": {
+        "Hyperdash": {
+          "level": "Problem",
+          "formatString": "{0} {1} is a hyperdash.",
+          "defaultArguments": [
+            "timestamp -",
+            "object"
+          ],
+          "cause": "Distance between the two objects is too high, triggering a hyperdash distance"
+        },
+        "HyperdashSliderPart": {
+          "level": "Problem",
+          "formatString": "{0} Slider hyperdash on {1}.",
+          "defaultArguments": [
+            "timestamp -",
+            "object"
+          ],
+          "cause": "Distance between the two objects is too high, triggering a hyperdash distance"
+        }
+      },
+      "modes": [
+        "Catch"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard"
+      ]
+    },
+    {
+      "name": "CheckHasSpinner",
+      "fullName": "MapsetVerifier.Checks.Catch.Compose.CheckHasSpinner",
+      "checkType": "Beatmap",
+      "category": "Compose",
+      "message": "Missing spinner.",
+      "author": "Greaper",
+      "applicableModes": "Catch",
+      "documentation": {
+        "Purpose": "\r\n                    Every difficulty should have a spinner if possible to create fluctuation among scores.\r\n                    However, if a spinner just doesn\u0027t fit anywhere in the song, then there\u0027s no need to force one.",
+        "Reasoning": "\r\n                    Scoring in catch is based on the amount of fruits, droplets. Because of this getting 100% accuracy is fairly easy to get.\r\n\r\n                    Bananas are an exception since they are the bonus fruit in catch, this means that you won\u0027t be punished if you miss any of them, although they get only generated with a spinner."
+      },
+      "templates": {
+        "NoSpinner": {
+          "level": "Minor",
+          "formatString": "When possible add a spinner to create fluctuation among scores.",
+          "defaultArguments": [],
+          "cause": "No spinner has been added."
+        }
+      },
+      "modes": [
+        "Catch"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckHyperdashSnap",
+      "fullName": "MapsetVerifier.Checks.Catch.Compose.CheckHyperdashSnap",
+      "checkType": "Beatmap",
+      "category": "Compose",
+      "message": "Disallowed hyperdash snap.",
+      "author": "Greaper",
+      "applicableModes": "Catch",
+      "documentation": {
+        "Purpose": "\r\n                Hyperdashes may only be used when the snapping is above or equal to the allowed threshold.\r\n\r\n                - For Platters at least *125ms or higher* must be between the ticks of the desired snapping.\r\n                - For Rains at least *62ms or higher* must be between the ticks of the desired snapping.",
+        "Reason": "\r\n                To ensure an increase of complexity in each level, hyperdashes can be really harsh on lower difficulties."
+      },
+      "templates": {
+        "HyperdashSnap": {
+          "level": "Problem",
+          "formatString": "{0} Current snap is not allowed, only ticks with at least {1}ms are allowed, currently {2}ms.",
+          "defaultArguments": [
+            "timestamp -",
+            "allowed",
+            "current"
+          ],
+          "cause": "The used snap is not allowed."
+        }
+      },
+      "modes": [
+        "Catch"
+      ],
+      "difficulties": [
+        "Hard",
+        "Insane"
+      ]
+    },
+    {
+      "name": "CheckMaxCombo",
+      "fullName": "MapsetVerifier.Checks.Catch.Compose.CheckMaxCombo",
+      "checkType": "Beatmap",
+      "category": "Compose",
+      "message": "Too high combo.",
+      "author": "Greaper",
+      "applicableModes": "Catch",
+      "documentation": {
+        "Purpose": "\r\n                    Combos should not reach unreasonable lengths.",
+        "Reasoning": "\r\n                    Caught fruits will stack up on the plate and can potentially obstruct the player\u0027s view. \r\n                    Bear in mind that slider tails, repeats and spinner bananas also count as fruits."
+      },
+      "templates": {
+        "MaxComboSignificantly": {
+          "level": "Warning",
+          "formatString": "{0} The amount of combo exceeds the guideline of {1} significantly, currently it has {2}.",
+          "defaultArguments": [
+            "timestamp -",
+            "guideline combo",
+            "combo"
+          ],
+          "cause": "The combo amount exceeds the guideline significantly."
+        },
+        "MaxCombo": {
+          "level": "Minor",
+          "formatString": "{0} The amount of combo exceeds the guideline of {1}, currently it has {2}.",
+          "defaultArguments": [
+            "timestamp -",
+            "guideline combo",
+            "combo"
+          ],
+          "cause": "The combo amount exceeds the guideline."
+        }
+      },
+      "modes": [
+        "Catch"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckSpinnerGap",
+      "fullName": "MapsetVerifier.Checks.Catch.Compose.CheckSpinnerGap",
+      "checkType": "Beatmap",
+      "category": "Compose",
+      "message": "Spinner gap too small.",
+      "author": "Greaper",
+      "applicableModes": "Catch",
+      "documentation": {
+        "Purpose": "\r\n                    There must be a gap between the start and end of a spinner to ensure readability.",
+        "Reasoning": "\r\n                    Spinners can make it difficult to read when provided shortly before/after an object. On lower difficulties \r\n                    the approach rate is slower and will result in a more clustered experience. The spinner gap is essential \r\n                    to give the player enough time to react to the next object and to avoid spinner traps."
+      },
+      "templates": {
+        "SpinnerBefore": {
+          "level": "Problem",
+          "formatString": "{0} The spinner must be at least {1} ms apart from the previous object, currently {2} ms.",
+          "defaultArguments": [
+            "timestamp -",
+            "required duration",
+            "current duration"
+          ],
+          "cause": "The spinner starts too early."
+        },
+        "SpinnerAfter": {
+          "level": "Problem",
+          "formatString": "{0} The spinner must be at least {1} ms apart from the next object, currently {2} ms.",
+          "defaultArguments": [
+            "timestamp -",
+            "required duration",
+            "current duration"
+          ],
+          "cause": "The spinner ends too late."
+        }
+      },
+      "modes": [
+        "Catch"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckRainConsistentHyperdashSnaps",
+      "fullName": "MapsetVerifier.Checks.Catch.Compose.Rain.CheckRainConsistentHyperdashSnaps",
+      "checkType": "Beatmap",
+      "category": "Compose",
+      "message": "Consecutive basic-snapped hyperdashes.",
+      "author": "Greaper",
+      "applicableModes": "Catch",
+      "documentation": {
+        "Purpose": "\r\n                Mixing different snapped hyperdashes can be somewhat challenging, to keep Rain difficulties easy to read it is discouraged to mix different snapped hyperdashes.",
+        "Reason": "\r\n                Mixing different snapped hyperdashes is to be introduced at Overdoses to have a gradual difficulty increase."
+      },
+      "templates": {
+        "DifferentSnap": {
+          "level": "Warning",
+          "formatString": "{0} Basic-snapped hyperdashes of different snap are used.",
+          "defaultArguments": [
+            "timestamp -"
+          ],
+          "cause": "Different snapped basic-snapped hyperdashes."
+        }
+      },
+      "modes": [
+        "Catch"
+      ],
+      "difficulties": [
+        "Insane"
+      ]
+    },
+    {
+      "name": "CheckRainHyperdashSlider",
+      "fullName": "MapsetVerifier.Checks.Catch.Compose.Rain.CheckRainHyperdashSlider",
+      "checkType": "Beatmap",
+      "category": "Compose",
+      "message": "Contains hyperdashes on repeat or droplet.",
+      "author": "Greaper",
+      "applicableModes": "Catch",
+      "documentation": {
+        "Purpose": "\r\n                    Hyperdashes on slider droplets or repeats in Rains are discouraged.",
+        "Reason": "\r\n                    Players should be somewhat comfortable with hyperdashes on Rains, it is still discouraged to use any repeat or droplet hyperdashes maintain a manageable difficulty progression."
+      },
+      "templates": {
+        "SliderHyperRain": {
+          "level": "Warning",
+          "formatString": "{0} {1} hyperdashes should not be used.",
+          "defaultArguments": [
+            "timestamp -",
+            "object"
+          ],
+          "cause": "Hyperdash is put on a droplet or slider repeat."
+        }
+      },
+      "modes": [
+        "Catch"
+      ],
+      "difficulties": [
+        "Insane"
+      ]
+    },
+    {
+      "name": "CheckPlatterHigherSnappedHyperdash",
+      "fullName": "MapsetVerifier.Checks.Catch.Compose.Platter.CheckPlatterHigherSnappedHyperdash",
+      "checkType": "Beatmap",
+      "category": "Compose",
+      "message": "Higher-snapped hyperdash.",
+      "author": "Greaper",
+      "applicableModes": "Catch",
+      "documentation": {
+        "Purpose": "\r\n                Higher-snapped hyperdashes should not be followed by antiflow patterns.",
+        "Reason": "\r\n                When a higher-snapped hyperdash is followed by an antiflow pattern (a walk in the opposite direction), it can create a harsh experience for players. Given that Platters introduce hyperdashes they should be used thoughtfully."
+      },
+      "templates": {
+        "HigherSnapFollowedByAntiFlow": {
+          "level": "Warning",
+          "formatString": "{0} Higher-snapped hyperdashes followed by antiflow.",
+          "defaultArguments": [
+            "timestamp -"
+          ]
+        }
+      },
+      "modes": [
+        "Catch"
+      ],
+      "difficulties": [
+        "Hard"
+      ]
+    },
+    {
+      "name": "CheckBeforeLine",
+      "fullName": "MapsetVerifier.Checks.AllModes.Timing.CheckBeforeLine",
+      "checkType": "Beatmap",
+      "category": "Timing",
+      "message": "Hit object is unaffected by a line very close to it.",
+      "author": "Naxess",
+      "applicableModes": "Standard Taiko Catch",
+      "documentation": {
+        "Purpose": "\r\n                        Preventing unintentional side effects like wrong snappings and slider velocities \r\n                        caused by hit objects or timing lines being slightly unsnapped.",
+        "Reasoning": "\r\n                        Sliders before a timing line (even if just by 1 ms or less), will not be affected by its slider velocity. \r\n                        With 1 ms unsnaps being common for objects and lines due to rounding errors when copy pasting, this in turn \r\n                        becomes a common issue for all game modes (excluding mania since SV works differently there).\r\n\r\n                        \u003E If bpm changes, this will still keep track of the effective slider velocity, thereby preventing false positives. So if it wouldn\u0027t make a difference, it\u0027s not pointed out."
+      },
+      "templates": {
+        "Before": {
+          "level": "Warning",
+          "formatString": "{0} {1} is snapped {2} ms before a line which would modify its slider velocity.",
+          "defaultArguments": [
+            "timestamp -",
+            "object",
+            "unsnap"
+          ],
+          "cause": "A hit object is snapped 5 ms or less behind a timing line which would otherwise modify its slider velocity. For standard and catch this only looks at slider heads."
+        },
+        "After": {
+          "level": "Warning",
+          "formatString": "{0} {1} is snapped {2} ms after a line which would modify its slider velocity.",
+          "defaultArguments": [
+            "timestamp -",
+            "object",
+            "unsnap"
+          ],
+          "cause": "Same as the other check, except after instead of before. Only applies to taiko."
+        }
+      },
+      "modes": [
+        "Standard",
+        "Taiko",
+        "Catch"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckConcurrentLines",
+      "fullName": "MapsetVerifier.Checks.AllModes.Timing.CheckConcurrentLines",
+      "checkType": "Beatmap",
+      "category": "Timing",
+      "message": "Concurrent or conflicting timing lines.",
+      "author": "Naxess",
+      "applicableModes": "All Modes",
+      "documentation": {
+        "Purpose": "\r\n                        Preventing issues with concurrent lines of the same type, such as them switching order when loading the beatmap.\r\n\r\n                        ![](https://i.imgur.com/whTV4aV.png)\r\n                        Two inherited lines which were originally the other way around, but swapped places when opening the beatmap again.",
+        "Reasoning": "\r\n                        Depending on how the game loads the lines, they may be loaded in the wrong order causing certain effects to disappear, \r\n                        like the editor to not see that kiai is enabled where it is in gameplay. This coupled with the fact that future versions \r\n                        of the game may change how these behave make them highly unreliable.\r\n                        \r\n                        \u003E Two lines of different types, however, work properly as inherited and uninherited lines are handled separately, where the inherited will always apply its effects last."
+      },
+      "templates": {
+        "Concurrent": {
+          "level": "Problem",
+          "formatString": "{0} Concurrent {1} lines.",
+          "defaultArguments": [
+            "timestamp -",
+            "inherited/uninherited"
+          ],
+          "cause": "Two inherited or uninherited timing lines exist at the same point in time."
+        },
+        "Conflicting": {
+          "level": "Minor",
+          "formatString": "{0} Conflicting line settings. Green: {1}. Red: {2}. {3}.",
+          "defaultArguments": [
+            "timestamp -",
+            "green setting(s)",
+            "red setting(s)",
+            "precedence"
+          ],
+          "cause": "An inherited and uninherited timing line exists at the same point in time and have different settings."
+        }
+      },
+      "modes": [
+        "Standard",
+        "Taiko",
+        "Catch",
+        "Mania"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckFirstLine",
+      "fullName": "MapsetVerifier.Checks.AllModes.Timing.CheckFirstLine",
+      "checkType": "Beatmap",
+      "category": "Timing",
+      "message": "First line toggles kiai or is inherited.",
+      "author": "Naxess",
+      "applicableModes": "All Modes",
+      "documentation": {
+        "Purpose": "\r\n                        Preventing effects from happening and inherited lines before the first uninherited line.",
+        "Reasoning": "\r\n                        If you toggle kiai on the first line, then when the player starts the beatmap, kiai will instantly trigger and apply \r\n                        from the beginning until the next line. \r\n                        ![](https://i.imgur.com/9F3LoR3.png)\r\n                        The game preventing you from enabling kiai on the first timing line.\r\n\r\n                        If you place an inherited line before the first uninherited line, then the game will \r\n                        think the whole section isn\u0027t timed, causing the default bpm to be used and the inherited line to malfunction since \r\n                        it has nothing to inherit.\r\n\r\n                        ![](https://i.imgur.com/yqSEObl.png)\r\n                        The first line being inherited, as seen from the timing view."
+      },
+      "templates": {
+        "Inherited": {
+          "level": "Problem",
+          "formatString": "{0} First timing line is inherited.",
+          "defaultArguments": [
+            "timestamp -"
+          ],
+          "cause": "The first timing line of a beatmap is inherited."
+        },
+        "Toggles Kiai": {
+          "level": "Problem",
+          "formatString": "{0} First timing line toggles kiai.",
+          "defaultArguments": [
+            "timestamp -"
+          ],
+          "cause": "The first timing line of a beatmap has kiai enabled."
+        },
+        "No Lines": {
+          "level": "Problem",
+          "formatString": "There are no timing lines.",
+          "defaultArguments": [],
+          "cause": "A beatmap has no timing lines."
+        }
+      },
+      "modes": [
+        "Standard",
+        "Taiko",
+        "Catch",
+        "Mania"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckInconsistentLines",
+      "fullName": "MapsetVerifier.Checks.AllModes.Timing.CheckInconsistentLines",
+      "checkType": "BeatmapSet",
+      "category": "Timing",
+      "message": "Inconsistent uninherited lines, meter signatures, or BPM.",
+      "author": "Naxess",
+      "applicableModes": "All Modes",
+      "documentation": {
+        "Purpose": "\r\n                        Ensuring that the song is timed consistently for all difficulties.",
+        "Reasoning": "\r\n                        Since all difficulties in a set are based around a single song, they should all use the same base timing, \r\n                        which is made from uninherited lines. Even if a line isn\u0027t used by some difficulty due to there being a \r\n                        break or similar, they still affect things like the main menu flashing and beats/snares/finishes in the \r\n                        nightcore mod.\r\n\r\n                        Similar to metadata, timing (bpm/meter/offset of uninherited lines) should really just be global for the \r\n                        whole beatmapset rather than difficulty-specific."
+      },
+      "templates": {
+        "Missing": {
+          "level": "Problem",
+          "formatString": "{0} Missing uninherited line, see {1}.",
+          "defaultArguments": [
+            "timestamp -",
+            "difficulty"
+          ],
+          "cause": "A beatmap does not have an uninherited line which the reference beatmap does, or visa versa."
+        },
+        "Missing Minor": {
+          "level": "Minor",
+          "formatString": "{0} Has a decimally different offset to the one in {1}.",
+          "defaultArguments": [
+            "timestamp -",
+            "difficulty"
+          ],
+          "cause": "Same as the first check, except includes issues caused by decimal unsnaps of uninherited lines."
+        },
+        "Inconsistent Meter": {
+          "level": "Problem",
+          "formatString": "{0} Inconsistent meter signature, see {1}.",
+          "defaultArguments": [
+            "timestamp -",
+            "difficulty"
+          ],
+          "cause": "The meter signature of an uninherited timing line is different from the reference beatmap."
+        },
+        "Inconsistent BPM": {
+          "level": "Problem",
+          "formatString": "{0} Inconsistent BPM, see {1}.",
+          "defaultArguments": [
+            "timestamp -",
+            "difficulty"
+          ],
+          "cause": "Same as the meter check, except checks BPM instead."
+        }
+      },
+      "modes": [
+        "Standard",
+        "Taiko",
+        "Catch",
+        "Mania"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckKiaiUnsnap",
+      "fullName": "MapsetVerifier.Checks.AllModes.Timing.CheckKiaiUnsnap",
+      "checkType": "Beatmap",
+      "category": "Timing",
+      "message": "Unsnapped kiai.",
+      "author": "Naxess",
+      "applicableModes": "All Modes",
+      "documentation": {
+        "Purpose": "\r\n                        Ensuring kiai starts on a distinct sound.",
+        "Reasoning": "\r\n                        Since kiai is visual, unlike hit sounds, it doesn\u0027t need to be as precise in timing, but kiai being \r\n                        notably unsnapped from any distinct sound is still probably something you\u0027d want to fix. Taiko has stronger\r\n                        kiai screen effects so this matters a bit more for that mode."
+      },
+      "templates": {
+        "Warning": {
+          "level": "Warning",
+          "formatString": "{0} Kiai is unsnapped by {1} ms.",
+          "defaultArguments": [
+            "timestamp -",
+            "unsnap"
+          ],
+          "cause": "An inherited line with kiai enabled is unsnapped by 10 ms or more. For taiko this is 5 ms or more instead."
+        },
+        "Minor": {
+          "level": "Minor",
+          "formatString": "{0} Kiai is unsnapped by {1} ms.",
+          "defaultArguments": [
+            "timestamp -",
+            "unsnap"
+          ],
+          "cause": "Same as the other check, but by 1 ms or more instead."
+        },
+        "Minor End": {
+          "level": "Minor",
+          "formatString": "{0} Kiai end is unsnapped by {1} ms.",
+          "defaultArguments": [
+            "timestamp -",
+            "unsnap"
+          ],
+          "cause": "Same as the second check, except looks for where kiai ends."
+        }
+      },
+      "modes": [
+        "Standard",
+        "Taiko",
+        "Catch",
+        "Mania"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckPreview",
+      "fullName": "MapsetVerifier.Checks.AllModes.Timing.CheckPreview",
+      "checkType": "BeatmapSet",
+      "category": "Timing",
+      "message": "Inconsistent or unset preview time.",
+      "author": "Naxess",
+      "applicableModes": "All Modes",
+      "documentation": {
+        "Purpose": "\r\n                        Ensuring that preview times are set and consistent for all beatmaps in the set.",
+        "Reasoning": "\r\n                        Without a set preview time the game will automatically pick a point to use as preview, but this rarely aligns with \r\n                        any beat or start of measure in the song. Additionally, not selecting a preview point will cause the web to use the \r\n                        whole song as preview, rather than the usual 10 second limit. Which difficulty is used to take preview time from is \r\n                        also not necessarily consistent between the web and the client.\r\n\r\n                        Similarly to metadata and timing, preview points should really just be a global setting for the whole beatmapset and \r\n                        not difficulty-specific."
+      },
+      "templates": {
+        "Not Set": {
+          "level": "Problem",
+          "formatString": "Preview time is not set.",
+          "defaultArguments": [],
+          "cause": "The preview time of a beatmap is missing."
+        },
+        "Inconsistent": {
+          "level": "Problem",
+          "formatString": "Preview time is inconsistent, see {0}.",
+          "defaultArguments": [
+            "difficulty"
+          ],
+          "cause": "The preview time of a beatmap is different from the reference beatmap."
+        }
+      },
+      "modes": [
+        "Standard",
+        "Taiko",
+        "Catch",
+        "Mania"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckUnsnaps",
+      "fullName": "MapsetVerifier.Checks.AllModes.Timing.CheckUnsnaps",
+      "checkType": "Beatmap",
+      "category": "Timing",
+      "message": "Unsnapped hit objects.",
+      "author": "Naxess",
+      "applicableModes": "All Modes",
+      "documentation": {
+        "Purpose": "\r\n                        Prevent hit objects from being unsnapped by more than 1 ms.",
+        "Reasoning": "\r\n                        Since gameplay is based on audio cues it wouldn\u0027t make much sense to have certain hit windows happen earlier or later, \r\n                        even if only by a few ms.\r\n\r\n                        The only reason a 1 ms leniency exists is because the editor casts decimal times to integers rather than rounds them \r\n                        properly, which causes these 1 ms unsnaps occasionally when copying and pasting hit objects and timing lines. This bug \r\n                        happens so frequently that basically all ranked maps have multiple 1 ms unsnaps in them.\r\n\r\n                        \u003E At overall difficulty 10, this would result in at most 2.4% chance of a 300 becoming a 100. It would change the ratio of 300s to 100s by 1.6%. This is acceptable, and a much larger variable is introduced by the possibility of lag, input latency and time calculation accuracy.\r\n                        \u003E\r\n                        \u003E \u2014 peppy, 2009 in [Ctrl\u002BV rounding error [Resolved]](https://osu.ppy.sh/community/forums/topics/17711)"
+      },
+      "templates": {
+        "Problem": {
+          "level": "Problem",
+          "formatString": "{0} {1} unsnapped by {2} ms.",
+          "defaultArguments": [
+            "timestamp -",
+            "object",
+            "unsnap"
+          ],
+          "cause": "A hit object is snapped at least 2 ms too early or late for either of the 1/5, 1/7, 1/9, 1/12, or 1/16 beat snap divisors."
+        },
+        "AiMod False Positive": {
+          "level": "Info",
+          "formatString": "{0} {1} unsnapped by {2} ms. AiMod will claim that this is an issue, but that is a false-positive. So you can ignore that.",
+          "defaultArguments": [
+            "timestamp -",
+            "object",
+            "unsnap"
+          ],
+          "cause": "Same as the other check, but only for slider tails snapped \u003E 1 ms and \u003C 2 ms late."
+        },
+        "Minor": {
+          "level": "Minor",
+          "formatString": "{0} {1} unsnapped by {2} ms.",
+          "defaultArguments": [
+            "timestamp -",
+            "object",
+            "unsnap"
+          ],
+          "cause": "Same as the other check, but by 1 ms or more instead."
+        }
+      },
+      "modes": [
+        "Standard",
+        "Taiko",
+        "Catch",
+        "Mania"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckUnusedLines",
+      "fullName": "MapsetVerifier.Checks.AllModes.Timing.CheckUnusedLines",
+      "checkType": "Beatmap",
+      "category": "Timing",
+      "message": "Unused timing lines.",
+      "author": "Naxess",
+      "applicableModes": "All Modes",
+      "documentation": {
+        "Purpose": "\r\n                        Ensuring there are no unused timing lines in the beatmap.",
+        "Reasoning": "\r\n                        When placing uninherited lines on-beat with the previous uninherited line, timing may shift 1 ms forwards \r\n                        due to rounding errors. This means after 20 uninherited lines placed in this way, timing may shift up to \r\n                        20 ms at the end. They may also affect the nightcore mod and main menu pulsing depending on placement.\r\n\r\n                        Unused inherited lines don\u0027t cause any issues and are basically equivalent to bookmarks. Unless the mapper \r\n                        intended to do something with them (e.g. silencing slider ends/ticks), they can be safely removed, but \r\n                        removal is not necessary."
+      },
+      "templates": {
+        "Problem": {
+          "level": "Problem",
+          "formatString": "{0} Uninherited line changes nothing.",
+          "defaultArguments": [
+            "timestamp -"
+          ],
+          "cause": "An uninherited line is placed on a multiple of 4 downbeats away from the previous uninherited line, and changes no settings."
+        },
+        "Problem Can Be Replaced By Inherited": {
+          "level": "Problem",
+          "formatString": "{0} Uninherited line changes nothing that can\u0027t be changed with an inherited line.",
+          "defaultArguments": [
+            "timestamp -"
+          ],
+          "cause": "Same as the first check, but changes volume, sampleset, or another setting that an inherited line could change instead."
+        },
+        "Warning": {
+          "level": "Warning",
+          "formatString": "{0} Uninherited line only {1}, ensure this makes sense, otherwise remove the line.",
+          "defaultArguments": [
+            "timestamp -",
+            "something not immediately obvious"
+          ],
+          "cause": "Same as the first check, but changes something that inherited lines cannot, yet isn\u0027t immediately obvious, i.e. omitting barline, correcting an omitted barline, or nightcore cymbals."
+        },
+        "Warning Can Be Replaced By Inherited": {
+          "level": "Warning",
+          "formatString": "{0} Uninherited line only {1}, ensure this makes sense, otherwise replace with an inherited line",
+          "defaultArguments": [
+            "timestamp -",
+            "something not immediately obvious"
+          ],
+          "cause": "Same as the second check, but changes something that inherited lines cannot, yet isn\u0027t immediately obvious, i.e. omitting barline, correcting an omitted barline, or nightcore cymbals."
+        },
+        "Minor Inherited": {
+          "level": "Minor",
+          "formatString": "{0} Inherited line changes {1}.",
+          "defaultArguments": [
+            "timestamp -",
+            "nothing(, other than SV/sample settings, but affects nothing)"
+          ],
+          "cause": "An inherited line changes no settings."
+        }
+      },
+      "modes": [
+        "Standard",
+        "Taiko",
+        "Catch",
+        "Mania"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckWrongSnapping",
+      "fullName": "MapsetVerifier.Checks.AllModes.Timing.CheckWrongSnapping",
+      "checkType": "BeatmapSet",
+      "category": "Timing",
+      "message": "Wrongly or inconsistently snapped hit objects.",
+      "author": "Naxess",
+      "applicableModes": "All Modes",
+      "documentation": {
+        "Purpose": "\r\n                        Preventing incorrectly snapped hit objects, for example 1/6 being used where the song only supports \r\n                        1/4, or a slider tail accidentally being extended 1/16 too far.",
+        "Reasoning": "\r\n                        Should hit objects not align with any audio cue or otherwise recognizable pattern, it would not only \r\n                        force the player to guess when objects should be clicked, but also harm the perceived connection between \r\n                        the beatmap and the song, neither of which make for good experiences.\r\n                        \r\n                        \u003E Note that this check is intentionally heavy on false-positives for safety\u0027s sake due to this being a common disqualification reason."
+      },
+      "templates": {
+        "Snap Consistency": {
+          "level": "Warning",
+          "formatString": "{0} (1/{1}) Different snapping, {2} (1/{3}), is used in {4}.",
+          "defaultArguments": [
+            "timestamp -",
+            "X",
+            "timestamp -",
+            "X",
+            "difficulty"
+          ],
+          "cause": "Two hit objects in separate difficulties do not have any object in the other difficulty at the same time, and are close enough in time to be mistaken for one another.\r\n                                    \u003E Ignores cases where the divisor on the lower difficulty is less than on the higher difficulty, since this is usually natural."
+        },
+        "Snap Count": {
+          "level": "Warning",
+          "formatString": "{0} 1/{1} is used 3 times or less, ensure this makes sense.",
+          "defaultArguments": [
+            "timestamp(s) -",
+            "X"
+          ],
+          "cause": "The beat snap divisor a hit object is on is used less than or equal to 3 times in the same difficulty and is 1/6 or lower."
+        },
+        "Snap Percent": {
+          "level": "Warning",
+          "formatString": "{0} 1/{1} makes out 0.5% or less of snappings, ensure this makes sense.",
+          "defaultArguments": [
+            "timestamp(s) -",
+            "X"
+          ],
+          "cause": "The beat snap divisor a hit object is on is used less than or equal to 0.5% of all snappings in the same difficulty and is 1/6 or lower."
+        },
+        "Minor Snap Count": {
+          "level": "Minor",
+          "formatString": "{0} 1/{1} is used 7 times or less, ensure this makes sense.",
+          "defaultArguments": [
+            "timestamp(s) -",
+            "X"
+          ],
+          "cause": "Same as the other check, except with 7 as threshold instead."
+        },
+        "Minor Snap Percent": {
+          "level": "Minor",
+          "formatString": "{0} 1/{1} makes out 5% or less of snappings, ensure this makes sense.",
+          "defaultArguments": [
+            "timestamp(s) -",
+            "X"
+          ],
+          "cause": "Same as the other check, except with 5% as threshold instead."
+        }
+      },
+      "modes": [
+        "Standard",
+        "Taiko",
+        "Catch",
+        "Mania"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckLowestDiff",
+      "fullName": "MapsetVerifier.Checks.AllModes.Spread.CheckLowestDiff",
+      "checkType": "BeatmapSet",
+      "category": "Spread",
+      "message": "Lowest difficulty too difficult for the given drain/play time(s).",
+      "author": "Naxess",
+      "applicableModes": "All Modes",
+      "documentation": {
+        "Purpose": "\r\n                        Ensuring that newer players still have new content to play at the same time as encouraging mappers to map longer songs.\r\n\r\n                        ![](https://i.imgur.com/1PFVl76.png)\r\n                        The drain time thresholds determining the highest difficulty level for the lowest difficulty in the set.",
+        "Reasoning": "\r\n                        Newer players usually struggle with especially long songs, so encouraging them to try shorter songs first at lower difficulty levels allows them to learn the basics before trying to train their stamina or similar. This is done by requiring that shorter songs have lower difficulties, while longer songs can have less of them. This also reduces the workload on mappers and as such introduces a larger variety of songs into the game that otherwise wouldn\u0027t be so common due to their length.\r\n\r\n                        \u003E The star rating algorithm is currently only implemented for standard, so the suggested difficulty level of beatmaps not from standard is highly inaccurate. Changing the interpretation of difficulty levels manually will fix this."
+      },
+      "templates": {
+        "Problem": {
+          "level": "Problem",
+          "formatString": "With a lowest difficulty {0}, the {1} time of {2} must be at least {3}, currently {4}.",
+          "defaultArguments": [
+            "lowest diff",
+            "drain/play",
+            "beatmap",
+            "lowest drain",
+            "current drain"
+          ],
+          "cause": "The lowest difficulty of a beatmapset is too high of a difficulty level considering the drain time of the other difficulties, alternatively play time if their drain is 80% or more of it and it isn\u0027t the top difficulty."
+        }
+      },
+      "modes": [
+        "Standard",
+        "Taiko",
+        "Catch",
+        "Mania"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckDefaultColours",
+      "fullName": "MapsetVerifier.Checks.AllModes.Settings.CheckDefaultColours",
+      "checkType": "Beatmap",
+      "category": "Settings",
+      "message": "Default combo colours without forced skin.",
+      "author": "Naxess",
+      "applicableModes": "Standard Catch",
+      "documentation": {
+        "Purpose": "\r\n                        Preventing the combo colours chosen without additional input from blending into the background.\r\n\r\n                        ![](https://i.imgur.com/G5vTU7f.png)\r\n                        The combo colour section in song setup without custom colours ticked.",
+        "Reasoning": "\r\n                        If you leave the combo colour setting as it is when you create a beatmap, no [Colours] section will be created in the .osu, meaning the skins of users will override them. Since we can\u0027t control which colours they may use or force them to dim the background, the colours may blend into the background making for an unfair gameplay experience.\r\n\r\n                        If you set a preferred skin in the beatmap however, for example default, that skin will be used over any user skin, but many players switch skins to get away from default, so would not recommend this. If you want the default colours, simply tick the \u0022Enable Custom Colours\u0022 checkbox instead."
+      },
+      "templates": {
+        "Default": {
+          "level": "Problem",
+          "formatString": "Default combo colours without preferred skin.",
+          "defaultArguments": [],
+          "cause": "A beatmap has no custom combo colours and does not have any preferred skin."
+        }
+      },
+      "modes": [
+        "Standard",
+        "Catch"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckDiffSettings",
+      "fullName": "MapsetVerifier.Checks.AllModes.Settings.CheckDiffSettings",
+      "checkType": "Beatmap",
+      "category": "Settings",
+      "message": "Abnormal difficulty settings.",
+      "author": "Naxess",
+      "applicableModes": "All Modes",
+      "documentation": {
+        "Purpose": "\r\n                        Preventing difficulty settings from including more than 1 decimal, and mania key counts from being too large or small.",
+        "Reasoning": "\r\n                        Settings having more than 1 decimal place is currently unrankable for, what is probably, two reasons:\r\n                        - The precision for anything greater than 1 place matters too little to be worth increasing the amount of digits in the song selection screen/website.\r\n                        - Searching for e.g. AR=9.25 will not find maps with AR 9.25. However, searching for AR=9.2 will.\r\n\r\n                        ![](https://i.imgur.com/ySldNaU.png)\r\n                        More than 1 decimal place compared to 1 decimal place.\r\n\r\n                        The circle size setting in mania determines the key count, and is limited between 4 and 10.\r\n                        - 3K or fewer leaves little room for patterning, making 2 maps of the same difficulty and song almost identical."
+      },
+      "templates": {
+        "CS Mania": {
+          "level": "Problem",
+          "formatString": "Key count {0} is less than {1} or greater than {2}.",
+          "defaultArguments": [
+            "setting",
+            "min",
+            "max"
+          ],
+          "cause": "The circle size settings is less than 4 or greater than 10. Only applies to mania."
+        },
+        "Decimals": {
+          "level": "Problem",
+          "formatString": "{0} {1} has more than 1 decimal place.",
+          "defaultArguments": [
+            "value",
+            "setting"
+          ],
+          "cause": "A difficulty setting has more than 1 decimal place."
+        },
+        "Other": {
+          "level": "Warning",
+          "formatString": "{0} {1}, although is capped between 0 to 10 in-game.",
+          "defaultArguments": [
+            "value",
+            "setting"
+          ],
+          "cause": "A difficulty setting is less than 0 or greater than 10."
+        }
+      },
+      "modes": [
+        "Standard",
+        "Taiko",
+        "Catch",
+        "Mania"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckInconsistentSettings",
+      "fullName": "MapsetVerifier.Checks.AllModes.Settings.CheckInconsistentSettings",
+      "checkType": "BeatmapSet",
+      "category": "Settings",
+      "message": "Inconsistent mapset id, countdown, epilepsy warning, etc.",
+      "author": "Naxess",
+      "applicableModes": "All Modes",
+      "documentation": {
+        "Purpose": "\r\n                        Ensuring settings across difficulties in a beatmapset are consistent within game modes and where it makes sense.",
+        "Reasoning": "\r\n                        Difficulties in a beatmapset using a similar video or storyboard, would likely want to have the same \r\n                        epilepsy settings since they would share the same reason to have it. Same goes for countdown, letterboxing, \r\n                        widescreen support, audio lead-in, etc. Obviously excluding settings that don\u0027t apply.\r\n\r\n                        Having difficulties all be different in terms of noticeable settings would make the set seem less coherent, \r\n                        but it can be acceptable if it differs thematically in a way that makes it seem intentional, without needing to \r\n                        specify that it is, for example one beatmap being old-style with a special skin and countdown while others are \r\n                        more modern and exclude this."
+      },
+      "templates": {
+        "Problem": {
+          "level": "Problem",
+          "formatString": "Inconsistent {0} \u0022{1}\u0022, see {2} \u0022{3}\u0022.",
+          "defaultArguments": [
+            "setting",
+            "value",
+            "difficulty",
+            "value"
+          ],
+          "cause": "The beatmapset id is inconsistent between any two difficulties in the set, regardless of mode."
+        },
+        "Warning": {
+          "level": "Warning",
+          "formatString": "Inconsistent {0} \u0022{1}\u0022, see {2} \u0022{3}\u0022.",
+          "defaultArguments": [
+            "setting",
+            "value",
+            "difficulty",
+            "value"
+          ],
+          "cause": "Compares settings and presence of elements within the same mode. Includes the following:\r\n\r\n                        - countdown speed (if there\u0027s enough time to show it, excluded for taiko/mania)\r\n                        - countdown offset (if there\u0027s enough time to show it, excluded for taiko/mania)\r\n                        - countdown presence (if there\u0027s enough time to show it, excluded for taiko/mania)\r\n                        - letterbox (if there are breaks)\r\n                        - widescreen support (if there\u0027s a storyboard)\r\n                        - difficulty-specific storyboard presence\r\n                        - epilepsy warning (if there\u0027s a storyboard or video)\r\n                        - audio lead-in\r\n                        - skin preference\r\n                        - storyboard in front of combo fire (if there\u0027s a storyboard)\r\n                        - usage of skin sprites in storyboard (if there\u0027s a storyboard)\r\n\r\n                        \u003E Inconsistent video is already covered by another check."
+        },
+        "Minor": {
+          "level": "Minor",
+          "formatString": "Inconsistent {0} \u0022{1}\u0022, see {2} \u0022{3}\u0022.",
+          "defaultArguments": [
+            "setting",
+            "value",
+            "difficulty",
+            "value"
+          ],
+          "cause": "Same as the warning, but only checks for slider ticks."
+        }
+      },
+      "modes": [
+        "Standard",
+        "Taiko",
+        "Catch",
+        "Mania"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckLuminosity",
+      "fullName": "MapsetVerifier.Checks.AllModes.Settings.CheckLuminosity",
+      "checkType": "Beatmap",
+      "category": "Settings",
+      "message": "Too dark or bright combo colours or slider borders.",
+      "author": "Naxess",
+      "applicableModes": "Standard Catch",
+      "documentation": {
+        "Purpose": "\r\n                        Preventing combo colours from blending into dimmed backgrounds or flashing too intensely in kiai.",
+        "Reasoning": "\r\n                        Although objects by default have a white border around them making them visible, the approach circles are \r\n                        affected by combo colour and will become impossible to see with colour 0,0,0. Stripping the game of \r\n                        important gameplay indicators or generally messing with them (see check for modified breaks) is not \r\n                        something beatmaps are expected to do, as they need to be consistent to work properly.\r\n\r\n                        ![](https://i.imgur.com/wxoMMQG.png)\r\n                        A slider whose approach circle is only visible on its borders and path, due to the rest blending into the dimmed bg.\r\n\r\n                        As for bright colours, when outside of kiai they\u0027re fine, but while in kiai the game flashes them, \r\n                        attempting to make them even brighter without caring about them already being really bright, resulting in \r\n                        pretty strange behaviour for some monitors and generally just unpleasant contrast.\r\n                        ![](https://i.imgur.com/9cRTvJc.png)\r\n                        An example of a slider with colour 255,255,255 while in the middle of flashing.\r\n\r\n                        This check uses the [HSP colour system](https://alienryderflex.com/hsp.html) to better approximate \r\n                        the way humans perceive luminosity in colours, as opposed to the HSL system where green is regarded the same \r\n                        luminosity as deep blue, see image.\r\n                        ![](https://i.imgur.com/CjPhf0b.png)\r\n                        The HSP colour system compared to the in-game HSL system."
+      },
+      "templates": {
+        "Problem Combo": {
+          "level": "Problem",
+          "formatString": "Combo colour {0} is way too dark.",
+          "defaultArguments": [
+            "number"
+          ],
+          "cause": "The HSP luminosity value of a combo colour is lower than 30. These values are visible in the overview section as tooltips for each colour if you want to check them manually."
+        },
+        "Warning Combo": {
+          "level": "Warning",
+          "formatString": "Combo colour {0} is really dark.",
+          "defaultArguments": [
+            "number"
+          ],
+          "cause": "Same as the first check, but lower than 43 instead."
+        },
+        "Problem Border": {
+          "level": "Problem",
+          "formatString": "Slider border is way too dark.",
+          "defaultArguments": [],
+          "cause": "Same as the first check, except applies on the slider border instead."
+        },
+        "Warning Border": {
+          "level": "Warning",
+          "formatString": "Slider border is really dark.",
+          "defaultArguments": [],
+          "cause": "Same as the second check, except applies on the slider border instead."
+        },
+        "Bright": {
+          "level": "Warning",
+          "formatString": "Combo colour {0} is really bright in kiai sections, see {1}.",
+          "defaultArguments": [
+            "number",
+            "example object"
+          ],
+          "cause": "Same as the first check, but higher than 250 and requires that at least one hit object with the combo is in a kiai section."
+        }
+      },
+      "modes": [
+        "Standard",
+        "Catch"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckTickRate",
+      "fullName": "MapsetVerifier.Checks.AllModes.Settings.CheckTickRate",
+      "checkType": "Beatmap",
+      "category": "Settings",
+      "message": "Slider tick rates not aligning with any common beat snap divisor.",
+      "author": "Naxess",
+      "applicableModes": "All Modes",
+      "documentation": {
+        "Purpose": "\r\n                        Ensuring that slider ticks align with the song\u0027s beat structure.\r\n                        ![](https://i.imgur.com/2NVm2aB.png)\r\n                        A 1/1 slider with an asymmetric tick rate (neither a tick in the middle nor two equally distanced from it).",
+        "Reasoning": "\r\n                        Slider ticks, just like any other object, should align with the song in some way. If slider ticks are going after a 1/5 beat \r\n                        structure, for instance, that\u0027s either extremely rare or much more likely a mistake."
+      },
+      "templates": {
+        "Tick Rate": {
+          "level": "Problem",
+          "formatString": "{0} {1}.",
+          "defaultArguments": [
+            "setting",
+            "value"
+          ],
+          "cause": "The slider tick rate setting of a beatmap is using an incorrect or otherwise extremely uncommon divisor.\r\n                                    \u003E Common tick rates include any full integer as well as 1/2, 4/3, and 3/2. Excludes precision errors."
+        }
+      },
+      "modes": [
+        "Standard",
+        "Taiko",
+        "Catch",
+        "Mania"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckHitSounds",
+      "fullName": "MapsetVerifier.Checks.AllModes.HitSounds.CheckHitSounds",
+      "checkType": "Beatmap",
+      "category": "Hit Sounds",
+      "message": "Long periods without hit sounding.",
+      "author": "Naxess",
+      "applicableModes": "Standard Catch",
+      "documentation": {
+        "Purpose": "\r\n                        Ensuring varied feedback is used frequently throughout the map. Not too frequently, but mixing things up at least \r\n                        once or twice every measure is preferable. This could be with hit sounds, sampleset changes or additions.",
+        "Reasoning": "\r\n                        Accenting and complementing the song with hit sounds, either by reflecting it or adding to it, generally yields \r\n                        better feedback than if the same sound would be used throughout. However, the option to use the same sounds for all \r\n                        hit sounds and samplesets is still possible through skinning on the players\u0027 end for those who prefer the monotone \r\n                        approach.",
+        "Exceptions": "\r\n                        Taiko is an exception due to relying on hit sounds for gameplay mechanics. Circles are by default don, and can be \r\n                        turned into kat by using a clap or whistle hit sound, for example. As such applying this check to taiko would\r\n                        make it take on a different meaning.\r\n\r\n                        Mania sets consisting only of insane and above difficulties can omit hit sounds due to very few in the community at that level enjoying them in general.\r\n                        See [[Proposal - mania] Guidelines allowing higher difficulties to omit hitsound additions.](https://osu.ppy.sh/community/forums/topics/996091)\r\n                        Since we\u0027re missing mania SR support we\u0027ll simply exclude mania from this check entirely."
+      },
+      "templates": {
+        "No Hit Sounds": {
+          "level": "Problem",
+          "formatString": "This beatmap contains no hit sounds or sampleset changes.",
+          "defaultArguments": [],
+          "cause": "There are no hit sounds or sampleset changes anywhere in a difficulty."
+        },
+        "Problem": {
+          "level": "Problem",
+          "formatString": "{0} No hit sounds or sampleset changes from here to {1}, ({2} s).",
+          "defaultArguments": [
+            "timestamp -",
+            "timestamp -",
+            "duration"
+          ],
+          "cause": "The hit sound score value, based on the amount of hit objects and time between two points without hit sounds or sampleset changes, is way too low."
+        },
+        "Warning": {
+          "level": "Warning",
+          "formatString": "{0} No hit sounds or sampleset changes from here to {1}, ({2} s).",
+          "defaultArguments": [
+            "timestamp -",
+            "timestamp -",
+            "duration"
+          ],
+          "cause": "Same as the other check, but with a threshold which is higher, but still very low."
+        }
+      },
+      "modes": [
+        "Standard",
+        "Catch"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckMuted",
+      "fullName": "MapsetVerifier.Checks.AllModes.HitSounds.CheckMuted",
+      "checkType": "Beatmap",
+      "category": "Hit Sounds",
+      "message": "Low volume hit sounding.",
+      "author": "Naxess",
+      "applicableModes": "All Modes",
+      "documentation": {
+        "Purpose": "\r\n                        Ensuring that active hit object feedback is audible.",
+        "Reasoning": "\r\n                        All active hit objects (i.e. circles, slider heads, and starts of hold notes) should provide some feedback \r\n                        so that players can hear if they\u0027re clicking too early or late. By reducing the volume to the point where \r\n                        it is difficult to hear over the song, hit sounds cease to function as proper feedback.\r\n\r\n                        Reverses are generally always done on sound cues, and assuming that\u0027s the case, it wouldn\u0027t make much sense \r\n                        being silent."
+      },
+      "templates": {
+        "Warning Volume": {
+          "level": "Warning",
+          "formatString": "{0} {1}% volume {2}, this may be hard to hear over the song.",
+          "defaultArguments": [
+            "timestamp -",
+            "percent",
+            "active hit object"
+          ],
+          "cause": "An active hit object is at 10% or lower volume."
+        },
+        "Minor Volume": {
+          "level": "Minor",
+          "formatString": "{0} {1}% volume {2}, this may be hard to hear over the song.",
+          "defaultArguments": [
+            "timestamp -",
+            "percent",
+            "active hit object"
+          ],
+          "cause": "An active hit object is at 20% or lower volume."
+        },
+        "Passive Reverse": {
+          "level": "Warning",
+          "formatString": "{0} {1}% volume {2}, ensure there is no distinct sound here in the song.",
+          "defaultArguments": [
+            "timestamp -",
+            "percent",
+            "reverse"
+          ],
+          "cause": "A slider reverse is at 10% or lower volume."
+        },
+        "Passive": {
+          "level": "Minor",
+          "formatString": "{0} {1}% volume {2}, ensure there is no distinct sound here in the song.",
+          "defaultArguments": [
+            "timestamp -",
+            "percent",
+            "tick/tail"
+          ],
+          "cause": "A passive hit object is at 10% or lower volume."
+        }
+      },
+      "modes": [
+        "Standard",
+        "Taiko",
+        "Catch",
+        "Mania"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckBgPresence",
+      "fullName": "MapsetVerifier.Checks.AllModes.General.Resources.CheckBgPresence",
+      "checkType": "General",
+      "category": "Resources",
+      "message": "Missing background.",
+      "author": "Naxess",
+      "applicableModes": "General",
+      "documentation": {
+        "Purpose": "\r\n                        Ensuring that each beatmap in a beatmapset has a background image present.\r\n\r\n                        ![](https://i.imgur.com/P9TdA7K.jpg)\r\n                        An example of a default non-seasonal background as shown in the editor.",
+        "Reasoning": "\r\n                        Backgrounds help players recognize the beatmap, and the absence of one makes it look incomplete."
+      },
+      "templates": {
+        "All": {
+          "level": "Problem",
+          "formatString": "All difficulties are missing backgrounds.",
+          "defaultArguments": [],
+          "cause": "None of the difficulties have a background present."
+        },
+        "One": {
+          "level": "Problem",
+          "formatString": "{0} has no background.",
+          "defaultArguments": [
+            "difficulty"
+          ],
+          "cause": "One or more difficulties are missing backgrounds, but not all."
+        },
+        "Missing": {
+          "level": "Problem",
+          "formatString": "{0} is missing its background file, \u0022{1}\u0022.",
+          "defaultArguments": [
+            "difficulty",
+            "path"
+          ],
+          "cause": "A background file path is present, but no file exists where it is pointing."
+        }
+      }
+    },
+    {
+      "name": "CheckBgResolution",
+      "fullName": "MapsetVerifier.Checks.AllModes.General.Resources.CheckBgResolution",
+      "checkType": "General",
+      "category": "Resources",
+      "message": "Too high or low background resolution.",
+      "author": "Naxess",
+      "applicableModes": "General",
+      "documentation": {
+        "Purpose": "\r\n                        Preventing background quality from being noticeably low or unnoticeable high to save on file size.\r\n\r\n                        ![](https://i.imgur.com/VrKRzse.png)\r\n                        The left side is ~2.25x the resolution of the right side, which is the equivalent of comparing \r\n                        2560 x 1440 to 1024 x 640.",
+        "Reasoning": "\r\n                        Anything less than 1024 x 640 is usually quite noticeable, whereas anything higher than 2560 x 1440 \r\n                        is unlikely to be visible with the setup of the average player.\r\n\r\n                        \u003E This uses 16:10 as base, since anything outside of 16:9 will be cut off on that aspect ratio rather than resized to fit the screen, preserving quality."
+      },
+      "templates": {
+        "Too high": {
+          "level": "Problem",
+          "formatString": "\u0022{0}\u0022 greater than 2560 x 1440 ({1} x {2})",
+          "defaultArguments": [
+            "file name",
+            "width",
+            "height"
+          ],
+          "cause": "A background file has a width exceeding 2560 pixels or a height exceeding 1440 pixels."
+        },
+        "Very low": {
+          "level": "Warning",
+          "formatString": "\u0022{0}\u0022 lower than 1024 x 640 ({1} x {2})",
+          "defaultArguments": [
+            "file name",
+            "width",
+            "height"
+          ],
+          "cause": "A background file has a width lower than 1024 pixels or a height lower than 640 pixels."
+        },
+        "File size": {
+          "level": "Problem",
+          "formatString": "\u0022{0}\u0022 has a file size exceeding 2.5 MB ({1} MB)",
+          "defaultArguments": [
+            "file name",
+            "file size"
+          ],
+          "cause": "A background file has a file size greater than 2.5 MB."
+        },
+        "Leaves Folder": {
+          "level": "Problem",
+          "formatString": "\u0022{0}\u0022 leaves the current song folder, which shouldn\u0027t ever happen.",
+          "defaultArguments": [
+            "file name"
+          ],
+          "cause": "The file path of a background file starts with two dots."
+        },
+        "Missing": {
+          "level": "Problem",
+          "formatString": "\u0022{0}\u0022 is missing, so you\u0027ll need to check that manually.",
+          "defaultArguments": [
+            "file name"
+          ],
+          "cause": "A background file referenced is not present."
+        },
+        "Exception": {
+          "level": "Error",
+          "formatString": "\u0022{0}\u0022 couldn\u0027t be checked, so you\u0027ll need to do that manually.{1}",
+          "defaultArguments": [
+            "file name",
+            "exception info"
+          ],
+          "cause": "An exception occurred trying to parse a background file."
+        }
+      }
+    },
+    {
+      "name": "CheckMultipleVideo",
+      "fullName": "MapsetVerifier.Checks.AllModes.General.Resources.CheckMultipleVideo",
+      "checkType": "General",
+      "category": "Resources",
+      "message": "Inconsistent video usage.",
+      "author": "Naxess",
+      "applicableModes": "General",
+      "documentation": {
+        "Purpose": "\r\n                        Making sure that any inconsistency in video is intentional and makes sense.",
+        "Reasoning": "\r\n                        When adding a guest difficulty or adding different mode difficulties, the mapset host may forget to ensure \r\n                        that the videos across beatmaps in the set are consistent. Using multiple videos can be fine in cases like \r\n                        compilations or if one difficulty is thematically different enough to warrant it, but do keep in mind that \r\n                        it takes up additional space.\r\n\r\n                        \u003E For taiko, videos usually need to be modified in some way since they\u0027re only visible on the bottom half of the screen, so this check ignores any inconsistency with that mode from other modes."
+      },
+      "templates": {
+        "Same Mode": {
+          "level": "Warning",
+          "formatString": "{0} : {1}.",
+          "defaultArguments": [
+            "path",
+            "difficulties"
+          ],
+          "cause": "Difficulties of the same mode do not share the same video."
+        },
+        "Cross Mode": {
+          "level": "Warning",
+          "formatString": "Inconsistent video between the {0} and {1} beatmaps.",
+          "defaultArguments": [
+            "mode",
+            "mode"
+          ],
+          "cause": "Difficulties of separate modes (except taiko) do not share the same video."
+        }
+      }
+    },
+    {
+      "name": "CheckOverlayLayer",
+      "fullName": "MapsetVerifier.Checks.AllModes.General.Resources.CheckOverlayLayer",
+      "checkType": "General",
+      "category": "Resources",
+      "message": "Overlay layer usage.",
+      "author": "Naxess",
+      "applicableModes": "General",
+      "documentation": {
+        "Purpose": "\r\n                        Preventing storyboard elements from blocking the view of objects to the point where they become unnecessarily \r\n                        difficult, or even impossible, to read.\r\n                        ![](https://i.imgur.com/rVZpeso.png)\r\n                        A storyboard element appearing over a slider.",
+        "Reasoning": "\r\n                        This layer appears over the object layer, meaning it can obscure objects. This is potentially very dangerous if not paid \r\n                        attention to, as it can screw over the experience of the map really badly if executed poorly.\r\n\r\n                        As a rough guideline, ensure that the position of aimed objects are clear and that indicators are identifiable (so for \r\n                        example when to start spinning or that a slider reverses). Basically don\u0027t cover up important gameplay elements unless \r\n                        otherwise clear."
+      },
+      "templates": {
+        "Warning": {
+          "level": "Warning",
+          "formatString": "\u0022{0}\u0022 Check the {1} to see where it appears.",
+          "defaultArguments": [
+            "file name",
+            ".osu/.osb"
+          ],
+          "cause": "A storyboard sprite or animation is using the overlay layer."
+        }
+      }
+    },
+    {
+      "name": "CheckSpriteResolution",
+      "fullName": "MapsetVerifier.Checks.AllModes.General.Resources.CheckSpriteResolution",
+      "checkType": "General",
+      "category": "Resources",
+      "message": "Too high sprite resolution.",
+      "author": "Naxess",
+      "applicableModes": "General",
+      "documentation": {
+        "Purpose": "\r\n                        Preventing storyboard images from being extremely large.",
+        "Reasoning": "\r\n                        Unlike background images, storyboard images can be used to pan, zoom, scroll, rotate, etc, so they have more lenient \r\n                        limits in terms of resolution, but otherwise follow the same reasoning."
+      },
+      "templates": {
+        "Resolution": {
+          "level": "Problem",
+          "formatString": "\u0022{0}\u0022",
+          "defaultArguments": [
+            "file name"
+          ],
+          "cause": "A storyboard image has a width height product exceeding 17,000,000 pixels."
+        },
+        "Resolution Animation Frame": {
+          "level": "Problem",
+          "formatString": "\u0022{0}\u0022 (Animation Frame)",
+          "defaultArguments": [
+            "file name"
+          ],
+          "cause": "Same as the regular storyboard image check, except on one used in an animation."
+        },
+        "Leaves Folder": {
+          "level": "Problem",
+          "formatString": "\u0022{0}\u0022 leaves the current song folder, which shouldn\u0027t ever happen.",
+          "defaultArguments": [
+            "file name"
+          ],
+          "cause": "The file path of a storyboard image starts with two dots."
+        },
+        "Missing": {
+          "level": "Warning",
+          "formatString": "\u0022{0}\u0022 is missing, so you\u0027ll need to check that manually.",
+          "defaultArguments": [
+            "file name"
+          ],
+          "cause": "A storyboard image referenced is not present."
+        },
+        "Exception": {
+          "level": "Error",
+          "formatString": "\u0022{0}\u0022 couldn\u0027t be checked, so you\u0027ll need to do that manually.{1}",
+          "defaultArguments": [
+            "file name",
+            "exception"
+          ],
+          "cause": "An exception occurred trying to parse a storyboard image."
+        }
+      }
+    },
+    {
+      "name": "CheckVideoOffset",
+      "fullName": "MapsetVerifier.Checks.AllModes.General.Resources.CheckVideoOffset",
+      "checkType": "General",
+      "category": "Resources",
+      "message": "Inconsistent video offset.",
+      "author": "Naxess",
+      "applicableModes": "General",
+      "documentation": {
+        "Purpose": "\r\n                        Ensuring that the video aligns with the song consistently for all difficulties.\r\n\r\n                        ![](https://i.imgur.com/RDRL3qG.png)\r\n                        Two difficulties with different video offsets, as shown in the respective .osu files. The second \r\n                        argument, after \u0022Video\u0022, is the offset in ms.",
+        "Reasoning": "\r\n                        Since many videos tend to match the music in some way, for example do transitions on downbeats, it wouldn\u0027t \r\n                        make much sense having difficulty-dependent video offsets, as all difficulties are based around the same song \r\n                        starting at the same point in time."
+      },
+      "templates": {
+        "Multiple": {
+          "level": "Problem",
+          "formatString": "{0}",
+          "defaultArguments": [
+            "video offset : difficulties"
+          ],
+          "cause": "There is more than one video offset used between all difficulties."
+        }
+      }
+    },
+    {
+      "name": "CheckVideoResolution",
+      "fullName": "MapsetVerifier.Checks.AllModes.General.Resources.CheckVideoResolution",
+      "checkType": "General",
+      "category": "Resources",
+      "message": "Too high video resolution.",
+      "author": "Naxess",
+      "applicableModes": "General",
+      "documentation": {
+        "Purpose": "\r\n                        Keeping video files under a certain resolution threshold.",
+        "Reasoning": "\r\n                        Videos, having multiple frames stacked after each other, naturally take more file size than any regular background image. \r\n                        Because of this, the resolution threshold needs to be lower than for backgrounds in order to keep file size reasonable, \r\n                        even if it is possible to download without the video.\r\n\r\n                        \u003E This is partly to ensure a reasonable load on the server, not only on the players\u0027 end, due to ranked content being downloaded more often."
+      },
+      "templates": {
+        "Resolution": {
+          "level": "Problem",
+          "formatString": "\u0022{0}\u0022 greater than 1280 x 720 ({1} x {2})",
+          "defaultArguments": [
+            "file name",
+            "width",
+            "height"
+          ],
+          "cause": "A video has a width exceeding 1280 pixels or a height exceeding 720 pixels."
+        },
+        "Leaves Folder": {
+          "level": "Problem",
+          "formatString": "\u0022{0}\u0022 leaves the current song folder, which shouldn\u0027t ever happen.",
+          "defaultArguments": [
+            "file name"
+          ],
+          "cause": "The file path of a video starts with two dots."
+        },
+        "Missing": {
+          "level": "Warning",
+          "formatString": "\u0022{0}\u0022 is missing, so you\u0027ll need to check that manually.",
+          "defaultArguments": [
+            "file name"
+          ],
+          "cause": "A video referenced is not present."
+        },
+        "Exception": {
+          "level": "Error",
+          "formatString": "\u0022{0}\u0022 couldn\u0027t be checked, so you\u0027ll need to do that manually.{1}",
+          "defaultArguments": [
+            "file name",
+            "exception"
+          ],
+          "cause": "An exception occurred trying to parse a video."
+        }
+      }
+    },
+    {
+      "name": "CheckGenreLanguage",
+      "fullName": "MapsetVerifier.Checks.AllModes.General.Metadata.CheckGenreLanguage",
+      "checkType": "General",
+      "category": "Metadata",
+      "message": "Missing genre/language in tags.",
+      "author": "Naxess",
+      "applicableModes": "General",
+      "documentation": {
+        "Purpose": "\r\n                        Consistent searching between web and in-game.",
+        "Reasoning": "\r\n                        Web\u0027s language/genre fields can be searched for on the web, but not in-game. \r\n                        They are therefore added to the tags for consistency.\r\n\r\n                        ![](https://i.imgur.com/g6zlqhy.png)\r\n                        An example of web genre/language also in the tags."
+      },
+      "templates": {
+        "Genre": {
+          "level": "Warning",
+          "formatString": "Missing genre tag (\u0022rock\u0022, \u0022pop\u0022, \u0022electronic\u0022, etc), ignore if none fit.",
+          "defaultArguments": [],
+          "cause": "None of the following tags were found (case insensitive):- \u0022Video\u0022\n \u0026 \u0022Game\u0022\n- \u0022Anime\u0022\n- \u0022Rock\u0022\n- \u0022Pop\u0022\n- \u0022Novelty\u0022\n- \u0022Hip\u0022\n \u0026 \u0022Hop\u0022\n- \u0022Electronic\u0022\n- \u0022Metal\u0022\n- \u0022Classical\u0022\n- \u0022Folk\u0022\n- \u0022Jazz\u0022\n"
+        },
+        "Language": {
+          "level": "Warning",
+          "formatString": "Missing language tag (\u0022english\u0022, \u0022japanese\u0022, \u0022instrumental\u0022, etc), ignore if none fit.",
+          "defaultArguments": [],
+          "cause": "None of the following tags were found (case insensitive):- \u0022English\u0022\n- \u0022Chinese\u0022\n- \u0022French\u0022\n- \u0022German\u0022\n- \u0022Italian\u0022\n- \u0022Japanese\u0022\n- \u0022Korean\u0022\n- \u0022Spanish\u0022\n- \u0022Swedish\u0022\n- \u0022Russian\u0022\n- \u0022Polish\u0022\n- \u0022Instrumental\u0022\n- \u0022Conlang\u0022\n- \u0022Hindi\u0022\n- \u0022Arabic\u0022\n- \u0022Portugese\u0022\n- \u0022Turkish\u0022\n- \u0022Vietnamese\u0022\n- \u0022Persian\u0022\n- \u0022Indonesian\u0022\n- \u0022Ukrainian\u0022\n- \u0022Romanian\u0022\n- \u0022Dutch\u0022\n- \u0022Thai\u0022\n- \u0022Greek\u0022\n- \u0022Somali\u0022\n- \u0022Malay\u0022\n- \u0022Hungarian\u0022\n- \u0022Czech\u0022\n- \u0022Norwegian\u0022\n- \u0022Finnish\u0022\n- \u0022Danish\u0022\n- \u0022Latvia\u0022\n- \u0022Lithuanian\u0022\n- \u0022Estonian\u0022\n- \u0022Punjabi\u0022\n- \u0022Bengali\u0022\n"
+        }
+      }
+    },
+    {
+      "name": "CheckGuestTags",
+      "fullName": "MapsetVerifier.Checks.AllModes.General.Metadata.CheckGuestTags",
+      "checkType": "General",
+      "category": "Metadata",
+      "message": "Missing GDers in tags.",
+      "author": "Naxess",
+      "applicableModes": "General",
+      "documentation": {
+        "Purpose": "\r\n                        Ensuring that the set can be found by searching for any of its guest difficulty creators.",
+        "Reasoning": "\r\n                        If you\u0027re looking for beatmaps of a specific user, it\u0027d make sense if sets containing their\r\n                        guest difficulties would appear, and not only sets they hosted."
+      },
+      "templates": {
+        "Warning": {
+          "level": "Warning",
+          "formatString": "\u0022{0}\u0022 is possessive but \u0022{1}\u0022 isn\u0027t in the tags, ignore if not a user.",
+          "defaultArguments": [
+            "guest\u0027s diff",
+            "guest"
+          ],
+          "cause": "A difficulty name is prefixed by text containing an apostrophe (\u0027) before or after the character \u0022s\u0022, which is not in the tags."
+        }
+      }
+    },
+    {
+      "name": "CheckInconsistentMetadata",
+      "fullName": "MapsetVerifier.Checks.AllModes.General.Metadata.CheckInconsistentMetadata",
+      "checkType": "General",
+      "category": "Metadata",
+      "message": "Inconsistent metadata.",
+      "author": "Naxess",
+      "applicableModes": "General",
+      "documentation": {
+        "Purpose": "\r\n                        Keeping metadata consistent between all difficulties of a beatmapset.\r\n\r\n                        ![](https://i.imgur.com/ojdxg6z.png)\r\n                        Comparing two difficulties with different titles in a beatmapset.",
+        "Reasoning": "\r\n                        Since all difficulties are of the same song, they should use the same song metadata. The website also assumes it\u0027s all the \r\n                        same, so it\u0027ll only display one of the artists, titles, creators, etc. Multiple metadata simply isn\u0027t supported very well, \r\n                        and should really just be a global beatmap setting rather than a .osu-specific one."
+      },
+      "templates": {
+        "Tags": {
+          "level": "Problem",
+          "formatString": "Inconsistent tags between {0} and {1}, difference being \u0022{2}\u0022.",
+          "defaultArguments": [
+            "difficulty",
+            "difficulty",
+            "difference"
+          ],
+          "cause": "A tag is present in one difficulty but missing in another.\n\u003E Does not care which order the tags are written in or about duplicate tags, simply that the tags themselves are consistent."
+        },
+        "Other Field": {
+          "level": "Problem",
+          "formatString": "Inconsistent {0} fields between {1} and {2}; \u0022{3}\u0022 and \u0022{4}\u0022 respectively.",
+          "defaultArguments": [
+            "field",
+            "difficulty",
+            "difficulty",
+            "field",
+            "field"
+          ],
+          "cause": "A metadata field is not consistent between all difficulties."
+        }
+      }
+    },
+    {
+      "name": "CheckMarkerFormat",
+      "fullName": "MapsetVerifier.Checks.AllModes.General.Metadata.CheckMarkerFormat",
+      "checkType": "General",
+      "category": "Metadata",
+      "message": "Incorrect marker format.",
+      "author": "Naxess",
+      "applicableModes": "General",
+      "documentation": {
+        "Purpose": "\r\n                        Standardizing the way metadata is written for ranked content.\r\n                        ![](https://i.imgur.com/e5mHEan.png)\r\n                        An example of \u0022featured by\u0022, which should be replaced by \u0022feat.\u0022.",
+        "Reasoning": "\r\n                        Small deviations in metadata or obvious mistakes in its formatting or capitalization are for the \r\n                        most part eliminated through standardization. Standardization also reduces confusion in case of \r\n                        multiple correct ways to write certain fields and contributes to making metadata more consistent \r\n                        across official content."
+      },
+      "templates": {
+        "Wrong Format": {
+          "level": "Problem",
+          "formatString": "Incorrect formatting of \u0022{0}\u0022 marker in {1} {2} field, \u0022{3}\u0022.",
+          "defaultArguments": [
+            "marker",
+            "Romanized/unicode",
+            "artist/title",
+            "field"
+          ],
+          "cause": "The artist or title field of a difficulty includes an incorrect format of \u0022CV:\u0022, \u0022vs.\u0022 or \u0022feat.\u0022."
+        }
+      }
+    },
+    {
+      "name": "CheckMarkerSpacing",
+      "fullName": "MapsetVerifier.Checks.AllModes.General.Metadata.CheckMarkerSpacing",
+      "checkType": "General",
+      "category": "Metadata",
+      "message": "Incorrect marker spacing.",
+      "author": "Naxess",
+      "applicableModes": "General",
+      "documentation": {
+        "Purpose": "\r\n                        Standardizing the way metadata is written for ranked content.\r\n\r\n                        ![](https://i.imgur.com/9w1fzvB.png)\r\n                        The romanized artist field is missing a whitespace before and after \u0022(CV:\u0022. \r\n                        The unicode artist field is fine, though, since the characters are full-width.",
+        "Reasoning": "\r\n                        Small deviations in metadata or obvious mistakes in its formatting or capitalization are for the \r\n                        most part eliminated through standardization. Standardization also reduces confusion in case of \r\n                        multiple correct ways to write certain fields and contributes to making metadata more consistent \r\n                        across official content."
+      },
+      "templates": {
+        "Problem": {
+          "level": "Problem",
+          "formatString": "Missing {0} in {1}; \u0022{2}\u0022.",
+          "defaultArguments": [
+            "something",
+            "field",
+            "field content"
+          ],
+          "cause": "Some whitespace or parameter is missing from the artist or title fields where only alphabetic and numerical characters are involved."
+        },
+        "Warning": {
+          "level": "Warning",
+          "formatString": "Missing {0} in {1}; \u0022{2}\u0022.",
+          "defaultArguments": [
+            "something",
+            "field",
+            "field content"
+          ],
+          "cause": "Same as the other check, but can involve any type of characters."
+        }
+      }
+    },
+    {
+      "name": "CheckTitleMarkers",
+      "fullName": "MapsetVerifier.Checks.AllModes.General.Metadata.CheckTitleMarkers",
+      "checkType": "General",
+      "category": "Metadata",
+      "message": "Incorrect format of (TV Size) / (Game Ver.) / (Short Ver.) / (Cut Ver.) / (Sped Up Ver.) / etc in title.",
+      "author": "Naxess",
+      "applicableModes": "General",
+      "documentation": {
+        "Purpose": "\r\n                        Standardizing the way metadata is written for ranked content.\r\n\r\n                        ![](https://i.imgur.com/1ozV71n.png)\r\n                        A song using \u0022-TV version-\u0022 as its official metadata, which becomes \u0022(TV Size)\u0022 when standardized.",
+        "Reasoning": "\r\n                    Small deviations in metadata or obvious mistakes in its formatting or capitalization are for the \r\n                    most part eliminated through standardization. Standardization also reduces confusion in case of \r\n                    multiple correct ways to write certain fields and contributes to making metadata more consistent \r\n                    across official content."
+      },
+      "templates": {
+        "Problem": {
+          "level": "Problem",
+          "formatString": "{0} title field; \u0022{1}\u0022 incorrect format of \u0022{2}\u0022.",
+          "defaultArguments": [
+            "Romanized/unicode",
+            "field",
+            "title marker"
+          ],
+          "cause": "The format of a title marker, in either the romanized or unicode title, is incorrect.\r\n                        The following are detected formats:\r\n                        - (TV Size)\r\n                        - (Game Ver.)\r\n                        - (Short Ver.)\r\n                        - (Cut Ver.)\r\n                        - (Sped Up Ver.)\r\n                        - (Nightcore Mix)\r\n                        - (Sped Up \u0026 Cut Ver.)\r\n                        - (Nightcore \u0026 Cut Ver.)"
+        },
+        "Warning Nightcore": {
+          "level": "Warning",
+          "formatString": "\u0022{0}\u0022 in tags, consider \u0022{1}\u0022 instead of \u0022{2}\u0022 in {3} title.",
+          "defaultArguments": [
+            "nightcore",
+            "(Nightcore Mix)",
+            "(Sped Up Ver.)",
+            "romanized/unicode"
+          ],
+          "cause": "The romanized/unicode title contains \u0022(Sped Up Ver.)\u0022 or equivalent, when the tags contain \u0022nightcore\u0022."
+        }
+      }
+    },
+    {
+      "name": "CheckUnicode",
+      "fullName": "MapsetVerifier.Checks.AllModes.General.Metadata.CheckUnicode",
+      "checkType": "General",
+      "category": "Metadata",
+      "message": "Unicode in romanized fields.",
+      "author": "Naxess",
+      "applicableModes": "General",
+      "documentation": {
+        "Purpose": "\r\n                        Ensuring that all characters in the romanized metadata fields can be displayed and communicated properly across \r\n                        multiple operating systems, devices and internet protocols.\r\n\r\n                        ![](https://i.imgur.com/3UAwC97.png)\r\n                        A beatmap with its unicode title manually edited into its romanized title field.",
+        "Reasoning": "\r\n                        The romanized title, artist, creator and difficulty name fields are used in the file name of the .osu and .osb, as well as by \r\n                        the website to allow for updates and syncing. As such, if they contain invalid characters, the beatmapset may become corrupt \r\n                        when uploaded, preventing users from properly downloading it.\r\n\r\n                        Even if it were possible to download correctly, should a character be unsupported it will be displayed as a box, questionmark \r\n                        or other placeholder character in-game, which makes some titles and artists impossible to interpret and distinguish.\r\n\r\n                        Some unicode characters do seem to work, however. The title and artist fields are regulated by the Ranking Criteria, and \r\n                        creator names filtered upon creation, but difficulty names are not regulated or filtered by anything, so we do those case by \r\n                        case."
+      },
+      "templates": {
+        "Problem": {
+          "level": "Problem",
+          "formatString": "{0} field contains unicode characters,\u0022{1}\u0022, those being \u0022{2}\u0022.",
+          "defaultArguments": [
+            "Artist/title/creator",
+            "field",
+            "unicode char(s)"
+          ],
+          "cause": "The romanized title, artist, or creator field contains unicode characters."
+        },
+        "Warning": {
+          "level": "Warning",
+          "formatString": "{0} field contains unicode characters,\u0022{1}\u0022, those being \u0022{2}\u0022. If the map can still be downloaded this is probably ok.",
+          "defaultArguments": [
+            "difficulty name",
+            "field",
+            "unicode char(s)"
+          ],
+          "cause": "The difficulty name field contains unicode characters."
+        }
+      }
+    },
+    {
+      "name": "CheckUnusedFiles",
+      "fullName": "MapsetVerifier.Checks.AllModes.General.Files.CheckUnusedFiles",
+      "checkType": "General",
+      "category": "Files",
+      "message": "Unused files.",
+      "author": "Naxess",
+      "applicableModes": "General",
+      "documentation": {
+        "Purpose": "\r\n                        Reducing the overall file size of beatmapset folders and preventing potentially malicious files \r\n                        from reaching the player.",
+        "Reasoning": "\r\n                        Having useless files in the folder that few players will look at in no way contributes to the gameplay experience \r\n                        and is a waste of resources. Unlike things like pointless bookmarks and green lines, files typically take up a way \r\n                        more noticeable amount of space.\r\n                        \u003E For comparison, you\u0027d need about 10 000 bookmarks, if not more, to match the file size of a regular hit sound.\r\n\r\n                        ---\r\n                        Official content distributing malicious .exe files or similar would also not reflect very well upon the game.",
+        "Scorebar Ki-Danger \u0026 Marker": "\r\n                        \u0060scorebar-ki\u0060, \u0060scorebar-kidanger\u0060, and \u0060scorebar-kidanger2\u0060, act strangely when \u0060scorebar-marker\u0060 is missing.\r\n                        The latter can simply be a blank file as it does not show up in-game for osu-stable regardless.\r\n                        \r\n                        ![](https://i.imgur.com/TnXmgt9.png)\r\n                        Spreadsheet over which scorebar elements are used. Only consistent regardless of user settings when both marker and ki elements exist."
+      },
+      "templates": {
+        "Unused": {
+          "level": "Problem",
+          "formatString": "\u0022{0}\u0022",
+          "defaultArguments": [
+            "path"
+          ],
+          "cause": "A file in the song folder is not used in any of the .osu or .osb files. Includes unused .osb files. Ignores thumbs.db."
+        },
+        "Unused Overridden": {
+          "level": "Problem",
+          "formatString": "\u0022{0}\u0022, likely due to \u0022{1}\u0022 being used instead.",
+          "defaultArguments": [
+            "path",
+            "path with different extension"
+          ],
+          "cause": "Same as the other check, but where a file with the same name is used."
+        }
+      }
+    },
+    {
+      "name": "CheckUpdateValidity",
+      "fullName": "MapsetVerifier.Checks.AllModes.General.Files.CheckUpdateValidity",
+      "checkType": "General",
+      "category": "Files",
+      "message": "Issues with updating or downloading.",
+      "author": "Naxess",
+      "applicableModes": "General",
+      "documentation": {
+        "Purpose": "\r\n                        Ensuring that beatmaps can properly be downloaded and updated to their newest version.\r\n                        ![](https://i.imgur.com/7Nc9Ejr.png)\r\n                        An example of a song folder where one of the difficulties\u0027 file names are incorrect, causing it to be unable to update.",
+        "Reasoning": "\r\n                        By being unable to update a beatmap, potentially important fixes can easily be missed out on. This mostly \r\n                        affects players who download the map in qualified, as it is more visible to the public while not necessarily \r\n                        being in its final version.\r\n\r\n                        The name of the file seems to determine how osu initially checks the map for updates. This is then presumably \r\n                        stored in some local database because deleting and re-downloading doesn\u0027t seem to affect it. So if you \r\n                        already had the map when the file name was correct, it may properly update for you while showing \u0022not \r\n                        submitted\u0022 for others downloading it for the first time.\r\n\r\n                        For Windows 10 users, file paths longer than 260 characters cannot properly be unzipped by the game and \r\n                        simply vanish instead. This varies between users based on where on their computer they put osu!, but\r\n                        for the sake of consistency, we\u0027ll simply arbitrarily make 130 characters the limit.\r\n                        ![](https://i.imgur.com/PO8eKvZ.png)\r\n                        A file name longer than 130 characters, caused by a combination of a long title and a long difficulty name."
+      },
+      "templates": {
+        "Wrong Format": {
+          "level": "Warning",
+          "formatString": "\u0022{0}\u0022 should be named \u0022{1}\u0022 to receive updates.",
+          "defaultArguments": [
+            "file name",
+            "artist - title (creator) [version].osu"
+          ],
+          "cause": "A .osu file is not named after the mentioned format using its respective properties."
+        },
+        "Too Long Name": {
+          "level": "Warning",
+          "formatString": "\u0022{0}\u0022 has a file name longer than 130 characters ({1}), which causes the .osz to fail to unzip for some users. Consider truncating the artist, title, and/or difficulty name fields where it makes sense to do so.",
+          "defaultArguments": [
+            "path",
+            "length"
+          ],
+          "cause": "A .osu file has a file name longer than 130 characters."
+        }
+      }
+    },
+    {
+      "name": "CheckZeroBytes",
+      "fullName": "MapsetVerifier.Checks.AllModes.General.Files.CheckZeroBytes",
+      "checkType": "General",
+      "category": "Files",
+      "message": "0-byte files.",
+      "author": "Naxess",
+      "applicableModes": "General",
+      "documentation": {
+        "Purpose": "\r\n                        Ensuring all files can be uploaded properly during the submission process.",
+        "Reasoning": "\r\n                        0-byte files prevent other files in the song folder from properly uploading. Mappers sometimes attempt to silence \r\n                        certain hit sound files by completely removing its audio data, but this often results in a file completely devoid \r\n                        of any data which makes it 0-byte. Instead, use [this 44-byte file](https://up.ppy.sh/files/blank.wav)\r\n                        which osu provides to mute hit sound files.\r\n\r\n                        ![](https://i.imgur.com/Qb9z95T.png)\r\n                        A 0-byte slidertick hit sound file."
+      },
+      "templates": {
+        "0-byte": {
+          "level": "Problem",
+          "formatString": "\u0022{0}\u0022",
+          "defaultArguments": [
+            "path"
+          ],
+          "cause": "A file in the song folder contains no data; consists of 0 bytes."
+        },
+        "Exception": {
+          "level": "Error",
+          "formatString": "\u0022{0}\u0022 couldn\u0027t be checked, so you\u0027ll need to do that manually.{1}",
+          "defaultArguments": [
+            "path",
+            "exception info"
+          ],
+          "cause": "A file which was attempted to be checked could not be opened."
+        }
+      }
+    },
+    {
+      "name": "CheckAudioFormat",
+      "fullName": "MapsetVerifier.Checks.AllModes.General.Audio.CheckAudioFormat",
+      "checkType": "General",
+      "category": "Audio",
+      "message": "Incorrect audio format.",
+      "author": "Naxess",
+      "applicableModes": "General",
+      "documentation": {
+        "Purpose": "\r\n                        Ensures that all audio files used for the song itself is in MP3 or OGG format.",
+        "Reasoning": "\r\n                        Although the Wave format can support compressed audio, it is usually not efficient and takes up \r\n                        more space than the MP3 format.\r\n                        \u003E Note that extension is not the same thing as format. If you take an OGG file and change its extension to \u0022.mp3\u0022, for example, it will still be a OGG file. To change the format of a file you need to re-encode it.\r\n\r\n                        MP3 often has an inherent delay, which is why it isn\u0027t allowed in active hit sounding. In audio \r\n                        files, however, this delay can be counteracted with offset."
+      },
+      "templates": {
+        "Incorrect Format": {
+          "level": "Problem",
+          "formatString": "\u0022{0}\u0022 is using the {1} format. Song audio files must be in either MP3 or OGG format. (Note: extension \u2260 format.)",
+          "defaultArguments": [
+            "path",
+            "actual format"
+          ],
+          "cause": "A song audio file is not using the MP3 format."
+        },
+        "Incorrect Extension": {
+          "level": "Warning",
+          "formatString": "\u0022{0}\u0022 is using the {1} format, but doesn\u0027t use the {2} extension.",
+          "defaultArguments": [
+            "path",
+            "actual format",
+            "expected extension"
+          ],
+          "cause": "A song audio file is using an incorrect extension."
+        },
+        "Exception": {
+          "level": "Error",
+          "formatString": "\u0022{0}\u0022 couldn\u0027t be checked, so you\u0027ll need to do that manually.{1}",
+          "defaultArguments": [
+            "path",
+            "exception info"
+          ],
+          "cause": "An error occurred trying to check the format of a song audio file."
+        }
+      }
+    },
+    {
+      "name": "CheckAudioInVideo",
+      "fullName": "MapsetVerifier.Checks.AllModes.General.Audio.CheckAudioInVideo",
+      "checkType": "General",
+      "category": "Audio",
+      "message": "Audio channels in video.",
+      "author": "Naxess",
+      "applicableModes": "General",
+      "documentation": {
+        "Purpose": "\r\n                        Reducing the file size of videos.",
+        "Reasoning": "\r\n                        The audio track of videos will not play and usually take a similar amount of file size as any other audio file, \r\n                        so not removing the audio track means a noticeable amount of resources are wasted, even if the audio track is \r\n                        empty but still present."
+      },
+      "templates": {
+        "Audio": {
+          "level": "Problem",
+          "formatString": "\u0022{0}\u0022",
+          "defaultArguments": [
+            "path"
+          ],
+          "cause": "An audio track is present in one of the video files."
+        },
+        "Leaves Folder": {
+          "level": "Problem",
+          "formatString": "\u0022{0}\u0022 leaves the current song folder, which shouldn\u0027t ever happen.",
+          "defaultArguments": [
+            "path"
+          ],
+          "cause": "The file path of a video file starts with two dots."
+        },
+        "Missing": {
+          "level": "Warning",
+          "formatString": "\u0022{0}\u0022 is missing, so unable to check that. Make sure you\u0027ve downloaded with video.",
+          "defaultArguments": [
+            "path"
+          ],
+          "cause": "A video file referenced is not present."
+        },
+        "Exception": {
+          "level": "Error",
+          "formatString": "\u0022{0}\u0022 couldn\u0027t be checked, so you\u0027ll need to do that manually.{1}",
+          "defaultArguments": [
+            "path",
+            "exception info"
+          ],
+          "cause": "An exception occurred trying to parse a video file."
+        }
+      }
+    },
+    {
+      "name": "CheckAudioUsage",
+      "fullName": "MapsetVerifier.Checks.AllModes.General.Audio.CheckAudioUsage",
+      "checkType": "General",
+      "category": "Audio",
+      "message": "More than 20% unused audio at the end.",
+      "author": "Naxess",
+      "applicableModes": "General",
+      "documentation": {
+        "Purpose": "\r\n                        Preventing audio files from being much longer than the beatmaps they are used for.\r\n                        ![](https://i.imgur.com/n8bYgaP.png)\r\n                        A beatmap which has left a large portion of the song unmapped.",
+        "Reasoning": "\r\n                        Audio files tend to be large in file size, so allowing them to be much longer than beatmaps would be a waste of resources, \r\n                        since few linger around score screens for that long. Something needs to be happening in the storyboard or video, to keep \r\n                        people around from skipping to the score screen, to justify the audio file being longer.\r\n\r\n                        Note that this applies only to beatmapsets where **all** beatmaps exclude the last portion of the audio. If **any** \r\n                        uses it, then the audio does not need to be cut."
+      },
+      "templates": {
+        "Without Video/Storyboard": {
+          "level": "Warning",
+          "formatString": "Currently {0}% unused audio. Ensure the outro significantly contributes to the song, otherwise cut the outro.",
+          "defaultArguments": [
+            "percent"
+          ],
+          "cause": "The amount of time after the last object exceeds 20% of the length of the audio file. No storyboard or video is present."
+        },
+        "With Video/Storyboard": {
+          "level": "Warning",
+          "formatString": "Currently {0}% unused audio. Ensure the outro either significantly contributes to the song, or is being occupied by the video or storyboard, otherwise cut the outro.",
+          "defaultArguments": [
+            "percent"
+          ],
+          "cause": "Same as the other check, except with a storyboard or video present."
+        },
+        "Unable to check": {
+          "level": "Error",
+          "formatString": "\u0022{0}\u0022 couldn\u0027t be checked, so you\u0027ll need to do that manually.{1}",
+          "defaultArguments": [
+            "path",
+            "exception info"
+          ],
+          "cause": "There was an error parsing the audio file."
+        }
+      }
+    },
+    {
+      "name": "CheckBitrate",
+      "fullName": "MapsetVerifier.Checks.AllModes.General.Audio.CheckBitrate",
+      "checkType": "General",
+      "category": "Audio",
+      "message": "Too high or low audio bitrate.",
+      "author": "Naxess",
+      "applicableModes": "General",
+      "documentation": {
+        "Purpose": "\r\n                        Preventing audio quality from being noticably low or unnoticably high to save on file size.\r\n                        \r\n                        ![](https://i.imgur.com/701cuCD.png)\r\n                        Audio bitrate as shown in the properties of a file. For some files this is not visible.",
+        "Reasoning": "\r\n                        Once you get lower than 128 kbps the quality loss is usually quite noticeable. After 192 kbps, with the \r\n                        setup of the average player, it would be difficult to tell a difference and as such would also be a \r\n                        waste of resources.\r\n\r\n                        \u003E Should no higher quality be available anywhere, less than 128 kbps may be acceptable depending on how noticeable it is.\r\n                        ---\r\n                        Audio files in the OGG container format using the Q6 setting will typically land around 192 kbps, \r\n                        somtimes inconveniently a little above that, so the upper limit for OGG is instead 208 kbps.\r\n                        \r\n                        \u003E Q6 generally reads as 192 kbps in tools like Spek. These programs actually just approximate the bitrate by rounding to the closest 32 kbps step. 192 kbps is one such step. Therefore, any file \u003E 208 kbps will show as 224 kbps in these tools.                        \r\n\r\n                        OGG and MP3 files are typically compressed, unlike Wave, making too low bitrate a concern even for \r\n                        hit sounds using those formats. An upper limit for hit sound quality is not enforced due to their short \r\n                        length and small impact on file size, even with uncompressed formats like Wave."
+      },
+      "templates": {
+        "Bitrate": {
+          "level": "Problem",
+          "formatString": "Average audio bitrate for \u0022{0}\u0022, {1} kbps, is too {2}.",
+          "defaultArguments": [
+            "path",
+            "bitrate",
+            "high/low"
+          ],
+          "cause": "The average bitrate of an audio file is either higher than 192/208 kbps for MP3/OGG respectively or lower than 128 kbps."
+        },
+        "Hit Sound": {
+          "level": "Warning",
+          "formatString": "Average audio bitrate for \u0022{0}\u0022, {1} kbps, is really low.",
+          "defaultArguments": [
+            "path",
+            "bitrate"
+          ],
+          "cause": "Same as the other check, except only applies to hit sounds using the lower threshold."
+        },
+        "Exception": {
+          "level": "Error",
+          "formatString": "\u0022{0}\u0022 couldn\u0027t be checked, so you\u0027ll need to do that manually.{1}",
+          "defaultArguments": [
+            "path",
+            "exception info"
+          ],
+          "cause": "A file which was attempted to be checked could not be opened."
+        }
+      }
+    },
+    {
+      "name": "CheckCommonFinish",
+      "fullName": "MapsetVerifier.Checks.AllModes.General.Audio.CheckCommonFinish",
+      "checkType": "General",
+      "category": "Audio",
+      "message": "Frequent finish hit sounds.",
+      "author": "Naxess",
+      "applicableModes": "Standard Catch Mania",
+      "documentation": {
+        "Purpose": "\r\n                        Discouraging normal/soft finish samples from playing too often to the point where it gets obnoxious \r\n                        without custom hit sounds.",
+        "Reasoning": "\r\n                        Although possibly fine when using custom samples, this will still get very jarring if the player \r\n                        turns off custom hit sounds and the finishes are used as frequently as claps/whistles, for example."
+      },
+      "templates": {
+        "Warning Common": {
+          "level": "Warning",
+          "formatString": "\u0022{0}\u0022 may be obnoxious without custom samples. Used most commonly in {1}.",
+          "defaultArguments": [
+            "path",
+            "[difficulty]"
+          ],
+          "cause": "The usage of non-drum finish hit sounds to drain time ratio in a map is 2 seconds or more."
+        },
+        "Warning Timestamp": {
+          "level": "Warning",
+          "formatString": "\u0022{0}\u0022 may be obnoxious without custom samples. Used most frequently leading up to {1}.",
+          "defaultArguments": [
+            "path",
+            "timestamp in [difficulty]"
+          ],
+          "cause": "Non-drum finish hit sounds are used frequently in a short timespan."
+        }
+      },
+      "modes": [
+        "Standard",
+        "Catch",
+        "Mania"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckHitSoundDelay",
+      "fullName": "MapsetVerifier.Checks.AllModes.General.Audio.CheckHitSoundDelay",
+      "checkType": "General",
+      "category": "Audio",
+      "message": "Delayed hit sounds.",
+      "author": "Naxess",
+      "applicableModes": "General",
+      "documentation": {
+        "Purpose": "\r\n                        Ensuring hit sounds which are used on active hit objects provide proper feedback for how early or late the player clicked.\r\n                        ![](https://i.imgur.com/LRpgqcJ.png)\r\n                        A hit sound which is delayed by ~10 ms, as shown in Audacity. Note that audacity shows its \r\n                        timeline in seconds, so 0.005 means 5 ms.",
+        "Reasoning": "\r\n                        By having delayed hit sounds, the feedback the player receives would be misleading them into \r\n                        thinking they clicked later than they actually did, which contradicts the purpose of having hit \r\n                        sounds in the first place.",
+        "Exceptions": "\r\n                        Cymbals/bell-like sounds (often finish/whistle respectively) usually have a small wind-up before their peak. \r\n                        This is often acceptable to keep, as it would sound wrong without.\r\n                        ![](https://i.imgur.com/4iggPGV.png)\r\n                        A bell hit sound whose peak is delayed by ~21 ms, which was considered fine \r\n                        due to the nature of the sound requiring a wind-up.\r\n\r\n                        The default \u0060normal-hitfinish.wav\u0060 has a delay of ~6 ms, but is used by the game itself,\r\n                        so copying this and using as a custom sample is acceptable.\r\n                        ![](https://i.imgur.com/W9yJiV6.png)\r\n                        A spectrogram of the default \u0060normal-hitfinish.wav\u0060."
+      },
+      "templates": {
+        "Pure Delay": {
+          "level": "Problem",
+          "formatString": "\u0022{0}\u0022 has a {1} ms period of complete silence at the start.",
+          "defaultArguments": [
+            "path",
+            "pure delay"
+          ],
+          "cause": "A hit sound file used on an active hit object has a definite delay (complete silence) of at least 5 ms."
+        },
+        "Delay": {
+          "level": "Warning",
+          "formatString": "\u0022{0}\u0022 has a delay of ~{2} ms, of which {1} ms is complete silence. (Active at e.g. {3} in {4}.)",
+          "defaultArguments": [
+            "path",
+            "pure delay",
+            "delay",
+            "timestamp",
+            "difficulty"
+          ],
+          "cause": "A hit sound file used on an active hit object has very low volume for ~5 ms or more."
+        },
+        "Minor Delay": {
+          "level": "Minor",
+          "formatString": "\u0022{0}\u0022 has a delay of ~{2} ms, of which {1} ms is complete silence.",
+          "defaultArguments": [
+            "path",
+            "pure delay",
+            "delay"
+          ],
+          "cause": "Same as the regular delay, except anything between 1 to 5 ms."
+        },
+        "Unable to check": {
+          "level": "Error",
+          "formatString": "\u0022{0}\u0022 couldn\u0027t be checked, so you\u0027ll need to do that manually.{1}",
+          "defaultArguments": [
+            "path",
+            "exception info"
+          ],
+          "cause": "There was an error parsing a hit sound file."
+        }
+      }
+    },
+    {
+      "name": "CheckHitSoundFormat",
+      "fullName": "MapsetVerifier.Checks.AllModes.General.Audio.CheckHitSoundFormat",
+      "checkType": "General",
+      "category": "Audio",
+      "message": "Incorrect hit sound format.",
+      "author": "Naxess",
+      "applicableModes": "General",
+      "documentation": {
+        "Purpose": "\r\n                        Discourages potentially detrimental file formats for hit sound files.\r\n                        ![](https://i.imgur.com/yAF6pEq.png)\r\n                        One of the hit sound files using the MP3 extension, which usually means it\u0027s also an MP3 format.",
+        "Reasoning": "\r\n                        The MP3 format often includes inherent delays. As such, the Wave or OGG format is preferred for \r\n                        any hit sound file.\r\n                        \u003E Passive objects such as slider tails are not clicked and as such do not need accurate feedback and may use the mp3 format because of this.\r\n\r\n                        \u003E Note that extension is not the same thing as format. If you take an MP3 file and change its extension to \u0022.wav\u0022, for example, it will still be an MP3 file. To change the format of a file you need to re-encode it."
+      },
+      "templates": {
+        "mp3": {
+          "level": "Problem",
+          "formatString": "\u0022{0}\u0022 is using the MP3 format and is used for active hit sounding, see {1} in {2} for example.",
+          "defaultArguments": [
+            "path",
+            "timestamp -",
+            "beatmap"
+          ],
+          "cause": "A hit sound file is using the MP3 format."
+        },
+        "Unexpected Format": {
+          "level": "Warning",
+          "formatString": "\u0022{0}\u0022 is using an unexpected format: \u0022{1}\u0022.",
+          "defaultArguments": [
+            "path",
+            "actual format"
+          ],
+          "cause": "A hit sound file is using a format which is neither OGG, Wave, or MP3."
+        },
+        "Incorrect Extension": {
+          "level": "Warning",
+          "formatString": "\u0022{0}\u0022 is using the {1} format, but doesn\u0027t use the .wav or .ogg extension.",
+          "defaultArguments": [
+            "path",
+            "actual format"
+          ],
+          "cause": "A hit sound file is using an incorrect extension."
+        },
+        "Exception": {
+          "level": "Error",
+          "formatString": "\u0022{0}\u0022 couldn\u0027t be checked, so you\u0027ll need to do that manually.{1}",
+          "defaultArguments": [
+            "path",
+            "exception info"
+          ],
+          "cause": "An error occurred trying to check the format of a hit sound file."
+        }
+      }
+    },
+    {
+      "name": "CheckHitSoundImbalance",
+      "fullName": "MapsetVerifier.Checks.AllModes.General.Audio.CheckHitSoundImbalance",
+      "checkType": "General",
+      "category": "Audio",
+      "message": "Imbalanced hit sounds.",
+      "author": "Naxess",
+      "applicableModes": "General",
+      "documentation": {
+        "Purpose": "\r\n                        Preventing the audio channels of hit sounds from being noticeably imbalanced, for example the left \r\n                        channel being twice as loud as the right.\r\n                        ![](https://i.imgur.com/6if5mJO.png)\r\n                        A hit sound which is much louder in the left channel compared to the right, as shown in Audacity.",
+        "Reasoning": "\r\n                        Having noticeably imbalanced hit sounds is often jarring, especially if used frequently or consecutively."
+      },
+      "templates": {
+        "Warning Silent": {
+          "level": "Warning",
+          "formatString": "\u0022{0}\u0022 is completely silent in the {1} channel.",
+          "defaultArguments": [
+            "path",
+            "left/right"
+          ],
+          "cause": "One of the channels of a hit sound has no volume, but still 2 channels."
+        },
+        "Warning Common": {
+          "level": "Warning",
+          "formatString": "\u0022{0}\u0022 has a notably louder {1} channel. Used most commonly in {2}.",
+          "defaultArguments": [
+            "path",
+            "left/right",
+            "[difficulty]"
+          ],
+          "cause": "One of the channels of a hit sound has at least half the total volume of the other. The hit sound must also be used on average once every 10 seconds in a map."
+        },
+        "Warning Timestamp": {
+          "level": "Warning",
+          "formatString": "\u0022{0}\u0022 has a notably louder {1} channel. Used most frequently leading up to {2}.",
+          "defaultArguments": [
+            "path",
+            "left/right",
+            "timestamp in [difficulty]"
+          ],
+          "cause": "Same as the other check, except only happens when the hit sound is used frequently in a short timespan."
+        },
+        "Minor": {
+          "level": "Minor",
+          "formatString": "\u0022{0}\u0022 has a notably louder {1} channel, not a huge deal in this case though.",
+          "defaultArguments": [
+            "path",
+            "left/right"
+          ],
+          "cause": "One of the channels of a hit sound has half the total volume of the other."
+        },
+        "Unable to check": {
+          "level": "Error",
+          "formatString": "\u0022{0}\u0022 couldn\u0027t be checked, so you\u0027ll need to do that manually.{1}",
+          "defaultArguments": [
+            "path",
+            "exception info"
+          ],
+          "cause": "There was an error parsing a hit sound file."
+        }
+      }
+    },
+    {
+      "name": "CheckHitSoundLength",
+      "fullName": "MapsetVerifier.Checks.AllModes.General.Audio.CheckHitSoundLength",
+      "checkType": "General",
+      "category": "Audio",
+      "message": "Too short hit sounds.",
+      "author": "Naxess",
+      "applicableModes": "General",
+      "documentation": {
+        "Purpose": "\r\n                        Ensuring hit sounds play consistently across multiple sound cards.",
+        "Reasoning": "\r\n                        Hit sounds shorter than ~25 ms (depending on soundcard) can result in no sound being played in-game. \r\n                        This makes it equivalent to a completely silent hit sound for some, while not for others. Muted hit \r\n                        sounds are fine having 0 ms duration though, since they don\u0027t play audio anyway.\r\n                        ![](https://i.imgur.com/y9Zmxp3.png)\r\n                        The 2.95 ms long hit sound from the example, as shown in Audacity.",
+        "Example": "\r\n                        soft-hitnormal.wav is shorter than 25 ms (2.95 ms) in https://osu.ppy.sh/beatmapsets/1527, see 00:25:880 (1) - . Set music to 0% and effect to 100% for clarity."
+      },
+      "templates": {
+        "Length": {
+          "level": "Problem",
+          "formatString": "\u0022{0}\u0022 is shorter than 25 ms ({1} ms).",
+          "defaultArguments": [
+            "path",
+            "length"
+          ],
+          "cause": "A hit sound file is shorter than 25 ms and longer than 0 ms."
+        },
+        "Unable to check": {
+          "level": "Error",
+          "formatString": "\u0022{0}\u0022 couldn\u0027t be checked, so you\u0027ll need to do that manually.{1}",
+          "defaultArguments": [
+            "path",
+            "exception info"
+          ],
+          "cause": "There was an error parsing a hit sound file."
+        }
+      }
+    },
+    {
+      "name": "CheckMultipleAudio",
+      "fullName": "MapsetVerifier.Checks.AllModes.General.Audio.CheckMultipleAudio",
+      "checkType": "General",
+      "category": "Audio",
+      "message": "Multiple or missing audio files.",
+      "author": "Naxess",
+      "applicableModes": "General",
+      "documentation": {
+        "Purpose": "\r\n                        Ensuring that each beatmapset only contains one audio file.",
+        "Reasoning": "\r\n                        While this works well in-game, the website preview, metadata, tags, etc are all relying on that each \r\n                        beatmapset is based around a single song. As such, having multiple songs in a single beatmapset is not \r\n                        supported properly. Each song will also need its own spread, so having each set of difficulties in its \r\n                        own beatmapset makes things more organized."
+      },
+      "templates": {
+        "Multiple": {
+          "level": "Problem",
+          "formatString": "{0}",
+          "defaultArguments": [
+            "audio file : difficulties"
+          ],
+          "cause": "There is more than one audio file used between all difficulties."
+        },
+        "Missing": {
+          "level": "Problem",
+          "formatString": "No audio file could be found.",
+          "defaultArguments": [],
+          "cause": "There is no audio file used in any difficulty."
+        }
+      }
+    },
+    {
+      "name": "CheckBreaks",
+      "fullName": "MapsetVerifier.Checks.AllModes.Events.CheckBreaks",
+      "checkType": "Beatmap",
+      "category": "Events",
+      "message": "Breaks only achievable through .osu editing.",
+      "author": "Naxess",
+      "applicableModes": "All Modes",
+      "documentation": {
+        "Purpose": "\r\n                        Ensures that breaks work as intended.",
+        "Reasoning": "\r\n                        Although not visible in the editor, manually changing the break times will allow the effects of a break \r\n                        to happen sooner and/or later than they should. This means you may start seeing flashing arrows on the \r\n                        side of the screen and the background undimming while in the middle of gameplay, which only serves to \r\n                        make the player confused. Saving the beatmap again will fix the break times automatically.\r\n\r\n                        ![](https://i.imgur.com/Vh1Ha5N.png)\r\n                        An example of break effects happening in the middle of gameplay."
+      },
+      "templates": {
+        "Too early or late": {
+          "level": "Problem",
+          "formatString": "{0} to {1} {2}. Saving the beatmap should fix this.",
+          "defaultArguments": [
+            "timestamp -",
+            "timestamp -",
+            "details"
+          ],
+          "cause": "Either the break starts less than 200 ms after the object before the end of the break, or the break ends less than the preemt time before the object after the start of the break."
+        },
+        "Too short": {
+          "level": "Warning",
+          "formatString": "{0} to {1} is non-functional due to being less than 650 ms.",
+          "defaultArguments": [
+            "timestamp -",
+            "timestamp -"
+          ],
+          "cause": "The break is less than 650 ms in length."
+        }
+      },
+      "modes": [
+        "Standard",
+        "Taiko",
+        "Catch",
+        "Mania"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckStoryHitSounds",
+      "fullName": "MapsetVerifier.Checks.AllModes.Events.CheckStoryHitSounds",
+      "checkType": "BeatmapSet",
+      "category": "Events",
+      "message": "Storyboarded hit sounds.",
+      "author": "Naxess",
+      "applicableModes": "Standard Taiko Catch",
+      "documentation": {
+        "Purpose": "\r\n                        Preventing storyboard sounds from replacing or becoming ambigious with any beatmap hit sounds.",
+        "Reasoning": "\r\n                        Storyboarded hit sounds always play at the same time regardless of however late or early the player clicks \r\n                        on an object, meaning they do not provide proper active hit object feedback, unlike regular hit sounds. This \r\n                        contradicts the purpose of hit sounds and is likely to be confusing for players if similar samples as the \r\n                        hit sounds are used.\r\n                        \u003E Mania is exempt from this due to multiple objects at the same point in time being possible, leading to regular hit sounding working poorly, for example amplifying the volume if concurrent objects have the same hit sounds."
+      },
+      "templates": {
+        "Storyboarded Hit Sound": {
+          "level": "Warning",
+          "formatString": "{0} Storyboarded hit sound ({1}, {2}%) from {3} file.",
+          "defaultArguments": [
+            "timestamp -",
+            "path",
+            "volume",
+            ".osu/.osb"
+          ],
+          "cause": "The .osu file or .osb file contains storyboarded hit sounds."
+        }
+      },
+      "modes": [
+        "Standard",
+        "Taiko",
+        "Catch"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckAbnormalNodes",
+      "fullName": "MapsetVerifier.Checks.AllModes.Compose.CheckAbnormalNodes",
+      "checkType": "Beatmap",
+      "category": "Compose",
+      "message": "Abnormal amount of slider nodes.",
+      "author": "Naxess",
+      "applicableModes": "All Modes",
+      "documentation": {
+        "Purpose": "\r\n                        Preventing mappers from writing inappropriate or otherwise harmful messages using slider nodes.\r\n\r\n                        ![](https://i.imgur.com/rlCoEtZ.png)\r\n                        An example of text being written with slider nodes in a way which can easily be hidden offscreen.",
+        "Reasoning": "\r\n                        The code of conduct applies to all aspects of the ranking process, including the beatmap content itself,\r\n                        whether that only be visible through the editor or in gameplay as well."
+      },
+      "templates": {
+        "Abnormal": {
+          "level": "Warning",
+          "formatString": "{0} Slider contains {1} nodes.",
+          "defaultArguments": [
+            "timestamp -",
+            "amount"
+          ],
+          "cause": "A slider contains more nodes than 10 times the square root of its length in pixels."
+        }
+      },
+      "modes": [
+        "Standard",
+        "Taiko",
+        "Catch",
+        "Mania"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckConcurrent",
+      "fullName": "MapsetVerifier.Checks.AllModes.Compose.CheckConcurrent",
+      "checkType": "Beatmap",
+      "category": "Compose",
+      "message": "Concurrent hit objects.",
+      "author": "Naxess",
+      "applicableModes": "All Modes",
+      "documentation": {
+        "Purpose": "\r\n                        Ensuring that only one object needs to be interacted with at any given moment in time.",
+        "Reasoning": "\r\n                        A clickable object during the duration of an already clicked object, for example a slider, is possible to play \r\n                        assuming the clickable object is within the slider circle whenever a slider tick/edge happens. However, there is \r\n                        no way for a player to intuitively know how to play such patterns as there is no tutorial for them, and they are \r\n                        not self-explanatory.\r\n\r\n                        Sliders, spinners, and other holdable objects, teach the player to hold down the key for \r\n                        the whole duration of the object, so suddenly forcing them to press again would be contradictory to that \r\n                        fundamental understanding. Because of this, these patterns more often than not cause confusion, even where \r\n                        otherwise introduced well.\r\n\r\n                        ![](https://i.imgur.com/2bTX4aQ.png)\r\n                        A slider with two concurrent circles. Can be hit without breaking combo."
+      },
+      "templates": {
+        "Concurrent Objects": {
+          "level": "Problem",
+          "formatString": "{0} Concurrent {1}.",
+          "defaultArguments": [
+            "timestamp -",
+            "hit objects"
+          ],
+          "cause": "A hit object starts before another hit object has ended. For mania this also requires that the objects are in the same column."
+        },
+        "Almost Concurrent Objects": {
+          "level": "Problem",
+          "formatString": "{0} Within {1} ms of one another.",
+          "defaultArguments": [
+            "timestamp -",
+            "gap"
+          ],
+          "cause": "Two hit objects are less than 10 ms apart from one another. For mania this also requires that the objects are in the same column."
+        }
+      },
+      "modes": [
+        "Standard",
+        "Taiko",
+        "Catch",
+        "Mania"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckDrainTime",
+      "fullName": "MapsetVerifier.Checks.AllModes.Compose.CheckDrainTime",
+      "checkType": "Beatmap",
+      "category": "Compose",
+      "message": "Too short drain time.",
+      "author": "Naxess",
+      "applicableModes": "All Modes",
+      "documentation": {
+        "Purpose": "\r\n                        Prevents beatmaps from being too short, for example 10 seconds long.\r\n                    \r\n                        ![](https://i.imgur.com/uNDPeJI.png)\r\n                        A beatmap with a total mp3 length of ~21 seconds.",
+        "Reasoning": "\r\n                        Beatmaps this short do not offer a substantial enough gameplay experience for the standards of \r\n                        the ranked section."
+      },
+      "templates": {
+        "Problem": {
+          "level": "Problem",
+          "formatString": "Less than 30 seconds of drain time, currently {0}.",
+          "defaultArguments": [
+            "drain time"
+          ],
+          "cause": "The time from the first object to the end of the last object, subtracting any time between two objects where a break exists, is in total less than 30 seconds."
+        }
+      },
+      "modes": [
+        "Standard",
+        "Taiko",
+        "Catch",
+        "Mania"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    },
+    {
+      "name": "CheckInvisibleSlider",
+      "fullName": "MapsetVerifier.Checks.AllModes.Compose.CheckInvisibleSlider",
+      "checkType": "Beatmap",
+      "category": "Compose",
+      "message": "Invisible sliders.",
+      "author": "Naxess",
+      "applicableModes": "All Modes",
+      "documentation": {
+        "Purpose": "\r\n                        Preventing objects from being invisible.\r\n                        ![](https://i.imgur.com/xJIwdbA.png)\r\n                        A slider with no nodes; looks like a circle on the timeline but is invisible on the playfield.",
+        "Reasoning": "\r\n                        Although often used in combination with a storyboard to make up for the invisibility through sprites, there \r\n                        is no way to force the storyboard to appear, meaning players may play the map unaware that they should have \r\n                        enabled something for a fair gameplay experience."
+      },
+      "templates": {
+        "Zero Nodes": {
+          "level": "Problem",
+          "formatString": "{0} has no slider nodes.",
+          "defaultArguments": [
+            "timestamp -"
+          ],
+          "cause": "A slider has no nodes."
+        },
+        "Negative Length": {
+          "level": "Problem",
+          "formatString": "{0} has negative pixel length.",
+          "defaultArguments": [
+            "timestamp -"
+          ],
+          "cause": "A slider has a negative pixel length."
+        }
+      },
+      "modes": [
+        "Standard",
+        "Taiko",
+        "Catch",
+        "Mania"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ]
+    }
+  ]
+}
