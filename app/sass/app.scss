@@ -2,6 +2,7 @@
 @use "./Header.scss";
 @use "./components/Logo.scss";
 @use "./components/DownloadButton.scss";
+@use "./components/MarkdownText.scss";
 
 html,
 body {
@@ -39,4 +40,12 @@ html {
     &:hover {
         background-color: var(--mantine-color-primary-4);
     }
+}
+
+/** Check icon colors */
+:root {
+    --check-icon-color-problem: #cd555a;
+    --check-icon-color-warning: #e1a642;
+    --check-icon-color-minor: #55cd78;
+    --check-icon-color-error: #9297ac;
 }
