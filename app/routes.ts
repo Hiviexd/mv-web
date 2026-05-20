@@ -8,5 +8,6 @@ export default [
             index("routes/checks.tsx"),
             route(":checkSlug", "routes/checks.$checkSlug.tsx"),
         ]),
+        route("*", "routes/catch-all.tsx"),
     ]),
 ] satisfies RouteConfig;
