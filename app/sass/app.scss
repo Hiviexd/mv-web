@@ -3,6 +3,7 @@
 @use "./components/Logo.scss";
 @use "./components/DownloadButton.scss";
 @use "./components/MarkdownText.scss";
+@use "./components/spotlight/SpotlightAction.scss";
 @use "./components/checks/CheckLayout.scss";
 @use "./components/home/HeroSection.scss";
 @use "./components/home/HeroLogo.scss";
@@ -12,7 +13,12 @@ html {
     color-scheme: dark;
     background-color: #161d28;
     scrollbar-gutter: stable;
+    scrollbar-width: thin;
     scrollbar-color: var(--mantine-color-primary-2) var(--mantine-color-body);
+}
+
+::-webkit-scrollbar {
+    width: 12px;
 }
 
 html,

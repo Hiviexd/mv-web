@@ -151,6 +151,9 @@ export function checkMatchesSearch(check: CheckEntry, query: string) {
 
     return (
         check.message.toLowerCase().includes(q) ||
+        check.name.toLowerCase().includes(q) ||
+        check.slug.toLowerCase().includes(q) ||
+        check.fullName.toLowerCase().includes(q) ||
         check.category.toLowerCase().includes(q) ||
         check.author?.toLowerCase().includes(q) ||
         check.modes?.some((mode) => mode.toLowerCase().includes(q))

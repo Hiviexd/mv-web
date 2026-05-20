@@ -1,10 +1,12 @@
 import { ActionIcon, Button, Group, Tooltip } from "@mantine/core";
 import { IconBrandGithub, IconBug } from "@tabler/icons-react";
 import metadata from "../../data/metadata.json";
+import { SearchButton } from "./SearchButton";
 
 export function ActionIcons() {
     return (
         <Group gap="sm">
+            <SearchButton />
             <Tooltip label="Report Issues">
                 <ActionIcon
                     size="lg"
@@ -25,7 +27,7 @@ export function ActionIcons() {
                 variant="light"
                 color="primary.2"
                 leftSection={<IconBrandGithub size={20} />}>
-                View on GitHub
+                Source Code
             </Button>
         </Group>
     );

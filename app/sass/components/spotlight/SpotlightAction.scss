@@ -1,0 +1,31 @@
+.mantine-Spotlight-action {
+    &:hover {
+        background-color: transparent !important;
+    }
+
+    &[data-selected="true"] {
+        background-color: transparent !important;
+
+        .spotlight-action-card {
+            --card-bg: var(--mantine-color-dark-5);
+            background-color: var(--mantine-color-dark-5) !important;
+            border-color: var(--mantine-color-primary-4);
+        }
+    }
+
+    .spotlight-action-card {
+        --card-bg: var(--mantine-color-dark-6);
+        background-color: var(--mantine-color-dark-6) !important;
+        border: 2px solid transparent;
+        transition:
+            transform 0.2s cubic-bezier(0.25, 1, 0.5, 1),
+            border-color 0.2s cubic-bezier(0.25, 1, 0.5, 1),
+            background-color 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+
+        &:hover {
+            --card-bg: var(--mantine-color-dark-5);
+            background-color: var(--mantine-color-dark-5) !important;
+            transform: translateY(-2px);
+        }
+    }
+}
