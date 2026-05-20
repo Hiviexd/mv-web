@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import { Logo } from "./Logo";
 import { NavigationLinks } from "../header/NavigationLinks";
 import { ActionIcons } from "../header/ActionIcons";
-import metadata from "../../data/metadata.json";
+import { releases } from "../../lib/release";
 
 interface IProps {
     mobileHeaderOpened: boolean;
@@ -20,7 +20,7 @@ export function Header({ mobileHeaderOpened, toggleMobileHeader }: IProps) {
                             <Logo width={32} height={32} />
                         </Anchor>
                         <Badge color="primary.2" variant="light">
-                            v{metadata.latestVersion}
+                            v{releases.release.latestVersion}
                         </Badge>
                     </Group>
                     <Box visibleFrom="md">    

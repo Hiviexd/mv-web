@@ -1,45 +1,52 @@
 import { UnstyledButton, Stack, Text, Group, Anchor } from "@mantine/core";
 import { useOs } from "@mantine/hooks";
 import { IconDownload } from "@tabler/icons-react";
-import metadata from "../../data/metadata.json";
+import { releases, type ReleaseDownloads } from "../../lib/release";
 
 interface Platform {
-    key: string;
+    key: keyof ReleaseDownloads;
     name: string;
     url: string;
 }
 
-const allPlatforms: Platform[] = [
-    { key: "windows", name: "Windows", url: metadata.downloads.windows },
-    { key: "macos", name: "macOS", url: metadata.downloads.macos },
-    { key: "linux", name: "Linux", url: metadata.downloads.linux },
-];
+function buildPlatforms(downloads: ReleaseDownloads): Platform[] {
+    const entries: { key: keyof ReleaseDownloads; name: string }[] = [
+        { key: "windows", name: "Windows" },
+        { key: "macos", name: "macOS" },
+        { key: "linux", name: "Linux" },
+    ];
+
+    return entries
+        .map(({ key, name }) => {
+            const url = downloads[key];
+            return url ? { key, name, url } : null;
+        })
+        .filter((platform): platform is Platform => platform !== null);
+}
+
+const allPlatforms = buildPlatforms(releases.release.downloads);
 
 export default function DownloadButton() {
     const os = useOs();
 
-    // Map OS to display name and download link
-    const getPlatformInfo = () => {
-        switch (os) {
-            case "windows":
-                return { name: "Windows", url: metadata.downloads.windows };
-            case "macos":
-                return { name: "macOS", url: metadata.downloads.macos };
-            case "linux":
-                return { name: "Linux", url: metadata.downloads.linux };
-            default:
-                return { name: "Windows", url: metadata.downloads.windows };
+    const getPlatformInfo = (): Platform | null => {
+        const key: keyof ReleaseDownloads =
+            os === "windows" ? "windows" : os === "macos" ? "macos" : os === "linux" ? "linux" : "windows";
+        const url = releases.release.downloads[key];
+        if (!url) {
+            return allPlatforms[0] ?? null;
         }
+        const name = key === "macos" ? "macOS" : key.charAt(0).toUpperCase() + key.slice(1);
+        return { key, name, url };
     };
 
     const platformInfo = getPlatformInfo();
 
-    // Get other platforms (excluding current one)
-    const otherPlatforms = allPlatforms.filter((platform) => {
-        const currentKey =
-            os === "windows" ? "windows" : os === "macos" ? "macos" : os === "linux" ? "linux" : "windows";
-        return platform.key !== currentKey;
-    });
+    if (!platformInfo) {
+        return null;
+    }
+
+    const otherPlatforms = allPlatforms.filter((platform) => platform.key !== platformInfo.key);
 
     return (
         <Stack gap="sm" align="center" className="download-button-group" w="100%">

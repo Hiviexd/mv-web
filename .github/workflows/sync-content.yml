@@ -1,0 +1,129 @@
+name: Sync MapsetVerifier content
+
+on:
+    workflow_dispatch:
+        inputs:
+            use_stable_release:
+                description: Clone/sync from latest stable (non-prerelease) tag
+                type: boolean
+                default: false
+
+permissions:
+    contents: write
+    pull-requests: write
+
+env:
+    SYNC_BRANCH: sync/content-update
+
+jobs:
+    sync:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout website repository
+              uses: actions/checkout@v4
+
+            - name: Resolve MapsetVerifier release tag
+              id: tag
+              env:
+                  GH_TOKEN: ${{ github.token }}
+              run: |
+                  set -euo pipefail
+                  REPO=$(node -p "JSON.parse(require('fs').readFileSync('app/data/metadata.json','utf8')).repository.replace(/.*github\\.com\\//,'').replace(/\\.git$/,'')")
+                  if [ "${{ inputs.use_stable_release }}" = "true" ]; then
+                    TAG=$(gh api "repos/${REPO}/releases" --paginate \
+                      --jq '[.[] | select(.prerelease == false)] | first | .tag_name')
+                  else
+                    TAG=$(gh api "repos/${REPO}/releases" --paginate \
+                      --jq '[.[]] | first | .tag_name')
+                  fi
+                  if [ -z "$TAG" ] || [ "$TAG" = "null" ]; then
+                    echo "No matching release found for repos/${REPO}"
+                    exit 1
+                  fi
+                  echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+                  echo "Resolved clone tag: $TAG"
+
+            - name: Checkout MapsetVerifier at release tag
+              uses: actions/checkout@v4
+              with:
+                  repository: Naxesss/MapsetVerifier
+                  ref: ${{ steps.tag.outputs.tag }}
+                  path: vendor/MapsetVerifier
+
+            - name: Setup .NET
+              uses: actions/setup-dotnet@v4
+              with:
+                  dotnet-version: "9.0.x"
+
+            - name: Setup pnpm
+              uses: pnpm/action-setup@v4
+              with:
+                  version: 9
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "22"
+                  cache: pnpm
+
+            - name: Sync content
+              env:
+                  MAPSETVERIFIER_ROOT: ${{ github.workspace }}/vendor/MapsetVerifier
+                  WORKSPACE_ROOT: ${{ github.workspace }}
+                  SYNC_CLONE_TAG: ${{ steps.tag.outputs.tag }}
+                  GITHUB_TOKEN: ${{ github.token }}
+              run: node scripts/sync-content.mjs
+
+            - name: Install dependencies and validate
+              run: |
+                  pnpm install --frozen-lockfile
+                  pnpm run typecheck
+                  pnpm run build
+
+            - name: Read sync summary
+              id: summary
+              run: |
+                  SUMMARY=$(cat .sync-summary.json)
+                  echo "body<<EOF" >> "$GITHUB_OUTPUT"
+                  echo "## MapsetVerifier content sync" >> "$GITHUB_OUTPUT"
+                  echo "" >> "$GITHUB_OUTPUT"
+                  echo "- **Clone tag:** \`${{ steps.tag.outputs.tag }}\`" >> "$GITHUB_OUTPUT"
+                  echo "- **Stable release:** \`$(echo "$SUMMARY" | jq -r .release)\`" >> "$GITHUB_OUTPUT"
+                  echo "- **Beta release:** \`$(echo "$SUMMARY" | jq -r .beta)\`" >> "$GITHUB_OUTPUT"
+                  echo "- **Checks:** $(echo "$SUMMARY" | jq -r .checksCount)" >> "$GITHUB_OUTPUT"
+                  echo "- **Check asset files:** $(echo "$SUMMARY" | jq -r .assetFiles)" >> "$GITHUB_OUTPUT"
+                  echo "- **Changelog images:** $(echo "$SUMMARY" | jq -r .changelogImages)" >> "$GITHUB_OUTPUT"
+                  echo "- **Changelog files:** $(echo "$SUMMARY" | jq -r .changelogFiles)" >> "$GITHUB_OUTPUT"
+                  echo "" >> "$GITHUB_OUTPUT"
+                  echo "Automated sync from [\`workflow_dispatch\`](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})." >> "$GITHUB_OUTPUT"
+                  echo "EOF" >> "$GITHUB_OUTPUT"
+
+            - name: Commit and push
+              run: |
+                  git config user.name "github-actions[bot]"
+                  git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+                  git checkout -B "$SYNC_BRANCH"
+                  git add -A
+                  git reset HEAD .sync-summary.json 2>/dev/null || true
+                  if git diff --staged --quiet; then
+                    echo "No changes to commit"
+                    exit 0
+                  fi
+                  git commit -m "chore: sync content from MapsetVerifier ${{ steps.tag.outputs.tag }}"
+                  git push --force-with-lease origin "$SYNC_BRANCH"
+
+            - name: Create or update pull request
+              env:
+                  GH_TOKEN: ${{ github.token }}
+              run: |
+                  PR_NUMBER=$(gh pr list --head "$SYNC_BRANCH" --json number --jq '.[0].number // empty')
+                  if [ -n "$PR_NUMBER" ]; then
+                    gh pr edit "$PR_NUMBER" --title "chore: sync MapsetVerifier content (${{ steps.tag.outputs.tag }})" --body "${{ steps.summary.outputs.body }}"
+                    echo "Updated PR #$PR_NUMBER"
+                  else
+                    gh pr create \
+                      --head "$SYNC_BRANCH" \
+                      --base main \
+                      --title "chore: sync MapsetVerifier content (${{ steps.tag.outputs.tag }})" \
+                      --body "${{ steps.summary.outputs.body }}"
+                  fi

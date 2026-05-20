@@ -1,9 +1,15 @@
 {
     "repository": "https://github.com/Naxesss/MapsetVerifier",
-    "latestVersion": "2.0.0",
-    "downloads": {
-        "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/2.0.0/MapsetVerifier-2.0.0-windows-x64.zip",
-        "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/2.0.0/MapsetVerifier-2.0.0-linux-x64.tar.gz",
-        "macos": "https://github.com/Naxesss/MapsetVerifier/releases/download/2.0.0/MapsetVerifier-2.0.0-macos-x64.dmg"
+    "locations": {
+        "checks-metadata-script": "/scripts/export-checks-metadata.sh",
+        "assets-checks": "/electron-app/public/assets",
+        "assets-changelog": "/electron-app/public/changelog",
+        "changelogs": "/electron-app/src/content/changelog"
+    },
+    "destinations": {
+        "checks-metadata": "app/data/checks-metadata.json",
+        "assets-checks": "public/assets",
+        "assets-changelog": "public/changelog",
+        "changelogs": "app/data/changelogs"
     }
 }

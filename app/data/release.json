@@ -1,0 +1,18 @@
+{
+    "release": {
+        "latestVersion": "2.0.0",
+        "downloads": {
+            "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/2.0.0/MapsetVerifier-2.0.0-windows-x64.zip",
+            "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/2.0.0/MapsetVerifier-2.0.0-linux-x64.tar.gz",
+            "macos": "https://github.com/Naxesss/MapsetVerifier/releases/download/2.0.0/MapsetVerifier-2.0.0-macos-x64.dmg"
+        }
+    },
+    "beta": {
+        "latestVersion": "2.0.0",
+        "downloads": {
+            "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/2.0.0/MapsetVerifier-2.0.0-windows-x64.zip",
+            "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/2.0.0/MapsetVerifier-2.0.0-linux-x64.tar.gz",
+            "macos": "https://github.com/Naxesss/MapsetVerifier/releases/download/2.0.0/MapsetVerifier-2.0.0-macos-x64.dmg"
+        }
+    }
+}
