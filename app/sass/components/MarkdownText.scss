@@ -1,8 +1,13 @@
 .markdown-text {
     img {
+        display: block;
         max-width: 75%;
         height: auto;
-        margin: 1rem 0;
+        margin: 1rem auto;
+    }
+
+    p:has(> img:only-child) {
+        text-align: center;
     }
 
     .blockquote {

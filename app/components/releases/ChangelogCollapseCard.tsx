@@ -18,7 +18,7 @@ export function ChangelogCollapseCard({
     const [opened, { toggle }] = useDisclosure(initiallyExpanded);
 
     return (
-        <Card withBorder radius="md" padding="md" className="changelog-collapse-card" w="100%">
+        <Card shadow="sm" withBorder radius="md" padding="md" className="changelog-collapse-card" w="100%">
             <UnstyledButton
                 type="button"
                 onClick={toggle}

@@ -42,18 +42,18 @@ export function MarkdownText({ content }: MarkdownTextProps) {
                         </Text>
                     ),
                     ul: ({ children }: { children?: ReactNode }) => (
-                        <List size="sm" spacing="xs" mb="sm">
+                        <List c="dimmed" size="sm" spacing="xs" mb="sm" withPadding>
                             {children}
                         </List>
                     ),
                     ol: ({ children }: { children?: ReactNode }) => (
-                        <List size="sm" spacing="xs" type="ordered" mb="sm">
+                        <List c="dimmed" size="sm" spacing="xs" type="ordered" mb="sm" withPadding>
                             {children}
                         </List>
                     ),
                     li: ({ children }: { children?: ReactNode }) => <List.Item>{children}</List.Item>,
                     a: ({ href, children }: { href?: string; children?: ReactNode }) => (
-                        <Anchor href={href} target="_blank" rel="noreferrer">
+                        <Anchor size="sm" href={href} target="_blank" rel="noreferrer">
                             {children}
                         </Anchor>
                     ),
