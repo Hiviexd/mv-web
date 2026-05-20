@@ -50,8 +50,8 @@
     width: 100%;
     max-width: 500px;
     aspect-ratio: 16 / 9;
-    background: light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-6));
-    border: 2px dashed light-dark(var(--mantine-color-gray-4), var(--mantine-color-dark-4));
+    background: var(--mantine-color-dark-6);
+    border: 2px dashed var(--mantine-color-dark-4);
     border-radius: var(--mantine-radius-md);
     display: flex;
     align-items: center;

@@ -3,13 +3,22 @@
 @use "./components/Logo.scss";
 @use "./components/DownloadButton.scss";
 @use "./components/MarkdownText.scss";
+@use "./components/checks/CheckLayout.scss";
+
+html {
+    color-scheme: dark;
+    background-color: #161d28;
+    scrollbar-gutter: stable;
+    scrollbar-color: var(--mantine-color-primary-2) var(--mantine-color-body);
+}
 
 html,
 body {
     margin: 0;
     padding: 0;
-    font-family: "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    font-family: "Nunito", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
         "Noto Color Emoji";
+    background-color: var(--mantine-color-body, #161d28);
 }
 
 /* Selection */
@@ -24,10 +33,6 @@ body {
 }
 
 /* Scrollbar */
-html {
-    scrollbar-color: var(--mantine-color-primary-2) var(--mantine-color-body);
-}
-
 ::-webkit-scrollbar-track {
     background: var(--mantine-color-body);
 }
@@ -48,4 +53,5 @@ html {
     --check-icon-color-warning: #e1a642;
     --check-icon-color-minor: #55cd78;
     --check-icon-color-error: #9297ac;
+    --check-icon-color-info: #2ec4a8;
 }

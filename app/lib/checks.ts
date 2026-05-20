@@ -39,7 +39,18 @@ export interface CategoryGroup {
     checks: CheckEntry[];
 }
 
-export const severityOrder = ["Problem", "Warning", "Minor"] as const;
+export const checkLevels = ["Problem", "Warning", "Minor", "Error", "Info"] as const;
+export type CheckLevel = (typeof checkLevels)[number];
+export const severityOrder = checkLevels;
+
+export function getCheckLevelSortIndex(level: string) {
+    const index = checkLevels.indexOf(level as CheckLevel);
+    return index === -1 ? checkLevels.length : index;
+}
+
+export function sortTemplatesBySeverity<T extends { level: string }>(templates: T[]) {
+    return [...templates].sort((a, b) => getCheckLevelSortIndex(a.level) - getCheckLevelSortIndex(b.level));
+}
 
 const slugify = (value: string) => {
     return value
@@ -75,11 +86,7 @@ export const allChecks: CheckEntry[] = checksMetadata.checks.map((check) => {
                 } satisfies CheckTemplate,
             ];
         })
-        .sort(
-            (a, b) =>
-                severityOrder.indexOf(a.level as (typeof severityOrder)[number]) -
-                severityOrder.indexOf(b.level as (typeof severityOrder)[number])
-        );
+        .sort((a, b) => getCheckLevelSortIndex(a.level) - getCheckLevelSortIndex(b.level));
 
     return {
         name: check.name,
@@ -147,3 +154,31 @@ export const getCheckLevels = (check: CheckEntry) => {
 
     return severityOrder.filter((level) => levels.has(level));
 };
+
+export function checkMatchesSearch(check: CheckEntry, query: string) {
+    const q = query.trim().toLowerCase();
+    if (!q) {
+        return true;
+    }
+
+    return (
+        check.message.toLowerCase().includes(q) ||
+        check.category.toLowerCase().includes(q) ||
+        check.author?.toLowerCase().includes(q) ||
+        check.modes?.some((mode) => mode.toLowerCase().includes(q))
+    );
+}
+
+export function filterCategoryGroups(groups: CategoryGroup[], query: string) {
+    const q = query.trim();
+    if (!q) {
+        return groups;
+    }
+
+    return groups
+        .map((group) => ({
+            ...group,
+            checks: group.checks.filter((check) => checkMatchesSearch(check, q)),
+        }))
+        .filter((group) => group.checks.length > 0);
+}

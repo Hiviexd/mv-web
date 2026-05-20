@@ -1,0 +1,64 @@
+$toc-width: 280px;
+$shell-pad: var(--mantine-spacing-md);
+$header-offset: calc(var(--app-shell-header-height, 60px) + #{$shell-pad});
+$toc-height: calc(100vh - var(--app-shell-header-height, 60px) - #{$shell-pad} * 2);
+
+// Matches .main-layout centering in Layout.scss + .check-layout inline padding.
+@function check-toc-left($max-width) {
+    @return calc((100vw - min(#{$max-width}, 100vw - #{$shell-pad} * 2)) / 2 + #{$shell-pad} * 2);
+}
+
+.check-layout {
+    padding-block: var(--mantine-spacing-xl);
+    padding-inline: $shell-pad;
+}
+
+.check-layout__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--mantine-spacing-xl);
+
+    @media (min-width: 62em) {
+        grid-template-columns: $toc-width minmax(0, 1fr);
+    }
+}
+
+.check-layout__toc-spacer {
+    display: none;
+
+    @media (min-width: 62em) {
+        display: block;
+    }
+}
+
+.check-layout__toc-panel {
+    display: none;
+    position: fixed;
+    top: $header-offset;
+    width: $toc-width;
+    height: $toc-height;
+    flex-direction: column;
+    z-index: 1;
+    border-inline-end: 1px solid var(--mantine-color-default-border);
+
+    @media (min-width: 62em) {
+        display: flex;
+        left: check-toc-left(75em);
+    }
+
+    @media (min-width: 75em) {
+        left: check-toc-left(88em);
+    }
+}
+
+.check-layout__content {
+    min-width: 0;
+}
+
+.check-layout__toc-mobile {
+    display: block;
+
+    @media (min-width: 62em) {
+        display: none !important;
+    }
+}

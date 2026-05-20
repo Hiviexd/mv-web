@@ -13,6 +13,17 @@ export function CheckToc({ groups, activeSlug }: CheckTocProps) {
 
     return (
         <Stack gap="md">
+            <Text size="xs" tt="uppercase" c="dimmed" fw={600}>
+                Index
+            </Text>
+            <NavLink
+                component={Link}
+                to="/checks"
+                label="Checks listing"
+                active={isIndex}
+                variant={isIndex ? "light" : "subtle"}
+                color="primary.2"
+            />
             {groups.map((group) => (
                 <Stack key={group.category} gap="xs">
                     <Text size="xs" tt="uppercase" c="dimmed" fw={600}>
@@ -21,13 +32,12 @@ export function CheckToc({ groups, activeSlug }: CheckTocProps) {
                     <Stack gap={4}>
                         {group.checks.map((check) => {
                             const isActive = activeSlug === check.slug;
-                            const href = isIndex ? `#${check.slug}` : `/checks/${check.slug}`;
 
                             return (
                                 <NavLink
                                     key={check.slug}
                                     component={Link}
-                                    to={href}
+                                    to={`/checks/${check.slug}`}
                                     label={check.message}
                                     active={isActive}
                                     variant={isActive ? "light" : "subtle"}

@@ -1,5 +1,4 @@
 import type { Route } from "./+types/home";
-import { Layout } from "../components/base/Layout";
 import { HeroSection } from "../components/home/HeroSection";
 import { FeatureSection } from "../components/home/FeatureSection";
 import { ChecksSection } from "../components/home/ChecksSection";
@@ -18,12 +17,10 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Home() {
     return (
-        <Layout>
-            <Stack gap="xl">
-                <HeroSection />
-                <ChecksSection />
-                <ComparisonSection />
-            </Stack>
-        </Layout>
+        <Stack gap="xl">
+            <HeroSection />
+            <ChecksSection />
+            <ComparisonSection />
+        </Stack>
     );
 }

@@ -27,7 +27,7 @@ const dark: MantineColorsTuple = [
 ] as const;
 
 export const theme = createTheme({
-    fontFamily: "Inter, sans-serif",
+    fontFamily: "Nunito, sans-serif",
     primaryColor: "primary",
     white: "#f8f9fa",
     black: "#212529",

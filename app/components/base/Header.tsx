@@ -1,4 +1,5 @@
-import { AppShell, Group, Badge, Burger, Box } from "@mantine/core";
+import { AppShell, Group, Badge, Burger, Box, Anchor } from "@mantine/core";
+import { Link } from "react-router";
 import { Logo } from "./Logo";
 import { NavigationLinks } from "../header/NavigationLinks";
 import { ActionIcons } from "../header/ActionIcons";
@@ -15,7 +16,9 @@ export function Header({ mobileHeaderOpened, toggleMobileHeader }: IProps) {
             <Group justify="space-between" h="100%" px="xl" className="header-container">
                 <Group gap="xl">
                     <Group gap="xs">
-                        <Logo width={32} height={32} />
+                        <Anchor component={Link} to="/" underline="never" aria-label="Mapset Verifier home">
+                            <Logo width={32} height={32} />
+                        </Anchor>
                         <Badge color="primary.2" variant="light">
                             v{metadata.latestVersion}
                         </Badge>

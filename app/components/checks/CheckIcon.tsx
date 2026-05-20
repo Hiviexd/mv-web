@@ -1,17 +1,19 @@
-import { Box } from "@mantine/core";
+import { Box, Tooltip } from "@mantine/core";
 import {
     IconAlertCircleFilled,
-    IconAlertTriangle,
     IconCircleCheckFilled,
     IconHelpCircleFilled,
     IconCircleXFilled,
+    IconInfoCircleFilled,
 } from "@tabler/icons-react";
+import type { CheckLevel } from "../../lib/checks";
 
-export type CheckLevel = "Problem" | "Warning" | "Error" | "Minor";
+export type { CheckLevel };
 
 interface CheckIconProps {
     level: CheckLevel;
     size?: number;
+    label?: string;
 }
 
 const levelConfig = {
@@ -35,15 +37,23 @@ const levelConfig = {
         color: "var(--check-icon-color-minor)",
         badge: true as const,
     },
+    Info: {
+        Icon: IconInfoCircleFilled,
+        color: "var(--check-icon-color-info)",
+        badge: false as const,
+    },
 } as const;
 
-export function CheckIcon({ level, size = 20 }: CheckIconProps) {
+export function CheckIcon({ level, size = 20, label }: CheckIconProps) {
     const config = levelConfig[level] ?? levelConfig.Warning;
     const { Icon, color, badge } = config;
+    const tooltipLabel = label ?? level;
+
+    let icon = <Icon size={size} color={color} />;
 
     if (badge) {
         const badgeSize = Math.max(8, size * 0.45);
-        return (
+        icon = (
             <Box style={{ position: "relative", display: "inline-flex" }}>
                 <Icon size={size} color={color} />
                 <Box
@@ -55,14 +65,15 @@ export function CheckIcon({ level, size = 20 }: CheckIconProps) {
                         alignItems: "center",
                         justifyContent: "center",
                     }}>
-                    <IconAlertCircleFilled
-                        size={badgeSize}
-                        color="var(--check-icon-color-warning)"
-                    />
+                    <IconAlertCircleFilled size={badgeSize} color="var(--check-icon-color-warning)" />
                 </Box>
             </Box>
         );
     }
 
-    return <Icon size={size} color={color} />;
+    return (
+        <Tooltip label={tooltipLabel} position="top">
+            <Box style={{ display: "inline-flex", lineHeight: 0 }}>{icon}</Box>
+        </Tooltip>
+    );
 }

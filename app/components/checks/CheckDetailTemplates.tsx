@@ -1,5 +1,6 @@
 import { Blockquote, Group, Mark, Stack, Text, Title } from "@mantine/core";
 import type { CheckTemplate } from "../../lib/checks";
+import { sortTemplatesBySeverity } from "../../lib/checks";
 import { CheckIcon, type CheckLevel } from "./CheckIcon";
 
 const levelConfig = {
@@ -7,19 +8,8 @@ const levelConfig = {
     Warning: { color: "var(--check-icon-color-warning)" },
     Minor: { color: "var(--check-icon-color-minor)" },
     Error: { color: "var(--check-icon-color-error)" },
+    Info: { color: "var(--check-icon-color-info)" },
 };
-
-const severityOrder: CheckLevel[] = ["Problem", "Warning", "Minor", "Error"];
-
-function sortTemplatesBySeverity(templates: CheckTemplate[]): CheckTemplate[] {
-    return [...templates].sort((a, b) => {
-        const aIndex = severityOrder.indexOf(a.level as CheckLevel);
-        const bIndex = severityOrder.indexOf(b.level as CheckLevel);
-        const ai = aIndex === -1 ? severityOrder.length : aIndex;
-        const bi = bIndex === -1 ? severityOrder.length : bIndex;
-        return ai - bi;
-    });
-}
 
 const renderFormatString = (formatString: string, defaultArguments: string[]) => {
     const parts = formatString.split(/(\{\d+\})/g);
@@ -57,7 +47,9 @@ export function CheckDetailTemplates({ templates }: CheckDetailTemplatesProps) {
 
     return (
         <Stack gap="md">
-            <Title order={3} mb="md">Templates</Title>
+            <Title order={3} mb="md">
+                Templates
+            </Title>
             {sortedTemplates.map((template) => {
                 const config = levelConfig[template.level as keyof typeof levelConfig] ?? levelConfig.Warning;
                 const level = (template.level as CheckLevel) ?? "Warning";

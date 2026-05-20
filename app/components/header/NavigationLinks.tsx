@@ -3,12 +3,12 @@ import { Link, useLocation } from "react-router";
 import { navigationLinks } from "../../config/navigation";
 
 export function NavigationLinks() {
-    const activePath = useLocation().pathname;
+    const activePath = useLocation().pathname.split("/")[1];
     return (
         <Group gap="md">
             {navigationLinks.map((link) => (
                 <Button
-                    variant={activePath === link.href ? "filled" : "subtle"}
+                    variant={activePath === link.href.split("/")[1] ? "light" : "subtle"}
                     color="primary.2"
                     component={Link}
                     key={link.href}
