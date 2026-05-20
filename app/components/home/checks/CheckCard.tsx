@@ -1,69 +1,57 @@
-import { Badge, Card, Group, Title } from "@mantine/core";
-import { IconAlertTriangle, IconInfoCircle, IconX } from "@tabler/icons-react";
+import { Badge, Card, Group, Stack, Text } from "@mantine/core";
+import { useHover } from "@mantine/hooks";
+import { Link } from "react-router";
+import { getCheckPath } from "../../../lib/checks";
+import { GameModeDisplay } from "../../checks/GameModeDisplay";
 
-const levelOrder = ["Problem", "Warning", "Minor"] as const;
-const levelConfig = {
-    Problem: { icon: IconX, color: "red.6" },
-    Warning: { icon: IconAlertTriangle, color: "orange.6" },
-    Minor: { icon: IconInfoCircle, color: "yellow.6" },
-};
+const hoverBackground = "color-mix(in srgb, var(--mantine-color-primary-2) 14%, var(--mantine-color-dark-7))";
 
-type TemplateEntry = { level?: string } | undefined;
+const CARD_HEIGHT = 96;
 
 interface CheckCardProps {
     check: {
+        slug: string;
         message: string;
-        category: string;
         checkType: string;
-        templates?: Record<string, TemplateEntry>;
         modes?: string[];
-        difficulties?: string[];
     };
 }
 
-const getLevels = (templates: Record<string, TemplateEntry> | undefined) => {
-    const levels = new Set<string>();
-
-    Object.values(templates ?? {}).forEach((template) => {
-        if (template?.level) {
-            levels.add(template.level);
-        }
-    });
-
-    return levelOrder.filter((level) => levels.has(level));
-};
-
 export function CheckCard({ check }: CheckCardProps) {
-    return (
-        <Card shadow="sm" padding="lg" radius="md" withBorder maw={300} miw={250} mr="md">
-            <Title order={4} mb="xs">
-                {check.message}
-            </Title>
-            <Group gap={6} mb="xs">
-                {getLevels(check.templates).map((level) => {
-                    const Icon = levelConfig[level].icon;
+    const { hovered, ref } = useHover();
 
-                    return <Icon key={level} size={18} color={levelConfig[level].color} />;
-                })}
-            </Group>
-            <Group gap={6} wrap="wrap">
-                <Badge size="sm" variant="light" color="primary.2">
-                    {check.category}
-                </Badge>
-                <Badge size="sm" variant="light" color="gray">
-                    {check.checkType}
-                </Badge>
-                {(check.modes ?? []).map((mode) => (
-                    <Badge key={mode} size="sm" variant="outline" color="blue">
-                        {mode}
-                    </Badge>
-                ))}
-                {(check.difficulties ?? []).map((difficulty) => (
-                    <Badge key={difficulty} size="xs" variant="outline" color="gray">
-                        {difficulty}
-                    </Badge>
-                ))}
-            </Group>
-        </Card>
+    return (
+        <Link
+            to={getCheckPath(check.slug)}
+            style={{ textDecoration: "none", color: "inherit", display: "block", height: CARD_HEIGHT }}>
+            <Card
+                ref={ref}
+                withBorder
+                radius="md"
+                padding="xs"
+                miw={220}
+                maw={280}
+                mr="md"
+                h="100%"
+                style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    transition: "background-color 120ms ease, border-color 120ms ease",
+                    cursor: "pointer",
+                    backgroundColor: hovered ? hoverBackground : "var(--mantine-color-body)",
+                }}>
+                <Stack gap="md" justify="space-between" flex={1} miw={0}>
+                    <Text fw={800} size="sm" lh={1.3} lineClamp={2}>
+                        {check.message}
+                    </Text>
+                    <Group gap="xs" wrap="nowrap">
+                        <GameModeDisplay modes={check.modes} size="sm" />
+                        <Badge size="sm" variant="light" color="primary.2">
+                            {check.checkType}
+                        </Badge>
+                    </Group>
+                </Stack>
+            </Card>
+        </Link>
     );
 }
