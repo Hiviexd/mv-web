@@ -4,6 +4,8 @@
 @use "./components/DownloadButton.scss";
 @use "./components/MarkdownText.scss";
 @use "./components/checks/CheckLayout.scss";
+@use "./components/home/HeroSection.scss";
+@use "./components/home/HeroLogo.scss";
 
 html {
     color-scheme: dark;

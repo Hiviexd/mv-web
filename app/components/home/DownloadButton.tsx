@@ -42,19 +42,19 @@ export default function DownloadButton() {
     });
 
     return (
-        <Stack gap="sm" align="center">
+        <Stack gap="sm" align="center" className="download-button-group" w="100%">
             <UnstyledButton
-            w="100%"
+                w="100%"
                 component="a"
                 href={platformInfo.url}
                 className="download-button"
                 aria-label={`Download Latest Release for ${platformInfo.name}`}>
-                <Stack gap={4} align="center">
+                <Stack gap={4} align="center" w="100%">
                     <IconDownload size={24} />
-                    <Text size="lg" fw={600}>
+                    <Text size="lg" fw={600} ta="center" w="100%">
                         Download Latest Release
                     </Text>
-                    <Text size="sm" opacity={0.8}>
+                    <Text size="sm" opacity={0.8} ta="center" w="100%">
                         for {platformInfo.name}
                     </Text>
                 </Stack>
