@@ -63,23 +63,32 @@ jobs:
                   GITHUB_TOKEN: ${{ github.token }}
               run: node scripts/sync-content.mjs
 
-            - name: Read sync summary
-              id: summary
+            - name: Prepare PR body
+              env:
+                  CLONE_TAG: ${{ steps.tag.outputs.tag }}
+                  RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
               run: |
-                  SUMMARY=$(cat .sync-summary.json)
-                  echo "body<<EOF" >> "$GITHUB_OUTPUT"
-                  echo "## MapsetVerifier content sync" >> "$GITHUB_OUTPUT"
-                  echo "" >> "$GITHUB_OUTPUT"
-                  echo "- **Clone tag:** \`${{ steps.tag.outputs.tag }}\`" >> "$GITHUB_OUTPUT"
-                  echo "- **Stable release:** \`$(echo "$SUMMARY" | jq -r .release)\`" >> "$GITHUB_OUTPUT"
-                  echo "- **Beta release:** \`$(echo "$SUMMARY" | jq -r .beta)\`" >> "$GITHUB_OUTPUT"
-                  echo "- **Checks:** $(echo "$SUMMARY" | jq -r .checksCount)" >> "$GITHUB_OUTPUT"
-                  echo "- **Check asset files:** $(echo "$SUMMARY" | jq -r .assetFiles)" >> "$GITHUB_OUTPUT"
-                  echo "- **Changelog images:** $(echo "$SUMMARY" | jq -r .changelogImages)" >> "$GITHUB_OUTPUT"
-                  echo "- **Changelog files:** $(echo "$SUMMARY" | jq -r .changelogFiles)" >> "$GITHUB_OUTPUT"
-                  echo "" >> "$GITHUB_OUTPUT"
-                  echo "Automated sync from [\`workflow_dispatch\`](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})." >> "$GITHUB_OUTPUT"
-                  echo "EOF" >> "$GITHUB_OUTPUT"
+                  set -euo pipefail
+                  mkdir -p .github
+                  RELEASE=$(jq -r .release .sync-summary.json)
+                  BETA=$(jq -r .beta .sync-summary.json)
+                  CHECKS=$(jq -r .checksCount .sync-summary.json)
+                  ASSETS=$(jq -r .assetFiles .sync-summary.json)
+                  IMAGES=$(jq -r .changelogImages .sync-summary.json)
+                  CHANGELOGS=$(jq -r .changelogFiles .sync-summary.json)
+                  {
+                    echo "## MapsetVerifier content sync"
+                    echo ""
+                    echo "- **Clone tag:** ${CLONE_TAG}"
+                    echo "- **Stable release:** ${RELEASE}"
+                    echo "- **Beta release:** ${BETA}"
+                    echo "- **Checks:** ${CHECKS}"
+                    echo "- **Check asset files:** ${ASSETS}"
+                    echo "- **Changelog images:** ${IMAGES}"
+                    echo "- **Changelog files:** ${CHANGELOGS}"
+                    echo ""
+                    echo "Automated sync from [workflow run](${RUN_URL})."
+                  } > .github/sync-pr-body.md
 
             - name: Commit and push
               run: |
@@ -87,7 +96,7 @@ jobs:
                   git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
                   git checkout -B "$SYNC_BRANCH"
                   git add -A
-                  git reset HEAD .sync-summary.json vendor 2>/dev/null || true
+                  git reset HEAD .sync-summary.json vendor .github/sync-pr-body.md 2>/dev/null || true
                   if git diff --staged --quiet; then
                     echo "No changes to commit"
                     exit 0
@@ -96,17 +105,32 @@ jobs:
                   git push --force-with-lease origin "$SYNC_BRANCH"
 
             - name: Create or update pull request
+              id: pr
+              continue-on-error: true
               env:
                   GH_TOKEN: ${{ github.token }}
               run: |
+                  set -euo pipefail
+                  PR_TITLE="chore: sync MapsetVerifier content (${{ steps.tag.outputs.tag }})"
                   PR_NUMBER=$(gh pr list --head "$SYNC_BRANCH" --json number --jq '.[0].number // empty')
                   if [ -n "$PR_NUMBER" ]; then
-                    gh pr edit "$PR_NUMBER" --title "chore: sync MapsetVerifier content (${{ steps.tag.outputs.tag }})" --body "${{ steps.summary.outputs.body }}"
+                    gh pr edit "$PR_NUMBER" --title "$PR_TITLE" --body-file .github/sync-pr-body.md
                     echo "Updated PR #$PR_NUMBER"
                   else
                     gh pr create \
                       --head "$SYNC_BRANCH" \
                       --base main \
-                      --title "chore: sync MapsetVerifier content (${{ steps.tag.outputs.tag }})" \
-                      --body "${{ steps.summary.outputs.body }}"
+                      --title "$PR_TITLE" \
+                      --body-file .github/sync-pr-body.md
                   fi
+
+            - name: Report PR result
+              if: steps.pr.outcome != 'success'
+              run: |
+                  echo "::error::Could not create or update the pull request."
+                  echo "If the message mentions 'not permitted to create or approve pull requests', enable:"
+                  echo "  Settings → Actions → General → Workflow permissions"
+                  echo "  → Allow GitHub Actions to create and approve pull requests"
+                  echo ""
+                  echo "Open a PR manually: https://github.com/${{ github.repository }}/compare/main...${{ env.SYNC_BRANCH }}"
+                  exit 1
