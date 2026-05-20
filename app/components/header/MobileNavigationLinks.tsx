@@ -1,6 +1,6 @@
 import { NavLink, Stack } from "@mantine/core";
 import { Link } from "react-router";
-import { navigationLinks } from "../../config/navigation";
+import { NAV_ICON_SIZE, navigationLinks } from "../../config/navigation";
 
 export function MobileNavigationLinks() {
     return (
@@ -11,7 +11,7 @@ export function MobileNavigationLinks() {
                     label={link.label}
                     component={Link}
                     to={link.href}
-                    leftSection={link.icon}
+                    leftSection={<link.icon size={NAV_ICON_SIZE} stroke={1.75} />}
                 />
             ))}
         </Stack>

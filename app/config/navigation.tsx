@@ -1,13 +1,26 @@
-import { IconChecks, IconPackages, IconInfoCircle, IconDownload } from "@tabler/icons-react";
+import { IconChecks, IconDownload, IconHome, IconInfoCircle, type Icon } from "@tabler/icons-react";
 
 export interface NavigationLink {
     label: string;
     href: string;
-    icon: React.ReactNode;
+    icon: Icon;
 }
 
 export const navigationLinks: NavigationLink[] = [
-    { label: "Checks", href: "/checks", icon: <IconChecks /> },
-    { label: "Downloads", href: "/releases", icon: <IconDownload /> },
-    { label: "About", href: "/about", icon: <IconInfoCircle /> },
+    { label: "Home", href: "/", icon: IconHome },
+    { label: "Downloads", href: "/releases", icon: IconDownload },
+    { label: "Checks", href: "/checks", icon: IconChecks },
+    { label: "About", href: "/about", icon: IconInfoCircle },
 ];
+
+export const NAV_INDICATOR_TRANSITION_MS = 220;
+export const NAV_ICON_SIZE = 20;
+export const NAV_BORDER_RADIUS = "var(--mantine-radius-default)";
+
+export function getActiveNavRoute(pathname: string): string | null {
+    return (
+        navigationLinks.find((item) =>
+            item.href === "/" ? pathname === "/" : pathname.startsWith(item.href),
+        )?.href ?? null
+    );
+}
