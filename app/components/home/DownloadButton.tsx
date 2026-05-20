@@ -1,35 +1,14 @@
 import { UnstyledButton, Stack, Text, Group, Anchor } from "@mantine/core";
 import { useOs } from "@mantine/hooks";
 import { IconDownload } from "@tabler/icons-react";
-import { releases, type ReleaseDownloads } from "../../lib/release";
-
-interface Platform {
-    key: keyof ReleaseDownloads;
-    name: string;
-    url: string;
-}
-
-function buildPlatforms(downloads: ReleaseDownloads): Platform[] {
-    const entries: { key: keyof ReleaseDownloads; name: string }[] = [
-        { key: "windows", name: "Windows" },
-        { key: "macos", name: "macOS" },
-        { key: "linux", name: "Linux" },
-    ];
-
-    return entries
-        .map(({ key, name }) => {
-            const url = downloads[key];
-            return url ? { key, name, url } : null;
-        })
-        .filter((platform): platform is Platform => platform !== null);
-}
+import { buildPlatforms, releases, type ReleaseDownloads } from "../../lib/release";
 
 const allPlatforms = buildPlatforms(releases.release.downloads);
 
 export default function DownloadButton() {
     const os = useOs();
 
-    const getPlatformInfo = (): Platform | null => {
+    const getPlatformInfo = () => {
         const key: keyof ReleaseDownloads =
             os === "windows" ? "windows" : os === "macos" ? "macos" : os === "linux" ? "linux" : "windows";
         const url = releases.release.downloads[key];

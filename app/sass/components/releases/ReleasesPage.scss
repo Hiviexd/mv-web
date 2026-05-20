@@ -1,0 +1,53 @@
+.releases-page {
+    padding-block: var(--mantine-spacing-md);
+}
+
+.release-channel-card {
+    &__logo {
+        flex-shrink: 0;
+        opacity: 0.92;
+
+        &--beta .logo img {
+            filter: hue-rotate(180deg);
+        }
+    }
+}
+
+.changelog-collapse-card {
+    position: relative;
+
+    &__trigger {
+        display: block;
+        position: relative;
+        z-index: 1;
+        border-radius: var(--mantine-radius-sm);
+        transition: background-color 150ms ease;
+
+        &:hover {
+            background-color: light-dark(
+                var(--mantine-color-gray-0),
+                var(--mantine-color-dark-6)
+            );
+        }
+    }
+
+    &__title {
+        line-height: 1.3;
+        text-align: left;
+    }
+
+    &__chevron {
+        flex-shrink: 0;
+        transition: transform 200ms ease;
+
+        &[data-opened] {
+            transform: rotate(180deg);
+        }
+    }
+
+    &__body {
+        position: relative;
+        z-index: 0;
+        padding-top: var(--mantine-spacing-md);
+    }
+}

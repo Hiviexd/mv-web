@@ -7,6 +7,6 @@ const checkPaths = checksMetadata.checks.map((check) => getCheckPath(slugify(che
 
 export default {
     async prerender({ getStaticPaths }) {
-        return [...getStaticPaths(), "/checks", ...checkPaths];
+        return [...getStaticPaths(), "/checks", "/releases", ...checkPaths];
     },
 } satisfies Config;

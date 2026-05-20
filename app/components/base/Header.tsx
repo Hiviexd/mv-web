@@ -23,7 +23,7 @@ export function Header({ mobileHeaderOpened, toggleMobileHeader }: IProps) {
                             v{releases.release.latestVersion}
                         </Badge>
                     </Group>
-                    <Box visibleFrom="md">    
+                    <Box visibleFrom="md">
                         <NavigationLinks />
                     </Box>
                 </Group>

@@ -16,7 +16,26 @@ export interface ReleaseData {
     beta: ReleaseChannel;
 }
 
+export interface PlatformDownload {
+    key: keyof ReleaseDownloads;
+    name: string;
+    url: string;
+}
+
 export const releases: ReleaseData = releaseData as ReleaseData;
+
+const PLATFORM_ENTRIES: { key: keyof ReleaseDownloads; name: string }[] = [
+    { key: "windows", name: "Windows" },
+    { key: "macos", name: "macOS" },
+    { key: "linux", name: "Linux" },
+];
+
+export function buildPlatforms(downloads: ReleaseDownloads): PlatformDownload[] {
+    return PLATFORM_ENTRIES.map(({ key, name }) => {
+        const url = downloads[key];
+        return url ? { key, name, url } : null;
+    }).filter((platform): platform is PlatformDownload => platform !== null);
+}
 
 export function getDownloadUrl(
     channel: ReleaseChannel,
