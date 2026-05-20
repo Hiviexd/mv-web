@@ -55,17 +55,6 @@ jobs:
               with:
                   dotnet-version: "9.0.x"
 
-            - name: Setup pnpm
-              uses: pnpm/action-setup@v4
-              with:
-                  version: 9
-
-            - name: Setup Node.js
-              uses: actions/setup-node@v4
-              with:
-                  node-version: "22"
-                  cache: pnpm
-
             - name: Sync content
               env:
                   MAPSETVERIFIER_ROOT: ${{ github.workspace }}/vendor/MapsetVerifier
@@ -73,12 +62,6 @@ jobs:
                   SYNC_CLONE_TAG: ${{ steps.tag.outputs.tag }}
                   GITHUB_TOKEN: ${{ github.token }}
               run: node scripts/sync-content.mjs
-
-            - name: Install dependencies and validate
-              run: |
-                  pnpm install --frozen-lockfile
-                  pnpm run typecheck
-                  pnpm run build
 
             - name: Read sync summary
               id: summary
@@ -104,7 +87,7 @@ jobs:
                   git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
                   git checkout -B "$SYNC_BRANCH"
                   git add -A
-                  git reset HEAD .sync-summary.json 2>/dev/null || true
+                  git reset HEAD .sync-summary.json vendor 2>/dev/null || true
                   if git diff --staged --quiet; then
                     echo "No changes to commit"
                     exit 0
