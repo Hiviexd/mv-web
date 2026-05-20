@@ -1,4 +1,5 @@
 import checksMetadata from "../data/checks-metadata.json";
+import { normalizeMarkdown, slugify } from "./utils";
 
 type TemplateEntry = {
     level?: string;
@@ -52,22 +53,9 @@ export function sortTemplatesBySeverity<T extends { level: string }>(templates: 
     return [...templates].sort((a, b) => getCheckLevelSortIndex(a.level) - getCheckLevelSortIndex(b.level));
 }
 
-const slugify = (value: string) => {
-    return value
-        .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
-        .replace(/[^a-zA-Z0-9-]+/g, "-")
-        .replace(/-{2,}/g, "-")
-        .replace(/^-+|-+$/g, "")
-        .toLowerCase();
-};
-
-const normalizeMarkdown = (value?: string) => {
-    if (!value) {
-        return undefined;
-    }
-
-    return value.replace(/\r\n/g, "\n").replace(/\n\s+/g, "\n").trim();
-};
+export function getCheckPath(slug: string) {
+    return `/checks/${slug}`;
+}
 
 export const allChecks: CheckEntry[] = checksMetadata.checks.map((check) => {
     const templates = Object.entries(check.templates ?? {})

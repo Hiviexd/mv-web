@@ -1,15 +1,9 @@
 import type { Config } from "@react-router/dev/config";
 import checksMetadata from "./app/data/checks-metadata.json";
+import { getCheckPath } from "./app/lib/checks";
+import { slugify } from "./app/lib/utils";
 
-const slugify = (value: string) =>
-    value
-        .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
-        .replace(/[^a-zA-Z0-9-]+/g, "-")
-        .replace(/-{2,}/g, "-")
-        .replace(/^-+|-+$/g, "")
-        .toLowerCase();
-
-const checkPaths = checksMetadata.checks.map((check) => `/checks/${slugify(check.name)}`);
+const checkPaths = checksMetadata.checks.map((check) => getCheckPath(slugify(check.name)));
 
 export default {
     async prerender({ getStaticPaths }) {

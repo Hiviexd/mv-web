@@ -1,6 +1,7 @@
 import { Stack, Text, NavLink } from "@mantine/core";
 import { Link, useLocation } from "react-router";
 import type { CategoryGroup } from "../../lib/checks";
+import { getCheckPath } from "../../lib/checks";
 
 interface CheckTocProps {
     groups: CategoryGroup[];
@@ -37,7 +38,7 @@ export function CheckToc({ groups, activeSlug }: CheckTocProps) {
                                 <NavLink
                                     key={check.slug}
                                     component={Link}
-                                    to={`/checks/${check.slug}`}
+                                    to={getCheckPath(check.slug)}
                                     label={check.message}
                                     active={isActive}
                                     variant={isActive ? "light" : "subtle"}

@@ -1,11 +1,11 @@
 import { Stack, Title, Mark } from "@mantine/core";
 import { useMemo } from "react";
 import { Marquee } from "@gfazioli/mantine-marquee";
-import checksMetadata from "../../data/checks-metadata.json";
+import { allChecks } from "../../lib/checks";
 import { CheckCard } from "./checks/CheckCard";
 
 export function ChecksSection() {
-    const checks = checksMetadata.checks;
+    const checks = allChecks;
     const totalChecks = checks.length;
     const shuffledChecks = useMemo(() => {
         return checks
@@ -23,13 +23,13 @@ export function ChecksSection() {
             </Title>
             <Stack gap="md">
                 <Marquee w="100%" fadeEdges duration={120}>
-                    {marqueeChecks.map((check, index) => (
-                        <CheckCard key={index} check={check} />
+                    {marqueeChecks.map((check) => (
+                        <CheckCard key={check.slug} check={check} />
                     ))}
                 </Marquee>
                 <Marquee w="100%" fadeEdges reverse duration={120}>
-                    {marqueeChecksReverse.map((check, index) => (
-                        <CheckCard key={index} check={check} />
+                    {marqueeChecksReverse.map((check) => (
+                        <CheckCard key={check.slug} check={check} />
                     ))}
                 </Marquee>
             </Stack>

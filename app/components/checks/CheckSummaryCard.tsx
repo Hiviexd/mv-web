@@ -3,7 +3,7 @@ import { Badge, Card, Group, Stack, Text } from "@mantine/core";
 import { useHover } from "@mantine/hooks";
 import { Link } from "react-router";
 import type { CheckEntry } from "../../lib/checks";
-import { sortTemplatesBySeverity } from "../../lib/checks";
+import { getCheckPath, sortTemplatesBySeverity } from "../../lib/checks";
 import { CheckIcon, type CheckLevel } from "./CheckIcon";
 import { GameModeDisplay } from "./GameModeDisplay";
 
@@ -18,7 +18,7 @@ export const CheckSummaryCard = memo(function CheckSummaryCard({ check }: CheckS
     const sortedTemplates = sortTemplatesBySeverity(check.templates);
 
     return (
-        <Link to={`/checks/${check.slug}`} style={{ textDecoration: "none", color: "inherit", display: "block" }}>
+        <Link to={getCheckPath(check.slug)} style={{ textDecoration: "none", color: "inherit", display: "block" }}>
             <Card
                 ref={ref}
                 withBorder

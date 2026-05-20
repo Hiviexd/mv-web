@@ -4,6 +4,7 @@ import { useDebouncedValue } from "@mantine/hooks";
 import { IconSearch } from "@tabler/icons-react";
 import type { CategoryGroup } from "../../lib/checks";
 import { filterCategoryGroups } from "../../lib/checks";
+import { slugify } from "../../lib/utils";
 import { CheckSummaryCard } from "./CheckSummaryCard";
 
 interface CheckIndexListProps {
@@ -16,14 +17,6 @@ interface CheckIndexSearchResultsProps {
 }
 
 const SEARCH_DEBOUNCE_MS = 200;
-
-const slugify = (value: string) =>
-    value
-        .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
-        .replace(/[^a-zA-Z0-9-]+/g, "-")
-        .replace(/-{2,}/g, "-")
-        .replace(/^-+|-+$/g, "")
-        .toLowerCase();
 
 const CheckIndexSearchResults = memo(function CheckIndexSearchResults({
     groups,

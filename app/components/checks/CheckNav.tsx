@@ -1,6 +1,7 @@
 import { Button, Group } from "@mantine/core";
 import { Link } from "react-router";
 import type { CheckEntry } from "../../lib/checks";
+import { getCheckPath } from "../../lib/checks";
 import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 
 interface CheckNavProps {
@@ -18,7 +19,7 @@ export function CheckNav({ previous, next }: CheckNavProps) {
             {previous ? (
                 <Button
                     component={Link}
-                    to={`/checks/${previous.slug}`}
+                    to={getCheckPath(previous.slug)}
                     variant="subtle"
                     color="primary.2"
                     leftSection={<IconArrowLeft size={18} />}
@@ -31,7 +32,7 @@ export function CheckNav({ previous, next }: CheckNavProps) {
             {next && (
                 <Button
                     component={Link}
-                    to={`/checks/${next.slug}`}
+                    to={getCheckPath(next.slug)}
                     variant="subtle"
                     color="primary.2"
                     rightSection={<IconArrowRight size={18} />}
