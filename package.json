@@ -4,8 +4,9 @@
     "type": "module",
     "scripts": {
         "build": "react-router build",
+        "build:pages": "react-router build && node scripts/prepare-github-pages.mjs",
         "dev": "react-router dev",
-        "start": "react-router-serve ./build/server/index.js",
+        "preview:pages": "pnpm run build:pages && npx --yes serve build/client",
         "typecheck": "react-router typegen && tsc"
     },
     "dependencies": {
