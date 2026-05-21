@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-20T03:07:26.7332498Z",
+  "generatedAt": "2026-05-21T23:51:49.4794377Z",
   "version": "1.0.0.0",
   "checks": [
     {
@@ -11,8 +11,8 @@
       "author": "Nostril",
       "applicableModes": "Taiko",
       "documentation": {
-        "Purpose": "\n                    Preventing unintentional barline slider velocities caused by timing lines being slightly unsnapped.",
-        "Reasoning": "\n                    Barlines before a timing line (even if just by 1 ms or less), will not be affected by its slider velocity. With 1 ms unsnaps being common due to rounding errors when copy-pasting, this in turn becomes a common issue."
+        "Purpose": "Preventing unintentional barline slider velocities caused by timing lines being slightly unsnapped.",
+        "Reasoning": "Barlines before a timing line (even if just by 1 ms or less), will not be affected by its slider velocity. With 1 ms unsnaps being common due to rounding errors when copy-pasting, this in turn becomes a common issue."
       },
       "templates": {
         "Warning": {
@@ -54,8 +54,8 @@
       "author": "Hivie, Phob",
       "applicableModes": "Taiko",
       "documentation": {
-        "Purpose": "\n                    Ensuring that there are no two barlines within 50ms of each other.",
-        "Reasoning": "\n                    Double barlines are caused by rounding errors. They are visually disruptive and confusing in the representation of a song's downbeat."
+        "Purpose": "Ensuring that there are no two barlines within 50ms of each other.",
+        "Reasoning": "Double barlines are caused by rounding errors. They are visually disruptive and confusing in the representation of a song's downbeat."
       },
       "templates": {
         "Problem": {
@@ -104,8 +104,8 @@
       "author": "Naxess",
       "applicableModes": "Taiko",
       "documentation": {
-        "Purpose": "\n                    Ensuring that bar lines are consistent between all difficulties.",
-        "Reasoning": "\n                    Since all difficulties in a set are based around a single song, and bar lines are meant to act as a point of reference\n                    for timing in gameplay, it would make the most sense if all difficulties would use the same bar lines. For this reason,\n                    if one difficulty skips one, others probably should too."
+        "Purpose": "Ensuring that bar lines are consistent between all difficulties.",
+        "Reasoning": "Since all difficulties in a set are based around a single song, and bar lines are meant to act as a point of reference\nfor timing in gameplay, it would make the most sense if all difficulties would use the same bar lines. For this reason,\nif one difficulty skips one, others probably should too."
       },
       "templates": {
         "Inconsistent": {
@@ -139,8 +139,8 @@
       "author": "SN707, Nostril",
       "applicableModes": "Taiko",
       "documentation": {
-        "Purpose": "\n                    Kiais should be consistent between difficulties.",
-        "Reasoning": "\n                    Kiais in osu!taiko have more impact than in other modes (illuminates entire playfield, slight score boost), so consistency is important unless there's a valid reason to break it (i.e. GDs)."
+        "Purpose": "Kiais should be consistent between difficulties.",
+        "Reasoning": "Kiais in osu!taiko have more impact than in other modes (illuminates entire playfield, slight score boost), so consistency is important unless there's a valid reason to break it (i.e. GDs)."
       },
       "templates": {
         "Inconsistent": {
@@ -174,8 +174,8 @@
       "author": "Hivie",
       "applicableModes": "Taiko",
       "documentation": {
-        "Purpose": "\n                    Ensuring that kiai flash usage is not too drastic.",
-        "Reasoning": "\n                    Kiai flashes in osu!taiko cause the entire playfield to flash, which can cause performance problems, alongside potentially causing epileptic effects if abused."
+        "Purpose": "Ensuring that kiai flash usage is not too drastic.",
+        "Reasoning": "Kiai flashes in osu!taiko cause the entire playfield to flash, which can cause performance problems, alongside potentially causing epileptic effects if abused."
       },
       "templates": {
         "Minor": {
@@ -216,8 +216,8 @@
       "author": "Hivie",
       "applicableModes": "Taiko",
       "documentation": {
-        "Purpose": "\n                    Kantan and Futsuu osu!taiko difficulties should keep a consistent scroll speed.",
-        "Reasoning": "\n                    Slider velocity changes on Kantan and Futsuu can be disorienting for newer players. Inherited timing lines that only normalize variable BPM (keeping the same effective scroll speed) are ignored, as are sections with no hit objects and no visible barlines. The check compares each segment's effective scroll speed — slider velocity multiplied by the current uninherited BPM — against the speed that covers the most time in the difficulty."
+        "Purpose": "Kantan and Futsuu osu!taiko difficulties should keep a consistent scroll speed.",
+        "Reasoning": "Slider velocity changes on Kantan and Futsuu can be disorienting for newer players. Inherited timing lines that only normalize variable BPM (keeping the same effective scroll speed) are ignored, as are sections with no hit objects and no visible barlines. The check compares each segment's effective scroll speed — slider velocity multiplied by the current uninherited BPM — against the speed that covers the most time in the difficulty."
       },
       "templates": {
         "Inconsistent": {
@@ -248,8 +248,8 @@
       "author": "Hivie",
       "applicableModes": "Taiko",
       "documentation": {
-        "Purpose": "\n                        Preventing difficulties from going beyond or below the\n                        recommended OD/HP values present in the ranking criteria.\n                        ",
-        "Reasoning": "\n                    OD/HP values that are too high or low can cause gameplay imbalances.\n\n                    > The recommended settings below are based on the current ranking criteria with adjustments based on mapping standards and drain time, so make sure you apply your own judgment as well.\n\n### Recommended OD settings\n\n| Difficulty | Overall Difficulty |\n|---|---|\n| Kantan | 3 |\n| Futsuu | 4 |\n| Muzukashii | 5 |\n| Oni | 5.5 |\n\n### Recommended HP settings\n\n| Difficulty | Drain <= 1:00 | 1:00 < Drain < 3:45  | 3:45 <= Drain < 4:45 | Drain >= 4:45  |\n| ---------- | ------------- | -------------------- | -------------------- | -------------- |\n| Kantan     | 9~10          | 8~9                  | 7~8                  | 6~7            |\n| Futsuu     | 8~9           | 7~8                  | 6~7                  | 5~6            |\n| Muzukashii | 7~8           | 6~7                  | 5~6                  | 4~5            |\n| Oni        | 7~8           | 5.5~6.5              | 5~6                  | 4~5            |"
+        "Purpose": "Preventing difficulties from going beyond or below the\nrecommended OD/HP values present in the ranking criteria.",
+        "Reasoning": "                    OD/HP values that are too high or low can cause gameplay imbalances.\n\n                    > The recommended settings below are based on the current ranking criteria with adjustments based on mapping standards and drain time, so make sure you apply your own judgment as well.\n\n### Recommended OD settings\n\n| Difficulty | Overall Difficulty |\n|---|---|\n| Kantan | 3 |\n| Futsuu | 4 |\n| Muzukashii | 5 |\n| Oni | 5.5 |\n\n### Recommended HP settings\n\n| Difficulty | Drain <= 1:00 | 1:00 < Drain < 3:45  | 3:45 <= Drain < 4:45 | Drain >= 4:45  |\n| ---------- | ------------- | -------------------- | -------------------- | -------------- |\n| Kantan     | 9~10          | 8~9                  | 7~8                  | 6~7            |\n| Futsuu     | 8~9           | 7~8                  | 6~7                  | 5~6            |\n| Muzukashii | 7~8           | 6~7                  | 5~6                  | 4~5            |\n| Oni        | 7~8           | 5.5~6.5              | 5~6                  | 4~5            |"
       },
       "templates": {
         "hpMinor": {
@@ -308,8 +308,8 @@
       "author": "Nostril",
       "applicableModes": "Taiko",
       "documentation": {
-        "Purpose": "\n                    Pointing out background offset inconsistencies between osu!taikodifficulties.",
-        "Reasoning": "\n                    Background offset should generally be consistent across osu!taiko difficulties that share the same background."
+        "Purpose": "Pointing out background offset inconsistencies between osu!taikodifficulties.",
+        "Reasoning": "Background offset should generally be consistent across osu!taiko difficulties that share the same background."
       },
       "templates": {
         "Minor": {
@@ -344,8 +344,8 @@
       "author": "Nostril",
       "applicableModes": "Taiko",
       "documentation": {
-        "Purpose": "\n                    Check if the last object in the beatmap is not 1ms earlier than a barline.",
-        "Reasoning": "\n                    This causes the last barline in the map to not be rendered."
+        "Purpose": "Check if the last object in the beatmap is not 1ms earlier than a barline.",
+        "Reasoning": "This causes the last barline in the map to not be rendered."
       },
       "templates": {
         "Minor": {
@@ -394,8 +394,8 @@
       "author": "SN707",
       "applicableModes": "Taiko",
       "documentation": {
-        "Purpose": "\n                    Preventing patterns from being too long based on each difficulty's Ranking Criteria.",
-        "Reasoning": "\n                    On lower difficulties, patterns that use smaller snaps should be avoided as they can become straining if they exceed an unreasonable length."
+        "Purpose": "Preventing patterns from being too long based on each difficulty's Ranking Criteria.",
+        "Reasoning": "On lower difficulties, patterns that use smaller snaps should be avoided as they can become straining if they exceed an unreasonable length."
       },
       "templates": {
         "Minor": {
@@ -440,8 +440,8 @@
       "author": "Hivie, Phob, Nostril",
       "applicableModes": "Taiko",
       "documentation": {
-        "Purpose": "\n                    Ensuring that a chain of objects doesn't exceed a certain threshold without a required rest moment.",
-        "Reasoning": "\n                    Abnormally long chains without proper rest moments can be very straining to play."
+        "Purpose": "Ensuring that a chain of objects doesn't exceed a certain threshold without a required rest moment.",
+        "Reasoning": "Abnormally long chains without proper rest moments can be very straining to play."
       },
       "templates": {
         "Minor": {
@@ -486,8 +486,8 @@
       "author": "Hivie, Phob",
       "applicableModes": "Taiko",
       "documentation": {
-        "Purpose": "\n                    Preventing patterns with abnormally small snaps based on each difficulty's Ranking Criteria.",
-        "Reasoning": "\n                    Certain snaps are too difficult/unreasonable for certain difficulties."
+        "Purpose": "Preventing patterns with abnormally small snaps based on each difficulty's Ranking Criteria.",
+        "Reasoning": "Certain snaps are too difficult/unreasonable for certain difficulties."
       },
       "templates": {
         "Warning": {
@@ -518,8 +518,8 @@
       "author": "Hivie, Phob",
       "applicableModes": "Taiko",
       "documentation": {
-        "Purpose": "\n                    Pointing out spinners that may be very close to their preceding object.",
-        "Reasoning": "\n                    Spinners can cause reading issues when being too close to their preceding object due to the visual overlap, especially in lower difficulties."
+        "Purpose": "Pointing out spinners that may be very close to their preceding object.",
+        "Reasoning": "Spinners can cause reading issues when being too close to their preceding object due to the visual overlap, especially in lower difficulties."
       },
       "templates": {
         "Minor": {
@@ -550,8 +550,8 @@
       "author": "Hivie, Nostril",
       "applicableModes": "Taiko",
       "documentation": {
-        "Purpose": "\n                    Ensuring that finishers abide by each difficulty's Ranking Criteria.",
-        "Reasoning": "\n                    Improper finisher usage can lead to significant gameplay issues."
+        "Purpose": "Ensuring that finishers abide by each difficulty's Ranking Criteria.",
+        "Reasoning": "Improper finisher usage can lead to significant gameplay issues."
       },
       "templates": {
         "Warning": {
@@ -592,8 +592,8 @@
       "author": "Naxess",
       "applicableModes": "Standard",
       "documentation": {
-        "Purpose": "\n                        Ensuring that objects close in time are indiciated as such in easy and lowest normal difficulties.\n\n                        ![](/assets/checks/standard-spread-close-overlap-1.png)\n                        Right image is harder to distinguish time distance in, despite spacings still clearly being different.",
-        "Reasoning": "\n                        Newer players often have trouble reading how far apart objects are in time, which is why enabling distance spacing for lower difficulties is often recommended. However, if two spacings for different snappings look similar, it's possible to confuse them. By forcing an overlap between objects close in time and discouraging it for objects further apart, the difference in snappings become more apparent."
+        "Purpose": "Ensuring that objects close in time are indiciated as such in easy and lowest normal difficulties.\n\n![](/assets/checks/standard-spread-close-overlap-1.png \"Right image is harder to distinguish time distance in, despite spacings still clearly being different.\")",
+        "Reasoning": "Newer players often have trouble reading how far apart objects are in time, which is why enabling distance spacing for lower difficulties is often recommended. However, if two spacings for different snappings look similar, it's possible to confuse them. By forcing an overlap between objects close in time and discouraging it for objects further apart, the difference in snappings become more apparent."
       },
       "templates": {
         "Problem": {
@@ -678,8 +678,8 @@
       "author": "Naxess",
       "applicableModes": "Standard",
       "documentation": {
-        "Purpose": "\n                        Preventing sliders from having multiple reverses in easy and normal difficulties.",
-        "Reasoning": "\n                        Assuming we do this on a short slider, the reverse would be visible for so short of a time that it \n                        would be difficult to react to. If we instead do this on a long slider where they can react, it's \n                        going to be really boring gameplay-wise due to how long the slider becomes. So no matter how it's \n                        done, it'll be worse than alternatives."
+        "Purpose": "Preventing sliders from having multiple reverses in easy and normal difficulties.",
+        "Reasoning": "Assuming we do this on a short slider, the reverse would be visible for so short of a time that it\nwould be difficult to react to. If we instead do this on a long slider where they can react, it's\ngoing to be really boring gameplay-wise due to how long the slider becomes. So no matter how it's\ndone, it'll be worse than alternatives."
       },
       "templates": {
         "Problem": {
@@ -716,8 +716,8 @@
       "author": "Naxess",
       "applicableModes": "Standard",
       "documentation": {
-        "Purpose": "\n                        Preventing slider head and tail from being too close in time for easy difficulties.",
-        "Reasoning": "\n                        Newer players need time to comprehend when to hold down and let go of sliders. If a slider ends too quickly, \n                        the action of pressing the slider and very shortly afterwards letting it go will sometimes be difficult to \n                        handle. The action of lifting a key is similar in difficulty to pressing a key for newer players. So any \n                        distance in time you wouldn't place circles apart, you shouldn't place slider head and tail apart either."
+        "Purpose": "Preventing slider head and tail from being too close in time for easy difficulties.",
+        "Reasoning": "Newer players need time to comprehend when to hold down and let go of sliders. If a slider ends too quickly,\nthe action of pressing the slider and very shortly afterwards letting it go will sometimes be difficult to\nhandle. The action of lifting a key is similar in difficulty to pressing a key for newer players. So any\ndistance in time you wouldn't place circles apart, you shouldn't place slider head and tail apart either."
       },
       "templates": {
         "Too Short": {
@@ -747,8 +747,8 @@
       "author": "Naxess",
       "applicableModes": "Standard",
       "documentation": {
-        "Purpose": "\n                        Ensuring spacing between objects with the same snapping is recognizable, and objects with different snappings are distinguishable, for easy and normal difficulties.",
-        "Reasoning": "\n                        Time distance equality is a fundamental concept used in low difficulties to teach newer players how to interpret rhythm easier. By trivializing reading, these maps can better teach how base mechanics work, like approach circles, slider follow circles, object fading, hit bursts, hit sounds, etc.\n\n                        Once these are learnt, and by the time players move on to hard difficulties, more advanced concepts and elements can begin to be introduced, like multiple reverses, spacing as a form of emphasis, complex rhythms, streams, and so on."
+        "Purpose": "Ensuring spacing between objects with the same snapping is recognizable, and objects with different snappings are distinguishable, for easy and normal difficulties.",
+        "Reasoning": "Time distance equality is a fundamental concept used in low difficulties to teach newer players how to interpret rhythm easier. By trivializing reading, these maps can better teach how base mechanics work, like approach circles, slider follow circles, object fading, hit bursts, hit sounds, etc.\n\nOnce these are learnt, and by the time players move on to hard difficulties, more advanced concepts and elements can begin to be introduced, like multiple reverses, spacing as a form of emphasis, complex rhythms, streams, and so on."
       },
       "templates": {
         "Distance": {
@@ -790,8 +790,8 @@
       "author": "Naxess",
       "applicableModes": "Standard",
       "documentation": {
-        "Purpose": "\n                        Preventing spinners or objects following them from being too fast to react to.",
-        "Reasoning": "\n                        Newer players need time to recognize that they should begin spinning, as well as time to regain control of their \n                        cursor after spinning. Hence, too short spinners will often lose them accuracy or combo, and objects very close \n                        to the end of spinners will probably be missed or clicked on in panic before the spinner has ended."
+        "Purpose": "Preventing spinners or objects following them from being too fast to react to.",
+        "Reasoning": "Newer players need time to recognize that they should begin spinning, as well as time to regain control of their\ncursor after spinning. Hence, too short spinners will often lose them accuracy or combo, and objects very close\nto the end of spinners will probably be missed or clicked on in panic before the spinner has ended."
       },
       "templates": {
         "Problem Length": {
@@ -856,8 +856,8 @@
       "author": "Naxess",
       "applicableModes": "Standard",
       "documentation": {
-        "Purpose": "\n                        Preventing objects from perfectly, or almost perfectly, overlapping when close in time for easy to insane difficulties.",
-        "Reasoning": "\n                        Objects stacked perfectly on top of each other close in time is read almost ambiguously to a single object, even for moderately \n                        experienced players. The lower in difficulty you get, the more beneficial it is to simply use a regular stack or overlap instead\n                        as trivializing readability gets more important."
+        "Purpose": "Preventing objects from perfectly, or almost perfectly, overlapping when close in time for easy to insane difficulties.",
+        "Reasoning": "Objects stacked perfectly on top of each other close in time is read almost ambiguously to a single object, even for moderately\nexperienced players. The lower in difficulty you get, the more beneficial it is to simply use a regular stack or overlap instead\nas trivializing readability gets more important."
       },
       "templates": {
         "Problem": {
@@ -907,8 +907,8 @@
       "author": "Naxess",
       "applicableModes": "Standard",
       "documentation": {
-        "Purpose": "\n                        Prevent the time/distance ratio of hit objects from being absurdly large, even for higher difficulties.\n                        This is often a cause of an object being snapped a 1/4th tick earlier, and has been a common reason for unranks.",
-        "Reasoning": "\n                        With two objects being spaced way further than previous objects of the same snapping, it can be extremely difficult to expect, much less play.\n\n                        When combined with incorrect snappings (which abnormal spacing is often a cause of), this can really throw players off to the point where the map is pretty much considered unplayable."
+        "Purpose": "Prevent the time/distance ratio of hit objects from being absurdly large, even for higher difficulties.\nThis is often a cause of an object being snapped a 1/4th tick earlier, and has been a common reason for unranks.",
+        "Reasoning": "With two objects being spaced way further than previous objects of the same snapping, it can be extremely difficult to expect, much less play.\n\nWhen combined with incorrect snappings (which abnormal spacing is often a cause of), this can really throw players off to the point where the map is pretty much considered unplayable."
       },
       "templates": {
         "Problem": {
@@ -963,8 +963,8 @@
       "author": "Naxess",
       "applicableModes": "Standard",
       "documentation": {
-        "Purpose": "\n                        Preventing sliders from being excessively difficult, or even impossible, to read in gameplay.\n\n                        ![](/assets/checks/standard-compose-ambiguity-1.png)\n                        A slider with a 3-way intersection in the middle. Considered readable if and only if the middle section goes up to the left and down on the right.",
-        "Reasoning": "\n                        Giving the player little to no hints as to how to move their cursor through the slider makes for an unfair gameplay experience. This means the majority of the difficulty does not stem from how well the player can click on and move through the slider, but from how well they can guess how to move through it. If implemented well, however, it is possible for the player to learn how to move through the sliders before they are able to fail from guessing wrong.\n\n                        Particularly slow sliders, for instance, may move their follow circle slow enough for players to correct themselves if they guessed wrong, whereas fast sliders often do not include as many slider ticks and are as such more lenient. Sliders that do not require that the player move their cursor are also hard to fail from guessing wrong since there it often doesn't matter if they know how to position their cursor.\n\n                        ![](/assets/checks/standard-compose-ambiguity-2.png)\n                        Two sliders which are practically the same in gameplay. The left one has a much higher chance of players guessing wrong on due to the tail not being visible."
+        "Purpose": "Preventing sliders from being excessively difficult, or even impossible, to read in gameplay.\n\n![](/assets/checks/standard-compose-ambiguity-1.png \"A slider with a 3-way intersection in the middle. Considered readable if and only if the middle section goes up to the left and down on the right.\")",
+        "Reasoning": "Giving the player little to no hints as to how to move their cursor through the slider makes for an unfair gameplay experience. This means the majority of the difficulty does not stem from how well the player can click on and move through the slider, but from how well they can guess how to move through it. If implemented well, however, it is possible for the player to learn how to move through the sliders before they are able to fail from guessing wrong.\n\nParticularly slow sliders, for instance, may move their follow circle slow enough for players to correct themselves if they guessed wrong, whereas fast sliders often do not include as many slider ticks and are as such more lenient. Sliders that do not require that the player move their cursor are also hard to fail from guessing wrong since there it often doesn't matter if they know how to position their cursor.\n\n![](/assets/checks/standard-compose-ambiguity-2.png \"Two sliders which are practically the same in gameplay. The left one has a much higher chance of players guessing wrong on due to the tail not being visible.\")"
       },
       "templates": {
         "Warning": {
@@ -1006,8 +1006,8 @@
       "author": "Naxess",
       "applicableModes": "Standard",
       "documentation": {
-        "Purpose": "\n                        Preventing sliders from being excessively difficult, or even impossible, to read in gameplay.\n\n                        ![](/assets/checks/standard-compose-burai-1.png)\n                        A slider which may be considered readable if it goes right, up, and then down, but would mean going through the same slider path twice for the right and top parts.",
-        "Reasoning": "\n                        Largely follows the same reasoning as the overlapping slider tail/head/anchor check; if the player needs to rely on guessing, and guessing wrong results in a slider break, then that's an unfair gameplay experience.\n\n                        A single path going back on itself far enough for the follow circle to not cover everything, is neither lenient nor something players will expect considering that sliders are expected to have a clear path. When the follow circle does cover the whole path, however, it's generally acceptable since even if the player misreads it, it usually doesn't cause any slider breaks.\n\n                        Should a slider go back on itself and end before it creates its own borders, players without slider tails enabled will have a hard time seeing how far back into itself it goes, or even if it goes back on itself at all.\n\n                        ![](/assets/checks/standard-compose-burai-2.png)\n                        A slider which goes back on itself multiple times and is impossible to read for players with slider tails hidden, which is common in skinning."
+        "Purpose": "Preventing sliders from being excessively difficult, or even impossible, to read in gameplay.\n\n![](/assets/checks/standard-compose-burai-1.png \"A slider which may be considered readable if it goes right, up, and then down, but would mean going through the same slider path twice for the right and top parts.\")",
+        "Reasoning": "Largely follows the same reasoning as the overlapping slider tail/head/anchor check; if the player needs to rely on guessing, and guessing wrong results in a slider break, then that's an unfair gameplay experience.\n\nA single path going back on itself far enough for the follow circle to not cover everything, is neither lenient nor something players will expect considering that sliders are expected to have a clear path. When the follow circle does cover the whole path, however, it's generally acceptable since even if the player misreads it, it usually doesn't cause any slider breaks.\n\nShould a slider go back on itself and end before it creates its own borders, players without slider tails enabled will have a hard time seeing how far back into itself it goes, or even if it goes back on itself at all.\n\n![](/assets/checks/standard-compose-burai-2.png \"A slider which goes back on itself multiple times and is impossible to read for players with slider tails hidden, which is common in skinning.\")"
       },
       "templates": {
         "Definitely": {
@@ -1048,8 +1048,8 @@
       "author": "Naxess",
       "applicableModes": "Standard",
       "documentation": {
-        "Purpose": "\n                        Preventing spinners from being so short that you almost need to memorize them in order to react \n                        to them before they end.",
-        "Reasoning": "\n                        Players generally react much slower than auto, so if auto can't even achieve 1000 points on the \n                        spinner, players will likely not get any points at all, much less pass it without losing accuracy. \n                        In general, these are just not fun to play due to needing to memorize them for a fair experience."
+        "Purpose": "Preventing spinners from being so short that you almost need to memorize them in order to react\nto them before they end.",
+        "Reasoning": "Players generally react much slower than auto, so if auto can't even achieve 1000 points on the\nspinner, players will likely not get any points at all, much less pass it without losing accuracy.\nIn general, these are just not fun to play due to needing to memorize them for a fair experience."
       },
       "templates": {
         "Problem": {
@@ -1090,8 +1090,8 @@
       "author": "Naxess",
       "applicableModes": "Standard",
       "documentation": {
-        "Purpose": "\n                        Preventing slider reverses from being covered up by other objects or combo bursts before players can react to them.\n\n                        ![](/assets/checks/standard-compose-obscured-reverse-1.png)\n                        Although many skins remove combo bursts, these can hide reverses under them in the same way other objects can in gameplay, so only looking at the editor is a bit misleading.",
-        "Reasoning": "\n                        Some mappers like to stack objects on upcoming slider ends to make everything seem more coherent, but in doing so, reverses can become obscured and impossible to read unless you know they're there. For more experienced players, however, this isn't as much of a problem since you learn to hold sliders more efficiently and can react faster."
+        "Purpose": "Preventing slider reverses from being covered up by other objects or combo bursts before players can react to them.\n\n![](/assets/checks/standard-compose-obscured-reverse-1.png \"An object before a reverse arrow ends over where it appears close in time.\")",
+        "Reasoning": "Some mappers like to stack objects on upcoming slider ends to make everything seem more coherent, but in doing so, reverses can become obscured and impossible to read unless you know they're there. For more experienced players, however, this isn't as much of a problem since you learn to hold sliders more efficiently and can react faster."
       },
       "templates": {
         "Obscured": {
@@ -1123,8 +1123,8 @@
       "author": "Naxess",
       "applicableModes": "Standard",
       "documentation": {
-        "Purpose": "\n                        Preventing the border of hit objects from even partially becoming offscreen in 4:3 aspect ratios.\n\n                        > 4:3 is included in 16:9 and 16:10, the only difference is the width, so you can check for offscreens along the top and bottom in any of these aspect ratios and it will look the same.\n\n                        ![](/assets/checks/standard-compose-offscreen-1.png)\n                        A slider end which is partially offscreen along the bottom of the screen.",
-        "Reasoning": "\n                        Although everything is technically readable and playable if an object is only partially offscreen, it trips up players using relative movement input (for example mouse) when their cursor hits the side of the screen, since the game will offset the cursor back into the screen which is difficult to correct while in the middle of gameplay.\n\n                        Since objects partially offscreen also have a smaller area to hit, if not hitting the screen causing the problems above, it makes those objects need more precision to play which isn't consistent with how the rest of the game works, especially considering that the punishment for overshooting is getting your cursor offset slightly but still hitting the object and not missing like you probably would otherwise."
+        "Purpose": "Preventing the border of hit objects from even partially becoming offscreen in 4:3 aspect ratios.\n\n> 4:3 is included in 16:9 and 16:10, the only difference is the width, so you can check for offscreens along the top and bottom in any of these aspect ratios and it will look the same.\n\n![](/assets/checks/standard-compose-offscreen-1.png \"A slider end which is partially offscreen along the bottom of the screen.\")",
+        "Reasoning": "Although everything is technically readable and playable if an object is only partially offscreen, it trips up players using relative movement input (for example mouse) when their cursor hits the side of the screen, since the game will offset the cursor back into the screen which is difficult to correct while in the middle of gameplay.\n\nSince objects partially offscreen also have a smaller area to hit, if not hitting the screen causing the problems above, it makes those objects need more precision to play which isn't consistent with how the rest of the game works, especially considering that the punishment for overshooting is getting your cursor offset slightly but still hitting the object and not missing like you probably would otherwise."
       },
       "templates": {
         "Offscreen": {
@@ -1175,8 +1175,8 @@
       "author": "RandomeLoL",
       "applicableModes": "Mania",
       "documentation": {
-        "Purpose": "\n                    Lower difficulties must not use inherited timing points on the lowest Easy/Normal difficulty of a set.",
-        "Reasoning": "\n                    Adding inherited timing points on the lowest Easy or Normal difficulty of a set can be disorienting for newer players not exposed to the gimmick. Therefore, inherited timing points must only be used to normalize the speed of a variable BPM song."
+        "Purpose": "Lower difficulties must not use inherited timing points on the lowest Easy/Normal difficulty of a set.",
+        "Reasoning": "Adding inherited timing points on the lowest Easy or Normal difficulty of a set can be disorienting for newer players not exposed to the gimmick. Therefore, inherited timing points must only be used to normalize the speed of a variable BPM song."
       },
       "templates": {
         "Normalization Problem": {
@@ -1208,8 +1208,8 @@
       "author": "RandomeLoL",
       "applicableModes": "Mania",
       "documentation": {
-        "Purpose": "\n                    Variable BPM songs usually should be normalized.",
-        "Reasoning": "\n                    Charts that do not exploit green lines and slider velocity changes despite having variable BPM should be normalized more often than not. This check will ensure to raise a warning if a variable BPM map is wrongly normalized, or if its normalizing green lines aren't right on top of the red lines that precede them."
+        "Purpose": "Variable BPM songs usually should be normalized.",
+        "Reasoning": "Charts that do not exploit green lines and slider velocity changes despite having variable BPM should be normalized more often than not. This check will ensure to raise a warning if a variable BPM map is wrongly normalized, or if its normalizing green lines aren't right on top of the red lines that precede them."
       },
       "templates": {
         "Unnormal Value Warning": {
@@ -1260,8 +1260,8 @@
       "author": "RandomeLoL",
       "applicableModes": "Mania",
       "documentation": {
-        "Purpose": "\n                    Prevent abnormally big chords from being used in lower difficulties.",
-        "Reasoning": "\n                    Due to how many players do not dispose of keyboards capable of registering more than 6-7 keystrokes at once (A.K.A Ghosting), lower difficulties should not allow for more than 7 notes to be pressed at once to be as accessible as possible.\n                    <br><br>\n                    Moreover, bigger chords in lower difficulties might be too daunting for players to read at their given skill level. Those should exclusively be used in >=Extra difficulties."
+        "Purpose": "Prevent abnormally big chords from being used in lower difficulties.",
+        "Reasoning": "Due to how many players do not dispose of keyboards capable of registering more than 6-7 keystrokes at once (A.K.A Ghosting), lower difficulties should not allow for more than 7 notes to be pressed at once to be as accessible as possible.\n<br><br>\nMoreover, bigger chords in lower difficulties might be too daunting for players to read at their given skill level. Those should exclusively be used in >=Extra difficulties."
       },
       "templates": {
         "Warning": {
@@ -1294,8 +1294,8 @@
       "author": "RandomeLoL",
       "applicableModes": "Mania",
       "documentation": {
-        "Purpose": "\n                    Prevent easier difficulties to go beyond the OD/HP values present in the ruleset's Ranking Criteria.",
-        "Reasoning": "\n                    To prevent Easy/Normal/Hard maps from being too difficult, hard limits for both their Overall Difficulty and Health Points were added. These values can be whatever so long they do not go beyond these prestablished limits."
+        "Purpose": "Prevent easier difficulties to go beyond the OD/HP values present in the ruleset's Ranking Criteria.",
+        "Reasoning": "To prevent Easy/Normal/Hard maps from being too difficult, hard limits for both their Overall Difficulty and Health Points were added. These values can be whatever so long they do not go beyond these prestablished limits."
       },
       "templates": {
         "HP Problem": {
@@ -1347,8 +1347,8 @@
       "author": "RandomeLoL",
       "applicableModes": "Mania",
       "documentation": {
-        "Purpose": "\n                    Maps must always have a hitnormal sample.",
-        "Reasoning": "\n                    To have a better playing experience, some players prefer active hitsound feedback. osu!mania Ranking Criteria mandates maps to have at least a custom sample overriding osu!'s default hitnormal."
+        "Purpose": "Maps must always have a hitnormal sample.",
+        "Reasoning": "To have a better playing experience, some players prefer active hitsound feedback. osu!mania Ranking Criteria mandates maps to have at least a custom sample overriding osu!'s default hitnormal."
       },
       "templates": {
         "HitnormalFile": {
@@ -1435,8 +1435,8 @@
       "author": "Tailsdk",
       "applicableModes": "Mania",
       "documentation": {
-        "Purpose": "\n                    Maps should use all columns somewhat equally.",
-        "Reasoning": "\n                    Maps that do not use all columns somewhat evenly may have major handbalancing issues."
+        "Purpose": "Maps should use all columns somewhat equally.",
+        "Reasoning": "Maps that do not use all columns somewhat evenly may have major handbalancing issues."
       },
       "templates": {
         "Underused column warning": {
@@ -1501,8 +1501,8 @@
       "author": "RandomeLoL",
       "applicableModes": "Mania",
       "documentation": {
-        "Purpose": "\n                    Prevent abnormally short long notes from being used. \n                    Displays a Problem for long notes held for less than 20ms, and a Warning for long notes held less than 30ms.\n                    ![](/assets/checks/mania-compose-slider-length-1.png)\n\n                    Examples of extremely short LNs, both beyond the Warning and Problem thresholds.",
-        "Reasoning": "\n                    Due to the human and hardware limitations in osu!, osu!mania long notes held for shorter than 1/12 of a beat at 180bpm (~30ms) are unreasonable to play with full accuracy."
+        "Purpose": "Prevent abnormally short long notes from being used.\nDisplays a Problem for long notes held for less than 20ms, and a Warning for long notes held less than 30ms.\n\n![](/assets/checks/mania-compose-slider-length-1.png \"Examples of extremely short LNs, both beyond the Warning and Problem thresholds.\")",
+        "Reasoning": "Due to the human and hardware limitations in osu!, osu!mania long notes held for shorter than 1/12 of a beat at 180bpm (~30ms) are unreasonable to play with full accuracy."
       },
       "templates": {
         "Warning": {
@@ -1545,8 +1545,8 @@
       "author": "Greaper",
       "applicableModes": "Catch",
       "documentation": {
-        "Purpose": "\n                    **Rain** : \n                    Hyperdashes that are basic-snapped must not be used more than four times between consecutive fruits.\n\n                    **Platter** : \n                    Hyperdashes that are basic-snapped must not be used more than two times between consecutive fruits.",
-        "Reasoning": "\n                    The amount of hyperdashes used in a difficulty should be increasing which each difficulty level.\n                    In platters the maximum amount of hyperdashes is set to two because the difficulty is meant to be an introduction to hypers."
+        "Purpose": "**Rain** :\nHyperdashes that are basic-snapped must not be used more than four times between consecutive fruits.\n\n**Platter** :\nHyperdashes that are basic-snapped must not be used more than two times between consecutive fruits.",
+        "Reasoning": "The amount of hyperdashes used in a difficulty should be increasing which each difficulty level.\nIn platters the maximum amount of hyperdashes is set to two because the difficulty is meant to be an introduction to hypers."
       },
       "templates": {
         "BasicConsecutive": {
@@ -1597,8 +1597,8 @@
       "author": "Greaper",
       "applicableModes": "Catch",
       "documentation": {
-        "Purpose": "\n                Edge dashes are hard and shouldn't be used on lower difficulties. \n                They can be used on Rains and Overdoses, although if they are used they mush be used properly.",
-        "Reasoning": "\n                Edge dashes require precise movement, on lower difficulties we cannot expect such accuracy from players.\n\n                On Rains edge dashes may only be used singularly. \n\n                On Overdose they may be used with caution for a maximum of three consecutive objects, and should not be used after hyperdashes."
+        "Purpose": "Edge dashes are hard and shouldn't be used on lower difficulties.\nThey can be used on Rains and Overdoses, although if they are used they mush be used properly.",
+        "Reasoning": "Edge dashes require precise movement, on lower difficulties we cannot expect such accuracy from players.\n\nOn Rains edge dashes may only be used singularly.\n\nOn Overdose they may be used with caution for a maximum of three consecutive objects, and should not be used after hyperdashes."
       },
       "templates": {
         "StrongDash": {
@@ -1662,8 +1662,8 @@
       "author": "Greaper",
       "applicableModes": "Catch",
       "documentation": {
-        "Purpose": "\n                    Hyperdashes are not allowed in Cups and Salads.\n\n                    In Platters they can't be used on drops or slider repetitions.",
-        "Reasoning": "\n                    Platter is the first difficulty where a hyperdash is introduced. This is to ensure a manageable step in difficulty for novice players.\n\n                    Only simple hyperdashes are allowed in a Platter given more advanced patterning requires accuracy and control."
+        "Purpose": "Hyperdashes are not allowed in Cups and Salads.\n\nIn Platters they can't be used on drops or slider repetitions.",
+        "Reasoning": "Platter is the first difficulty where a hyperdash is introduced. This is to ensure a manageable step in difficulty for novice players.\n\nOnly simple hyperdashes are allowed in a Platter given more advanced patterning requires accuracy and control."
       },
       "templates": {
         "Hyperdash": {
@@ -1703,8 +1703,8 @@
       "author": "Greaper",
       "applicableModes": "Catch",
       "documentation": {
-        "Purpose": "\n                    Every difficulty should have a spinner if possible to create fluctuation among scores.\n                    However, if a spinner just doesn't fit anywhere in the song, then there's no need to force one.",
-        "Reasoning": "\n                    Scoring in catch is based on the amount of fruits, droplets. Because of this getting 100% accuracy is fairly easy to get.\n\n                    Bananas are an exception since they are the bonus fruit in catch, this means that you won't be punished if you miss any of them, although they get only generated with a spinner."
+        "Purpose": "Every difficulty should have a spinner if possible to create fluctuation among scores.\nHowever, if a spinner just doesn't fit anywhere in the song, then there's no need to force one.",
+        "Reasoning": "Scoring in catch is based on the amount of fruits, droplets. Because of this getting 100% accuracy is fairly easy to get.\n\nBananas are an exception since they are the bonus fruit in catch, this means that you won't be punished if you miss any of them, although they get only generated with a spinner."
       },
       "templates": {
         "NoSpinner": {
@@ -1735,8 +1735,8 @@
       "author": "Greaper",
       "applicableModes": "Catch",
       "documentation": {
-        "Purpose": "\n                Hyperdashes may only be used when the snapping is above or equal to the allowed threshold.\n\n                - For Platters at least *125ms or higher* must be between the ticks of the desired snapping.\n                - For Rains at least *62ms or higher* must be between the ticks of the desired snapping.",
-        "Reason": "\n                To ensure an increase of complexity in each level, hyperdashes can be really harsh on lower difficulties."
+        "Purpose": "Hyperdashes may only be used when the snapping is above or equal to the allowed threshold.\n\n- For Platters at least *125ms or higher* must be between the ticks of the desired snapping.\n- For Rains at least *62ms or higher* must be between the ticks of the desired snapping.",
+        "Reason": "To ensure an increase of complexity in each level, hyperdashes can be really harsh on lower difficulties."
       },
       "templates": {
         "HyperdashSnap": {
@@ -1767,8 +1767,8 @@
       "author": "Greaper",
       "applicableModes": "Catch",
       "documentation": {
-        "Purpose": "\n                    Combos should not reach unreasonable lengths.",
-        "Reasoning": "\n                    Caught fruits will stack up on the plate and can potentially obstruct the player's view. \n                    Bear in mind that slider tails, repeats and spinner bananas also count as fruits."
+        "Purpose": "Combos should not reach unreasonable lengths.",
+        "Reasoning": "Caught fruits will stack up on the plate and can potentially obstruct the player's view.\nBear in mind that slider tails, repeats and spinner bananas also count as fruits."
       },
       "templates": {
         "MaxComboSignificantly": {
@@ -1813,8 +1813,8 @@
       "author": "Greaper",
       "applicableModes": "Catch",
       "documentation": {
-        "Purpose": "\n                    There must be a gap between the start and end of a spinner to ensure readability.",
-        "Reasoning": "\n                    Spinners can make it difficult to read when provided shortly before/after an object. On lower difficulties \n                    the approach rate is slower and will result in a more clustered experience. The spinner gap is essential \n                    to give the player enough time to react to the next object and to avoid spinner traps."
+        "Purpose": "There must be a gap between the start and end of a spinner to ensure readability.",
+        "Reasoning": "Spinners can make it difficult to read when provided shortly before/after an object. On lower difficulties\nthe approach rate is slower and will result in a more clustered experience. The spinner gap is essential\nto give the player enough time to react to the next object and to avoid spinner traps."
       },
       "templates": {
         "SpinnerBefore": {
@@ -1859,8 +1859,8 @@
       "author": "Greaper",
       "applicableModes": "Catch",
       "documentation": {
-        "Purpose": "\n                Mixing different snapped hyperdashes can be somewhat challenging, to keep Rain difficulties easy to read it is discouraged to mix different snapped hyperdashes.",
-        "Reason": "\n                Mixing different snapped hyperdashes is to be introduced at Overdoses to have a gradual difficulty increase."
+        "Purpose": "Mixing different snapped hyperdashes can be somewhat challenging, to keep Rain difficulties easy to read it is discouraged to mix different snapped hyperdashes.",
+        "Reason": "Mixing different snapped hyperdashes is to be introduced at Overdoses to have a gradual difficulty increase."
       },
       "templates": {
         "DifferentSnap": {
@@ -1888,8 +1888,8 @@
       "author": "Greaper",
       "applicableModes": "Catch",
       "documentation": {
-        "Purpose": "\n                    Hyperdashes on slider droplets or repeats in Rains are discouraged.",
-        "Reason": "\n                    Players should be somewhat comfortable with hyperdashes on Rains, it is still discouraged to use any repeat or droplet hyperdashes maintain a manageable difficulty progression."
+        "Purpose": "Hyperdashes on slider droplets or repeats in Rains are discouraged.",
+        "Reason": "Players should be somewhat comfortable with hyperdashes on Rains, it is still discouraged to use any repeat or droplet hyperdashes maintain a manageable difficulty progression."
       },
       "templates": {
         "SliderHyperRain": {
@@ -1918,8 +1918,8 @@
       "author": "Greaper",
       "applicableModes": "Catch",
       "documentation": {
-        "Purpose": "\n                Higher-snapped hyperdashes should not be followed by antiflow patterns.",
-        "Reason": "\n                When a higher-snapped hyperdash is followed by an antiflow pattern (a walk in the opposite direction), it can create a harsh experience for players. Given that Platters introduce hyperdashes they should be used thoughtfully."
+        "Purpose": "Higher-snapped hyperdashes should not be followed by antiflow patterns.",
+        "Reason": "When a higher-snapped hyperdash is followed by an antiflow pattern (a walk in the opposite direction), it can create a harsh experience for players. Given that Platters introduce hyperdashes they should be used thoughtfully."
       },
       "templates": {
         "HigherSnapFollowedByAntiFlow": {
@@ -1946,8 +1946,8 @@
       "author": "Naxess",
       "applicableModes": "Standard Taiko Catch",
       "documentation": {
-        "Purpose": "\n                        Preventing unintentional side effects like wrong snappings and slider velocities \n                        caused by hit objects or timing lines being slightly unsnapped.",
-        "Reasoning": "\n                        Sliders before a timing line (even if just by 1 ms or less), will not be affected by its slider velocity. \n                        With 1 ms unsnaps being common for objects and lines due to rounding errors when copy pasting, this in turn \n                        becomes a common issue for all game modes (excluding mania since SV works differently there).\n\n                        > If bpm changes, this will still keep track of the effective slider velocity, thereby preventing false positives. So if it wouldn't make a difference, it's not pointed out."
+        "Purpose": "Preventing unintentional side effects like wrong snappings and slider velocities\ncaused by hit objects or timing lines being slightly unsnapped.",
+        "Reasoning": "Sliders before a timing line (even if just by 1 ms or less), will not be affected by its slider velocity.\nWith 1 ms unsnaps being common for objects and lines due to rounding errors when copy pasting, this in turn\nbecomes a common issue for all game modes (excluding mania since SV works differently there).\n\n> If bpm changes, this will still keep track of the effective slider velocity, thereby preventing false positives. So if it wouldn't make a difference, it's not pointed out."
       },
       "templates": {
         "Before": {
@@ -1994,8 +1994,8 @@
       "author": "Naxess",
       "applicableModes": "All Modes",
       "documentation": {
-        "Purpose": "\n                        Preventing issues with concurrent lines of the same type, such as them switching order when loading the beatmap.\n\n                        ![](/assets/checks/all-modes-timing-concurrent-lines-1.png)\n                        Two inherited lines which were originally the other way around, but swapped places when opening the beatmap again.",
-        "Reasoning": "\n                        Depending on how the game loads the lines, they may be loaded in the wrong order causing certain effects to disappear, \n                        like the editor to not see that kiai is enabled where it is in gameplay. This coupled with the fact that future versions \n                        of the game may change how these behave make them highly unreliable.\n                        \n                        > Two lines of different types, however, work properly as inherited and uninherited lines are handled separately, where the inherited will always apply its effects last."
+        "Purpose": "Preventing issues with concurrent lines of the same type, such as them switching order when loading the beatmap.\n\n![](/assets/checks/all-modes-timing-concurrent-lines-1.png \"Two inherited lines which were originally the other way around, but swapped places when opening the beatmap again.\")",
+        "Reasoning": "Depending on how the game loads the lines, they may be loaded in the wrong order causing certain effects to disappear,\nlike the editor to not see that kiai is enabled where it is in gameplay. This coupled with the fact that future versions\nof the game may change how these behave make them highly unreliable.\n\n> Two lines of different types, however, work properly as inherited and uninherited lines are handled separately, where the inherited will always apply its effects last."
       },
       "templates": {
         "Concurrent": {
@@ -2043,8 +2043,8 @@
       "author": "Naxess",
       "applicableModes": "All Modes",
       "documentation": {
-        "Purpose": "\n                        Preventing effects from happening and inherited lines before the first uninherited line.",
-        "Reasoning": "\n                        If you toggle kiai on the first line, then when the player starts the beatmap, kiai will instantly trigger and apply \n                        from the beginning until the next line. \n                        ![](/assets/checks/all-modes-timing-first-line-1.png)\n                        The game preventing you from enabling kiai on the first timing line.\n\n                        If you place an inherited line before the first uninherited line, then the game will \n                        think the whole section isn't timed, causing the default bpm to be used and the inherited line to malfunction since \n                        it has nothing to inherit.\n\n                        ![](/assets/checks/all-modes-timing-first-line-2.png)\n                        The first line being inherited, as seen from the timing view."
+        "Purpose": "Preventing effects from happening and inherited lines before the first uninherited line.",
+        "Reasoning": "If you toggle kiai on the first line, then when the player starts the beatmap, kiai will instantly trigger and apply\nfrom the beginning until the next line.\n![](/assets/checks/all-modes-timing-first-line-1.png \"The game preventing you from enabling kiai on the first timing line.\")\n\nIf you place an inherited line before the first uninherited line, then the game will\nthink the whole section isn't timed, causing the default bpm to be used and the inherited line to malfunction since\nit has nothing to inherit.\n\n![](/assets/checks/all-modes-timing-first-line-2.png \"The first line being inherited, as seen from the timing view.\")"
       },
       "templates": {
         "Inherited": {
@@ -2094,8 +2094,8 @@
       "author": "Naxess",
       "applicableModes": "All Modes",
       "documentation": {
-        "Purpose": "\n                        Ensuring that the song is timed consistently for all difficulties.",
-        "Reasoning": "\n                        Since all difficulties in a set are based around a single song, they should all use the same base timing, \n                        which is made from uninherited lines. Even if a line isn't used by some difficulty due to there being a \n                        break or similar, they still affect things like the main menu flashing and beats/snares/finishes in the \n                        nightcore mod.\n\n                        Similar to metadata, timing (bpm/meter/offset of uninherited lines) should really just be global for the \n                        whole beatmapset rather than difficulty-specific."
+        "Purpose": "Ensuring that the song is timed consistently for all difficulties.",
+        "Reasoning": "Since all difficulties in a set are based around a single song, they should all use the same base timing,\nwhich is made from uninherited lines. Even if a line isn't used by some difficulty due to there being a\nbreak or similar, they still affect things like the main menu flashing and beats/snares/finishes in the\nnightcore mod.\n\nSimilar to metadata, timing (bpm/meter/offset of uninherited lines) should really just be global for the\nwhole beatmapset rather than difficulty-specific."
       },
       "templates": {
         "Missing": {
@@ -2159,8 +2159,8 @@
       "author": "Hivie",
       "applicableModes": "All Modes",
       "documentation": {
-        "Purpose": "\n                        Preventing timing lines with sample volumes outside the range supported by the osu! editor.",
-        "Reasoning": "\n                        Timing line volume is limited to 5–100% in the editor. Values below 5% or above 100%, such as 105%, \n                        are usually introduced by external hitsounding tools and can crash the osu! client when \n                        selecting the line in the timing panel.\n                        "
+        "Purpose": "Preventing timing lines with sample volumes outside the range supported by the osu! editor.",
+        "Reasoning": "Timing line volume is limited to 5–100% in the editor. Values below 5% or above 100%, such as 105%,\nare usually introduced by external hitsounding tools and can crash the osu! client when\nselecting the line in the timing panel."
       },
       "templates": {
         "Invalid Volume": {
@@ -2197,8 +2197,8 @@
       "author": "Naxess",
       "applicableModes": "All Modes",
       "documentation": {
-        "Purpose": "\n                        Ensuring kiai starts on a distinct sound.",
-        "Reasoning": "\n                        Since kiai is visual, unlike hit sounds, it doesn't need to be as precise in timing, but kiai being \n                        notably unsnapped from any distinct sound is still probably something you'd want to fix. Taiko has stronger\n                        kiai screen effects so this matters a bit more for that mode."
+        "Purpose": "Ensuring kiai starts on a distinct sound.",
+        "Reasoning": "Since kiai is visual, unlike hit sounds, it doesn't need to be as precise in timing, but kiai being\nnotably unsnapped from any distinct sound is still probably something you'd want to fix. Taiko has stronger\nkiai screen effects so this matters a bit more for that mode."
       },
       "templates": {
         "Warning": {
@@ -2253,8 +2253,8 @@
       "author": "Naxess",
       "applicableModes": "All Modes",
       "documentation": {
-        "Purpose": "\n                        Ensuring that preview times are set and consistent for all beatmaps in the set.",
-        "Reasoning": "\n                        Without a set preview time the game will automatically pick a point to use as preview, but this rarely aligns with \n                        any beat or start of measure in the song. Additionally, not selecting a preview point will cause the web to use the \n                        whole song as preview, rather than the usual 10 second limit. Which difficulty is used to take preview time from is \n                        also not necessarily consistent between the web and the client.\n\n                        Similarly to metadata and timing, preview points should really just be a global setting for the whole beatmapset and \n                        not difficulty-specific."
+        "Purpose": "Ensuring that preview times are set and consistent for all beatmaps in the set.",
+        "Reasoning": "Without a set preview time the game will automatically pick a point to use as preview, but this rarely aligns with\nany beat or start of measure in the song. Additionally, not selecting a preview point will cause the web to use the\nwhole song as preview, rather than the usual 10 second limit. Which difficulty is used to take preview time from is\nalso not necessarily consistent between the web and the client.\n\nSimilarly to metadata and timing, preview points should really just be a global setting for the whole beatmapset and\nnot difficulty-specific."
       },
       "templates": {
         "Not Set": {
@@ -2296,8 +2296,8 @@
       "author": "Hivie",
       "applicableModes": "All Modes",
       "documentation": {
-        "Purpose": "\n                        Detecting hit objects that appear snapped under the current uninherited timing line, but would be \n                        unsnapped relative to an upcoming misaligned red line within a short lookahead window.",
-        "Reasoning": "\n                        On complex or unquantized timing, new red lines may not align with previous ones. Objects resnapped \n                        against the earlier line can look correct locally while being wrong for the closer upcoming timing, \n                        which is tedious to find manually and harms playability."
+        "Purpose": "Detecting hit objects that appear snapped under the current uninherited timing line, but would be\nunsnapped relative to an upcoming misaligned red line within a short lookahead window.",
+        "Reasoning": "On complex or unquantized timing, new red lines may not align with previous ones. Objects resnapped\nagainst the earlier line can look correct locally while being wrong for the closer upcoming timing,\nwhich is tedious to find manually and harms playability."
       },
       "templates": {
         "Upcoming Red Line": {
@@ -2336,8 +2336,8 @@
       "author": "Naxess",
       "applicableModes": "All Modes",
       "documentation": {
-        "Purpose": "\n                        Prevent hit objects from being unsnapped by more than 1 ms.",
-        "Reasoning": "\n                        Since gameplay is based on audio cues it wouldn't make much sense to have certain hit windows happen earlier or later, \n                        even if only by a few ms.\n\n                        The only reason a 1 ms leniency exists is because the editor casts decimal times to integers rather than rounds them \n                        properly, which causes these 1 ms unsnaps occasionally when copying and pasting hit objects and timing lines. This bug \n                        happens so frequently that basically all ranked maps have multiple 1 ms unsnaps in them.\n\n                        > At overall difficulty 10, this would result in at most 2.4% chance of a 300 becoming a 100. It would change the ratio of 300s to 100s by 1.6%. This is acceptable, and a much larger variable is introduced by the possibility of lag, input latency and time calculation accuracy.\n                        >\n                        > — peppy, 2009 in [Ctrl+V rounding error [Resolved]](https://osu.ppy.sh/community/forums/topics/17711)"
+        "Purpose": "Prevent hit objects from being unsnapped by more than 1 ms.",
+        "Reasoning": "Since gameplay is based on audio cues it wouldn't make much sense to have certain hit windows happen earlier or later,\neven if only by a few ms.\n\nThe only reason a 1 ms leniency exists is because the editor casts decimal times to integers rather than rounds them\nproperly, which causes these 1 ms unsnaps occasionally when copying and pasting hit objects and timing lines. This bug\nhappens so frequently that basically all ranked maps have multiple 1 ms unsnaps in them.\n\n> At overall difficulty 10, this would result in at most 2.4% chance of a 300 becoming a 100. It would change the ratio of 300s to 100s by 1.6%. This is acceptable, and a much larger variable is introduced by the possibility of lag, input latency and time calculation accuracy.\n>\n> — peppy, 2009 in [Ctrl+V rounding error [Resolved]](https://osu.ppy.sh/community/forums/topics/17711)"
       },
       "templates": {
         "Problem": {
@@ -2395,8 +2395,8 @@
       "author": "Naxess",
       "applicableModes": "All Modes",
       "documentation": {
-        "Purpose": "\n                        Ensuring there are no unused timing lines in the beatmap.",
-        "Reasoning": "\n                        When placing uninherited lines on-beat with the previous uninherited line, timing may shift 1 ms forwards \n                        due to rounding errors. This means after 20 uninherited lines placed in this way, timing may shift up to \n                        20 ms at the end. They may also affect the nightcore mod and main menu pulsing depending on placement.\n\n                        Unused inherited lines don't cause any issues and are basically equivalent to bookmarks. Unless the mapper \n                        intended to do something with them (e.g. silencing slider ends/ticks), they can be safely removed, but \n                        removal is not necessary."
+        "Purpose": "Ensuring there are no unused timing lines in the beatmap.",
+        "Reasoning": "When placing uninherited lines on-beat with the previous uninherited line, timing may shift 1 ms forwards\ndue to rounding errors. This means after 20 uninherited lines placed in this way, timing may shift up to\n20 ms at the end. They may also affect the nightcore mod and main menu pulsing depending on placement.\n\nUnused inherited lines don't cause any issues and are basically equivalent to bookmarks. Unless the mapper\nintended to do something with them (e.g. silencing slider ends/ticks), they can be safely removed, but\nremoval is not necessary."
       },
       "templates": {
         "Problem": {
@@ -2467,13 +2467,13 @@
       "author": "Naxess",
       "applicableModes": "All Modes",
       "documentation": {
-        "Purpose": "\n                        Preventing incorrectly snapped hit objects, for example 1/6 being used where the song only supports \n                        1/4, or a slider tail accidentally being extended 1/16 too far.",
-        "Reasoning": "\n                        Should hit objects not align with any audio cue or otherwise recognizable pattern, it would not only \n                        force the player to guess when objects should be clicked, but also harm the perceived connection between \n                        the beatmap and the song, neither of which make for good experiences.\n                        \n                        > Note that this check is intentionally heavy on false-positives for safety's sake due to this being a common disqualification reason."
+        "Purpose": "Preventing incorrectly snapped hit objects, for example 1/6 being used where the song only supports\n1/4, or a slider tail accidentally being extended 1/16 too far.",
+        "Reasoning": "Should hit objects not align with any audio cue or otherwise recognizable pattern, it would not only\nforce the player to guess when objects should be clicked, but also harm the perceived connection between\nthe beatmap and the song, neither of which make for good experiences.\n\n> Note that this check is intentionally heavy on false-positives for safety's sake due to this being a common disqualification reason."
       },
       "templates": {
         "Snap Consistency": {
           "level": "Warning",
-          "formatString": "{0} (1/{1}) Different snapping, {2} (1/{3}), is used in {4}.",
+          "formatString": "{0} (1/{1}) Different snapping, {2} (1/{3}), is used in {4}. Ensure this makes sense.",
           "defaultArguments": [
             "timestamp -",
             "X",
@@ -2503,7 +2503,7 @@
         },
         "Minor Snap Consistency": {
           "level": "Minor",
-          "formatString": "{0} (1/{1}) Different snapping, {2} (1/{3}), is used in {4}.",
+          "formatString": "{0} (1/{1}) Different snapping, {2} (1/{3}), is used in {4}. Ensure this makes sense.",
           "defaultArguments": [
             "timestamp -",
             "X",
@@ -2556,8 +2556,8 @@
       "author": "Naxess",
       "applicableModes": "All Modes",
       "documentation": {
-        "Purpose": "\n                        Ensuring that newer players still have new content to play at the same time as encouraging mappers to map longer songs.\n\n                        ![](/assets/checks/all-modes-spread-lowest-diff-1.png)\n                        The drain time thresholds determining the highest difficulty level for the lowest difficulty in the set.",
-        "Reasoning": "\n                        Newer players usually struggle with especially long songs, so encouraging them to try shorter songs first at lower difficulty levels allows them to learn the basics before trying to train their stamina or similar. This is done by requiring that shorter songs have lower difficulties, while longer songs can have less of them. This also reduces the workload on mappers and as such introduces a larger variety of songs into the game that otherwise wouldn't be so common due to their length."
+        "Purpose": "Ensuring that newer players still have new content to play at the same time as encouraging mappers to map longer songs.\n\n![](/assets/checks/all-modes-spread-lowest-diff-1.png \"The drain time thresholds determining the highest difficulty level for the lowest difficulty in the set.\")",
+        "Reasoning": "Newer players usually struggle with especially long songs, so encouraging them to try shorter songs first at lower difficulty levels allows them to learn the basics before trying to train their stamina or similar. This is done by requiring that shorter songs have lower difficulties, while longer songs can have less of them. This also reduces the workload on mappers and as such introduces a larger variety of songs into the game that otherwise wouldn't be so common due to their length."
       },
       "templates": {
         "Problem": {
@@ -2597,8 +2597,8 @@
       "author": "Naxess",
       "applicableModes": "Standard Catch",
       "documentation": {
-        "Purpose": "\n                        Preventing the combo colours chosen without additional input from blending into the background.\n\n                        ![](/assets/checks/all-modes-settings-default-colours-1.png)\n                        The combo colour section in song setup without custom colours ticked.",
-        "Reasoning": "\n                        If you leave the combo colour setting as it is when you create a beatmap, no [Colours] section will be created in the .osu, meaning the skins of users will override them. Since we can't control which colours they may use or force them to dim the background, the colours may blend into the background making for an unfair gameplay experience.\n\n                        If you set a preferred skin in the beatmap however, for example default, that skin will be used over any user skin, but many players switch skins to get away from default, so would not recommend this. If you want the default colours, simply tick the \"Enable Custom Colours\" checkbox instead."
+        "Purpose": "Preventing the combo colours chosen without additional input from blending into the background.\n\n![](/assets/checks/all-modes-settings-default-colours-1.png \"The combo colour section in song setup without custom colours ticked.\")",
+        "Reasoning": "If you leave the combo colour setting as it is when you create a beatmap, no [Colours] section will be created in the .osu, meaning the skins of users will override them. Since we can't control which colours they may use or force them to dim the background, the colours may blend into the background making for an unfair gameplay experience.\n\nIf you set a preferred skin in the beatmap however, for example default, that skin will be used over any user skin, but many players switch skins to get away from default, so would not recommend this. If you want the default colours, simply tick the \"Enable Custom Colours\" checkbox instead."
       },
       "templates": {
         "Default": {
@@ -2630,8 +2630,8 @@
       "author": "Naxess",
       "applicableModes": "All Modes",
       "documentation": {
-        "Purpose": "\n                        Preventing difficulty settings from including more than 1 decimal, and mania key counts from being too large or small.",
-        "Reasoning": "\n                        Settings having more than 1 decimal place is currently unrankable for, what is probably, two reasons:\n                        - The precision for anything greater than 1 place matters too little to be worth increasing the amount of digits in the song selection screen/website.\n                        - Searching for e.g. AR=9.25 will not find maps with AR 9.25. However, searching for AR=9.2 will.\n\n                        ![](/assets/checks/all-modes-settings-diff-settings-1.png)\n                        More than 1 decimal place compared to 1 decimal place.\n\n                        The circle size setting in mania determines the key count, and is limited between 4 and 10.\n                        - 3K or fewer leaves little room for patterning, making 2 maps of the same difficulty and song almost identical."
+        "Purpose": "Preventing difficulty settings from including more than 1 decimal, and mania key counts from being too large or small.",
+        "Reasoning": "Settings having more than 1 decimal place is currently unrankable for, what is probably, two reasons:\n- The precision for anything greater than 1 place matters too little to be worth increasing the amount of digits in the song selection screen/website.\n- Searching for e.g. AR=9.25 will not find maps with AR 9.25. However, searching for AR=9.2 will.\n\n![](/assets/checks/all-modes-settings-diff-settings-1.png \"More than 1 decimal place compared to 1 decimal place.\")\n\n\nThe circle size setting in mania determines the key count, and is limited between 4 and 10.\n- 3K or fewer leaves little room for patterning, making 2 maps of the same difficulty and song almost identical."
       },
       "templates": {
         "CS Mania": {
@@ -2687,8 +2687,8 @@
       "author": "Naxess",
       "applicableModes": "All Modes",
       "documentation": {
-        "Purpose": "\n                        Ensuring settings across difficulties in a beatmapset are consistent within game modes and where it makes sense.",
-        "Reasoning": "\n                        Difficulties in a beatmapset using a similar video or storyboard, would likely want to have the same \n                        epilepsy settings since they would share the same reason to have it. Same goes for countdown, letterboxing, \n                        widescreen support, audio lead-in, etc. Obviously excluding settings that don't apply.\n\n                        Having difficulties all be different in terms of noticeable settings would make the set seem less coherent, \n                        but it can be acceptable if it differs thematically in a way that makes it seem intentional, without needing to \n                        specify that it is, for example one beatmap being old-style with a special skin and countdown while others are \n                        more modern and exclude this."
+        "Purpose": "Ensuring settings across difficulties in a beatmapset are consistent within game modes and where it makes sense.",
+        "Reasoning": "Difficulties in a beatmapset using a similar video or storyboard, would likely want to have the same\nepilepsy settings since they would share the same reason to have it. Same goes for countdown, letterboxing,\nwidescreen support, audio lead-in, etc. Obviously excluding settings that don't apply.\n\nHaving difficulties all be different in terms of noticeable settings would make the set seem less coherent,\nbut it can be acceptable if it differs thematically in a way that makes it seem intentional, without needing to\nspecify that it is, for example one beatmap being old-style with a special skin and countdown while others are\nmore modern and exclude this."
       },
       "templates": {
         "Problem": {
@@ -2749,8 +2749,8 @@
       "author": "Naxess",
       "applicableModes": "Standard Catch",
       "documentation": {
-        "Purpose": "\n                        Preventing combo colours from blending into dimmed backgrounds or flashing too intensely in kiai.",
-        "Reasoning": "\n                        Although objects by default have a white border around them making them visible, the approach circles are \n                        affected by combo colour and will become impossible to see with colour 0,0,0. Stripping the game of \n                        important gameplay indicators or generally messing with them (see check for modified breaks) is not \n                        something beatmaps are expected to do, as they need to be consistent to work properly.\n\n                        ![](/assets/checks/all-modes-settings-luminosity-1.png)\n                        A slider whose approach circle is only visible on its borders and path, due to the rest blending into the dimmed bg.\n\n                        As for bright colours, when outside of kiai they're fine, but while in kiai the game flashes them, \n                        attempting to make them even brighter without caring about them already being really bright, resulting in \n                        pretty strange behaviour for some monitors and generally just unpleasant contrast.\n                        ![](/assets/checks/all-modes-settings-luminosity-2.png)\n                        An example of a slider with colour 255,255,255 while in the middle of flashing.\n\n                        This check uses the [HSP colour system](https://alienryderflex.com/hsp.html) to better approximate \n                        the way humans perceive luminosity in colours, as opposed to the HSL system where green is regarded the same \n                        luminosity as deep blue, see image.\n                        ![](/assets/checks/all-modes-settings-luminosity-3.png)\n                        The HSP colour system compared to the in-game HSL system."
+        "Purpose": "Preventing combo colours from blending into dimmed backgrounds or flashing too intensely in kiai.",
+        "Reasoning": "Although objects by default have a white border around them making them visible, the approach circles are\naffected by combo colour and will become impossible to see with colour 0,0,0. Stripping the game of\nimportant gameplay indicators or generally messing with them (see check for modified breaks) is not\nsomething beatmaps are expected to do, as they need to be consistent to work properly.\n\n![](/assets/checks/all-modes-settings-luminosity-1.png \"A slider whose approach circle is only visible on its borders and path, due to the rest blending into the dimmed bg.\")\n\nAs for bright colours, when outside of kiai they're fine, but while in kiai the game flashes them,\nattempting to make them even brighter without caring about them already being really bright, resulting in\npretty strange behaviour for some monitors and generally just unpleasant contrast.\n\n![](/assets/checks/all-modes-settings-luminosity-2.png \"An example of a slider with colour 255,255,255 while in the middle of flashing.\")\n\nThis check uses the [HSP colour system](https://alienryderflex.com/hsp.html) to better approximate\nthe way humans perceive luminosity in colours, as opposed to the HSL system where green is regarded the same\nluminosity as deep blue, see image.\n\n![](/assets/checks/all-modes-settings-luminosity-3.png \"The HSP colour system compared to the in-game HSL system.\")"
       },
       "templates": {
         "Problem Combo": {
@@ -2813,8 +2813,8 @@
       "author": "Naxess",
       "applicableModes": "All Modes",
       "documentation": {
-        "Purpose": "\n                        Ensuring that slider ticks align with the song's beat structure.\n                        ![](/assets/checks/all-modes-settings-tick-rate-1.png)\n                        A 1/1 slider with an asymmetric tick rate (neither a tick in the middle nor two equally distanced from it).",
-        "Reasoning": "\n                        Slider ticks, just like any other object, should align with the song in some way. If slider ticks are going after a 1/5 beat \n                        structure, for instance, that's either extremely rare or much more likely a mistake."
+        "Purpose": "Ensuring that slider ticks align with the song's beat structure.\n\n![](/assets/checks/all-modes-settings-tick-rate-1.png \"A 1/1 slider with an asymmetric tick rate (neither a tick in the middle nor two equally distanced from it).",
+        "Reasoning": "Slider ticks, just like any other object, should align with the song in some way. If slider ticks are going after a 1/5 beat\nstructure, for instance, that's either extremely rare or much more likely a mistake."
       },
       "templates": {
         "Tick Rate": {
@@ -2851,9 +2851,9 @@
       "author": "Naxess",
       "applicableModes": "Standard Catch",
       "documentation": {
-        "Purpose": "\n                        Ensuring varied feedback is used frequently throughout the map. Not too frequently, but mixing things up at least \n                        once or twice every measure is preferable. This could be with hit sounds, sampleset changes or additions.",
-        "Reasoning": "\n                        Accenting and complementing the song with hit sounds, either by reflecting it or adding to it, generally yields \n                        better feedback than if the same sound would be used throughout. However, the option to use the same sounds for all \n                        hit sounds and samplesets is still possible through skinning on the players' end for those who prefer the monotone \n                        approach.",
-        "Exceptions": "\n                        Taiko is an exception due to relying on hit sounds for gameplay mechanics. Circles are by default don, and can be \n                        turned into kat by using a clap or whistle hit sound, for example. As such applying this check to taiko would\n                        make it take on a different meaning.\n\n                        Mania sets consisting only of insane and above difficulties can omit hit sounds due to very few in the community at that level enjoying them in general.\n                        See [[Proposal - mania] Guidelines allowing higher difficulties to omit hitsound additions.](https://osu.ppy.sh/community/forums/topics/996091)\n                        Since we're missing mania SR support we'll simply exclude mania from this check entirely."
+        "Purpose": "Ensuring varied feedback is used frequently throughout the map. Not too frequently, but mixing things up at least\nonce or twice every measure is preferable. This could be with hit sounds, sampleset changes or additions.",
+        "Reasoning": "Accenting and complementing the song with hit sounds, either by reflecting it or adding to it, generally yields\nbetter feedback than if the same sound would be used throughout. However, the option to use the same sounds for all\nhit sounds and samplesets is still possible through skinning on the players' end for those who prefer the monotone\napproach.",
+        "Exceptions": "Taiko is an exception due to relying on hit sounds for gameplay mechanics. Circles are by default don, and can be\nturned into kat by using a clap or whistle hit sound, for example. As such applying this check to taiko would\nmake it take on a different meaning.\n\nMania sets consisting only of insane and above difficulties can omit hit sounds due to very few in the community at that level enjoying them in general.\nSee [[Proposal - mania] Guidelines allowing higher difficulties to omit hitsound additions.](https://osu.ppy.sh/community/forums/topics/996091)\nSince we're missing mania SR support we'll simply exclude mania from this check entirely."
       },
       "templates": {
         "No Hit Sounds": {
@@ -2905,8 +2905,8 @@
       "author": "Naxess",
       "applicableModes": "All Modes",
       "documentation": {
-        "Purpose": "\n                        Ensuring that active hit object feedback is audible.",
-        "Reasoning": "\n                        All active hit objects (i.e. circles, slider heads, and starts of hold notes) should provide some feedback \n                        so that players can hear if they're clicking too early or late. By reducing the volume to the point where \n                        it is difficult to hear over the song, hit sounds cease to function as proper feedback.\n\n                        Reverses are generally always done on sound cues, and assuming that's the case, it wouldn't make much sense \n                        being silent."
+        "Purpose": "Ensuring that active hit object feedback is audible.",
+        "Reasoning": "All active hit objects (i.e. circles, slider heads, and starts of hold notes) should provide some feedback\nso that players can hear if they're clicking too early or late. By reducing the volume to the point where\nit is difficult to hear over the song, hit sounds cease to function as proper feedback.\n\nReverses are generally always done on sound cues, and assuming that's the case, it wouldn't make much sense\nbeing silent."
       },
       "templates": {
         "Warning Volume": {
@@ -2974,8 +2974,8 @@
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
-        "Purpose": "\n                        Ensuring that each beatmap in a beatmapset has a background image present.\n\n                        ![](/assets/checks/all-modes-general-resources-bg-presence-1.jpg)\n                        An example of a default non-seasonal background as shown in the editor.",
-        "Reasoning": "\n                        Backgrounds help players recognize the beatmap, and the absence of one makes it look incomplete."
+        "Purpose": "Ensuring that each beatmap in a beatmapset has a background image present.\n\n![](/assets/checks/all-modes-general-resources-bg-presence-1.jpg \"An example of a default non-seasonal background as shown in the editor.\")",
+        "Reasoning": "Backgrounds help players recognize the beatmap, and the absence of one makes it look incomplete."
       },
       "templates": {
         "All": {
@@ -3012,8 +3012,8 @@
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
-        "Purpose": "\n                        Preventing background quality from being noticeably low or unnoticeable high to save on file size.\n\n                        ![](/assets/checks/all-modes-general-resources-bg-resolution-1.png)\n                        The left side is ~2.25x the resolution of the right side, which is the equivalent of comparing \n                        2560 x 1440 to 1024 x 640.",
-        "Reasoning": "\n                        Anything less than 1024 x 640 is usually quite noticeable, whereas anything higher than 2560 x 1440 \n                        is unlikely to be visible with the setup of the average player.\n\n                        > This uses 16:10 as base, since anything outside of 16:9 will be cut off on that aspect ratio rather than resized to fit the screen, preserving quality."
+        "Purpose": "Preventing background quality from being noticeably low or unnoticeable high to save on file size.\n\n![](/assets/checks/all-modes-general-resources-bg-resolution-1.png \"The left side is ~2.25x the resolution of the right side, which is the equivalent of comparing 2560 x 1440 to 1024 x 640.\")",
+        "Reasoning": "Anything less than 1024 x 640 is usually quite noticeable, whereas anything higher than 2560 x 1440\nis unlikely to be visible with the setup of the average player.\n\n> This uses 16:10 as base, since anything outside of 16:9 will be cut off on that aspect ratio rather than resized to fit the screen, preserving quality."
       },
       "templates": {
         "Too high": {
@@ -3080,8 +3080,8 @@
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
-        "Purpose": "\n                        Making sure that any inconsistency in video is intentional and makes sense.",
-        "Reasoning": "\n                        When adding a guest difficulty or adding different mode difficulties, the mapset host may forget to ensure \n                        that the videos across beatmaps in the set are consistent. Using multiple videos can be fine in cases like \n                        compilations or if one difficulty is thematically different enough to warrant it, but do keep in mind that \n                        it takes up additional space.\n\n                        > For taiko, videos usually need to be modified in some way since they're only visible on the bottom half of the screen, so this check ignores any inconsistency with that mode from other modes."
+        "Purpose": "Making sure that any inconsistency in video is intentional and makes sense.",
+        "Reasoning": "When adding a guest difficulty or adding different mode difficulties, the mapset host may forget to ensure\nthat the videos across beatmaps in the set are consistent. Using multiple videos can be fine in cases like\ncompilations or if one difficulty is thematically different enough to warrant it, but do keep in mind that\nit takes up additional space.\n\n> For taiko, videos usually need to be modified in some way since they're only visible on the bottom half of the screen, so this check ignores any inconsistency with that mode from other modes."
       },
       "templates": {
         "Same Mode": {
@@ -3113,8 +3113,8 @@
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
-        "Purpose": "\n                        Preventing storyboard elements from blocking the view of objects to the point where they become unnecessarily \n                        difficult, or even impossible, to read.\n                        ![](/assets/checks/all-modes-general-resources-overlay-layer-1.png)\n                        A storyboard element appearing over a slider.",
-        "Reasoning": "\n                        This layer appears over the object layer, meaning it can obscure objects. This is potentially very dangerous if not paid \n                        attention to, as it can screw over the experience of the map really badly if executed poorly.\n\n                        As a rough guideline, ensure that the position of aimed objects are clear and that indicators are identifiable (so for \n                        example when to start spinning or that a slider reverses). Basically don't cover up important gameplay elements unless \n                        otherwise clear."
+        "Purpose": "Preventing storyboard elements from blocking the view of objects to the point where they become unnecessarily\ndifficult, or even impossible, to read.\n\n![](/assets/checks/all-modes-general-resources-overlay-layer-1.png \"A storyboard element appearing over a slider.\")",
+        "Reasoning": "This layer appears over the object layer, meaning it can obscure objects. This is potentially very dangerous if not paid\nattention to, as it can screw over the experience of the map really badly if executed poorly.\n\nAs a rough guideline, ensure that the position of aimed objects are clear and that indicators are identifiable (so for\nexample when to start spinning or that a slider reverses). Basically don't cover up important gameplay elements unless\notherwise clear."
       },
       "templates": {
         "Warning": {
@@ -3137,8 +3137,8 @@
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
-        "Purpose": "\n                        Preventing storyboard images from being extremely large.",
-        "Reasoning": "\n                        Unlike background images, storyboard images can be used to pan, zoom, scroll, rotate, etc, so they have more lenient \n                        limits in terms of resolution, but otherwise follow the same reasoning."
+        "Purpose": "Preventing storyboard images from being extremely large.",
+        "Reasoning": "Unlike background images, storyboard images can be used to pan, zoom, scroll, rotate, etc, so they have more lenient\nlimits in terms of resolution, but otherwise follow the same reasoning."
       },
       "templates": {
         "Resolution": {
@@ -3192,8 +3192,8 @@
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
-        "Purpose": "\n                        Ensuring that the video aligns with the song consistently for all difficulties.\n\n                        ![](/assets/checks/all-modes-general-resources-video-offset-1.png)\n                        Two difficulties with different video offsets, as shown in the respective .osu files. The second \n                        argument, after \"Video\", is the offset in ms.",
-        "Reasoning": "\n                        Since many videos tend to match the music in some way, for example do transitions on downbeats, it wouldn't \n                        make much sense having difficulty-dependent video offsets, as all difficulties are based around the same song \n                        starting at the same point in time."
+        "Purpose": "Ensuring that the video aligns with the song consistently for all difficulties.\n\n![](/assets/checks/all-modes-general-resources-video-offset-1.png \"Two difficulties with different video offsets, as shown in the respective .osu files. The second argument, after 'Video', is the offset in ms.\")",
+        "Reasoning": "Since many videos tend to match the music in some way, for example do transitions on downbeats, it wouldn't\nmake much sense having difficulty-dependent video offsets, as all difficulties are based around the same song\nstarting at the same point in time."
       },
       "templates": {
         "Multiple": {
@@ -3215,8 +3215,8 @@
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
-        "Purpose": "\n                        Keeping video files under a certain resolution threshold.",
-        "Reasoning": "\n                        Videos, having multiple frames stacked after each other, naturally take more file size than any regular background image. \n                        Because of this, the resolution threshold needs to be lower than for backgrounds in order to keep file size reasonable, \n                        even if it is possible to download without the video.\n\n                        > This is partly to ensure a reasonable load on the server, not only on the players' end, due to ranked content being downloaded more often."
+        "Purpose": "Keeping video files under a certain resolution threshold.",
+        "Reasoning": "Videos, having multiple frames stacked after each other, naturally take more file size than any regular background image.\nBecause of this, the resolution threshold needs to be lower than for backgrounds in order to keep file size reasonable,\neven if it is possible to download without the video.\n\n> This is partly to ensure a reasonable load on the server, not only on the players' end, due to ranked content being downloaded more often."
       },
       "templates": {
         "Resolution": {
@@ -3264,8 +3264,8 @@
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
-        "Purpose": "\n                        Consistent searching between web and in-game.",
-        "Reasoning": "\n                        Web's language/genre fields can be searched for on the web, but not in-game. \n                        They are therefore added to the tags for consistency.\n\n                        ![](/assets/checks/all-modes-general-metadata-genre-language-1.png)\n                        An example of web genre/language also in the tags."
+        "Purpose": "Consistent searching between web and in-game.",
+        "Reasoning": "Web's language/genre fields can be searched for on the web, but not in-game.\nThey are therefore added to the tags for consistency.\n\n![](/assets/checks/all-modes-general-metadata-genre-language-1.png \"An example of web genre/language also in the tags.\")"
       },
       "templates": {
         "Genre": {
@@ -3291,8 +3291,8 @@
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
-        "Purpose": "\n                        Ensuring that the set can be found by searching for any of its guest difficulty creators.",
-        "Reasoning": "\n                        If you're looking for beatmaps of a specific user, it'd make sense if sets containing their\n                        guest difficulties would appear, and not only sets they hosted."
+        "Purpose": "Ensuring that the set can be found by searching for any of its guest difficulty creators.",
+        "Reasoning": "If you're looking for beatmaps of a specific user, it'd make sense if sets containing their\nguest difficulties would appear, and not only sets they hosted."
       },
       "templates": {
         "Warning": {
@@ -3315,8 +3315,8 @@
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
-        "Purpose": "\n                        Keeping metadata consistent between all difficulties of a beatmapset.\n\n                        ![](/assets/checks/all-modes-general-metadata-inconsistent-metadata-1.png)\n                        Comparing two difficulties with different titles in a beatmapset.",
-        "Reasoning": "\n                        Since all difficulties are of the same song, they should use the same song metadata. The website also assumes it's all the \n                        same, so it'll only display one of the artists, titles, creators, etc. Multiple metadata simply isn't supported very well, \n                        and should really just be a global beatmap setting rather than a .osu-specific one."
+        "Purpose": "Keeping metadata consistent between all difficulties of a beatmapset.\n\n![](/assets/checks/all-modes-general-metadata-inconsistent-metadata-1.png \"Comparing two difficulties with different titles in a beatmapset.\")",
+        "Reasoning": "Since all difficulties are of the same song, they should use the same song metadata. The website also assumes it's all the\nsame, so it'll only display one of the artists, titles, creators, etc. Multiple metadata simply isn't supported very well,\nand should really just be a global beatmap setting rather than a .osu-specific one."
       },
       "templates": {
         "Tags": {
@@ -3352,8 +3352,8 @@
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
-        "Purpose": "\n                        Standardizing the way metadata is written for ranked content.\n                        ![](/assets/checks/all-modes-general-metadata-marker-format-1.png)\n                        An example of \"featured by\", which should be replaced by \"feat.\".",
-        "Reasoning": "\n                        Small deviations in metadata or obvious mistakes in its formatting or capitalization are for the \n                        most part eliminated through standardization. Standardization also reduces confusion in case of \n                        multiple correct ways to write certain fields and contributes to making metadata more consistent \n                        across official content."
+        "Purpose": "Standardizing the way metadata is written for ranked content.\n\n![](/assets/checks/all-modes-general-metadata-marker-format-1.png \"An example of \"featured by\", which should be replaced by \"feat.\".\")",
+        "Reasoning": "Small deviations in metadata or obvious mistakes in its formatting or capitalization are for the\nmost part eliminated through standardization. Standardization also reduces confusion in case of\nmultiple correct ways to write certain fields and contributes to making metadata more consistent\nacross official content."
       },
       "templates": {
         "Wrong Format": {
@@ -3378,8 +3378,8 @@
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
-        "Purpose": "\n                        Standardizing the way metadata is written for ranked content.\n\n                        ![](/assets/checks/all-modes-general-metadata-marker-spacing-1.png)\n                        The romanized artist field is missing a whitespace before and after \"(CV:\". \n                        The unicode artist field is fine, though, since the characters are full-width.",
-        "Reasoning": "\n                        Small deviations in metadata or obvious mistakes in its formatting or capitalization are for the \n                        most part eliminated through standardization. Standardization also reduces confusion in case of \n                        multiple correct ways to write certain fields and contributes to making metadata more consistent \n                        across official content."
+        "Purpose": "Standardizing the way metadata is written for ranked content.\n\n![](/assets/checks/all-modes-general-metadata-marker-spacing-1.png \"The romanized artist field is missing a whitespace before and after \"(CV:\". The unicode artist field is fine, though, since the characters are full-width.\")",
+        "Reasoning": "Small deviations in metadata or obvious mistakes in its formatting or capitalization are for the\nmost part eliminated through standardization. Standardization also reduces confusion in case of\nmultiple correct ways to write certain fields and contributes to making metadata more consistent\nacross official content."
       },
       "templates": {
         "Problem": {
@@ -3409,12 +3409,13 @@
       "fullName": "MapsetVerifier.Checks.AllModes.General.Metadata.CheckTitleMarkers",
       "checkType": "General",
       "category": "Metadata",
-      "message": "Incorrect format of (TV Size) / (Game Ver.) / (Short Ver.) / (Cut Ver.) / (Sped Up Ver.) / etc in title.",
+      "message": "Incorrect format of title version markers such as (TV Size), (Game Ver.), (Extended Edit), etc.",
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
-        "Purpose": "\n                        Standardizing the way metadata is written for ranked content.\n\n                        ![](/assets/checks/all-modes-general-metadata-title-markers-1.png)\n                        A song using \"-TV version-\" as its official metadata, which becomes \"(TV Size)\" when standardized.",
-        "Reasoning": "\n                    Small deviations in metadata or obvious mistakes in its formatting or capitalization are for the \n                    most part eliminated through standardization. Standardization also reduces confusion in case of \n                    multiple correct ways to write certain fields and contributes to making metadata more consistent \n                    across official content."
+        "Purpose": "Standardizing title version markers for ranked content per the markers ranking criteria.\n\n![](/assets/checks/all-modes-general-metadata-title-markers-1.png \"A song using \"-TV version-\" as its official metadata, which becomes \"(TV Size)\" when standardized.\")",
+        "Reasoning": "Small deviations in metadata or obvious mistakes in its formatting or capitalization are for the\nmost part eliminated through standardization. Standardization also reduces confusion in case of\nmultiple correct ways to write certain fields and contributes to making metadata more consistent\nacross official content.",
+        "Limitations": "This check cannot verify whether a marker *must* be added (e.g. TV Size for a TV airing, or Cut Ver.\nfor a non-official cut), whether audio matches an official version, or whether Short/Game/Movie markers\nshould be added when only one version of a song exists. Custom combined markers approved after discussion\nmay still need manual review."
       },
       "templates": {
         "Problem": {
@@ -3425,9 +3426,9 @@
             "field",
             "title marker"
           ],
-          "cause": "The format of a title marker, in either the romanized or unicode title, is incorrect.\n                        The following are detected formats:\n                        - (TV Size)\n                        - (Game Ver.)\n                        - (Short Ver.)\n                        - (Cut Ver.)\n                        - (Sped Up Ver.)\n                        - (Nightcore Mix)\n                        - (Sped Up & Cut Ver.)\n                        - (Nightcore & Cut Ver.)"
+          "cause": "The format of a title marker, in either the romanized or unicode title, is incorrect.\n                        Standard markers include:\n                        - (TV Size)\n                        - (Game Ver.)\n                        - (Short Ver.)\n                        - (Movie Ver.)\n                        - (Cut Ver.)\n                        - (Extended Edit)\n                        - (Sped Up Ver.)\n                        - (Nightcore Mix)\n                        - (Sped Up & Cut Ver.)\n                        - (Nightcore & Cut Ver.)"
         },
-        "Warning Nightcore": {
+        "Warning Nightcore Tag": {
           "level": "Warning",
           "formatString": "\"{0}\" in tags, consider \"{1}\" instead of \"{2}\" in {3} title.",
           "defaultArguments": [
@@ -3436,7 +3437,35 @@
             "(Sped Up Ver.)",
             "romanized/unicode"
           ],
-          "cause": "The romanized/unicode title contains \"(Sped Up Ver.)\" or equivalent, when the tags contain \"nightcore\"."
+          "cause": "The title contains a sped-up marker while tags indicate nightcore (pitch-up). Use a Nightcore marker instead."
+        },
+        "Warning Guideline Ver": {
+          "level": "Warning",
+          "formatString": "{0} title field; \"{1}\" should use guideline format \"{2}\".",
+          "defaultArguments": [
+            "Romanized/unicode",
+            "field",
+            "title marker"
+          ],
+          "cause": "Length or version markers not covered by the standard list should use a descriptive \"(#### Ver.)\" form in title case, e.g. \"(Extended Version)\" -> \"(Extended Ver.)\", \"(Long)\" -> \"(Long Ver.)\"."
+        },
+        "Warning Tv Position": {
+          "level": "Warning",
+          "formatString": "{0} title field; \"{1}\" — (TV Size) should be at the end of the title.",
+          "defaultArguments": [
+            "Romanized/unicode",
+            "field"
+          ],
+          "cause": "The TV Size marker should appear at the end of the title, typically as the final parenthetical."
+        },
+        "Warning Op Version": {
+          "level": "Warning",
+          "formatString": "{0} title field; \"{1}\" — consider \"(Game Ver.)\" instead of \"OP Version\" (game-related tags detected).",
+          "defaultArguments": [
+            "Romanized/unicode",
+            "field"
+          ],
+          "cause": "\"OP Version\" in a game context should be standardized to (Game Ver.)."
         }
       }
     },
@@ -3449,8 +3478,8 @@
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
-        "Purpose": "\n                        Ensuring that all characters in the romanized metadata fields can be displayed and communicated properly across \n                        multiple operating systems, devices and internet protocols.\n\n                        ![](/assets/checks/all-modes-general-metadata-unicode-1.png)\n                        A beatmap with its unicode title manually edited into its romanized title field.",
-        "Reasoning": "\n                        The romanized title, artist, creator and difficulty name fields are used in the file name of the .osu and .osb, as well as by \n                        the website to allow for updates and syncing. As such, if they contain invalid characters, the beatmapset may become corrupt \n                        when uploaded, preventing users from properly downloading it.\n\n                        Even if it were possible to download correctly, should a character be unsupported it will be displayed as a box, questionmark \n                        or other placeholder character in-game, which makes some titles and artists impossible to interpret and distinguish.\n\n                        Some unicode characters do seem to work, however. The title and artist fields are regulated by the Ranking Criteria, and \n                        creator names filtered upon creation, but difficulty names are not regulated or filtered by anything, so we do those case by \n                        case."
+        "Purpose": "Ensuring that all characters in the romanized metadata fields can be displayed and communicated properly across\nmultiple operating systems, devices and internet protocols.\n\n![](/assets/checks/all-modes-general-metadata-unicode-1.png \"A beatmap with its unicode title manually edited into its romanized title field.\")",
+        "Reasoning": "The romanized title, artist, creator and difficulty name fields are used in the file name of the .osu and .osb, as well as by\nthe website to allow for updates and syncing. As such, if they contain invalid characters, the beatmapset may become corrupt\nwhen uploaded, preventing users from properly downloading it.\n\nEven if it were possible to download correctly, should a character be unsupported it will be displayed as a box, questionmark\nor other placeholder character in-game, which makes some titles and artists impossible to interpret and distinguish.\n\nSome unicode characters do seem to work, however. The title and artist fields are regulated by the Ranking Criteria, and\ncreator names filtered upon creation, but difficulty names are not regulated or filtered by anything, so we do those case by\ncase."
       },
       "templates": {
         "Problem": {
@@ -3484,8 +3513,8 @@
       "author": "RandomeLoL",
       "applicableModes": "All Modes",
       "documentation": {
-        "Purpose": "\n                    Beatmaps must not be nominated with hitsound difficulties still present.",
-        "Reasoning": "\n                    Hitsounding template difficulties are commonly used as an easy way to copy and apply hitsounds across all difficulties of the beatmapset. However, they must be deleted before nominating the beatmapset.\n                    "
+        "Purpose": "Beatmaps must not be nominated with hitsound difficulties still present.",
+        "Reasoning": "Hitsounding template difficulties are commonly used as an easy way to copy and apply hitsounds across all difficulties of the beatmapset. However, they must be deleted before nominating the beatmapset."
       },
       "templates": {
         "HitsoundDiff": {
@@ -3521,9 +3550,9 @@
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
-        "Purpose": "\n                        Reducing the overall file size of beatmapset folders and preventing potentially malicious files \n                        from reaching the player.",
-        "Reasoning": "\n                        Having useless files in the folder that few players will look at in no way contributes to the gameplay experience \n                        and is a waste of resources. Unlike things like pointless bookmarks and green lines, files typically take up a way \n                        more noticeable amount of space.\n                        > For comparison, you'd need about 10 000 bookmarks, if not more, to match the file size of a regular hit sound.\n\n                        ---\n                        Official content distributing malicious .exe files or similar would also not reflect very well upon the game.",
-        "Scorebar Ki-Danger & Marker": "\n                        `scorebar-ki`, `scorebar-kidanger`, and `scorebar-kidanger2`, act strangely when `scorebar-marker` is missing.\n                        The latter can simply be a blank file as it does not show up in-game for osu-stable regardless.\n                        \n                        ![](/assets/checks/all-modes-general-files-unused-files-1.png)\n                        Spreadsheet over which scorebar elements are used. Only consistent regardless of user settings when both marker and ki elements exist."
+        "Purpose": "Reducing the overall file size of beatmapset folders and preventing potentially malicious files\nfrom reaching the player.",
+        "Reasoning": "Having useless files in the folder that few players will look at in no way contributes to the gameplay experience\nand is a waste of resources. Unlike things like pointless bookmarks and green lines, files typically take up a way\nmore noticeable amount of space.\n> For comparison, you'd need about 10 000 bookmarks, if not more, to match the file size of a regular hit sound.\n\n---\nOfficial content distributing malicious .exe files or similar would also not reflect very well upon the game.",
+        "Scorebar Ki-Danger & Marker": "`scorebar-ki`, `scorebar-kidanger`, and `scorebar-kidanger2`, act strangely when `scorebar-marker` is missing.\nThe latter can simply be a blank file as it does not show up in-game for osu-stable regardless.\n\n![](/assets/checks/all-modes-general-files-unused-files-1.png \"Spreadsheet over which scorebar elements are used. Only consistent regardless of user settings when both marker and ki elements exist.\")"
       },
       "templates": {
         "Unused": {
@@ -3554,8 +3583,8 @@
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
-        "Purpose": "\n                        Ensuring that beatmaps can properly be downloaded and updated to their newest version.\n                        ![](/assets/checks/all-modes-general-files-update-validity-1.png)\n                        An example of a song folder where one of the difficulties' file names are incorrect, causing it to be unable to update.",
-        "Reasoning": "\n                        By being unable to update a beatmap, potentially important fixes can easily be missed out on. This mostly \n                        affects players who download the map in qualified, as it is more visible to the public while not necessarily \n                        being in its final version.\n\n                        The name of the file seems to determine how osu initially checks the map for updates. This is then presumably \n                        stored in some local database because deleting and re-downloading doesn't seem to affect it. So if you \n                        already had the map when the file name was correct, it may properly update for you while showing \"not \n                        submitted\" for others downloading it for the first time.\n\n                        For Windows 10 users, file paths longer than 260 characters cannot properly be unzipped by the game and \n                        simply vanish instead. This varies between users based on where on their computer they put osu!, but\n                        for the sake of consistency, we'll simply arbitrarily make 130 characters the limit.\n                        ![](/assets/checks/all-modes-general-files-update-validity-2.png)\n                        A file name longer than 130 characters, caused by a combination of a long title and a long difficulty name."
+        "Purpose": "Ensuring that beatmaps can properly be downloaded and updated to their newest version.\n\n![](/assets/checks/all-modes-general-files-update-validity-1.png \"An example of a song folder where one of the difficulties' file names are incorrect, causing it to be unable to update.\")",
+        "Reasoning": "By being unable to update a beatmap, potentially important fixes can easily be missed out on. This mostly\naffects players who download the map in qualified, as it is more visible to the public while not necessarily\nbeing in its final version.\n\nThe name of the file seems to determine how osu initially checks the map for updates. This is then presumably\nstored in some local database because deleting and re-downloading doesn't seem to affect it. So if you\nalready had the map when the file name was correct, it may properly update for you while showing \"not\nsubmitted\" for others downloading it for the first time.\n\nFor Windows 10 users, file paths longer than 260 characters cannot properly be unzipped by the game and\nsimply vanish instead. This varies between users based on where on their computer they put osu!, but\nfor the sake of consistency, we'll simply arbitrarily make 130 characters the limit.\n\n![](/assets/checks/all-modes-general-files-update-validity-2.png \"A file name longer than 130 characters, caused by a combination of a long title and a long difficulty name.\")"
       },
       "templates": {
         "Wrong Format": {
@@ -3587,8 +3616,8 @@
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
-        "Purpose": "\n                        Ensuring all files can be uploaded properly during the submission process.",
-        "Reasoning": "\n                        0-byte files prevent other files in the song folder from properly uploading. Mappers sometimes attempt to silence \n                        certain hit sound files by completely removing its audio data, but this often results in a file completely devoid \n                        of any data which makes it 0-byte. Instead, use [this 44-byte file](https://up.ppy.sh/files/blank.wav)\n                        which osu provides to mute hit sound files.\n\n                        ![](/assets/checks/all-modes-general-files-zero-bytes-1.png)\n                        A 0-byte slidertick hit sound file."
+        "Purpose": "Ensuring all files can be uploaded properly during the submission process.",
+        "Reasoning": "0-byte files prevent other files in the song folder from properly uploading. Mappers sometimes attempt to silence\ncertain hit sound files by completely removing its audio data, but this often results in a file completely devoid\nof any data which makes it 0-byte. Instead, use [this 44-byte file](https://up.ppy.sh/files/blank.wav)\nwhich osu provides to mute hit sound files.\n\n![](/assets/checks/all-modes-general-files-zero-bytes-1.png \"A 0-byte slidertick hit sound file.\")"
       },
       "templates": {
         "0-byte": {
@@ -3618,8 +3647,8 @@
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
-        "Purpose": "\n                        Ensures that all audio files used for the song itself is in MP3 or OGG format.",
-        "Reasoning": "\n                        Although the Wave format can support compressed audio, it is usually not efficient and takes up \n                        more space than the MP3 format.\n                        > Note that extension is not the same thing as format. If you take an OGG file and change its extension to \".mp3\", for example, it will still be a OGG file. To change the format of a file you need to re-encode it.\n\n                        MP3 often has an inherent delay, which is why it isn't allowed in active hit sounding. In audio \n                        files, however, this delay can be counteracted with offset."
+        "Purpose": "Ensures that all audio files used for the song itself is in MP3 or OGG format.",
+        "Reasoning": "Although the Wave format can support compressed audio, it is usually not efficient and takes up\nmore space than the MP3 format.\n> Note that extension is not the same thing as format. If you take an OGG file and change its extension to \".mp3\", for example, it will still be a OGG file. To change the format of a file you need to re-encode it.\n\nMP3 often has an inherent delay, which is why it isn't allowed in active hit sounding. In audio\nfiles, however, this delay can be counteracted with offset."
       },
       "templates": {
         "Incorrect Format": {
@@ -3660,8 +3689,8 @@
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
-        "Purpose": "\n                        Reducing the file size of videos.",
-        "Reasoning": "\n                        The audio track of videos will not play and usually take a similar amount of file size as any other audio file, \n                        so not removing the audio track means a noticeable amount of resources are wasted, even if the audio track is \n                        empty but still present."
+        "Purpose": "Reducing the file size of videos.",
+        "Reasoning": "The audio track of videos will not play and usually take a similar amount of file size as any other audio file,\nso not removing the audio track means a noticeable amount of resources are wasted, even if the audio track is\nempty but still present."
       },
       "templates": {
         "Audio": {
@@ -3707,8 +3736,8 @@
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
-        "Purpose": "\n                        Preventing audio files from being much longer than the beatmaps they are used for.\n                        ![](/assets/checks/all-modes-general-audio-usage-1.png)\n                        A beatmap which has left a large portion of the song unmapped.",
-        "Reasoning": "\n                        Audio files tend to be large in file size, so allowing them to be much longer than beatmaps would be a waste of resources, \n                        since few linger around score screens for that long. Something needs to be happening in the storyboard or video, to keep \n                        people around from skipping to the score screen, to justify the audio file being longer.\n\n                        Note that this applies only to beatmapsets where **all** beatmaps exclude the last portion of the audio. If **any** \n                        uses it, then the audio does not need to be cut."
+        "Purpose": "Preventing audio files from being much longer than the beatmaps they are used for.\n\n![](/assets/checks/all-modes-general-audio-usage-1.png \"A beatmap which has left a large portion of the song unmapped.\")",
+        "Reasoning": "Audio files tend to be large in file size, so allowing them to be much longer than beatmaps would be a waste of resources,\nsince few linger around score screens for that long. Something needs to be happening in the storyboard or video, to keep\npeople around from skipping to the score screen, to justify the audio file being longer.\n\nNote that this applies only to beatmapsets where **all** beatmaps exclude the last portion of the audio. If **any**\nuses it, then the audio does not need to be cut."
       },
       "templates": {
         "Without Video/Storyboard": {
@@ -3746,8 +3775,8 @@
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
-        "Purpose": "\n                        Preventing audio quality from being noticably low or unnoticably high to save on file size.\n                        \n                        ![](/assets/checks/all-modes-general-audio-bitrate-1.png)\n                        Audio bitrate as shown in the properties of a file. For some files this is not visible.",
-        "Reasoning": "\n                        Once you get lower than 128 kbps the quality loss is usually quite noticeable. After 192 kbps, with the \n                        setup of the average player, it would be difficult to tell a difference and as such would also be a \n                        waste of resources.\n\n                        > Should no higher quality be available anywhere, less than 128 kbps may be acceptable depending on how noticeable it is.\n                        ---\n                        Audio files in the OGG container format using the Q6 setting will typically land around 192 kbps, \n                        somtimes inconveniently a little above that, so the upper limit for OGG is instead 208 kbps.\n                        \n                        > Q6 generally reads as 192 kbps in tools like Spek. These programs actually just approximate the bitrate by rounding to the closest 32 kbps step. 192 kbps is one such step. Therefore, any file > 208 kbps will show as 224 kbps in these tools.                        \n\n                        OGG and MP3 files are typically compressed, unlike Wave, making too low bitrate a concern even for \n                        hit sounds using those formats. An upper limit for hit sound quality is not enforced due to their short \n                        length and small impact on file size, even with uncompressed formats like Wave."
+        "Purpose": "Preventing audio quality from being noticably low or unnoticably high to save on file size.\n\n![](/assets/checks/all-modes-general-audio-bitrate-1.png \"Audio bitrate as shown in the properties of a file. For some files this is not visible.\")",
+        "Reasoning": "Once you get lower than 128 kbps the quality loss is usually quite noticeable. After 192 kbps, with the\nsetup of the average player, it would be difficult to tell a difference and as such would also be a\nwaste of resources.\n\n> Should no higher quality be available anywhere, less than 128 kbps may be acceptable depending on how noticeable it is.\n---\nAudio files in the OGG container format using the Q6 setting will typically land around 192 kbps,\nsomtimes inconveniently a little above that, so the upper limit for OGG is instead 208 kbps.\n\n> Q6 generally reads as 192 kbps in tools like Spek. These programs actually just approximate the bitrate by rounding to the closest 32 kbps step. 192 kbps is one such step. Therefore, any file > 208 kbps will show as 224 kbps in these tools.\n\nOGG and MP3 files are typically compressed, unlike Wave, making too low bitrate a concern even for\nhit sounds using those formats. An upper limit for hit sound quality is not enforced due to their short\nlength and small impact on file size, even with uncompressed formats like Wave."
       },
       "templates": {
         "Bitrate": {
@@ -3788,8 +3817,8 @@
       "author": "Naxess",
       "applicableModes": "Standard Catch Mania",
       "documentation": {
-        "Purpose": "\n                        Discouraging normal/soft finish samples from playing too often to the point where it gets obnoxious \n                        without custom hit sounds.",
-        "Reasoning": "\n                        Although possibly fine when using custom samples, this will still get very jarring if the player \n                        turns off custom hit sounds and the finishes are used as frequently as claps/whistles, for example."
+        "Purpose": "Discouraging normal/soft finish samples from playing too often to the point where it gets obnoxious\nwithout custom hit sounds.",
+        "Reasoning": "Although possibly fine when using custom samples, this will still get very jarring if the player\nturns off custom hit sounds and the finishes are used as frequently as claps/whistles, for example."
       },
       "templates": {
         "Warning Common": {
@@ -3834,9 +3863,9 @@
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
-        "Purpose": "\n                        Ensuring hit sounds which are used on active hit objects provide proper feedback for how early or late the player clicked.\n                        ![](/assets/checks/all-modes-general-audio-hit-sound-delay-1.png)\n                        A hit sound which is delayed by ~10 ms, as shown in Audacity. Note that audacity shows its \n                        timeline in seconds, so 0.005 means 5 ms.",
-        "Reasoning": "\n                        By having delayed hit sounds, the feedback the player receives would be misleading them into \n                        thinking they clicked later than they actually did, which contradicts the purpose of having hit \n                        sounds in the first place.",
-        "Exceptions": "\n                        Cymbals/bell-like sounds (often finish/whistle respectively) usually have a small wind-up before their peak. \n                        This is often acceptable to keep, as it would sound wrong without.\n                        ![](/assets/checks/all-modes-general-audio-hit-sound-delay-2.png)\n                        A bell hit sound whose peak is delayed by ~21 ms, which was considered fine \n                        due to the nature of the sound requiring a wind-up.\n\n                        The default `normal-hitfinish.wav` has a delay of ~6 ms, but is used by the game itself,\n                        so copying this and using as a custom sample is acceptable.\n                        ![](/assets/checks/all-modes-general-audio-hit-sound-delay-3.png)\n                        A spectrogram of the default `normal-hitfinish.wav`."
+        "Purpose": "Ensuring hit sounds which are used on active hit objects provide proper feedback for how early or late the player clicked.\n\n![](/assets/checks/all-modes-general-audio-hit-sound-delay-1.png \"A hit sound which is delayed by ~10 ms, as shown in Audacity. Note that audacity shows its timeline in seconds, so 0.005 means 5 ms.\")",
+        "Reasoning": "By having delayed hit sounds, the feedback the player receives would be misleading them into\nthinking they clicked later than they actually did, which contradicts the purpose of having hit\nsounds in the first place.",
+        "Exceptions": "Cymbals/bell-like sounds (often finish/whistle respectively) usually have a small wind-up before their peak. This is often acceptable to keep, as it would sound wrong without.\n\n![](/assets/checks/all-modes-general-audio-hit-sound-delay-2.png \"A bell hit sound whose peak is delayed by ~21 ms, which was considered fine due to the nature of the sound requiring a wind-up.\")\n\nThe default `normal-hitfinish.wav` has a delay of ~6 ms, but is used by the game itself, so copying this and using as a custom sample is acceptable.\n\n![](/assets/checks/all-modes-general-audio-hit-sound-delay-3.png \"A spectrogram of the default `normal-hitfinish.wav`.\")"
       },
       "templates": {
         "Pure Delay": {
@@ -3889,8 +3918,8 @@
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
-        "Purpose": "\n                        Discourages potentially detrimental file formats for hit sound files.\n                        ![](/assets/checks/all-modes-general-audio-hit-sound-format-1.png)\n                        One of the hit sound files using the MP3 extension, which usually means it's also an MP3 format.",
-        "Reasoning": "\n                        The MP3 format often includes inherent delays. As such, the Wave or OGG format is preferred for \n                        any hit sound file.\n                        > Passive objects such as slider tails are not clicked and as such do not need accurate feedback and may use the mp3 format because of this.\n\n                        > Note that extension is not the same thing as format. If you take an MP3 file and change its extension to \".wav\", for example, it will still be an MP3 file. To change the format of a file you need to re-encode it."
+        "Purpose": "Discourages potentially detrimental file formats for hit sound files.\n\n![](/assets/checks/all-modes-general-audio-hit-sound-format-1.png \"One of the hit sound files using the MP3 extension, which usually means it's also an MP3 format.\")",
+        "Reasoning": "The MP3 format often includes inherent delays. As such, the Wave or OGG format is preferred for\nany hit sound file.\n\n> Passive objects such as slider tails are not clicked and as such do not need accurate feedback and may use the mp3 format because of this.\n\n> Note that extension is not the same thing as format. If you take an MP3 file and change its extension to \".wav\", for example, it will still be an MP3 file. To change the format of a file you need to re-encode it."
       },
       "templates": {
         "mp3": {
@@ -3940,8 +3969,8 @@
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
-        "Purpose": "\n                        Preventing the audio channels of hit sounds from being noticeably imbalanced, for example the left \n                        channel being twice as loud as the right.\n                        ![](/assets/checks/all-modes-general-audio-hit-sound-imbalance-1.png)\n                        A hit sound which is much louder in the left channel compared to the right, as shown in Audacity.",
-        "Reasoning": "\n                        Having noticeably imbalanced hit sounds is often jarring, especially if used frequently or consecutively."
+        "Purpose": "Preventing the audio channels of hit sounds from being noticeably imbalanced, for example the left channel being twice as loud as the right.\n\n![](/assets/checks/all-modes-general-audio-hit-sound-imbalance-1.png \"A hit sound which is much louder in the left channel compared to the right, as shown in Audacity.\")",
+        "Reasoning": "Having noticeably imbalanced hit sounds is often jarring, especially if used frequently or consecutively."
       },
       "templates": {
         "Warning Silent": {
@@ -4001,9 +4030,9 @@
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
-        "Purpose": "\n                        Ensuring hit sounds play consistently across multiple sound cards.",
-        "Reasoning": "\n                        Hit sounds shorter than ~25 ms (depending on soundcard) can result in no sound being played in-game. \n                        This makes it equivalent to a completely silent hit sound for some, while not for others. Muted hit \n                        sounds are fine having 0 ms duration though, since they don't play audio anyway.\n                        ![](/assets/checks/all-modes-general-audio-hit-sound-length-1.png)\n                        The 2.95 ms long hit sound from the example, as shown in Audacity.",
-        "Example": "\n                        soft-hitnormal.wav is shorter than 25 ms (2.95 ms) in https://osu.ppy.sh/beatmapsets/1527, see 00:25:880 (1) - . Set music to 0% and effect to 100% for clarity."
+        "Purpose": "Ensuring hit sounds play consistently across multiple sound cards.",
+        "Reasoning": "Hit sounds shorter than ~25 ms (depending on soundcard) can result in no sound being played in-game.\nThis makes it equivalent to a completely silent hit sound for some, while not for others. Muted hit\nsounds are fine having 0 ms duration though, since they don't play audio anyway.\n\n![](/assets/checks/all-modes-general-audio-hit-sound-length-1.png \"The 2.95 ms long hit sound from the example, as shown in Audacity.\")",
+        "Example": "soft-hitnormal.wav is shorter than 25 ms (2.95 ms) in https://osu.ppy.sh/beatmapsets/1527, see 00:25:880 (1) - . Set music to 0% and effect to 100% for clarity."
       },
       "templates": {
         "Length": {
@@ -4034,8 +4063,8 @@
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
-        "Purpose": "\n                        Ensuring that each beatmapset only contains one audio file.",
-        "Reasoning": "\n                        While this works well in-game, the website preview, metadata, tags, etc are all relying on that each \n                        beatmapset is based around a single song. As such, having multiple songs in a single beatmapset is not \n                        supported properly. Each song will also need its own spread, so having each set of difficulties in its \n                        own beatmapset makes things more organized."
+        "Purpose": "Ensuring that each beatmapset only contains one audio file.",
+        "Reasoning": "While this works well in-game, the website preview, metadata, tags, etc are all relying on that each\nbeatmapset is based around a single song. As such, having multiple songs in a single beatmapset is not\nsupported properly. Each song will also need its own spread, so having each set of difficulties in its\nown beatmapset makes things more organized."
       },
       "templates": {
         "Multiple": {
@@ -4063,8 +4092,8 @@
       "author": "Naxess",
       "applicableModes": "All Modes",
       "documentation": {
-        "Purpose": "\n                        Ensures that breaks work as intended.",
-        "Reasoning": "\n                        Although not visible in the editor, manually changing the break times will allow the effects of a break \n                        to happen sooner and/or later than they should. This means you may start seeing flashing arrows on the \n                        side of the screen and the background undimming while in the middle of gameplay, which only serves to \n                        make the player confused. Saving the beatmap again will fix the break times automatically.\n\n                        ![](/assets/checks/all-modes-events-breaks-1.png)\n                        An example of break effects happening in the middle of gameplay."
+        "Purpose": "Ensures that breaks work as intended.",
+        "Reasoning": "Although not visible in the editor, manually changing the break times will allow the effects of a break\nto happen sooner and/or later than they should. This means you may start seeing flashing arrows on the\nside of the screen and the background undimming while in the middle of gameplay, which only serves to\nmake the player confused. Saving the beatmap again will fix the break times automatically.\n\n![](/assets/checks/all-modes-events-breaks-1.png \"An example of break effects happening in the middle of gameplay.\")"
       },
       "templates": {
         "Too early or late": {
@@ -4111,8 +4140,8 @@
       "author": "Naxess",
       "applicableModes": "Standard Taiko Catch",
       "documentation": {
-        "Purpose": "\n                        Preventing storyboard sounds from replacing or becoming ambigious with any beatmap hit sounds.",
-        "Reasoning": "\n                        Storyboarded hit sounds always play at the same time regardless of however late or early the player clicks \n                        on an object, meaning they do not provide proper active hit object feedback, unlike regular hit sounds. This \n                        contradicts the purpose of hit sounds and is likely to be confusing for players if similar samples as the \n                        hit sounds are used.\n                        > Mania is exempt from this due to multiple objects at the same point in time being possible, leading to regular hit sounding working poorly, for example amplifying the volume if concurrent objects have the same hit sounds."
+        "Purpose": "Preventing storyboard sounds from replacing or becoming ambigious with any beatmap hit sounds.",
+        "Reasoning": "Storyboarded hit sounds always play at the same time regardless of however late or early the player clicks\non an object, meaning they do not provide proper active hit object feedback, unlike regular hit sounds. This\ncontradicts the purpose of hit sounds and is likely to be confusing for players if similar samples as the\nhit sounds are used.\n> Mania is exempt from this due to multiple objects at the same point in time being possible, leading to regular hit sounding working poorly, for example amplifying the volume if concurrent objects have the same hit sounds."
       },
       "templates": {
         "Storyboarded Hit Sound": {
@@ -4150,8 +4179,8 @@
       "author": "Naxess",
       "applicableModes": "All Modes",
       "documentation": {
-        "Purpose": "\n                        Preventing mappers from writing inappropriate or otherwise harmful messages using slider nodes.\n\n                        ![](/assets/checks/all-modes-compose-abnormal-nodes-1.png)\n                        An example of text being written with slider nodes in a way which can easily be hidden offscreen.",
-        "Reasoning": "\n                        The code of conduct applies to all aspects of the ranking process, including the beatmap content itself,\n                        whether that only be visible through the editor or in gameplay as well."
+        "Purpose": "Preventing mappers from writing inappropriate or otherwise harmful messages using slider nodes.\n\n![](/assets/checks/all-modes-compose-abnormal-nodes-1.png \"An example of text being written with slider nodes in a way which can easily be hidden offscreen.\")",
+        "Reasoning": "The code of conduct applies to all aspects of the ranking process, including the beatmap content itself,\nwhether that only be visible through the editor or in gameplay as well."
       },
       "templates": {
         "Abnormal": {
@@ -4188,8 +4217,8 @@
       "author": "Naxess",
       "applicableModes": "All Modes",
       "documentation": {
-        "Purpose": "\n                        Ensuring that only one object needs to be interacted with at any given moment in time.",
-        "Reasoning": "\n                        A clickable object during the duration of an already clicked object, for example a slider, is possible to play \n                        assuming the clickable object is within the slider circle whenever a slider tick/edge happens. However, there is \n                        no way for a player to intuitively know how to play such patterns as there is no tutorial for them, and they are \n                        not self-explanatory.\n\n                        Sliders, spinners, and other holdable objects, teach the player to hold down the key for \n                        the whole duration of the object, so suddenly forcing them to press again would be contradictory to that \n                        fundamental understanding. Because of this, these patterns more often than not cause confusion, even where \n                        otherwise introduced well.\n\n                        ![](/assets/checks/all-modes-compose-concurrent-1.png)\n                        A slider with two concurrent circles. Can be hit without breaking combo."
+        "Purpose": "Ensuring that only one object needs to be interacted with at any given moment in time.",
+        "Reasoning": "A clickable object during the duration of an already clicked object, for example a slider, is possible to play\nassuming the clickable object is within the slider circle whenever a slider tick/edge happens. However, there is\nno way for a player to intuitively know how to play such patterns as there is no tutorial for them, and they are\nnot self-explanatory.\n\nSliders, spinners, and other holdable objects, teach the player to hold down the key for\nthe whole duration of the object, so suddenly forcing them to press again would be contradictory to that\nfundamental understanding. Because of this, these patterns more often than not cause confusion, even where\notherwise introduced well.\n\n![](/assets/checks/all-modes-compose-concurrent-1.png \"A slider with two concurrent circles. Can be hit without breaking combo.\")"
       },
       "templates": {
         "Concurrent Objects": {
@@ -4235,8 +4264,8 @@
       "author": "Naxess",
       "applicableModes": "All Modes",
       "documentation": {
-        "Purpose": "\n                        Prevents beatmaps from being too short, for example 10 seconds long.\n                    \n                        ![](/assets/checks/all-modes-compose-drain-time-1.png)\n                        A beatmap with a total mp3 length of ~21 seconds.",
-        "Reasoning": "\n                        Beatmaps this short do not offer a substantial enough gameplay experience for the standards of \n                        the ranked section."
+        "Purpose": "Prevents beatmaps from being too short, for example 10 seconds long.\n\n![](/assets/checks/all-modes-compose-drain-time-1.png \"A beatmap with a total mp3 length of ~21 seconds.\")",
+        "Reasoning": "Beatmaps this short do not offer a substantial enough gameplay experience for the standards of\nthe ranked section."
       },
       "templates": {
         "Problem": {
@@ -4272,8 +4301,8 @@
       "author": "Naxess",
       "applicableModes": "All Modes",
       "documentation": {
-        "Purpose": "\n                        Preventing objects from being invisible.\n                        ![](/assets/checks/all-modes-compose-invisible-slider-1.png)\n                        A slider with no nodes; looks like a circle on the timeline but is invisible on the playfield.",
-        "Reasoning": "\n                        Although often used in combination with a storyboard to make up for the invisibility through sprites, there \n                        is no way to force the storyboard to appear, meaning players may play the map unaware that they should have \n                        enabled something for a fair gameplay experience."
+        "Purpose": "Preventing objects from being invisible.\n\n![](/assets/checks/all-modes-compose-invisible-slider-1.png \"A slider with no nodes; looks like a circle on the timeline but is invisible on the playfield.\")",
+        "Reasoning": "Although often used in combination with a storyboard to make up for the invisibility through sprites, there\nis no way to force the storyboard to appear, meaning players may play the map unaware that they should have\nenabled something for a fair gameplay experience."
       },
       "templates": {
         "Zero Nodes": {
