@@ -48,7 +48,7 @@ export function CheckDetailTemplates({ templates }: CheckDetailTemplatesProps) {
     return (
         <Stack gap="md">
             <Title order={3} mb="md">
-                Templates
+                Outcomes
             </Title>
             {sortedTemplates.map((template) => {
                 const config = levelConfig[template.level as keyof typeof levelConfig] ?? levelConfig.Warning;

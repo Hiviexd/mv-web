@@ -2,9 +2,7 @@ import { lazy, Suspense } from "react";
 import { Stack, Title } from "@mantine/core";
 import type { CheckDocumentation } from "../../lib/checks";
 
-const MarkdownText = lazy(() =>
-    import("../base/MarkdownText").then((module) => ({ default: module.MarkdownText }))
-);
+const MarkdownText = lazy(() => import("../base/MarkdownText").then((module) => ({ default: module.MarkdownText })));
 
 interface CheckDocSectionsProps {
     documentation: CheckDocumentation;

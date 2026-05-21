@@ -19,7 +19,7 @@ export function ChecksSection() {
     return (
         <Stack gap="xl" mb="xl">
             <Title order={1} ta="center" c="primary.2">
-                Over <Mark color="primary.2">{totalChecks}</Mark> unique beatmap checks
+                A total of <Mark color="primary.2">{totalChecks}</Mark> unique beatmap checks
             </Title>
             <Stack gap="md">
                 <Marquee w="100%" fadeEdges duration={120}>
