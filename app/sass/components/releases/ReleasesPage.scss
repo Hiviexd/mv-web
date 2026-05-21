@@ -1,3 +1,8 @@
+@use "sass:color";
+
+$dark-7: #161d28;
+$beta-logo-bg: color.adjust($dark-7, $hue: -171deg);
+
 .releases-page {
     padding-block: var(--mantine-spacing-md);
 }
@@ -7,8 +12,18 @@
         flex-shrink: 0;
         opacity: 0.92;
 
-        &--beta .logo img {
-            filter: hue-rotate(180deg);
+        &-paper {
+            background-color: var(--mantine-color-dark-7);
+        }
+
+        &--beta {
+            .release-channel-card__logo-paper {
+                background-color: $beta-logo-bg;
+            }
+
+            .logo img {
+                filter: hue-rotate(180deg);
+            }
         }
     }
 }

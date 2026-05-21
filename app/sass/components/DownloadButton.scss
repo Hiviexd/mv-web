@@ -45,6 +45,7 @@
 
 .platform-links {
     .platform-link {
+        transition: color 0.1s cubic-bezier(0.4, 0, 0.2, 1);
         &:hover {
             color: var(--mantine-color-primary-2) !important;
         }

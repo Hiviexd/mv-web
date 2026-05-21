@@ -1,4 +1,4 @@
-import { Anchor, Badge, Box, Button, Card, Group, Stack, Text, Title } from "@mantine/core";
+import { Anchor, Badge, Box, Button, Card, Group, Paper, Stack, Text, Title } from "@mantine/core";
 import { IconDownload } from "@tabler/icons-react";
 import { Logo } from "../base/Logo";
 import { buildPlatforms, type ReleaseChannel } from "../../lib/release";
@@ -26,7 +26,9 @@ export function ReleaseChannelCard({ label, channel }: ReleaseChannelCardProps) 
                     <Box
                         className={`release-channel-card__logo${isBeta ? " release-channel-card__logo--beta" : ""}`}
                         aria-hidden>
-                        <Logo width={36} height={36} />
+                        <Paper radius="lg" p="xs" className="release-channel-card__logo-paper">
+                            <Logo width={36} height={36} />
+                        </Paper>
                     </Box>
                 </Group>
 
