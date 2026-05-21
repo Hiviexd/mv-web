@@ -2,7 +2,6 @@ import type { ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
 import { Anchor, Alert, Code, Divider, List, Text, Title } from "@mantine/core";
 import remarkGfm from "remark-gfm";
-import remarkBreaks from "remark-breaks";
 import rehypeRaw from "rehype-raw";
 import { IconInfoCircleFilled } from "@tabler/icons-react";
 
@@ -18,7 +17,7 @@ export function MarkdownText({ content }: MarkdownTextProps) {
     return (
         <div className="markdown-text">
             <ReactMarkdown
-                remarkPlugins={[remarkGfm, remarkBreaks]}
+                remarkPlugins={[remarkGfm]}
                 rehypePlugins={[rehypeRaw]}
                 components={{
                     h1: ({ children }: { children?: ReactNode }) => (
@@ -58,6 +57,20 @@ export function MarkdownText({ content }: MarkdownTextProps) {
                         </Anchor>
                     ),
                     code: ({ children }: { children?: ReactNode }) => <Code>{children}</Code>,
+                    img: ({ src, alt, title }: { src?: string; alt?: string; title?: string }) => {
+                        if (!title) {
+                            return <img src={src} alt={alt} />;
+                        }
+
+                        return (
+                            <figure className="markdown-image">
+                                <img src={src} alt={alt ?? title} />
+                                <Text component="figcaption" size="sm" c="dimmed" mt="xs">
+                                    {title}
+                                </Text>
+                            </figure>
+                        );
+                    },
                     blockquote: ({ children }: { children?: ReactNode }) => (
                         <Alert
                             className="blockquote"

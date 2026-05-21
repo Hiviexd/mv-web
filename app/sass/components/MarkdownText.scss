@@ -6,7 +6,23 @@
         margin: 1rem auto;
     }
 
-    p:has(> img:only-child) {
+    .markdown-image {
+        max-width: 75%;
+        margin: 1rem auto;
+        text-align: center;
+
+        img {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        figcaption {
+            text-align: center;
+        }
+    }
+
+    p:has(> img:only-child),
+    p:has(> .markdown-image:only-child) {
         text-align: center;
     }
 
