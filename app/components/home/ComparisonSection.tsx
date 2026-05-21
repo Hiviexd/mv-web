@@ -1,14 +1,9 @@
-import { Stack, Table, Title, Text, SimpleGrid } from "@mantine/core";
+import { Stack, Table, Title, Text } from "@mantine/core";
 import FeatureCell from "./comparison/FeatureCell";
-import IssueCard from "./comparison/IssueCard";
 
 interface FeatureComparison {
     feature: string;
     mapsetVerifier: {
-        supported: boolean;
-        note?: string;
-    };
-    moddingAssistant: {
         supported: boolean;
         note?: string;
     };
@@ -20,63 +15,53 @@ interface FeatureComparison {
 
 const comparisons: FeatureComparison[] = [
     {
-        feature: "Difficulty Interpretation",
-        mapsetVerifier: { supported: true, note: "Option, Name, SR" },
-        moddingAssistant: { supported: true, note: "Name, SR" },
-        aiMod: { supported: true, note: "SR" },
+        feature: "Covers latest Ranking Criteria",
+        mapsetVerifier: { supported: true },
+        aiMod: { supported: false, note: "Outdated" },
     },
     {
-        feature: "Snapshots",
-        mapsetVerifier: { supported: true, note: "Automatic" },
-        moddingAssistant: { supported: true, note: "Manual" },
+        feature: "Accurate difficulty interpretation",
+        mapsetVerifier: { supported: true, note: "All modes" },
+        aiMod: { supported: false, note: "Outdated" },
+    },
+    {
+        feature: "osu!taiko/osu!catch/osu!mania-specific checks",
+        mapsetVerifier: { supported: true },
         aiMod: { supported: false },
     },
     {
-        feature: "Integrated Documentation",
-        mapsetVerifier: { supported: true },
-        moddingAssistant: { supported: true, note: "RC Snippets" },
+        feature: "Beatmap version history tracking",
+        mapsetVerifier: { supported: true, note: "Snapshots" },
         aiMod: { supported: false },
     },
     {
-        feature: "Timeline Comparison",
+        feature: "Timeline comparison",
         mapsetVerifier: { supported: true },
-        moddingAssistant: { supported: true, note: "osu!taiko-only" },
         aiMod: { supported: false },
     },
     {
-        feature: "Song folder detection",
+        feature: "Snap usage overview",
         mapsetVerifier: { supported: true },
-        moddingAssistant: { supported: false },
-        aiMod: { supported: true },
-    },
-    {
-        feature: "Automatic Updates",
-        mapsetVerifier: { supported: true, note: "Windows-only" },
-        moddingAssistant: { supported: false },
-        aiMod: { supported: true },
-    },
-    {
-        feature: "Verbose Mode",
-        mapsetVerifier: { supported: true },
-        moddingAssistant: { supported: false },
-        aiMod: { supported: true },
-    },
-    {
-        feature: "Plugin Support",
-        mapsetVerifier: { supported: true },
-        moddingAssistant: { supported: false },
         aiMod: { supported: false },
     },
     {
-        feature: "Open Source",
+        feature: "Difficulty, SV, and volume charts",
         mapsetVerifier: { supported: true },
-        moddingAssistant: { supported: false },
         aiMod: { supported: false },
     },
     {
-        feature: "Difficulty Graph",
+        feature: "Audio analysis",
+        mapsetVerifier: { supported: true, note: "Spectrogram" },
+        aiMod: { supported: false },
+    },
+    {
+        feature: "Integrated documentation",
         mapsetVerifier: { supported: true },
-        moddingAssistant: { supported: true, note: "Outdated SR" },
+        aiMod: { supported: false },
+    },
+    {
+        feature: "Plugin support",
+        mapsetVerifier: { supported: true },
         aiMod: { supported: false },
     },
 ];
@@ -102,14 +87,13 @@ export function ComparisonSection() {
                                 }}>
                                 Mapset Verifier
                             </Table.Th>
-                            <Table.Th style={{ textAlign: "center" }}>Modding Assistant</Table.Th>
                             <Table.Th style={{ textAlign: "center" }}>AiMod</Table.Th>
                         </Table.Tr>
                     </Table.Thead>
                     <Table.Tbody>
                         {comparisons.map((comparison, index) => (
                             <Table.Tr key={index}>
-                                <Table.Td>
+                                <Table.Td w="60%">
                                     <Text fw={500}>{comparison.feature}</Text>
                                 </Table.Td>
                                 <FeatureCell
@@ -118,41 +102,12 @@ export function ComparisonSection() {
                                     highlight
                                     isLast={index === comparisons.length - 1}
                                 />
-                                <FeatureCell
-                                    supported={comparison.moddingAssistant.supported}
-                                    note={comparison.moddingAssistant.note}
-                                />
                                 <FeatureCell supported={comparison.aiMod.supported} note={comparison.aiMod.note} />
                             </Table.Tr>
                         ))}
                     </Table.Tbody>
                 </Table>
             </Table.ScrollContainer>
-            <Stack gap="xl" mt="xl">
-                <Title order={3} ta="center">
-                    Here's some more issues from other tools that we fix
-                </Title>
-                <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="lg">
-                    <IssueCard
-                        toolName="Modding Assistant"
-                        issues={[
-                            "counting extended break times as drain time.",
-                            "failing to account for minimum SV (0.1x).",
-                            "misinterpreting hit sounds on slider bodies as hit sounds on heads/tails.",
-                            "completely ignoring storyboard variables and animation frames.",
-                        ]}
-                    />
-                    <IssueCard
-                        toolName="AiMod"
-                        issues={[
-                            "incorrectly detecting unsnaps on slider tails < 2 ms off",
-                            "not accounting for stacking.",
-                            "using a vastly outdated star rating system, saying you need an easy/normal when you already have one.",
-                            "using inaccurate playfield measurements to detect offscreen hit objects.",
-                        ]}
-                    />
-                </SimpleGrid>
-            </Stack>
         </Stack>
     );
 }
