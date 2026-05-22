@@ -14,5 +14,9 @@ export function normalizeMarkdown(value?: string): string | undefined {
         return undefined;
     }
 
-    return value.replace(/\r\n/g, "\n").replace(/\n\s+/g, "\n").trim();
+    return value
+        .replace(/\r\n/g, "\n")
+        .replace(/[ \t]+$/gm, "")
+        .replace(/\n[ \t]+/g, "\n")
+        .trim();
 }

@@ -20,7 +20,7 @@ const renderFormatString = (formatString: string, defaultArguments: string[]) =>
             const argIndex = Number(match[1]);
             const value = defaultArguments[argIndex] ?? part;
             return (
-                <Mark key={`${part}-${index}`} color="dark" c="primary.2">
+                <Mark key={`${part}-${index}`} color="dark" c="primary.2" ff="monospace">
                     {value}
                 </Mark>
             );

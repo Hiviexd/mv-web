@@ -4,6 +4,7 @@
         max-width: 75%;
         height: auto;
         margin: 1rem auto;
+        border-radius: var(--mantine-radius-sm);
     }
 
     .markdown-image {
@@ -26,7 +27,16 @@
         text-align: center;
     }
 
-    .blockquote {
+    .alert-blockquote {
         border: 1px solid var(--mantine-color-blue-6);
+        // Stupid overrides because it isn't a Mantine app if I don't fight it
+        .mantine-Alert-body {
+            .mantine-Alert-message {
+                p {
+                    color: var(--mantine-color-text) !important;
+                    font-size: var(--mantine-font-size-sm) !important;
+                }
+            }
+        }
     }
 }

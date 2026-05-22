@@ -36,23 +36,23 @@ export function MarkdownText({ content }: MarkdownTextProps) {
                         </Title>
                     ),
                     p: ({ children }: { children?: ReactNode }) => (
-                        <Text size="sm" c="dimmed" mb="sm">
+                        <Text size="md" c="dimmed" mb="sm">
                             {children}
                         </Text>
                     ),
                     ul: ({ children }: { children?: ReactNode }) => (
-                        <List c="dimmed" size="sm" spacing="xs" mb="sm" withPadding>
+                        <List c="dimmed" size="md" spacing="xs" mb="sm" withPadding>
                             {children}
                         </List>
                     ),
                     ol: ({ children }: { children?: ReactNode }) => (
-                        <List c="dimmed" size="sm" spacing="xs" type="ordered" mb="sm" withPadding>
+                        <List c="dimmed" size="md" spacing="xs" type="ordered" mb="sm" withPadding>
                             {children}
                         </List>
                     ),
                     li: ({ children }: { children?: ReactNode }) => <List.Item>{children}</List.Item>,
                     a: ({ href, children }: { href?: string; children?: ReactNode }) => (
-                        <Anchor size="sm" href={href} target="_blank" rel="noreferrer">
+                        <Anchor size="md" href={href} target="_blank" rel="noreferrer">
                             {children}
                         </Anchor>
                     ),
@@ -73,7 +73,7 @@ export function MarkdownText({ content }: MarkdownTextProps) {
                     },
                     blockquote: ({ children }: { children?: ReactNode }) => (
                         <Alert
-                            className="blockquote"
+                            className="alert-blockquote"
                             color="blue"
                             radius="md"
                             title="Note"
