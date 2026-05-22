@@ -1,4 +1,5 @@
 import type { Route } from "./+types/home";
+import { createPageMeta } from "../lib/seo";
 import { HeroSection } from "../components/home/HeroSection";
 import { HomeSection } from "../components/home/HomeSection";
 import { ChecksSection } from "../components/home/ChecksSection";
@@ -64,13 +65,12 @@ const homeSections = [
 ] as const;
 
 export function meta({}: Route.MetaArgs) {
-    return [
-        { title: "Mapset Verifier - Automated Quality Assurance for osu! Beatmaps" },
-        {
-            name: "description",
-            content: "Automated quality assurance tool for osu! beatmaps. Catch issues before they become problems.",
-        },
-    ];
+    return createPageMeta({
+        title: "Mapset Verifier | Automated Quality Assurance for osu! Beatmaps",
+        ogTitle: "Mapset Verifier",
+        description: "Automated Quality Assurance for osu! Beatmaps. Catch issues before they become problems.",
+        isHome: true,
+    });
 }
 
 export default function Home() {

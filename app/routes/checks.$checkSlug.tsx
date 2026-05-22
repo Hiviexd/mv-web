@@ -3,24 +3,27 @@ import { CheckDocSections } from "../components/checks/CheckDocSections";
 import { CheckDetailTemplates } from "../components/checks/CheckDetailTemplates";
 import { CheckHeader } from "../components/checks/CheckHeader";
 import { CheckNav } from "../components/checks/CheckNav";
-import { getCheckBySlug, getPrevNextInCategory } from "../lib/checks";
+import { getCheckBySlug, getCheckPath, getPrevNextInCategory } from "../lib/checks";
+import { createPageMeta } from "../lib/seo";
 import { Alert, Anchor, Group, Stack, Text } from "@mantine/core";
 import { Link } from "react-router";
 import { IconInfoCircle } from "@tabler/icons-react";
 
 export function meta({ params }: Route.MetaArgs) {
-    const check = getCheckBySlug(params.checkSlug ?? "");
-    const title = check ? `${check.message} - Mapset Verifier` : "Check not found - Mapset Verifier";
+    const slug = params.checkSlug ?? "";
+    const check = getCheckBySlug(slug);
+    const title = check ? `${check.message} | Mapset Verifier` : "Check not found | Mapset Verifier";
+    const ogTitle = check ? check.message : "Check not found";
+    const description = check
+        ? `Documentation for the ${check.message} check.`
+        : "Requested check documentation could not be found.";
 
-    return [
-        { title },
-        {
-            name: "description",
-            content: check
-                ? `Documentation for the ${check.message} check.`
-                : "Requested check documentation could not be found.",
-        },
-    ];
+    return createPageMeta({
+        title,
+        ogTitle,
+        description,
+        path: getCheckPath(slug),
+    });
 }
 
 export default function CheckDetail({ params }: Route.ComponentProps) {
