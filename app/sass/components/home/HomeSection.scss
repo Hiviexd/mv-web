@@ -1,6 +1,8 @@
 .home-section {
+    width: calc(100vw - 5px);
+    margin-inline: calc(50% - 50vw);
     padding: 4rem 0;
-    width: 100%;
+    box-sizing: border-box;
 }
 
 .home-section__layout {
