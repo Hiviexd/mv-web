@@ -1,4 +1,4 @@
-import { IconChecks, IconDownload, IconHome, IconInfoCircle, type Icon } from "@tabler/icons-react";
+import { IconChecks, IconDownload, IconHome, type Icon } from "@tabler/icons-react";
 
 export interface NavigationLink {
     label: string;
@@ -10,7 +10,6 @@ export const navigationLinks: NavigationLink[] = [
     { label: "Home", href: "/", icon: IconHome },
     { label: "Downloads", href: "/releases", icon: IconDownload },
     { label: "Checks", href: "/checks", icon: IconChecks },
-    { label: "About", href: "/about", icon: IconInfoCircle },
 ];
 
 export const NAV_INDICATOR_TRANSITION_MS = 220;
