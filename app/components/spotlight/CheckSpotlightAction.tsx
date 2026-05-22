@@ -15,9 +15,16 @@ export function CheckSpotlightAction({ check, onClick }: CheckSpotlightActionPro
 
     return (
         <Spotlight.Action onClick={onClick}>
-            <Card className="spotlight-action-card" p="xs" radius="md" w="100%" withBorder={false} shadow="none">
-                <Group justify="space-between" align="stretch" gap="md" wrap="nowrap">
-                    <Stack gap={4} style={{ flex: 1, minWidth: 0 }}>
+            <Card
+                className="spotlight-action-card"
+                p="xs"
+                radius="md"
+                w="100%"
+                withBorder={false}
+                shadow="none"
+                style={{ display: "flex" }}>
+                <Group justify="space-between" align="stretch" wrap="nowrap" flex={1} w="100%">
+                    <Stack gap="md" justify="space-between" flex={1} miw={0}>
                         <Text size="sm" lineClamp={2}>
                             {check.message}
                         </Text>
@@ -32,7 +39,7 @@ export function CheckSpotlightAction({ check, onClick }: CheckSpotlightActionPro
                         </Group>
                     </Stack>
 
-                    <Stack gap="md" align="flex-end" style={{ flexShrink: 0 }}>
+                    <Stack gap="md" align="flex-end" justify="space-between" style={{ flexShrink: 0, alignSelf: "stretch" }}>
                         {sortedTemplates.length > 0 && (
                             <Group gap={4} wrap="nowrap" justify="flex-end">
                                 {sortedTemplates.map((template) => (
