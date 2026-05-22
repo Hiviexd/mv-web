@@ -1,0 +1,5 @@
+@mixin section-full-bleed {
+    width: calc(100vw - 5px);
+    margin-inline: calc(50% - 50vw);
+    box-sizing: border-box;
+}

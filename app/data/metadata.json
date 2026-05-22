@@ -1,5 +1,8 @@
 {
     "repository": "https://github.com/Naxesss/MapsetVerifier",
+    "websiteRepository": "https://github.com/Hiviexd/mv-web",
+    "greaperLink": "https://osu.ppy.sh/users/2369776",
+    "hivieLink": "https://osu.ppy.sh/users/14102976",
     "locations": {
         "checks-metadata-script": "/scripts/export-checks-metadata.sh",
         "assets-checks": "/electron-app/public/assets",

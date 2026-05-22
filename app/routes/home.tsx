@@ -4,6 +4,7 @@ import { HomeSection } from "../components/home/HomeSection";
 import { ChecksSection } from "../components/home/ChecksSection";
 import { ComparisonSection } from "../components/home/ComparisonSection";
 import { DownloadCtaSection } from "../components/home/DownloadCtaSection";
+import { HomeFooter } from "../components/home/HomeFooter";
 import { Stack } from "@mantine/core";
 
 const homeSections = [
@@ -82,6 +83,7 @@ export default function Home() {
             ))}
             <ComparisonSection />
             <DownloadCtaSection />
+            <HomeFooter />
         </Stack>
     );
 }

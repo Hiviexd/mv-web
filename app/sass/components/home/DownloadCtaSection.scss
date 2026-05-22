@@ -1,6 +1,9 @@
+@use "sectionBleed" as *;
+
 .download-cta {
+    @include section-full-bleed;
+    background-color: var(--mantine-color-dark-8);
     padding: 4rem 0 5rem;
-    width: 100%;
 }
 
 .download-cta__button {

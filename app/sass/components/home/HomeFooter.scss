@@ -1,0 +1,55 @@
+@use "sectionBleed" as *;
+
+.home-footer {
+    @include section-full-bleed;
+    background-color: var(--mantine-color-dark-7);
+    padding: 3rem 0 4rem;
+}
+
+.home-footer__inner {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 0 var(--mantine-spacing-md);
+    align-items: center;
+}
+
+.home-footer__column {
+    align-items: flex-start;
+
+    @media (max-width: 48em) {
+        align-items: center;
+    }
+}
+
+.home-footer__brand {
+    display: inline-flex;
+    transition: opacity 150ms ease;
+
+    &:hover {
+        opacity: 0.9;
+    }
+}
+
+.home-footer__title {
+    margin: 0;
+    font-weight: 700;
+    line-height: 1.05;
+    white-space: nowrap;
+}
+
+.home-footer__maintainers {
+    line-height: 1.5;
+    max-width: 16rem;
+}
+
+.home-footer__links .home-footer__link {
+    width: fit-content;
+}
+
+.home-footer__link {
+    transition: color 150ms ease;
+
+    &:hover {
+        color: var(--mantine-color-primary-4);
+    }
+}
