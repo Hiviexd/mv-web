@@ -7,7 +7,7 @@
       "fullName": "MapsetVerifier.Checks.Taiko.Timing.CheckBarlineUnaffectedBySv",
       "checkType": "Beatmap",
       "category": "Timing",
-      "message": "Barline is unaffected by a line very close to it.",
+      "message": "Barline is unaffected by a line very close to it",
       "author": "Nostril",
       "applicableModes": "Taiko",
       "documentation": {
@@ -100,7 +100,7 @@
       "fullName": "MapsetVerifier.Checks.Taiko.Timing.CheckInconsistentBarLines",
       "checkType": "BeatmapSet",
       "category": "Timing",
-      "message": "Inconsistent omitted bar lines.",
+      "message": "Inconsistent omitted bar lines",
       "author": "Naxess",
       "applicableModes": "Taiko",
       "documentation": {
@@ -212,7 +212,7 @@
       "fullName": "MapsetVerifier.Checks.Taiko.Timing.CheckLowDiffScrollSpeed",
       "checkType": "Beatmap",
       "category": "Timing",
-      "message": "Scroll speed changes on lower difficulties.",
+      "message": "Scroll speed changes on lower difficulties",
       "author": "Hivie",
       "applicableModes": "Taiko",
       "documentation": {
@@ -588,7 +588,7 @@
       "fullName": "MapsetVerifier.Checks.Standard.Spread.CheckCloseOverlap",
       "checkType": "BeatmapSet",
       "category": "Spread",
-      "message": "Objects close in time not overlapping.",
+      "message": "Objects close in time not overlapping",
       "author": "Naxess",
       "applicableModes": "Standard",
       "documentation": {
@@ -633,7 +633,7 @@
       "fullName": "MapsetVerifier.Checks.Standard.Spread.CheckHardRockPerfectStacks",
       "checkType": "Beatmap",
       "category": "Spread",
-      "message": "Perfect stacks too close in time with Hard Rock applied.",
+      "message": "Perfect stacks too close in time with Hard Rock applied",
       "author": "Greaper",
       "applicableModes": "Standard",
       "documentation": {},
@@ -674,7 +674,7 @@
       "fullName": "MapsetVerifier.Checks.Standard.Spread.CheckMultipleReverses",
       "checkType": "Beatmap",
       "category": "Spread",
-      "message": "Multiple reverses on too short sliders.",
+      "message": "Multiple reverses on too short sliders",
       "author": "Naxess",
       "applicableModes": "Standard",
       "documentation": {
@@ -712,7 +712,7 @@
       "fullName": "MapsetVerifier.Checks.Standard.Spread.CheckShortSliders",
       "checkType": "Beatmap",
       "category": "Spread",
-      "message": "Too short sliders.",
+      "message": "Too short sliders",
       "author": "Naxess",
       "applicableModes": "Standard",
       "documentation": {
@@ -743,7 +743,7 @@
       "fullName": "MapsetVerifier.Checks.Standard.Spread.CheckSpaceVariation",
       "checkType": "Beatmap",
       "category": "Spread",
-      "message": "Object too close or far away from previous.",
+      "message": "Object too close or far away from previous",
       "author": "Naxess",
       "applicableModes": "Standard",
       "documentation": {
@@ -786,7 +786,7 @@
       "fullName": "MapsetVerifier.Checks.Standard.Spread.CheckSpinnerRecovery",
       "checkType": "Beatmap",
       "category": "Spread",
-      "message": "Too short spinner time or spinner recovery time.",
+      "message": "Too short spinner time or spinner recovery time",
       "author": "Naxess",
       "applicableModes": "Standard",
       "documentation": {
@@ -852,7 +852,7 @@
       "fullName": "MapsetVerifier.Checks.Standard.Spread.CheckStackLeniency",
       "checkType": "Beatmap",
       "category": "Spread",
-      "message": "Perfect stacks too close in time.",
+      "message": "Perfect stacks too close in time",
       "author": "Naxess",
       "applicableModes": "Standard",
       "documentation": {
@@ -903,7 +903,7 @@
       "fullName": "MapsetVerifier.Checks.Standard.Compose.CheckAbnormalSpacing",
       "checkType": "Beatmap",
       "category": "Compose",
-      "message": "Abnormally large spacing.",
+      "message": "Abnormally large spacing",
       "author": "Naxess",
       "applicableModes": "Standard",
       "documentation": {
@@ -959,7 +959,7 @@
       "fullName": "MapsetVerifier.Checks.Standard.Compose.CheckAmbiguity",
       "checkType": "Beatmap",
       "category": "Compose",
-      "message": "Ambiguous slider intersection.",
+      "message": "Ambiguous slider intersection",
       "author": "Naxess",
       "applicableModes": "Standard",
       "documentation": {
@@ -1002,7 +1002,7 @@
       "fullName": "MapsetVerifier.Checks.Standard.Compose.CheckBurai",
       "checkType": "Beatmap",
       "category": "Compose",
-      "message": "Burai slider.",
+      "message": "Burai slider",
       "author": "Naxess",
       "applicableModes": "Standard",
       "documentation": {
@@ -1044,7 +1044,7 @@
       "fullName": "MapsetVerifier.Checks.Standard.Compose.CheckNinjaSpinner",
       "checkType": "Beatmap",
       "category": "Compose",
-      "message": "Too short spinner.",
+      "message": "Too short spinner",
       "author": "Naxess",
       "applicableModes": "Standard",
       "documentation": {
@@ -1086,7 +1086,7 @@
       "fullName": "MapsetVerifier.Checks.Standard.Compose.CheckObscuredReverse",
       "checkType": "Beatmap",
       "category": "Compose",
-      "message": "Obscured reverse arrows.",
+      "message": "Obscured reverse arrows",
       "author": "Naxess",
       "applicableModes": "Standard",
       "documentation": {
@@ -1119,7 +1119,7 @@
       "fullName": "MapsetVerifier.Checks.Standard.Compose.CheckOffscreen",
       "checkType": "Beatmap",
       "category": "Compose",
-      "message": "Offscreen hit objects.",
+      "message": "Offscreen hit objects",
       "author": "Naxess",
       "applicableModes": "Standard",
       "documentation": {
@@ -1171,7 +1171,7 @@
       "fullName": "MapsetVerifier.Checks.Mania.Timing.CheckEasySliderVelocity",
       "checkType": "BeatmapSet",
       "category": "Timing",
-      "message": "Abnormal Slider Velocity changes on lower difficulties found.",
+      "message": "Abnormal Slider Velocity changes on lower difficulties found",
       "author": "RandomeLoL",
       "applicableModes": "Mania",
       "documentation": {
@@ -1204,7 +1204,7 @@
       "fullName": "MapsetVerifier.Checks.Mania.Timing.CheckVariableBpm",
       "checkType": "BeatmapSet",
       "category": "Timing",
-      "message": "Unnormalized inherited timing lines found.",
+      "message": "Unnormalized inherited timing lines found",
       "author": "RandomeLoL",
       "applicableModes": "Mania",
       "documentation": {
@@ -1256,7 +1256,7 @@
       "fullName": "MapsetVerifier.Checks.Mania.Spread.CheckSeven",
       "checkType": "Beatmap",
       "category": "Spread",
-      "message": "Chord too big for its difficulty.",
+      "message": "Chord too big for its difficulty",
       "author": "RandomeLoL",
       "applicableModes": "Mania",
       "documentation": {
@@ -1431,7 +1431,7 @@
       "fullName": "MapsetVerifier.Checks.Mania.Compose.CheckColumnDistribution",
       "checkType": "BeatmapSet",
       "category": "Compose",
-      "message": "Column usage.",
+      "message": "Column usage",
       "author": "Tailsdk",
       "applicableModes": "Mania",
       "documentation": {
@@ -1497,7 +1497,7 @@
       "fullName": "MapsetVerifier.Checks.Mania.Compose.CheckSliderLength",
       "checkType": "Beatmap",
       "category": "Compose",
-      "message": "Too short long notes (less than 30ms).",
+      "message": "Too short long notes (less than 30ms)",
       "author": "RandomeLoL",
       "applicableModes": "Mania",
       "documentation": {
@@ -1541,7 +1541,7 @@
       "fullName": "MapsetVerifier.Checks.Catch.Compose.CheckConsecutiveHyperdash",
       "checkType": "Beatmap",
       "category": "Compose",
-      "message": "Too many consecutive hyperdashes.",
+      "message": "Too many consecutive hyperdashes",
       "author": "Greaper",
       "applicableModes": "Catch",
       "documentation": {
@@ -1593,7 +1593,7 @@
       "fullName": "MapsetVerifier.Checks.Catch.Compose.CheckHasEdgeDash",
       "checkType": "Beatmap",
       "category": "Compose",
-      "message": "Edge dashes.",
+      "message": "Edge dashes",
       "author": "Greaper",
       "applicableModes": "Catch",
       "documentation": {
@@ -1658,7 +1658,7 @@
       "fullName": "MapsetVerifier.Checks.Catch.Compose.CheckHasHyperdash",
       "checkType": "Beatmap",
       "category": "Compose",
-      "message": "Contains hyperdashes.",
+      "message": "Contains hyperdashes",
       "author": "Greaper",
       "applicableModes": "Catch",
       "documentation": {
@@ -1699,7 +1699,7 @@
       "fullName": "MapsetVerifier.Checks.Catch.Compose.CheckHasSpinner",
       "checkType": "Beatmap",
       "category": "Compose",
-      "message": "Missing spinner.",
+      "message": "Missing spinner",
       "author": "Greaper",
       "applicableModes": "Catch",
       "documentation": {
@@ -1731,7 +1731,7 @@
       "fullName": "MapsetVerifier.Checks.Catch.Compose.CheckHyperdashSnap",
       "checkType": "Beatmap",
       "category": "Compose",
-      "message": "Disallowed hyperdash snap.",
+      "message": "Disallowed hyperdash snap",
       "author": "Greaper",
       "applicableModes": "Catch",
       "documentation": {
@@ -1763,7 +1763,7 @@
       "fullName": "MapsetVerifier.Checks.Catch.Compose.CheckMaxCombo",
       "checkType": "Beatmap",
       "category": "Compose",
-      "message": "Too high combo.",
+      "message": "Too high combo",
       "author": "Greaper",
       "applicableModes": "Catch",
       "documentation": {
@@ -1809,7 +1809,7 @@
       "fullName": "MapsetVerifier.Checks.Catch.Compose.CheckSpinnerGap",
       "checkType": "Beatmap",
       "category": "Compose",
-      "message": "Spinner gap too small.",
+      "message": "Spinner gap too small",
       "author": "Greaper",
       "applicableModes": "Catch",
       "documentation": {
@@ -1855,7 +1855,7 @@
       "fullName": "MapsetVerifier.Checks.Catch.Compose.Rain.CheckRainConsistentHyperdashSnaps",
       "checkType": "Beatmap",
       "category": "Compose",
-      "message": "Consecutive basic-snapped hyperdashes.",
+      "message": "Consecutive basic-snapped hyperdashes",
       "author": "Greaper",
       "applicableModes": "Catch",
       "documentation": {
@@ -1884,7 +1884,7 @@
       "fullName": "MapsetVerifier.Checks.Catch.Compose.Rain.CheckRainHyperdashSlider",
       "checkType": "Beatmap",
       "category": "Compose",
-      "message": "Contains hyperdashes on repeat or droplet.",
+      "message": "Contains hyperdashes on repeat or droplet",
       "author": "Greaper",
       "applicableModes": "Catch",
       "documentation": {
@@ -1914,7 +1914,7 @@
       "fullName": "MapsetVerifier.Checks.Catch.Compose.Platter.CheckPlatterHigherSnappedHyperdash",
       "checkType": "Beatmap",
       "category": "Compose",
-      "message": "Higher-snapped hyperdash.",
+      "message": "Higher-snapped hyperdash",
       "author": "Greaper",
       "applicableModes": "Catch",
       "documentation": {
@@ -1942,7 +1942,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.Timing.CheckBeforeLine",
       "checkType": "Beatmap",
       "category": "Timing",
-      "message": "Hit object is unaffected by a line very close to it.",
+      "message": "Hit object is unaffected by a line very close to it",
       "author": "Naxess",
       "applicableModes": "Standard Taiko Catch",
       "documentation": {
@@ -1990,7 +1990,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.Timing.CheckConcurrentLines",
       "checkType": "Beatmap",
       "category": "Timing",
-      "message": "Concurrent or conflicting timing lines.",
+      "message": "Concurrent or conflicting timing lines",
       "author": "Naxess",
       "applicableModes": "All Modes",
       "documentation": {
@@ -2039,7 +2039,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.Timing.CheckFirstLine",
       "checkType": "Beatmap",
       "category": "Timing",
-      "message": "First line toggles kiai or is inherited.",
+      "message": "First line toggles kiai or is inherited",
       "author": "Naxess",
       "applicableModes": "All Modes",
       "documentation": {
@@ -2090,7 +2090,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.Timing.CheckInconsistentLines",
       "checkType": "BeatmapSet",
       "category": "Timing",
-      "message": "Inconsistent uninherited lines, meter signatures, or BPM.",
+      "message": "Inconsistent uninherited lines, meter signatures, or BPM",
       "author": "Naxess",
       "applicableModes": "All Modes",
       "documentation": {
@@ -2155,7 +2155,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.Timing.CheckInvalidVolume",
       "checkType": "Beatmap",
       "category": "Timing",
-      "message": "Invalid timing line volume.",
+      "message": "Invalid timing line volume",
       "author": "Hivie",
       "applicableModes": "All Modes",
       "documentation": {
@@ -2193,7 +2193,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.Timing.CheckKiaiUnsnap",
       "checkType": "Beatmap",
       "category": "Timing",
-      "message": "Unsnapped kiai.",
+      "message": "Unsnapped kiai",
       "author": "Naxess",
       "applicableModes": "All Modes",
       "documentation": {
@@ -2249,7 +2249,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.Timing.CheckPreview",
       "checkType": "BeatmapSet",
       "category": "Timing",
-      "message": "Inconsistent or unset preview time.",
+      "message": "Inconsistent or unset preview time",
       "author": "Naxess",
       "applicableModes": "All Modes",
       "documentation": {
@@ -2292,7 +2292,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.Timing.CheckRedLineSnapping",
       "checkType": "Beatmap",
       "category": "Timing",
-      "message": "Hit objects potentially snapped to the wrong red line.",
+      "message": "Hit objects potentially snapped to the wrong red line",
       "author": "Hivie",
       "applicableModes": "All Modes",
       "documentation": {
@@ -2332,7 +2332,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.Timing.CheckUnsnaps",
       "checkType": "Beatmap",
       "category": "Timing",
-      "message": "Unsnapped hit objects.",
+      "message": "Unsnapped hit objects",
       "author": "Naxess",
       "applicableModes": "All Modes",
       "documentation": {
@@ -2391,7 +2391,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.Timing.CheckUnusedLines",
       "checkType": "Beatmap",
       "category": "Timing",
-      "message": "Unused timing lines.",
+      "message": "Unused timing lines",
       "author": "Naxess",
       "applicableModes": "All Modes",
       "documentation": {
@@ -2463,7 +2463,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.Timing.CheckWrongSnapping",
       "checkType": "BeatmapSet",
       "category": "Timing",
-      "message": "Wrongly or inconsistently snapped hit objects.",
+      "message": "Wrongly or inconsistently snapped hit objects",
       "author": "Naxess",
       "applicableModes": "All Modes",
       "documentation": {
@@ -2552,7 +2552,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.Spread.CheckLowestDiff",
       "checkType": "BeatmapSet",
       "category": "Spread",
-      "message": "Lowest difficulty too difficult for the given drain/play time(s).",
+      "message": "Lowest difficulty too difficult for the given drain/play time(s)",
       "author": "Naxess",
       "applicableModes": "All Modes",
       "documentation": {
@@ -2593,7 +2593,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.Settings.CheckDefaultColours",
       "checkType": "Beatmap",
       "category": "Settings",
-      "message": "Default combo colours without forced skin.",
+      "message": "Default combo colours without forced skin",
       "author": "Naxess",
       "applicableModes": "Standard Catch",
       "documentation": {
@@ -2626,7 +2626,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.Settings.CheckDiffSettings",
       "checkType": "Beatmap",
       "category": "Settings",
-      "message": "Abnormal difficulty settings.",
+      "message": "Abnormal difficulty settings",
       "author": "Naxess",
       "applicableModes": "All Modes",
       "documentation": {
@@ -2683,7 +2683,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.Settings.CheckInconsistentSettings",
       "checkType": "BeatmapSet",
       "category": "Settings",
-      "message": "Inconsistent mapset id, countdown, epilepsy warning, etc.",
+      "message": "Inconsistent mapset id, countdown, epilepsy warning, etc",
       "author": "Naxess",
       "applicableModes": "All Modes",
       "documentation": {
@@ -2745,7 +2745,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.Settings.CheckLuminosity",
       "checkType": "Beatmap",
       "category": "Settings",
-      "message": "Too dark or bright combo colours or slider borders.",
+      "message": "Too dark or bright combo colours or slider borders",
       "author": "Naxess",
       "applicableModes": "Standard Catch",
       "documentation": {
@@ -2809,7 +2809,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.Settings.CheckTickRate",
       "checkType": "Beatmap",
       "category": "Settings",
-      "message": "Slider tick rates not aligning with any common beat snap divisor.",
+      "message": "Slider tick rates not aligning with any common beat snap divisor",
       "author": "Naxess",
       "applicableModes": "All Modes",
       "documentation": {
@@ -2847,7 +2847,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.HitSounds.CheckHitSounds",
       "checkType": "Beatmap",
       "category": "Hit Sounds",
-      "message": "Long periods without hit sounding.",
+      "message": "Long periods without hit sounding",
       "author": "Naxess",
       "applicableModes": "Standard Catch",
       "documentation": {
@@ -2901,7 +2901,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.HitSounds.CheckMuted",
       "checkType": "Beatmap",
       "category": "Hit Sounds",
-      "message": "Low volume hit sounding.",
+      "message": "Low volume hit sounding",
       "author": "Naxess",
       "applicableModes": "All Modes",
       "documentation": {
@@ -2970,7 +2970,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.General.Resources.CheckBgPresence",
       "checkType": "General",
       "category": "Resources",
-      "message": "Missing background.",
+      "message": "Missing background",
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
@@ -3008,7 +3008,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.General.Resources.CheckBgResolution",
       "checkType": "General",
       "category": "Resources",
-      "message": "Too high or low background resolution.",
+      "message": "Too high or low background resolution",
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
@@ -3076,7 +3076,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.General.Resources.CheckMultipleVideo",
       "checkType": "General",
       "category": "Resources",
-      "message": "Inconsistent video usage.",
+      "message": "Inconsistent video usage",
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
@@ -3109,7 +3109,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.General.Resources.CheckOverlayLayer",
       "checkType": "General",
       "category": "Resources",
-      "message": "Overlay layer usage.",
+      "message": "Overlay layer usage",
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
@@ -3133,7 +3133,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.General.Resources.CheckSpriteResolution",
       "checkType": "General",
       "category": "Resources",
-      "message": "Too high sprite resolution.",
+      "message": "Too high sprite resolution",
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
@@ -3188,7 +3188,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.General.Resources.CheckVideoOffset",
       "checkType": "General",
       "category": "Resources",
-      "message": "Inconsistent video offset.",
+      "message": "Inconsistent video offset",
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
@@ -3211,7 +3211,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.General.Resources.CheckVideoResolution",
       "checkType": "General",
       "category": "Resources",
-      "message": "Too high video resolution.",
+      "message": "Too high video resolution",
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
@@ -3260,7 +3260,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.General.Metadata.CheckGenreLanguage",
       "checkType": "General",
       "category": "Metadata",
-      "message": "Missing genre/language in tags.",
+      "message": "Missing genre/language in tags",
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
@@ -3287,7 +3287,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.General.Metadata.CheckGuestTags",
       "checkType": "General",
       "category": "Metadata",
-      "message": "Missing GDers in tags.",
+      "message": "Missing GDers in tags",
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
@@ -3311,7 +3311,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.General.Metadata.CheckInconsistentMetadata",
       "checkType": "General",
       "category": "Metadata",
-      "message": "Inconsistent metadata.",
+      "message": "Inconsistent metadata",
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
@@ -3348,7 +3348,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.General.Metadata.CheckMarkerFormat",
       "checkType": "General",
       "category": "Metadata",
-      "message": "Incorrect marker format.",
+      "message": "Incorrect marker format",
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
@@ -3374,7 +3374,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.General.Metadata.CheckMarkerSpacing",
       "checkType": "General",
       "category": "Metadata",
-      "message": "Incorrect marker spacing.",
+      "message": "Incorrect marker spacing",
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
@@ -3409,7 +3409,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.General.Metadata.CheckTitleMarkers",
       "checkType": "General",
       "category": "Metadata",
-      "message": "Incorrect format of title version markers such as (TV Size), (Game Ver.), (Extended Edit), etc.",
+      "message": "Incorrect format of title version markers such as (TV Size), (Game Ver.), (Extended Edit), etc",
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
@@ -3474,7 +3474,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.General.Metadata.CheckUnicode",
       "checkType": "General",
       "category": "Metadata",
-      "message": "Unicode in romanized fields.",
+      "message": "Unicode in romanized fields",
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
@@ -3509,7 +3509,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.General.Files.CheckHitsoundDiff",
       "checkType": "BeatmapSet",
       "category": "Files",
-      "message": "Hitsound difficulty present.",
+      "message": "Hitsound difficulty present",
       "author": "RandomeLoL",
       "applicableModes": "All Modes",
       "documentation": {
@@ -3546,7 +3546,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.General.Files.CheckUnusedFiles",
       "checkType": "General",
       "category": "Files",
-      "message": "Unused files.",
+      "message": "Unused files",
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
@@ -3579,7 +3579,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.General.Files.CheckUpdateValidity",
       "checkType": "General",
       "category": "Files",
-      "message": "Issues with updating or downloading.",
+      "message": "Issues with updating or downloading",
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
@@ -3612,7 +3612,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.General.Files.CheckZeroBytes",
       "checkType": "General",
       "category": "Files",
-      "message": "0-byte files.",
+      "message": "0-byte files",
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
@@ -3643,7 +3643,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.General.Audio.CheckAudioFormat",
       "checkType": "General",
       "category": "Audio",
-      "message": "Incorrect audio format.",
+      "message": "Incorrect audio format",
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
@@ -3685,7 +3685,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.General.Audio.CheckAudioInVideo",
       "checkType": "General",
       "category": "Audio",
-      "message": "Audio channels in video.",
+      "message": "Audio channels in video",
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
@@ -3732,7 +3732,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.General.Audio.CheckAudioUsage",
       "checkType": "General",
       "category": "Audio",
-      "message": "More than 20% unused audio at the end.",
+      "message": "More than 20% unused audio at the end",
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
@@ -3771,7 +3771,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.General.Audio.CheckBitrate",
       "checkType": "General",
       "category": "Audio",
-      "message": "Too high or low audio bitrate.",
+      "message": "Too high or low audio bitrate",
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
@@ -3813,7 +3813,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.General.Audio.CheckCommonFinish",
       "checkType": "General",
       "category": "Audio",
-      "message": "Frequent finish hit sounds.",
+      "message": "Frequent finish hit sounds",
       "author": "Naxess",
       "applicableModes": "Standard Catch Mania",
       "documentation": {
@@ -3859,7 +3859,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.General.Audio.CheckHitSoundDelay",
       "checkType": "General",
       "category": "Audio",
-      "message": "Delayed hit sounds.",
+      "message": "Delayed hit sounds",
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
@@ -3914,7 +3914,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.General.Audio.CheckHitSoundFormat",
       "checkType": "General",
       "category": "Audio",
-      "message": "Incorrect hit sound format.",
+      "message": "Incorrect hit sound format",
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
@@ -3965,7 +3965,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.General.Audio.CheckHitSoundImbalance",
       "checkType": "General",
       "category": "Audio",
-      "message": "Imbalanced hit sounds.",
+      "message": "Imbalanced hit sounds",
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
@@ -4026,7 +4026,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.General.Audio.CheckHitSoundLength",
       "checkType": "General",
       "category": "Audio",
-      "message": "Too short hit sounds.",
+      "message": "Too short hit sounds",
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
@@ -4059,7 +4059,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.General.Audio.CheckMultipleAudio",
       "checkType": "General",
       "category": "Audio",
-      "message": "Multiple or missing audio files.",
+      "message": "Multiple or missing audio files",
       "author": "Naxess",
       "applicableModes": "General",
       "documentation": {
@@ -4088,7 +4088,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.Events.CheckBreaks",
       "checkType": "Beatmap",
       "category": "Events",
-      "message": "Breaks only achievable through .osu editing.",
+      "message": "Breaks only achievable through .osu editing",
       "author": "Naxess",
       "applicableModes": "All Modes",
       "documentation": {
@@ -4136,7 +4136,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.Events.CheckStoryHitSounds",
       "checkType": "BeatmapSet",
       "category": "Events",
-      "message": "Storyboarded hit sounds.",
+      "message": "Storyboarded hit sounds",
       "author": "Naxess",
       "applicableModes": "Standard Taiko Catch",
       "documentation": {
@@ -4175,7 +4175,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.Compose.CheckAbnormalNodes",
       "checkType": "Beatmap",
       "category": "Compose",
-      "message": "Abnormal amount of slider nodes.",
+      "message": "Abnormal amount of slider nodes",
       "author": "Naxess",
       "applicableModes": "All Modes",
       "documentation": {
@@ -4213,7 +4213,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.Compose.CheckConcurrent",
       "checkType": "Beatmap",
       "category": "Compose",
-      "message": "Concurrent hit objects.",
+      "message": "Concurrent hit objects",
       "author": "Naxess",
       "applicableModes": "All Modes",
       "documentation": {
@@ -4260,7 +4260,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.Compose.CheckDrainTime",
       "checkType": "Beatmap",
       "category": "Compose",
-      "message": "Too short drain time.",
+      "message": "Too short drain time",
       "author": "Naxess",
       "applicableModes": "All Modes",
       "documentation": {
@@ -4297,7 +4297,7 @@
       "fullName": "MapsetVerifier.Checks.AllModes.Compose.CheckInvisibleSlider",
       "checkType": "Beatmap",
       "category": "Compose",
-      "message": "Invisible sliders.",
+      "message": "Invisible sliders",
       "author": "Naxess",
       "applicableModes": "All Modes",
       "documentation": {
