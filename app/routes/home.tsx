@@ -13,7 +13,7 @@ const homeSections = [
         title: "Automatic Snapshots",
         description:
             "Automatically track mapset beatmap changes over time. Browse snapshot history and see exactly what was added, removed, or modified.",
-        imageSrc: "https://placehold.co/800x500/1a2332/62a0ff?text=Snapshots+Screenshot",
+        imageSrc: "/assets/home/snapshots.mp4",
         inverse: false,
         backgroundColor: "var(--mantine-color-dark-8)",
     },
@@ -21,14 +21,14 @@ const homeSections = [
         title: "Up to Date with Ranking Criteria",
         description:
             "Every check is updated to match current Ranking Criteria, from metadata and timing to mode-specific rules.",
-        imageSrc: "https://placehold.co/800x500/1a2332/62a0ff?text=Checks+Tab+Screenshot",
+        imageSrc: "/assets/home/checks.mp4",
         inverse: true,
     },
     {
         title: "Rich Documentation",
         description:
             "Built-in documentation explains each check: what it looks for, and why it matters. Browse the full checks reference without leaving the app.",
-        imageSrc: "https://placehold.co/800x500/1a2332/62a0ff?text=Documentation+Screenshot",
+        imageSrc: "/assets/home/documentation.mp4",
         inverse: false,
         backgroundColor: "var(--mantine-color-dark-8)",
     },
@@ -36,14 +36,14 @@ const homeSections = [
         title: "Complete Overview",
         description:
             "One place to understand your entire mapset — metadata, objects, settings, difficulty curves, and audio quality.",
-        imageSrc: "https://placehold.co/800x500/1a2332/62a0ff?text=Overview+Screenshot",
+        imageSrc: "/assets/home/overview.mp4",
         inverse: true,
     },
     {
         title: "Objects Overview",
         description:
             "See every snap divisor and unsnapped object across all difficulties, plus an interactive timeline to compare patterns side by side.",
-        imageSrc: "https://placehold.co/800x500/1a2332/62a0ff?text=Objects+Overview+Screenshot",
+        imageSrc: "/assets/home/objects-overview.mp4",
         inverse: false,
         backgroundColor: "var(--mantine-color-dark-8)",
     },
@@ -51,14 +51,14 @@ const homeSections = [
         title: "Difficulty Overview",
         description:
             "Interactive charts for star rating, slider velocity, and skill strain for all modes, with drag-to-zoom.",
-        imageSrc: "https://placehold.co/800x500/1a2332/62a0ff?text=Difficulty+Overview+Screenshot",
+        imageSrc: "/assets/home/difficulty-overview.mp4",
         inverse: true,
     },
     {
         title: "Audio Overview",
         description:
             "Inspect audio format, ranking compliance, and a visual spectrogram — all without leaving Mapset Verifier.",
-        imageSrc: "https://placehold.co/800x500/1a2332/62a0ff?text=Audio+Overview+Screenshot",
+        imageSrc: "/assets/home/audio-overview.png",
         inverse: false,
         backgroundColor: "var(--mantine-color-dark-8)",
     },

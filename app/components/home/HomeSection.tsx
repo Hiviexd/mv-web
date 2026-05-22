@@ -22,10 +22,32 @@ function SectionText({ title, description }: Pick<HomeSectionProps, "title" | "d
     );
 }
 
+function isVideoSrc(src: string) {
+    return /\.(mp4|webm|ogg)(\?|$)/i.test(src);
+}
+
+function SectionMedia({ src, alt }: { src: string; alt: string }) {
+    if (isVideoSrc(src)) {
+        return (
+            <video
+                className="home-section__media"
+                src={src}
+                loop
+                muted
+                playsInline
+                autoPlay
+                aria-label={alt}
+            />
+        );
+    }
+
+    return <img className="home-section__media" src={src} alt={alt} />;
+}
+
 function SectionImage({ imageSrc, imageAlt }: Pick<HomeSectionProps, "imageSrc" | "imageAlt">) {
     return (
-        <Card className="home-section__image" maw="50%" p="0">
-            <img src={imageSrc} alt={imageAlt ?? ""} />
+        <Card className="home-section__image" p="0">
+            <SectionMedia src={imageSrc} alt={imageAlt ?? ""} />
         </Card>
     );
 }
@@ -65,8 +87,8 @@ export function HomeSection({
 
             <Stack className="home-section__layout" hiddenFrom="md" gap="xl" align="center">
                 {text}
-                <Card className="home-section__image" maw="28rem" p="0">
-                    <img src={imageSrc} alt={imageAlt ?? title} />
+                <Card className="home-section__image" p="0">
+                    <SectionMedia src={imageSrc} alt={imageAlt ?? title} />
                 </Card>
             </Stack>
         </section>

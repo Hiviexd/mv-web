@@ -25,7 +25,15 @@ function HeroContent({ layout }: { layout: "desktop" | "mobile" }) {
 function HeroVideo({ maw }: { maw: string | number }) {
     return (
         <Card className="hero__video" maw={maw} p="0">
-            <img src="https://i.imgur.com/F6HhxPU.gif?sanitize=true" alt="Mapset Verifier" />
+            <video
+                className="hero__media"
+                src="/assets/home/showcase.mp4"
+                loop
+                muted
+                playsInline
+                autoPlay
+                aria-label="Mapset Verifier"
+            />
         </Card>
     );
 }

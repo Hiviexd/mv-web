@@ -8,10 +8,14 @@
 
 .hero__video {
     flex-shrink: 0;
+    overflow: hidden;
 
-    img {
+    .hero__media {
         display: block;
         width: 100%;
         height: auto;
+        // hack for cropping weird line from recording
+        margin-top: -3px;
+        margin-bottom: -3px;
     }
 }
