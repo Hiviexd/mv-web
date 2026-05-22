@@ -25,9 +25,9 @@ export const CheckSummaryCard = memo(function CheckSummaryCard({ check }: CheckS
                 radius="md"
                 padding="xs"
                 style={{
-                    transition: "background-color 120ms ease, border-color 120ms ease",
+                    transition: "border-color 120ms ease",
                     cursor: "pointer",
-                    backgroundColor: hovered ? hoverBackground : "var(--mantine-color-body)",
+                    backgroundColor: hovered ? hoverBackground : "var(--mantine-color-dark-7)",
                 }}>
                 <Group justify="space-between" align="stretch" gap="md" wrap="nowrap">
                     <Stack gap="md" flex={1} miw={0}>

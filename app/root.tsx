@@ -3,13 +3,15 @@ import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration }
 import type { Route } from "./+types/root";
 import "./sass/app.scss";
 
-import { ColorSchemeScript, MantineProvider, mantineHtmlProps } from "@mantine/core";
+import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
 import "@mantine/spotlight/styles.css";
 import "@gfazioli/mantine-marquee/styles.css";
+import { forcedDarkColorSchemeManager } from "./lib/color-scheme";
 import { theme } from "./theme";
 
 export const links: Route.LinksFunction = () => [
+    // { rel: "icon", href: `${import.meta.env.BASE_URL}favicon.ico`, type: "image/x-icon" },
     { rel: "preconnect", href: "https://fonts.googleapis.com" },
     {
         rel: "preconnect",
@@ -24,7 +26,7 @@ export const links: Route.LinksFunction = () => [
 
 export function Layout({ children }: { children: React.ReactNode }) {
     return (
-        <html lang="en" {...mantineHtmlProps} data-mantine-color-scheme="dark">
+        <html lang="en" suppressHydrationWarning data-mantine-color-scheme="dark">
             <head>
                 <meta charSet="utf-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -33,7 +35,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 <Links />
             </head>
             <body>
-                <MantineProvider theme={theme} forceColorScheme="dark">
+                <MantineProvider
+                    theme={theme}
+                    forceColorScheme="dark"
+                    defaultColorScheme="dark"
+                    colorSchemeManager={forcedDarkColorSchemeManager}>
                     {children}
                 </MantineProvider>
                 <ScrollRestoration />

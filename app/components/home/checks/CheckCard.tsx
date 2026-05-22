@@ -36,9 +36,9 @@ export function CheckCard({ check }: CheckCardProps) {
                 style={{
                     display: "flex",
                     flexDirection: "column",
-                    transition: "background-color 120ms ease, border-color 120ms ease",
+                    transition: "border-color 120ms ease",
                     cursor: "pointer",
-                    backgroundColor: hovered ? hoverBackground : "var(--mantine-color-body)",
+                    backgroundColor: hovered ? hoverBackground : "var(--mantine-color-dark-7)",
                 }}>
                 <Stack gap="md" justify="space-between" flex={1} miw={0}>
                     <Text fw={800} size="sm" lh={1.3} lineClamp={2}>

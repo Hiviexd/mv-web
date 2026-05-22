@@ -22,12 +22,12 @@ export function ChecksSection() {
                 A total of <Mark color="primary.2">{totalChecks}</Mark> unique beatmap checks
             </Title>
             <Stack gap="md">
-                <Marquee w="100%" fadeEdges duration={120}>
+                <Marquee w="100%" fadeEdges fadeEdgesColor="dark.7" duration={120}>
                     {marqueeChecks.map((check) => (
                         <CheckCard key={check.slug} check={check} />
                     ))}
                 </Marquee>
-                <Marquee w="100%" fadeEdges reverse duration={120}>
+                <Marquee w="100%" fadeEdges fadeEdgesColor="dark.7" reverse duration={120}>
                     {marqueeChecksReverse.map((check) => (
                         <CheckCard key={check.slug} check={check} />
                     ))}
