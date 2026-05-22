@@ -46,7 +46,7 @@ function SectionMedia({ src, alt }: { src: string; alt: string }) {
 
 function SectionImage({ imageSrc, imageAlt }: Pick<HomeSectionProps, "imageSrc" | "imageAlt">) {
     return (
-        <Card className="home-section__image" p="0">
+        <Card className="home-section__image" p="0" radius="md">
             <SectionMedia src={imageSrc} alt={imageAlt ?? ""} />
         </Card>
     );

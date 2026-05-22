@@ -24,7 +24,7 @@ function HeroContent({ layout }: { layout: "desktop" | "mobile" }) {
 
 function HeroVideo({ maw }: { maw: string | number }) {
     return (
-        <Card className="hero__video" maw={maw} p="0">
+        <Card className="hero__video" maw={maw} p="0" radius="md">
             <video
                 className="hero__media"
                 src="/assets/home/showcase.mp4"
