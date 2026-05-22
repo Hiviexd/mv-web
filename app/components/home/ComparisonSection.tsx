@@ -15,17 +15,17 @@ interface FeatureComparison {
 
 const comparisons: FeatureComparison[] = [
     {
-        feature: "Covers latest Ranking Criteria",
+        feature: "Up to date with current standards",
         mapsetVerifier: { supported: true },
         aiMod: { supported: false, note: "Outdated" },
     },
     {
-        feature: "Accurate difficulty interpretation",
-        mapsetVerifier: { supported: true, note: "All modes" },
-        aiMod: { supported: false, note: "Outdated" },
+        feature: "Difficulty interpretation",
+        mapsetVerifier: { supported: true, note: "Option/Name/SR" },
+        aiMod: { supported: true, note: "SR" },
     },
     {
-        feature: "osu!taiko/osu!catch/osu!mania-specific checks",
+        feature: "Taiko/Catch/Mania-specific checks",
         mapsetVerifier: { supported: true },
         aiMod: { supported: false },
     },
