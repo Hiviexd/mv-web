@@ -37,9 +37,8 @@ jobs:
 
             - name: Build for GitHub Pages
               env:
-                  # Project site: https://<owner>.github.io/<repo>/
-                  # Override with BASE_PATH=/ when using a custom domain at the repo root.
-                  BASE_PATH: /${{ github.event.repository.name }}/
+                  # Custom domain (mv.hivie.tn) is served from /. Use /repo-name/ only for github.io project URLs.
+                  BASE_PATH: /
               run: |
                   pnpm run build
                   node scripts/prepare-github-pages.mjs

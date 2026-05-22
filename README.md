@@ -13,15 +13,16 @@ pnpm dev
 
 The site builds as a static SPA (`ssr: false`) with prerendered routes. Pushes to `main` deploy via [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml).
 
-In the repo **Settings → Pages**, set **Source** to **GitHub Actions**.
+In the repo **Settings → Pages**, set **Source** to **GitHub Actions** and configure the custom domain (`mv.hivie.tn`).
 
-### Local preview (project base path)
+### Local preview
 
 ```powershell
-$env:BASE_PATH="/mv-web/"
 pnpm run build:pages
 npx serve build/client
 ```
+
+To preview the legacy `github.io/<repo>/` project URL locally, set `BASE_PATH=/mv-web/` before building.
 
 ## Syncing content
 
