@@ -10,10 +10,10 @@ const homeSections = [
     {
         title: "Automatic Snapshots",
         description:
-            "Automatically track mapset changes over time. Browse snapshot history and see exactly what was added, removed, or modified — per difficulty or for the whole set.",
+            "Automatically track mapset beatmap changes over time. Browse snapshot history and see exactly what was added, removed, or modified.",
         imageSrc: "https://placehold.co/800x500/1a2332/62a0ff?text=Snapshots",
         inverse: false,
-        backgroundColor: "var(--mantine-color-dark-7)",
+        backgroundColor: "var(--mantine-color-dark-8)",
     },
     {
         title: "Up to Date with Ranking Criteria",
@@ -28,7 +28,7 @@ const homeSections = [
             "One place to understand your entire mapset — metadata, objects, settings, difficulty curves, and audio quality.",
         imageSrc: "https://placehold.co/800x500/1a2332/62a0ff?text=Overview",
         inverse: false,
-        backgroundColor: "var(--mantine-color-dark-7)",
+        backgroundColor: "var(--mantine-color-dark-8)",
     },
     {
         title: "Objects Overview",
@@ -40,10 +40,10 @@ const homeSections = [
     {
         title: "Difficulty Overview",
         description:
-            "Interactive charts for star rating, slider velocity, and skill strain — all modes, with drag-to-zoom.",
+            "Interactive charts for star rating, slider velocity, and skill strain for all modes, with drag-to-zoom.",
         imageSrc: "https://placehold.co/800x500/1a2332/62a0ff?text=Difficulty+Overview",
         inverse: false,
-        backgroundColor: "var(--mantine-color-dark-7)",
+        backgroundColor: "var(--mantine-color-dark-8)",
     },
     {
         title: "Audio Overview",
