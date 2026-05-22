@@ -78,9 +78,17 @@ function rewriteChangelogMarkdown(text) {
     return text.replace(/\]\(changelog\//g, "](/changelog/");
 }
 
+function stripTrailingPeriods(text) {
+    return text.replace(/\.+$/, "");
+}
+
 function rewriteChecksMetadata(filePath) {
     const data = JSON.parse(readFileSync(filePath, "utf8"));
     for (const check of data.checks ?? []) {
+        if (typeof check.message === "string") {
+            check.message = stripTrailingPeriods(check.message);
+        }
+
         const doc = check.documentation;
         if (!doc) continue;
         for (const key of Object.keys(doc)) {
