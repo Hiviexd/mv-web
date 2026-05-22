@@ -1,7 +1,8 @@
-import { Stack, Title, Mark } from "@mantine/core";
+import { Paper, Stack, Title } from "@mantine/core";
 import { useMemo } from "react";
 import { Marquee } from "@gfazioli/mantine-marquee";
 import { allChecks } from "../../lib/checks";
+import { RollingNumber } from "../base/RollingNumber";
 import { CheckCard } from "./checks/CheckCard";
 
 export function ChecksSection() {
@@ -19,7 +20,11 @@ export function ChecksSection() {
     return (
         <Stack gap="xl" mb="xl">
             <Title order={1} ta="center" c="primary.2">
-                A total of <Mark color="primary.2">{totalChecks}</Mark> unique beatmap checks
+                A total of{" "}
+                <Paper bg="primary.2" c="black" p={0} radius="sm" component="span" display="inline-flex" px="6">
+                    <RollingNumber value={totalChecks} />
+                </Paper>{" "}
+                unique checks
             </Title>
             <Stack gap="md">
                 <Marquee w="100%" fadeEdges fadeEdgesColor="dark.7" duration={120}>
