@@ -16,7 +16,7 @@ const SIDEBAR_MAX_HEIGHT =
     "calc(100vh - var(--app-shell-header-height, 60px) - var(--mantine-spacing-md) * 2)";
 
 function MobileCheckToc({ groups, activeSlug }: { groups: CategoryGroup[]; activeSlug?: string }) {
-    const [opened, { toggle }] = useDisclosure(false);
+    const [opened, { toggle, close }] = useDisclosure(false);
 
     return (
         <Box className="check-layout__toc-mobile">
@@ -35,7 +35,7 @@ function MobileCheckToc({ groups, activeSlug }: { groups: CategoryGroup[]; activ
                 </UnstyledButton>
                 <Collapse in={opened}>
                     <Box pt="sm">
-                        <CheckToc groups={groups} activeSlug={activeSlug} />
+                        <CheckToc groups={groups} activeSlug={activeSlug} onLinkClick={close} />
                     </Box>
                 </Collapse>
             </Card>

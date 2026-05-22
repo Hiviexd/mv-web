@@ -6,9 +6,10 @@ import { getCheckPath } from "../../lib/checks";
 interface CheckTocProps {
     groups: CategoryGroup[];
     activeSlug?: string;
+    onLinkClick?: () => void;
 }
 
-export function CheckToc({ groups, activeSlug }: CheckTocProps) {
+export function CheckToc({ groups, activeSlug, onLinkClick }: CheckTocProps) {
     const location = useLocation();
     const isIndex = location.pathname === "/checks";
 
@@ -24,6 +25,7 @@ export function CheckToc({ groups, activeSlug }: CheckTocProps) {
                 active={isIndex}
                 variant={isIndex ? "light" : "subtle"}
                 color="primary.2"
+                onClick={onLinkClick}
             />
             {groups.map((group) => (
                 <Stack key={group.category} gap="xs">
@@ -43,6 +45,7 @@ export function CheckToc({ groups, activeSlug }: CheckTocProps) {
                                     active={isActive}
                                     variant={isActive ? "light" : "subtle"}
                                     color="primary.2"
+                                    onClick={onLinkClick}
                                 />
                             );
                         })}

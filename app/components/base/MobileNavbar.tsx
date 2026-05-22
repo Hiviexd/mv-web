@@ -1,5 +1,6 @@
 import { AppShell, Stack, Transition } from "@mantine/core";
 import { MobileNavigationLinks } from "../header/MobileNavigationLinks";
+import { RepositoryActions } from "../header/RepositoryActions";
 import { SearchButton } from "../header/SearchButton";
 
 interface IProps {
@@ -15,8 +16,11 @@ export default function MobileNavbar({ opened, onClose }: IProps) {
                     <AppShell.Section grow>
                         <Stack gap="md">
                             <SearchButton isMobile onOpen={onClose} text="Search checks..." />
-                            <MobileNavigationLinks />
+                            <MobileNavigationLinks onNavigate={onClose} />
                         </Stack>
+                    </AppShell.Section>
+                    <AppShell.Section>
+                        <RepositoryActions isMobile onNavigate={onClose} />
                     </AppShell.Section>
                 </AppShell.Navbar>
             )}

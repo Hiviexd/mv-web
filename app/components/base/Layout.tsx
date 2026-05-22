@@ -9,7 +9,7 @@ interface LayoutProps {
 }
 
 export function Layout({ children }: LayoutProps) {
-    const [mobileHeaderOpened, { toggle: toggleMobileHeader }] = useDisclosure(false);
+    const [mobileHeaderOpened, { toggle: toggleMobileHeader, close: closeMobileHeader }] = useDisclosure(false);
     return (
         <>
             <CheckSpotlight />
@@ -18,7 +18,7 @@ export function Layout({ children }: LayoutProps) {
                 navbar={{ width: 300, breakpoint: "sm", collapsed: { desktop: true, mobile: !mobileHeaderOpened } }}
                 padding="md">
                 <Header mobileHeaderOpened={mobileHeaderOpened} toggleMobileHeader={toggleMobileHeader} />
-                <MobileNavbar opened={mobileHeaderOpened} onClose={toggleMobileHeader} />
+                <MobileNavbar opened={mobileHeaderOpened} onClose={closeMobileHeader} />
 
                 <AppShell.Main className="main-layout">{children}</AppShell.Main>
             </AppShell>
