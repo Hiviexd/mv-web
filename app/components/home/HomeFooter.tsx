@@ -10,11 +10,17 @@ const externalLinks = [
     { label: "Report Issues in MV", href: `${metadata.repository}/issues` },
 ] as const;
 
+const otherProjectLinks = [
+    { label: "Ranking Criteria", href: "https://osu.ppy.sh/wiki/en/Ranking_Criteria" },
+    { label: "Mappers' Guild", href: "https://mappersguild.com" },
+    { label: "BN Management", href: "https://bn.mappersguild.com" },
+] as const;
+
 export function HomeFooter() {
     return (
         <footer className="home-footer">
             <div className="home-footer__inner">
-                <SimpleGrid cols={{ base: 1, sm: 3 }} spacing="xl" verticalSpacing="xl">
+                <SimpleGrid cols={{ base: 1, sm: 2, lg: 4 }} spacing="xl" verticalSpacing="xl">
                     <Stack gap="md" className="home-footer__column">
                         <Anchor
                             component={Link}
@@ -78,6 +84,24 @@ export function HomeFooter() {
                         {externalLinks.map((item) => (
                             <Anchor
                                 key={item.href}
+                                href={item.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                size="sm"
+                                c="primary.2"
+                                className="home-footer__link">
+                                {item.label}
+                            </Anchor>
+                        ))}
+                    </Stack>
+
+                    <Stack gap="sm" align="flex-start" className="home-footer__column home-footer__links">
+                        <Text size="sm" fw={600} c="dimmed" tt="uppercase" lts={0.04}>
+                            Other Projects
+                        </Text>
+                        {otherProjectLinks.map((item) => (
+                            <Anchor
+                                key={item.label}
                                 href={item.href}
                                 target="_blank"
                                 rel="noopener noreferrer"
