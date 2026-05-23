@@ -124,6 +124,17 @@ jobs:
                   GITHUB_TOKEN: ${{ github.token }}
               run: node scripts/sync-content.mjs
 
+            - name: Verify non-check assets preserved
+              run: |
+                  set -euo pipefail
+                  while IFS= read -r path; do
+                    [ -z "$path" ] && continue
+                    if [ ! -e "$path" ]; then
+                      echo "::error::Sync removed path outside checks scope: $path"
+                      exit 1
+                    fi
+                  done < <(git ls-files 'public/assets/**' ':(exclude)public/assets/checks/**')
+
             - name: Prepare PR body
               env:
                   CLONE_TAG: ${{ steps.tag.outputs.tag }}

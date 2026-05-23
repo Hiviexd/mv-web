@@ -5,13 +5,13 @@
     "hivieLink": "https://osu.ppy.sh/users/14102976",
     "locations": {
         "checks-metadata-script": "/scripts/export-checks-metadata.sh",
-        "assets-checks": "/electron-app/public/assets",
+        "assets-checks": "/electron-app/public/assets/checks",
         "assets-changelog": "/electron-app/public/changelog",
         "changelogs": "/electron-app/src/content/changelog"
     },
     "destinations": {
         "checks-metadata": "app/data/checks-metadata.json",
-        "assets-checks": "public/assets",
+        "assets-checks": "public/assets/checks",
         "assets-changelog": "public/changelog",
         "changelogs": "app/data/changelogs"
     }
