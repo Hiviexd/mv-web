@@ -54,7 +54,7 @@ export function GameModeDisplay({ modes = [], difficulties = [], size = "md" }: 
             {hasDifficulties && (
                 <Group gap={4} wrap="wrap">
                     {difficulties.map((d) => (
-                        <GameModeIcon key={d} mode={DEFAULT_MODE} difficulty={d} size={config.iconSize} />
+                        <GameModeIcon key={d} mode={modes.length > 1 ? DEFAULT_MODE : modes[0]} difficulty={d} size={config.iconSize} />
                     ))}
                 </Group>
             )}

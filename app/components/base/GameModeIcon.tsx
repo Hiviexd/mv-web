@@ -30,6 +30,41 @@ export const DIFFICULTIES: Record<Difficulty, { color: string; label: string }> 
     ultra: { color: "#6563de", label: "Ultra" },
 };
 
+const MODE_DIFFICULTY_LABELS: Record<GameMode, Record<Difficulty, string>> = {
+    osu: {
+        easy: "Easy",
+        normal: "Normal",
+        hard: "Hard",
+        insane: "Insane",
+        expert: "Expert",
+        ultra: "Ultra",
+    },
+    mania: {
+        easy: "Easy",
+        normal: "Normal",
+        hard: "Hard",
+        insane: "Insane",
+        expert: "Expert",
+        ultra: "Ultra",
+    },
+    taiko: {
+        easy: "Kantan",
+        normal: "Futsuu",
+        hard: "Muzukashii",
+        insane: "Oni",
+        expert: "Inner Oni",
+        ultra: "Hell Oni",
+    },
+    catch: {
+        easy: "Cup",
+        normal: "Salad",
+        hard: "Platter",
+        insane: "Rain",
+        expert: "Overdose",
+        ultra: "Deluge",
+    },
+};
+
 const DEFAULT_ICON_COLOR = "#fff";
 
 /** Replaces the white fill in the SVG data URI with the given hex color. */
@@ -56,9 +91,40 @@ export function normalizeMode(rawMode: string): GameMode {
     return "osu";
 }
 
-/** Normalizes a difficulty string to a Difficulty enum value. */
-export function normalizeDifficulty(rawDifficulty: string): Difficulty {
-    return rawDifficulty.trim().toLowerCase() as Difficulty;
+/** Resolves a difficulty string to a Difficulty tier. */
+function resolveDifficultyTier(rawDifficulty: string): Difficulty {
+    const s = rawDifficulty.trim().toLowerCase();
+
+    // Canonical keys (osu! / mania)
+    if (s === "easy") return "easy";
+    if (s === "normal") return "normal";
+    if (s === "hard") return "hard";
+    if (s === "insane") return "insane";
+    if (s === "expert") return "expert";
+    if (s === "ultra") return "ultra";
+    // Taiko
+    if (s === "kantan") return "easy";
+    if (s === "futsuu") return "normal";
+    if (s === "muzukashii") return "hard";
+    if (s === "oni") return "insane";
+    if (s === "inner oni") return "expert";
+    if (s === "hell oni") return "ultra";
+    // Catch
+    if (s === "cup") return "easy";
+    if (s === "salad") return "normal";
+    if (s === "platter") return "hard";
+    if (s === "rain") return "insane";
+    if (s === "overdose") return "expert";
+    if (s === "deluge") return "ultra";
+    // Fallback for unknown values
+    return "normal";
+}
+
+/** Normalizes a difficulty string to the mode-appropriate difficulty name. */
+export function normalizeDifficulty(rawMode: string, rawDifficulty: string): string {
+    const mode = normalizeMode(rawMode);
+    const tier = resolveDifficultyTier(rawDifficulty);
+    return MODE_DIFFICULTY_LABELS[mode][tier];
 }
 
 export interface GameModeIconProps {
@@ -69,11 +135,12 @@ export interface GameModeIconProps {
 
 export function GameModeIcon({ mode, difficulty, size = 20 }: GameModeIconProps) {
     const normalizedMode = normalizeMode(mode ?? "osu");
-    const normalizedDifficulty = difficulty ? normalizeDifficulty(difficulty) : undefined;
+    const difficultyTier = difficulty ? resolveDifficultyTier(difficulty) : undefined;
+    const difficultyLabel = difficulty ? normalizeDifficulty(normalizedMode, difficulty) : undefined;
 
     const { icon, label: modeLabel } = GAME_MODES[normalizedMode];
-    const color = normalizedDifficulty ? DIFFICULTIES[normalizedDifficulty].color : DEFAULT_ICON_COLOR;
-    const tooltipLabel = normalizedDifficulty ? DIFFICULTIES[normalizedDifficulty].label : modeLabel;
+    const color = difficultyTier ? DIFFICULTIES[difficultyTier].color : DEFAULT_ICON_COLOR;
+    const tooltipLabel = difficultyLabel ?? modeLabel;
     const src = color === DEFAULT_ICON_COLOR ? icon : withFillColor(icon, color);
 
     return (
