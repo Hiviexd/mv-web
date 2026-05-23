@@ -8,15 +8,21 @@ import { releases } from "../../lib/release";
 interface IProps {
     mobileHeaderOpened: boolean;
     toggleMobileHeader: () => void;
+    onNavigate?: () => void;
 }
 
-export function Header({ mobileHeaderOpened, toggleMobileHeader }: IProps) {
+export function Header({ mobileHeaderOpened, toggleMobileHeader, onNavigate }: IProps) {
     return (
         <AppShell.Header className="header-base">
             <Group justify="space-between" h="100%" px="xl" className="header-container">
                 <Group gap="xl">
                     <Group gap="xs">
-                        <Anchor component={Link} to="/" underline="never" aria-label="Mapset Verifier home">
+                        <Anchor
+                            component={Link}
+                            to="/"
+                            underline="never"
+                            aria-label="Mapset Verifier home"
+                            onClick={onNavigate}>
                             <Logo width={32} height={32} />
                         </Anchor>
                         <Badge color="primary.2" variant="light">

@@ -17,7 +17,11 @@ export function Layout({ children }: LayoutProps) {
                 header={{ height: 60 }}
                 navbar={{ width: 300, breakpoint: "sm", collapsed: { desktop: true, mobile: !mobileHeaderOpened } }}
                 padding="md">
-                <Header mobileHeaderOpened={mobileHeaderOpened} toggleMobileHeader={toggleMobileHeader} />
+                <Header
+                    mobileHeaderOpened={mobileHeaderOpened}
+                    toggleMobileHeader={toggleMobileHeader}
+                    onNavigate={closeMobileHeader}
+                />
                 <MobileNavbar opened={mobileHeaderOpened} onClose={closeMobileHeader} />
 
                 <AppShell.Main className="main-layout">{children}</AppShell.Main>
