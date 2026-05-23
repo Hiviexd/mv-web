@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-21T23:51:49.4794377Z",
+  "generatedAt": "2026-05-23T23:51:55.6556686Z",
   "version": "1.0.0.0",
   "checks": [
     {
@@ -2100,37 +2100,45 @@
       "templates": {
         "Missing": {
           "level": "Problem",
-          "formatString": "{0} Missing uninherited line, see {1}.",
+          "formatString": "{0} Missing uninherited line, see {1} ({2}, {3}).",
           "defaultArguments": [
             "timestamp -",
-            "difficulty"
+            "difficulty",
+            "bpm",
+            "meter"
           ],
           "cause": "A beatmap does not have an uninherited line which the reference beatmap does, or visa versa."
         },
         "Missing Minor": {
           "level": "Minor",
-          "formatString": "{0} Has a decimally different offset to the one in {1}.",
+          "formatString": "{0} Has a decimally different offset ({1}), see {2} ({3}).",
           "defaultArguments": [
             "timestamp -",
-            "difficulty"
+            "offset",
+            "difficulty",
+            "reference offset"
           ],
           "cause": "Same as the first check, except includes issues caused by decimal unsnaps of uninherited lines."
         },
         "Inconsistent Meter": {
           "level": "Problem",
-          "formatString": "{0} Inconsistent meter signature, see {1}.",
+          "formatString": "{0} Inconsistent meter signature ({1}), see {2} ({3}).",
           "defaultArguments": [
             "timestamp -",
-            "difficulty"
+            "meter",
+            "difficulty",
+            "reference meter"
           ],
           "cause": "The meter signature of an uninherited timing line is different from the reference beatmap."
         },
         "Inconsistent BPM": {
           "level": "Problem",
-          "formatString": "{0} Inconsistent BPM, see {1}.",
+          "formatString": "{0} Inconsistent BPM ({1}), see {2} ({3}).",
           "defaultArguments": [
             "timestamp -",
-            "difficulty"
+            "bpm",
+            "difficulty",
+            "reference bpm"
           ],
           "cause": "Same as the meter check, except checks BPM instead."
         }
