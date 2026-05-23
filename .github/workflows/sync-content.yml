@@ -7,6 +7,9 @@ on:
                 description: Clone/sync from latest stable (non-prerelease) tag
                 type: boolean
                 default: false
+    repository_dispatch:
+        types:
+            - mapsetverifier-release
 
 permissions:
     contents: write
@@ -30,6 +33,30 @@ jobs:
                   GH_TOKEN: ${{ github.token }}
               run: |
                   set -euo pipefail
+                  if [ "${{ github.event_name }}" = "repository_dispatch" ]; then
+                    DISPATCH_TAG="${{ github.event.client_payload.tag }}"
+                    DISPATCH_PRERELEASE="${{ github.event.client_payload.prerelease }}"
+                    if [ -z "$DISPATCH_TAG" ] || [ "$DISPATCH_TAG" = "null" ]; then
+                      echo "repository_dispatch payload is missing client_payload.tag"
+                      exit 1
+                    fi
+                    if [ "$DISPATCH_PRERELEASE" = "true" ]; then
+                      REPO=$(node -p "JSON.parse(require('fs').readFileSync('app/data/metadata.json','utf8')).repository.replace(/.*github\\.com\\//,'').replace(/\\.git$/,'')")
+                      TAG=$(gh api "repos/${REPO}/releases" --paginate \
+                        --jq '[.[] | select(.prerelease == false)] | first | .tag_name')
+                      if [ -z "$TAG" ] || [ "$TAG" = "null" ]; then
+                        echo "Prerelease dispatch (${DISPATCH_TAG}): no stable release found, using dispatched tag for content"
+                        TAG="$DISPATCH_TAG"
+                      else
+                        echo "Prerelease dispatch (${DISPATCH_TAG}): syncing stable content from ${TAG}"
+                      fi
+                    else
+                      TAG="$DISPATCH_TAG"
+                      echo "Stable release dispatch: syncing content from ${TAG}"
+                    fi
+                    echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+                    exit 0
+                  fi
                   REPO=$(node -p "JSON.parse(require('fs').readFileSync('app/data/metadata.json','utf8')).repository.replace(/.*github\\.com\\//,'').replace(/\\.git$/,'')")
                   if [ "${{ inputs.use_stable_release }}" = "true" ]; then
                     TAG=$(gh api "repos/${REPO}/releases" --paginate \
@@ -69,6 +96,9 @@ jobs:
               env:
                   CLONE_TAG: ${{ steps.tag.outputs.tag }}
                   RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+                  SOURCE_RUN_URL: ${{ github.event.client_payload.source_run_url }}
+                  DISPATCH_TAG: ${{ github.event.client_payload.tag }}
+                  DISPATCH_PRERELEASE: ${{ github.event.client_payload.prerelease }}
               run: |
                   set -euo pipefail
                   mkdir -p .github
@@ -82,6 +112,9 @@ jobs:
                     echo "## MapsetVerifier content sync"
                     echo ""
                     echo "- **Clone tag:** ${CLONE_TAG}"
+                    if [ -n "$DISPATCH_TAG" ] && [ "$DISPATCH_TAG" != "null" ] && [ "$DISPATCH_TAG" != "$CLONE_TAG" ]; then
+                      echo "- **Release tag:** ${DISPATCH_TAG} (prerelease; content synced from latest stable)"
+                    fi
                     echo "- **Stable release:** ${RELEASE}"
                     echo "- **Beta release:** ${BETA}"
                     echo "- **Checks:** ${CHECKS}"
@@ -89,6 +122,10 @@ jobs:
                     echo "- **Changelog images:** ${IMAGES}"
                     echo "- **Changelog files:** ${CHANGELOGS}"
                     echo ""
+                    if [ -n "$SOURCE_RUN_URL" ] && [ "$SOURCE_RUN_URL" != "null" ]; then
+                      echo "Triggered by MapsetVerifier release workflow: [source run](${SOURCE_RUN_URL})."
+                      echo ""
+                    fi
                     echo "Automated sync from [workflow run](${RUN_URL})."
                   } > .github/sync-pr-body.md
 
