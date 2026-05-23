@@ -1,6 +1,9 @@
 import { Card, Group, Stack, Text } from "@mantine/core";
+import { getMediaAspectRatio } from "../../lib/mediaDimensions";
 import DownloadButton from "./DownloadButton";
 import { HeroLogo } from "./HeroLogo";
+
+const showcaseSrc = "/assets/home/showcase.mp4";
 
 function HeroContent({ layout }: { layout: "desktop" | "mobile" }) {
     const isDesktop = layout === "desktop";
@@ -23,11 +26,20 @@ function HeroContent({ layout }: { layout: "desktop" | "mobile" }) {
 }
 
 function HeroVideo({ maw }: { maw: string | number }) {
+    const aspectRatio = getMediaAspectRatio(showcaseSrc);
+
     return (
-        <Card className="hero__video" maw={maw} p="0" radius="md">
+        <Card
+            className="hero__video"
+            maw={maw}
+            w="100%"
+            p="0"
+            radius="md"
+            style={aspectRatio ? { aspectRatio } : undefined}
+        >
             <video
                 className="hero__media"
-                src="/assets/home/showcase.mp4"
+                src={showcaseSrc}
                 loop
                 muted
                 playsInline

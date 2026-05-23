@@ -1,4 +1,5 @@
 import { Card, Group, Stack, Text, Title } from "@mantine/core";
+import { getMediaAspectRatio } from "../../lib/mediaDimensions";
 
 interface HomeSectionProps {
     title: string;
@@ -44,9 +45,14 @@ function SectionMedia({ src, alt }: { src: string; alt: string }) {
     return <img className="home-section__media" src={src} alt={alt} />;
 }
 
+function mediaContainerStyle(src: string) {
+    const aspectRatio = getMediaAspectRatio(src);
+    return aspectRatio ? { aspectRatio } : undefined;
+}
+
 function SectionImage({ imageSrc, imageAlt }: Pick<HomeSectionProps, "imageSrc" | "imageAlt">) {
     return (
-        <Card className="home-section__image" p="0" radius="md">
+        <Card className="home-section__image" p="0" radius="md" style={mediaContainerStyle(imageSrc)}>
             <SectionMedia src={imageSrc} alt={imageAlt ?? ""} />
         </Card>
     );
@@ -87,7 +93,7 @@ export function HomeSection({
 
             <Stack className="home-section__layout" hiddenFrom="md" gap="xl" align="center">
                 {text}
-                <Card className="home-section__image" p="0">
+                <Card className="home-section__image" p="0" style={mediaContainerStyle(imageSrc)}>
                     <SectionMedia src={imageSrc} alt={imageAlt ?? title} />
                 </Card>
             </Stack>
