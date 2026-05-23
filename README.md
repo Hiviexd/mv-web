@@ -1,4 +1,4 @@
-# mapsetverifier.com
+# mv-web
 
 Website for the [Mapset Verifier](https://github.com/Naxesss/MapsetVerifier) project.
 
@@ -13,7 +13,7 @@ pnpm dev
 
 The site builds as a static SPA (`ssr: false`) with prerendered routes. Pushes to `main` deploy via [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml).
 
-In the repo **Settings → Pages**, set **Source** to **GitHub Actions** and configure the custom domain (`mv.hivie.tn`).
+In the repo **Settings → Pages**, set **Source** to **GitHub Actions** and configure custom domain.
 
 ### Local preview
 

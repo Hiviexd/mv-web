@@ -37,7 +37,7 @@ jobs:
 
             - name: Build for GitHub Pages
               env:
-                  # Custom domain (mv.hivie.tn) is served from /. Use /repo-name/ only for github.io project URLs.
+                  # Custom domain is served from /. Use /repo-name/ only for github.io project URLs.
                   BASE_PATH: /
               run: |
                   pnpm run build

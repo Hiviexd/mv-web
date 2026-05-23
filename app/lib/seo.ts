@@ -1,4 +1,4 @@
-const SITE_URL = "https://mv.hivie.tn";
+const SITE_URL = "https://mv.mappersguild.com";
 const SITE_NAME = "Mapset Verifier";
 const THEME_COLOR = "#99ccff";
 const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.png`;
