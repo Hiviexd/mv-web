@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-23T23:51:55.6556686Z",
+  "generatedAt": "2026-05-24T23:17:10.0716844Z",
   "version": "1.0.0.0",
   "checks": [
     {
@@ -2472,7 +2472,7 @@
       "checkType": "BeatmapSet",
       "category": "Timing",
       "message": "Wrongly or inconsistently snapped hit objects",
-      "author": "Naxess",
+      "author": "Naxess, Hivie",
       "applicableModes": "All Modes",
       "documentation": {
         "Purpose": "Preventing incorrectly snapped hit objects, for example 1/6 being used where the song only supports\n1/4, or a slider tail accidentally being extended 1/16 too far.",
