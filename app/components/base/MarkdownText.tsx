@@ -83,6 +83,11 @@ export function MarkdownText({ content }: MarkdownTextProps) {
                         </Alert>
                     ),
                     hr: () => <Divider my="xl" />,
+                    table: ({ children }: { children?: ReactNode }) => (
+                        <div className="table-wrapper">
+                            <table className="table">{children}</table>
+                        </div>
+                    ),
                 }}>
                 {content}
             </ReactMarkdown>
