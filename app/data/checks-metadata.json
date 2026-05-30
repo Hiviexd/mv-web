@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-23T23:51:55.6556686Z",
+  "generatedAt": "2026-05-27T02:39:40.1255030Z",
   "version": "1.0.0.0",
   "checks": [
     {
@@ -300,20 +300,20 @@
       ]
     },
     {
-      "name": "CheckBgOffsetConsistency",
-      "fullName": "MapsetVerifier.Checks.Taiko.Design.CheckBgOffsetConsistency",
+      "name": "CheckBgOffsetIssues",
+      "fullName": "MapsetVerifier.Checks.Taiko.Design.CheckBgOffsetIssues",
       "checkType": "BeatmapSet",
       "category": "Design",
-      "message": "Background offset inconsistencies",
-      "author": "Nostril",
+      "message": "Background offset issues",
+      "author": "Nostril, Hivie",
       "applicableModes": "Taiko",
       "documentation": {
-        "Purpose": "Pointing out background offset inconsistencies between osu!taikodifficulties.",
-        "Reasoning": "Background offset should generally be consistent across osu!taiko difficulties that share the same background."
+        "Purpose": "Pointing out background offset issues between osu!taiko difficulties.",
+        "Reasoning": "Background offset should generally be consistent across osu!taiko difficulties that share the same background.\n\nIn addition, horizontal (X axis) offset is very rare and often leaves black gaps in the playfield, so it should be double-checked when present."
       },
       "templates": {
-        "Minor": {
-          "level": "Minor",
+        "Inconsistent": {
+          "level": "Warning",
           "formatString": "\"{0}\" {1}: ({2})",
           "defaultArguments": [
             "Filename",
@@ -321,6 +321,15 @@
             "List of Difficulties"
           ],
           "cause": "Background offset is inconsistent across difficulties. Make sure this is intentional."
+        },
+        "XOffset": {
+          "level": "Warning",
+          "formatString": "\"{0}\" uses an X offset of {1}. Ensure this is intentional.",
+          "defaultArguments": [
+            "Filename",
+            "X offset"
+          ],
+          "cause": "Horizontal background offset is rare in osu!taiko and often leaves black gaps in the playfield."
         }
       },
       "modes": [
@@ -2472,7 +2481,7 @@
       "checkType": "BeatmapSet",
       "category": "Timing",
       "message": "Wrongly or inconsistently snapped hit objects",
-      "author": "Naxess",
+      "author": "Naxess, Hivie",
       "applicableModes": "All Modes",
       "documentation": {
         "Purpose": "Preventing incorrectly snapped hit objects, for example 1/6 being used where the song only supports\n1/4, or a slider tail accidentally being extended 1/16 too far.",
@@ -3560,7 +3569,8 @@
       "documentation": {
         "Purpose": "Reducing the overall file size of beatmapset folders and preventing potentially malicious files\nfrom reaching the player.",
         "Reasoning": "Having useless files in the folder that few players will look at in no way contributes to the gameplay experience\nand is a waste of resources. Unlike things like pointless bookmarks and green lines, files typically take up a way\nmore noticeable amount of space.\n> For comparison, you'd need about 10 000 bookmarks, if not more, to match the file size of a regular hit sound.\n\n---\nOfficial content distributing malicious .exe files or similar would also not reflect very well upon the game.",
-        "Scorebar Ki-Danger & Marker": "`scorebar-ki`, `scorebar-kidanger`, and `scorebar-kidanger2`, act strangely when `scorebar-marker` is missing.\nThe latter can simply be a blank file as it does not show up in-game for osu-stable regardless.\n\n![](/assets/checks/all-modes-general-files-unused-files-1.png \"Spreadsheet over which scorebar elements are used. Only consistent regardless of user settings when both marker and ki elements exist.\")"
+        "Scorebar Ki-Danger & Marker": "`scorebar-ki`, `scorebar-kidanger`, and `scorebar-kidanger2`, act strangely when `scorebar-marker` is missing.\nThe latter can simply be a blank file as it does not show up in-game for osu-stable regardless.\n\n![](/assets/checks/all-modes-general-files-unused-files-1.png \"Spreadsheet over which scorebar elements are used. Only consistent regardless of user settings when both marker and ki elements exist.\")",
+        "osu!(lazer) skin assets": "Some beatmap skin files are recognized by osu!(lazer) but ignored by osu!(stable). Mapset Verifier reports those as **Info**\n(not Problems) so they are not mistaken for truly unused files. Ranking and BN workflows still target stable."
       },
       "templates": {
         "Unused": {
@@ -3579,6 +3589,14 @@
             "path with different extension"
           ],
           "cause": "Same as the other check, but where a file with the same name is used."
+        },
+        "Lazer Only": {
+          "level": "Info",
+          "formatString": "\"{0}\" is not used in osu!(stable), but may be used in osu!(lazer).",
+          "defaultArguments": [
+            "path"
+          ],
+          "cause": "A beatmap skin file documented as Lazer-only (e.g. fountain-shoot, grade-specific applause, slider miss indicators). See https://osu.ppy.sh/wiki/en/Skinning/Sounds and https://osu.ppy.sh/wiki/en/Skinning/osu!"
         }
       }
     },
