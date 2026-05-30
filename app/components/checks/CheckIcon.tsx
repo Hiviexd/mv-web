@@ -2,7 +2,7 @@ import { Box, Tooltip } from "@mantine/core";
 import {
     IconAlertCircleFilled,
     IconCircleCheckFilled,
-    IconHelpCircleFilled,
+    IconHelpHexagonFilled,
     IconCircleXFilled,
     IconInfoCircleFilled,
 } from "@tabler/icons-react";
@@ -28,7 +28,7 @@ const levelConfig = {
         badge: false as const,
     },
     Error: {
-        Icon: IconHelpCircleFilled,
+        Icon: IconHelpHexagonFilled,
         color: "var(--check-icon-color-error)",
         badge: false as const,
     },
