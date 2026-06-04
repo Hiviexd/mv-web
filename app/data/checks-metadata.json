@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-27T02:39:40.1255030Z",
+  "generatedAt": "2026-06-04T22:46:04.7417739Z",
   "version": "1.0.0.0",
   "checks": [
     {
@@ -174,23 +174,25 @@
       "author": "Hivie",
       "applicableModes": "Taiko",
       "documentation": {
-        "Purpose": "Ensuring that kiai flash usage is not too drastic.",
+        "Purpose": "Ensuring that kiai flash usage is not too drastic.\n\n**Thresholds**:\n\n| Severity | Maximum flash length |\n| :-: | :-- |\n| **Warning** | ≤ 1/3 beat |\n| **Minor** | ≤ 1/2 beat, but longer than the warning threshold |\n\nFlashes longer than 1/2 beat are not flagged.",
         "Reasoning": "Kiai flashes in osu!taiko cause the entire playfield to flash, which can cause performance problems, alongside potentially causing epileptic effects if abused."
       },
       "templates": {
         "Minor": {
           "level": "Minor",
-          "formatString": "{0} Kiai flash ",
+          "formatString": "{0} Kiai flash (1/{1}).",
           "defaultArguments": [
-            "timestamp -"
+            "timestamp -",
+            "X"
           ],
           "cause": "A kiai flash exists, but is not too drastic"
         },
         "Warning": {
           "level": "Warning",
-          "formatString": "{0} Kiai flash",
+          "formatString": "{0} Kiai flash (1/{1}).",
           "defaultArguments": [
-            "timestamp -"
+            "timestamp -",
+            "X"
           ],
           "cause": "A kiai flash that's too drastic exists"
         }
@@ -449,13 +451,13 @@
       "author": "Hivie, Phob, Nostril",
       "applicableModes": "Taiko",
       "documentation": {
-        "Purpose": "Ensuring that a chain of objects doesn't exceed a certain threshold without a required rest moment.",
+        "Purpose": "Rest moments are small pauses in gameplay used to separate patterns and provide a break for the player from continuous rhythm chains. They play an important role in reducing player fatigue, especially on denser rhythms.\n\nUsing rest moments less frequently is acceptable if either the pace of the music makes rest moments counter-intuitive or if the continuously mapped part is overall more forgiving to the player.\n\n**Each difficulty should follow its respective rest moment guidelines:**\n\n| Difficulty | Rest moment | Example | Chain length |\n| :-: | :-: | :-: | :-- |\n| **Kantan** | 3/1 or longer | ![](/assets/checks/taiko-compose-rest-moments-example-kantan.png \"3/1\") | Rest moment needed every 32–36 beats |\n| **Futsuu** | 2/1 or longer | ![](/assets/checks/taiko-compose-rest-moments-example-futsuu.png \"2/1\") | Rest moment needed every 32–36 beats |\n| **Muzukashii** (option 1) | 3/2 or longer | ![](/assets/checks/taiko-compose-rest-moments-example-muzu-3-2.png \"3/2\") | Rest moment needed every 32–36 beats |\n| **Muzukashii** (option 2) | 3 consecutive 1/1 or longer | ![](/assets/checks/taiko-compose-rest-moments-example-muzu-1-1.png \"3 consecutive 1/1\") | Rest moment needed every 32–36 beats |\n| **Oni** | 1/1 or longer | ![](/assets/checks/taiko-compose-rest-moments-example-oni.png \"1/1\") | Rest moment needed every 16–20 beats",
         "Reasoning": "Abnormally long chains without proper rest moments can be very straining to play."
       },
       "templates": {
         "Minor": {
           "level": "Minor",
-          "formatString": "{0} > {1} No {2} rest moments for {3}, ensure this makes sense",
+          "formatString": "{0} > {1} No {2} rest moments for {3}. Ensure this makes sense.",
           "defaultArguments": [
             "start",
             "end",
@@ -466,7 +468,7 @@
         },
         "Warning": {
           "level": "Warning",
-          "formatString": "{0} > {1} No {2} rest moments for {3}, ensure this makes sense",
+          "formatString": "{0} > {1} No {2} rest moments for {3}. Ensure this makes sense.",
           "defaultArguments": [
             "start",
             "end",
@@ -533,11 +535,11 @@
       "templates": {
         "Minor": {
           "level": "Minor",
-          "formatString": "{0} Note is too close to spinner",
+          "formatString": "{0} Note is very close to spinner. Ensure there are no readability issues.",
           "defaultArguments": [
             "timestamp -"
           ],
-          "cause": "The note is too close to the spinner"
+          "cause": "The note is very close to the spinner, risking readability issues in certain cases."
         }
       },
       "modes": [
@@ -547,7 +549,8 @@
         "Easy",
         "Normal",
         "Hard",
-        "Insane"
+        "Insane",
+        "Expert"
       ]
     },
     {
@@ -1933,9 +1936,10 @@
       "templates": {
         "HigherSnapFollowedByAntiFlow": {
           "level": "Warning",
-          "formatString": "{0} Higher-snapped hyperdashes followed by antiflow.",
+          "formatString": "{0} Higher-snapped hyperdashes on {1} followed by antiflow.",
           "defaultArguments": [
-            "timestamp -"
+            "timestamp -",
+            "note"
           ]
         }
       },
@@ -2489,7 +2493,7 @@
       },
       "templates": {
         "Snap Consistency": {
-          "level": "Warning",
+          "level": "Minor",
           "formatString": "{0} (1/{1}) Different snapping, {2} (1/{3}), is used in {4}. Ensure this makes sense.",
           "defaultArguments": [
             "timestamp -",
@@ -2983,6 +2987,37 @@
       ]
     },
     {
+      "name": "CheckSilentHitSounds",
+      "fullName": "MapsetVerifier.Checks.AllModes.HitSounds.CheckSilentHitSounds",
+      "checkType": "General",
+      "category": "Hit Sounds",
+      "message": "Silent hit sounds not using the 44-byte blank.wav",
+      "author": "Greaper",
+      "applicableModes": "General",
+      "documentation": {
+        "Purpose": "Ensuring silent hit sounds use the required 44-byte file rather than a larger file padded with silence.",
+        "Reasoning": "The ranking criteria requires completely silent sound files to use [this 44-byte file](https://up.ppy.sh/files/blank.wav)\nwhich osu provides. Other files have unnecessarily large file sizes, and 0-byte files do not function.\n\nMappers occasionally create silent hit sounds by exporting an audio file with no audible content rather than using\nthe provided blank.wav. While these files play correctly in-game, they bloat the beatmap's download size for no benefit."
+      },
+      "templates": {
+        "Silent": {
+          "level": "Problem",
+          "formatString": "\"{0}\" is a silent hit sound but is not the required 44-byte blank.wav.",
+          "defaultArguments": [
+            "path"
+          ],
+          "cause": "A used hit sound file is effectively silent but does not match the 44-byte file osu provides for muted hit sounds."
+        },
+        "Unable to check": {
+          "level": "Error",
+          "formatString": "\"{0}\" couldn't be checked, so you'll need to do that manually.",
+          "defaultArguments": [
+            "path"
+          ],
+          "cause": "There was an error parsing a hit sound file."
+        }
+      }
+    },
+    {
       "name": "CheckBgPresence",
       "fullName": "MapsetVerifier.Checks.AllModes.General.Resources.CheckBgPresence",
       "checkType": "General",
@@ -3426,8 +3461,8 @@
       "fullName": "MapsetVerifier.Checks.AllModes.General.Metadata.CheckTitleMarkers",
       "checkType": "General",
       "category": "Metadata",
-      "message": "Incorrect format of title version markers such as (TV Size), (Game Ver.), (Extended Edit), etc",
-      "author": "Naxess",
+      "message": "Incorrect format of title version markers such as (TV Size), (Game Ver.), etc",
+      "author": "Hivie",
       "applicableModes": "General",
       "documentation": {
         "Purpose": "Standardizing title version markers for ranked content per the markers ranking criteria.\n\n![](/assets/checks/all-modes-general-metadata-title-markers-1.png \"A song using \"-TV version-\" as its official metadata, which becomes \"(TV Size)\" when standardized.\")",
@@ -3445,7 +3480,7 @@
           ],
           "cause": "The format of a title marker, in either the romanized or unicode title, is incorrect.\n                        Standard markers include:\n                        - (TV Size)\n                        - (Game Ver.)\n                        - (Short Ver.)\n                        - (Movie Ver.)\n                        - (Cut Ver.)\n                        - (Extended Edit)\n                        - (Sped Up Ver.)\n                        - (Nightcore Mix)\n                        - (Sped Up & Cut Ver.)\n                        - (Nightcore & Cut Ver.)"
         },
-        "Warning Nightcore Tag": {
+        "Nightcore Tag": {
           "level": "Warning",
           "formatString": "\"{0}\" in tags, consider \"{1}\" instead of \"{2}\" in {3} title.",
           "defaultArguments": [
@@ -3456,7 +3491,7 @@
           ],
           "cause": "The title contains a sped-up marker while tags indicate nightcore (pitch-up). Use a Nightcore marker instead."
         },
-        "Warning Guideline Ver": {
+        "Generic Marker Format": {
           "level": "Warning",
           "formatString": "{0} title field; \"{1}\" should use guideline format \"{2}\".",
           "defaultArguments": [
@@ -3466,7 +3501,7 @@
           ],
           "cause": "Length or version markers not covered by the standard list should use a descriptive \"(#### Ver.)\" form in title case, e.g. \"(Extended Version)\" -> \"(Extended Ver.)\", \"(Long)\" -> \"(Long Ver.)\"."
         },
-        "Warning Tv Position": {
+        "TV Size Position": {
           "level": "Warning",
           "formatString": "{0} title field; \"{1}\" — (TV Size) should be at the end of the title.",
           "defaultArguments": [
@@ -3475,7 +3510,7 @@
           ],
           "cause": "The TV Size marker should appear at the end of the title, typically as the final parenthetical."
         },
-        "Warning Op Version": {
+        "OP Version": {
           "level": "Warning",
           "formatString": "{0} title field; \"{1}\" — consider \"(Game Ver.)\" instead of \"OP Version\" (game-related tags detected).",
           "defaultArguments": [
@@ -3483,6 +3518,16 @@
             "field"
           ],
           "cause": "\"OP Version\" in a game context should be standardized to (Game Ver.)."
+        },
+        "Title Marker Mismatch": {
+          "level": "Problem",
+          "formatString": "{0} title field includes \"{1}\" but {2} title field does not.",
+          "defaultArguments": [
+            "Romanized/unicode",
+            "title marker",
+            "Romanized/unicode"
+          ],
+          "cause": "When a version marker is present in one title field, the same marker should appear in the other title field as well."
         }
       }
     },
