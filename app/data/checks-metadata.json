@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-04T22:46:04.7417739Z",
+  "generatedAt": "2026-07-03T22:31:45.8668323Z",
   "version": "1.0.0.0",
   "checks": [
     {
@@ -1374,56 +1374,6 @@
           "formatString": "Custom hitnormal isn't being overriden.",
           "defaultArguments": [],
           "cause": "A hitnormal file is present, but it's not overwriting the default hitnormal."
-        }
-      },
-      "modes": [
-        "Mania"
-      ],
-      "difficulties": [
-        "Easy",
-        "Normal",
-        "Hard",
-        "Insane",
-        "Expert",
-        "Ultra"
-      ]
-    },
-    {
-      "name": "CheckHitSoundInconsistencies",
-      "fullName": "MapsetVerifier.Checks.Mania.HitSounds.CheckHitSoundInconsistencies",
-      "checkType": "BeatmapSet",
-      "category": "Hit Sounds",
-      "message": "Hitsound inconsistency detected",
-      "author": "Tailsdk, Greaper",
-      "applicableModes": "Mania",
-      "documentation": {},
-      "templates": {
-        "Warning": {
-          "level": "Warning",
-          "formatString": "{0} has a hitsound inconsistency with {1}.",
-          "defaultArguments": [
-            "timestamp",
-            "beatmap"
-          ],
-          "cause": "There is a hitsound inconsistency"
-        },
-        "Problem": {
-          "level": "Problem",
-          "formatString": "{0} is used at {1} but does not exist.",
-          "defaultArguments": [
-            "hitsound",
-            "timestamp"
-          ],
-          "cause": "Missing hitsound"
-        },
-        "Double Hitsound": {
-          "level": "Warning",
-          "formatString": "{0} you have 2 of the same samples here make sure this is intentional {1}",
-          "defaultArguments": [
-            "timestamp",
-            "hitsound"
-          ],
-          "cause": "Double hitsound"
         }
       },
       "modes": [
@@ -3499,7 +3449,7 @@
             "field",
             "title marker"
           ],
-          "cause": "Length or version markers not covered by the standard list should use a descriptive \"(#### Ver.)\" form in title case, e.g. \"(Extended Version)\" -> \"(Extended Ver.)\", \"(Long)\" -> \"(Long Ver.)\"."
+          "cause": "Length or version markers not covered by the standard list should use a descriptive \"(#### Ver.)\" form in title case, e.g. \"(Extended Version)\" -> \"(Extended Ver.)\", \"(Long)\" -> \"(Long Ver.)\". Stylised markers considered part of the title should be kept as-is."
         },
         "TV Size Position": {
           "level": "Warning",
