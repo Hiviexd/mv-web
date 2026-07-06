@@ -8,11 +8,11 @@
         }
     },
     "beta": {
-        "latestVersion": "2.0.0-beta.14",
+        "latestVersion": "2.0.0-beta.15",
         "downloads": {
-            "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.14/Mapset-Verifier-Installer.exe",
-            "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.14/Mapset-Verifier-2.0.0-beta.14.AppImage",
-            "macos": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.14/Mapset-Verifier-2.0.0-beta.14.dmg"
+            "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.15/Mapset-Verifier-Installer.exe",
+            "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.15/Mapset-Verifier-2.0.0-beta.15.AppImage",
+            "macos": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.15/Mapset-Verifier-2.0.0-beta.15.dmg"
         }
     }
 }
