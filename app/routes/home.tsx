@@ -6,6 +6,7 @@ import { ChecksSection } from "../components/home/ChecksSection";
 import { ComparisonSection } from "../components/home/ComparisonSection";
 import { DownloadCtaSection } from "../components/home/DownloadCtaSection";
 import { HomeFooter } from "../components/home/HomeFooter";
+import { HomeSkeleton } from "../components/home/HomeSkeleton";
 import { Stack } from "@mantine/core";
 
 const homeSections = [
@@ -71,6 +72,10 @@ export function meta({}: Route.MetaArgs) {
         description: "Automated Quality Assurance for osu! Beatmaps. Catch issues before they become problems.",
         isHome: true,
     });
+}
+
+export function HydrateFallback() {
+    return <HomeSkeleton />;
 }
 
 export default function Home() {
