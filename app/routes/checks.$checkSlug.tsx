@@ -1,5 +1,6 @@
 import type { Route } from "./+types/checks.$checkSlug";
 import { CheckDocSections } from "../components/checks/CheckDocSections";
+import { CheckDetailSkeleton } from "../components/checks/CheckDetailSkeleton";
 import { CheckDetailTemplates } from "../components/checks/CheckDetailTemplates";
 import { CheckHeader } from "../components/checks/CheckHeader";
 import { CheckNav } from "../components/checks/CheckNav";
@@ -24,6 +25,10 @@ export function meta({ params }: Route.MetaArgs) {
         description,
         path: getCheckPath(slug),
     });
+}
+
+export function HydrateFallback() {
+    return <CheckDetailSkeleton />;
 }
 
 export default function CheckDetail({ params }: Route.ComponentProps) {
