@@ -110,12 +110,17 @@ function rewriteChangelogFiles(dir) {
     }
 }
 
-function pickDownloadUrls(assets) {
+function pickDownloads(assets) {
     const downloads = { windows: null, linux: null, macos: null };
+    const picked = [];
 
     const appImage = assets.find((a) => a.name.toLowerCase().endsWith(".appimage"));
     const tarGz = assets.find((a) => a.name.toLowerCase().endsWith(".tar.gz"));
-    downloads.linux = appImage?.browser_download_url ?? tarGz?.browser_download_url ?? null;
+    const linuxAsset = appImage ?? tarGz;
+    if (linuxAsset) {
+        downloads.linux = linuxAsset.browser_download_url;
+        picked.push(linuxAsset);
+    }
 
     for (const asset of assets) {
         const name = asset.name;
@@ -126,22 +131,65 @@ function pickDownloadUrls(assets) {
 
         if (lower.endsWith(".exe") && !downloads.windows) {
             downloads.windows = url;
+            picked.push(asset);
         }
 
         if (lower.endsWith(".dmg") && !lower.includes("arm64") && !downloads.macos) {
             downloads.macos = url;
+            picked.push(asset);
         }
     }
 
-    return downloads;
+    const downloadCount = picked.reduce((sum, asset) => sum + (asset.download_count ?? 0), 0);
+    return { downloads, downloadCount };
 }
 
-function channelFromRelease(release) {
-    if (!release) return null;
+function versionEntryFromRelease(release) {
+    const { downloads, downloadCount } = pickDownloads(release.assets ?? []);
     return {
-        latestVersion: stripTag(release.tag_name),
-        downloads: pickDownloadUrls(release.assets ?? []),
+        version: stripTag(release.tag_name),
+        downloadCount,
+        downloads,
     };
+}
+
+function emptyChannel() {
+    return {
+        latestVersion: "0.0.0",
+        isLatest: false,
+        downloadCount: 0,
+        downloads: { windows: null, linux: null, macos: null },
+        versions: [],
+    };
+}
+
+function channelFromReleases(streamReleases) {
+    if (!streamReleases.length) return emptyChannel();
+
+    const [head, ...older] = streamReleases;
+    const { downloads, downloadCount } = pickDownloads(head.assets ?? []);
+    return {
+        latestVersion: stripTag(head.tag_name),
+        isLatest: false,
+        downloadCount,
+        downloads,
+        versions: older.map(versionEntryFromRelease),
+    };
+}
+
+function applyIsLatest(releaseChannel, betaChannel, stableHead, betaHead) {
+    const stablePublished = stableHead?.published_at ?? null;
+    const betaPublished = betaHead?.published_at ?? null;
+
+    if (stablePublished && betaPublished) {
+        const stableIsLatest = Date.parse(stablePublished) >= Date.parse(betaPublished);
+        releaseChannel.isLatest = stableIsLatest;
+        betaChannel.isLatest = !stableIsLatest;
+        return;
+    }
+
+    releaseChannel.isLatest = Boolean(stablePublished);
+    betaChannel.isLatest = Boolean(betaPublished) && !stablePublished;
 }
 
 async function fetchReleases(owner, repo) {
@@ -216,18 +264,16 @@ rewriteChangelogFiles(changelogDest);
 // --- Update release.json ---
 const { owner, repo } = parseRepo(metadata.repository);
 const releases = await fetchReleases(owner, repo);
-const stableRelease = releases.find((r) => !r.prerelease);
-const betaRelease = releases.find((r) => r.prerelease);
+const stableReleases = releases.filter((r) => !r.prerelease);
+const betaReleases = releases.filter((r) => r.prerelease);
+
+const releaseChannel = channelFromReleases(stableReleases);
+const betaChannel = channelFromReleases(betaReleases);
+applyIsLatest(releaseChannel, betaChannel, stableReleases[0], betaReleases[0]);
 
 const releaseData = {
-    release: channelFromRelease(stableRelease) ?? {
-        latestVersion: "0.0.0",
-        downloads: { windows: null, linux: null, macos: null },
-    },
-    beta: channelFromRelease(betaRelease) ?? {
-        latestVersion: "0.0.0",
-        downloads: { windows: null, linux: null, macos: null },
-    },
+    release: releaseChannel,
+    beta: betaChannel,
 };
 
 const releasePath = join(WORKSPACE_ROOT, "app/data/release.json");

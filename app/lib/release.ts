@@ -6,9 +6,18 @@ export interface ReleaseDownloads {
     macos: string | null;
 }
 
+export interface ReleaseVersionEntry {
+    version: string;
+    downloadCount: number;
+    downloads: ReleaseDownloads;
+}
+
 export interface ReleaseChannel {
     latestVersion: string;
+    isLatest: boolean;
+    downloadCount: number;
     downloads: ReleaseDownloads;
+    versions: ReleaseVersionEntry[];
 }
 
 export interface ReleaseData {
@@ -42,4 +51,8 @@ export function getDownloadUrl(
     platform: keyof ReleaseDownloads
 ): string | null {
     return channel.downloads[platform];
+}
+
+export function formatDownloadCount(count: number): string {
+    return new Intl.NumberFormat().format(count);
 }

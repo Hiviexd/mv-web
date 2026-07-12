@@ -1,27 +1,95 @@
-import { Anchor, Badge, Box, Button, Card, Group, Paper, Stack, Text, Title } from "@mantine/core";
-import { IconDownload } from "@tabler/icons-react";
+import {
+    Anchor,
+    Badge,
+    Box,
+    Button,
+    Card,
+    Collapse,
+    Group,
+    Paper,
+    ScrollArea,
+    Stack,
+    Text,
+    Title,
+    UnstyledButton,
+} from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+import { IconChevronDown, IconDownload } from "@tabler/icons-react";
 import { Logo } from "../base/Logo";
-import { buildPlatforms, type ReleaseChannel } from "../../lib/release";
+import { buildPlatforms, formatDownloadCount, type ReleaseChannel } from "../../lib/release";
+
+const OLDER_VERSIONS_SCROLL_HEIGHT = 180;
 
 interface ReleaseChannelCardProps {
     label: string;
     channel: ReleaseChannel;
 }
 
+function DownloadCount({ count }: { count: number }) {
+    return (
+        <Text size="sm" c="dimmed">
+            {formatDownloadCount(count)} downloads
+        </Text>
+    );
+}
+
+function PlatformLinks({ downloads }: { downloads: ReleaseChannel["downloads"] }) {
+    const platforms = buildPlatforms(downloads);
+    if (platforms.length === 0) {
+        return (
+            <Text size="sm" c="dimmed">
+                No downloads
+            </Text>
+        );
+    }
+
+    return (
+        <Group gap="xs" wrap="wrap" className="platform-links">
+            {platforms.map((platform, index) => (
+                <Group key={platform.key} gap="xs">
+                    <Anchor
+                        href={platform.url}
+                        size="sm"
+                        c="dimmed"
+                        className="platform-link"
+                        style={{ textDecoration: "none" }}>
+                        {platform.name}
+                    </Anchor>
+                    {index < platforms.length - 1 && (
+                        <Text size="sm" c="dimmed" style={{ userSelect: "none" }}>
+                            •
+                        </Text>
+                    )}
+                </Group>
+            ))}
+        </Group>
+    );
+}
+
 export function ReleaseChannelCard({ label, channel }: ReleaseChannelCardProps) {
     const platforms = buildPlatforms(channel.downloads);
     const primary = platforms[0];
     const isBeta = label === "Beta";
+    const olderVersions = channel.versions ?? [];
+    const [olderOpened, { toggle: toggleOlder }] = useDisclosure(false);
 
     return (
-        <Card shadow="sm" padding="xl" radius="md" withBorder className="release-channel-card" h="100%">
-            <Stack gap="md" h="100%">
+        <Card shadow="sm" padding="xl" radius="md" withBorder className="release-channel-card">
+            <Stack gap="md">
                 <Group justify="space-between" align="center" wrap="nowrap" gap="md">
                     <Stack gap={4}>
-                        <Badge size="lg" variant="light" color={isBeta ? "yellow" : "blue"}>
-                            {label}
-                        </Badge>
+                        <Group gap="xs" wrap="wrap">
+                            <Badge size="lg" variant="light" color={isBeta ? "yellow" : "blue"}>
+                                {label}
+                            </Badge>
+                            {channel.isLatest && (
+                                <Badge size="lg" variant="filled" color="teal">
+                                    Latest
+                                </Badge>
+                            )}
+                        </Group>
                         <Title order={2}>v{channel.latestVersion}</Title>
+                        <DownloadCount count={channel.downloadCount} />
                     </Stack>
                     <Box
                         className={`release-channel-card__logo${isBeta ? " release-channel-card__logo--beta" : ""}`}
@@ -50,7 +118,7 @@ export function ReleaseChannelCard({ label, channel }: ReleaseChannelCardProps) 
                 )}
 
                 {platforms.length > 1 && (
-                    <Group gap="xs" justify="center" className="platform-links" mt="auto">
+                    <Group gap="xs" justify="center" className="platform-links">
                         {platforms.slice(1).map((platform, index) => (
                             <Group key={platform.key} gap="xs">
                                 <Anchor
@@ -69,6 +137,58 @@ export function ReleaseChannelCard({ label, channel }: ReleaseChannelCardProps) 
                             </Group>
                         ))}
                     </Group>
+                )}
+
+                {olderVersions.length > 0 && (
+                    <Stack gap="xs" className="release-channel-card__older">
+                        <UnstyledButton
+                            type="button"
+                            onClick={toggleOlder}
+                            w="100%"
+                            aria-expanded={olderOpened}
+                            className="release-channel-card__older-trigger">
+                            <Group justify="space-between" wrap="nowrap" gap="sm">
+                                <Text size="sm" c="dimmed">
+                                    Older versions ({olderVersions.length})
+                                </Text>
+                                <IconChevronDown
+                                    size={16}
+                                    className="release-channel-card__older-chevron"
+                                    data-opened={olderOpened || undefined}
+                                />
+                            </Group>
+                        </UnstyledButton>
+
+                        <Collapse in={olderOpened}>
+                            <ScrollArea
+                                type="always"
+                                scrollbarSize={6}
+                                offsetScrollbars
+                                overscrollBehavior="contain"
+                                h={OLDER_VERSIONS_SCROLL_HEIGHT}
+                                className="release-channel-card__older-scroll">
+                                <Stack gap="xs" pr="xs">
+                                    {olderVersions.map((entry) => (
+                                        <Group
+                                            key={entry.version}
+                                            justify="space-between"
+                                            align="center"
+                                            wrap="nowrap"
+                                            gap="sm"
+                                            className="release-channel-card__older-row">
+                                            <Stack gap={2}>
+                                                <Text size="sm" fw={600}>
+                                                    v{entry.version}
+                                                </Text>
+                                                <DownloadCount count={entry.downloadCount} />
+                                            </Stack>
+                                            <PlatformLinks downloads={entry.downloads} />
+                                        </Group>
+                                    ))}
+                                </Stack>
+                            </ScrollArea>
+                        </Collapse>
+                    </Stack>
                 )}
             </Stack>
         </Card>

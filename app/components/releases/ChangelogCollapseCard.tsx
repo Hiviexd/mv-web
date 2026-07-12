@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Badge, Card, Collapse, Group, Stack, Text, UnstyledButton } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconChevronDown } from "@tabler/icons-react";
@@ -15,18 +16,35 @@ export function ChangelogCollapseCard({
     isLatest,
     initiallyExpanded = false,
 }: ChangelogCollapseCardProps) {
-    const [opened, { toggle }] = useDisclosure(initiallyExpanded);
+    const [opened, { toggle, open }] = useDisclosure(initiallyExpanded);
+    const [renderBody, setRenderBody] = useState(initiallyExpanded);
+
+    const handleToggle = () => {
+        if (opened) {
+            toggle();
+            return;
+        }
+
+        setRenderBody(true);
+        requestAnimationFrame(() => open());
+    };
+
+    const handleTransitionEnd = () => {
+        if (!opened) {
+            setRenderBody(false);
+        }
+    };
 
     return (
         <Card shadow="sm" withBorder radius="md" padding="md" className="changelog-collapse-card" w="100%">
             <UnstyledButton
                 type="button"
-                onClick={toggle}
+                onClick={handleToggle}
                 w="100%"
                 aria-expanded={opened}
                 className="changelog-collapse-card__trigger">
                 <Group justify="space-between" wrap="nowrap" align="flex-start" gap="sm">
-                    <Stack gap={4} style={{ flex: 1, minWidth: 0 }}>
+                    <Stack gap={0} style={{ flex: 1, minWidth: 0 }}>
                         <Group gap="sm" wrap="wrap">
                             <Text fw={700} size="xl" className="changelog-collapse-card__title">
                                 {entry.title}
@@ -38,9 +56,9 @@ export function ChangelogCollapseCard({
                             )}
                         </Group>
                         {!opened && entry.preview && (
-                            <Text size="sm" c="dimmed" lineClamp={2}>
-                                {entry.preview}
-                            </Text>
+                            <div className="changelog-collapse-card__preview">
+                                <MarkdownText content={entry.preview} />
+                            </div>
                         )}
                     </Stack>
                     <IconChevronDown
@@ -51,9 +69,13 @@ export function ChangelogCollapseCard({
                 </Group>
             </UnstyledButton>
 
-            <Collapse in={opened} my="md">
-                {opened && <MarkdownText content={entry.body} />}
-            </Collapse>
+            {renderBody && (
+                <Collapse in={opened} onTransitionEnd={handleTransitionEnd}>
+                    <div className="changelog-collapse-card__body">
+                        <MarkdownText content={entry.body} />
+                    </div>
+                </Collapse>
+            )}
         </Card>
     );
 }

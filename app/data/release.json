@@ -1,18 +1,557 @@
 {
     "release": {
         "latestVersion": "2.0.0",
+        "isLatest": true,
+        "downloadCount": 16,
         "downloads": {
             "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0/Mapset-Verifier-Installer.exe",
             "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0/Mapset-Verifier-2.0.0.AppImage",
             "macos": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0/Mapset-Verifier-2.0.0.dmg"
-        }
+        },
+        "versions": [
+            {
+                "version": "1.8.2",
+                "downloadCount": 33895,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.8.2/mapsetverifier-setup-1.8.2.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.8.2/mapsetverifier-1.8.2.tar.gz",
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.8.1",
+                "downloadCount": 178,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.8.1/mapsetverifier-setup-1.8.1.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.8.1/mapsetverifier-1.8.1.tar.gz",
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.8.0",
+                "downloadCount": 873,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.8.0/mapsetverifier-setup-1.8.0.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.8.0/mapsetverifier-1.8.0.tar.gz",
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.7.2",
+                "downloadCount": 5011,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.7.2/mapsetverifier-setup-1.7.2.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.7.2/mapsetverifier-1.7.2.tar.gz",
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.7.1",
+                "downloadCount": 462,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.7.1/mapsetverifier-setup-1.7.1.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.7.1/mapsetverifier-1.7.1.tar.gz",
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.7.0",
+                "downloadCount": 468,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.7.0/mapsetverifier-setup-1.7.0.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.7.0/mapsetverifier-1.7.0.tar.gz",
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.6.6",
+                "downloadCount": 1702,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.6.6/mapsetverifier-setup-1.6.6.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.6.6/mapsetverifier-1.6.6.tar.gz",
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.6.5",
+                "downloadCount": 1271,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.6.5/mapsetverifier-setup-1.6.5.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.6.5/mapsetverifier-1.6.5.tar.gz",
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.6.4",
+                "downloadCount": 825,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.6.4/mapsetverifier-setup-1.6.4.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.6.4/mapsetverifier-1.6.4.tar.gz",
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.6.3",
+                "downloadCount": 612,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.6.3/mapsetverifier-setup-1.6.3.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.6.3/mapsetverifier-1.6.3.tar.gz",
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.6.2",
+                "downloadCount": 36,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.6.2/mapsetverifier-setup-1.6.2.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.6.2/mapsetverifier-1.6.2.tar.gz",
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.6.1",
+                "downloadCount": 34,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.6.1/mapsetverifier-setup-1.6.1.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.6.1/mapsetverifier-1.6.1.tar.gz",
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.6.0",
+                "downloadCount": 172,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.6.0/mapsetverifier-setup-1.6.0.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.6.0/mapsetverifier-1.6.0.tar.gz",
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.5.2",
+                "downloadCount": 1704,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.5.2/mapsetverifier-setup-1.5.2.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.5.2/mapsetverifier-1.5.2.tar.gz",
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.5.1",
+                "downloadCount": 1006,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.5.1/mapsetverifier-setup-1.5.1.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.5.1/mapsetverifier-1.5.1.tar.gz",
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.5.0",
+                "downloadCount": 1002,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.5.0/mapsetverifier-setup-1.5.0.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.5.0/mapsetverifier-1.5.0.tar.gz",
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.4.3",
+                "downloadCount": 1656,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.4.3/mapsetverifier-setup-1.4.3.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.4.3/mapsetverifier-1.4.3.tar.gz",
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.4.2",
+                "downloadCount": 51,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.4.2/mapsetverifier-setup-1.4.2.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.4.2/mapsetverifier-1.4.2.tar.gz",
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.4.1",
+                "downloadCount": 512,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.4.1/mapsetverifier-setup-1.4.1.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.4.1/mapsetverifier-1.4.1.tar.gz",
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.4.0",
+                "downloadCount": 310,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.4.0/mapsetverifier-setup-1.4.0.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.4.0/mapsetverifier-1.4.0.tar.gz",
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.3.3",
+                "downloadCount": 1162,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.3.3/mapsetverifier-setup-1.3.3.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.3.3/mapsetverifier-1.3.3.tar.gz",
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.3.2",
+                "downloadCount": 341,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.3.2/mapsetverifier-setup-1.3.2.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.3.2/mapsetverifier-1.3.2.tar.gz",
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.3.1",
+                "downloadCount": 80,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.3.1/mapsetverifier-setup-1.3.1.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.3.1/mapsetverifier-1.3.1.tar.gz",
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.3.0",
+                "downloadCount": 242,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.3.0/mapsetverifier-setup-1.3.0.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.3.0/mapsetverifier-1.3.0.tar.gz",
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.2.1",
+                "downloadCount": 639,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.2.1/mapsetverifier-setup-1.2.1.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.2.1/mapsetverifier-1.2.1.tar.gz",
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.2.0",
+                "downloadCount": 186,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.2.0/mapsetverifier-setup-1.2.0.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.2.0/mapsetverifier-1.2.0.tar.gz",
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.1.4",
+                "downloadCount": 1225,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.1.4/mapsetverifier-setup-1.1.4.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.1.4/mapsetverifier-1.1.4.tar.gz",
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.1.3",
+                "downloadCount": 243,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.1.3/mapsetverifier-setup-1.1.3.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.1.3/mapsetverifier-1.1.3.tar.gz",
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.1.2",
+                "downloadCount": 155,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.1.2/mapsetverifier-setup-1.1.2.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.1.2/mapsetverifier-1.1.2.tar.gz",
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.1.1",
+                "downloadCount": 690,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.1.1/mapsetverifier-setup-1.1.1.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.1.1/mapsetverifier-1.1.1.tar.gz",
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.1.0",
+                "downloadCount": 536,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.1.0/mapsetverifier-setup-1.1.0.exe",
+                    "linux": null,
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.0.9",
+                "downloadCount": 257,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.0.9/mapsetverifier-setup-1.0.9.exe",
+                    "linux": null,
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.0.8",
+                "downloadCount": 308,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.0.8/mapsetverifier-setup-1.0.8.exe",
+                    "linux": null,
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.0.7",
+                "downloadCount": 20,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.0.7/mapsetverifier-setup-1.0.7.exe",
+                    "linux": null,
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.0.6",
+                "downloadCount": 18,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.0.6/mapsetverifier-setup-1.0.6.exe",
+                    "linux": null,
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.0.5",
+                "downloadCount": 15,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.0.5/mapsetverifier-setup-1.0.5.exe",
+                    "linux": null,
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.0.4",
+                "downloadCount": 10,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.0.4/mapsetverifier-setup-1.0.4.exe",
+                    "linux": null,
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.0.3",
+                "downloadCount": 12,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.0.3/mapsetverifier-setup-1.0.3.exe",
+                    "linux": null,
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.0.2",
+                "downloadCount": 13,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.0.2/mapsetverifier-setup-1.0.2.exe",
+                    "linux": null,
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.0.1",
+                "downloadCount": 11,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.0.1/mapsetverifier-setup-1.0.1.exe",
+                    "linux": null,
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.0.0",
+                "downloadCount": 11,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.0.0/mapsetverifier-setup-1.0.0.exe",
+                    "linux": null,
+                    "macos": null
+                }
+            }
+        ]
     },
     "beta": {
         "latestVersion": "2.0.0-beta.16",
+        "isLatest": false,
+        "downloadCount": 140,
         "downloads": {
             "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.16/Mapset-Verifier-Installer.exe",
             "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.16/Mapset-Verifier-2.0.0-beta.16.AppImage",
             "macos": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.16/Mapset-Verifier-2.0.0-beta.16.dmg"
-        }
+        },
+        "versions": [
+            {
+                "version": "2.0.0-beta.15",
+                "downloadCount": 131,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.15/Mapset-Verifier-Installer.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.15/Mapset-Verifier-2.0.0-beta.15.AppImage",
+                    "macos": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.15/Mapset-Verifier-2.0.0-beta.15.dmg"
+                }
+            },
+            {
+                "version": "2.0.0-beta.14",
+                "downloadCount": 131,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.14/Mapset-Verifier-Installer.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.14/Mapset-Verifier-2.0.0-beta.14.AppImage",
+                    "macos": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.14/Mapset-Verifier-2.0.0-beta.14.dmg"
+                }
+            },
+            {
+                "version": "2.0.0-beta.13",
+                "downloadCount": 460,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.13/Mapset-Verifier-Installer.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.13/Mapset-Verifier-2.0.0-beta.13.AppImage",
+                    "macos": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.13/Mapset-Verifier-2.0.0-beta.13.dmg"
+                }
+            },
+            {
+                "version": "2.0.0-beta.12",
+                "downloadCount": 216,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.12/Mapset-Verifier-Installer.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.12/Mapset-Verifier-2.0.0-beta.12.AppImage",
+                    "macos": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.12/Mapset-Verifier-2.0.0-beta.12.dmg"
+                }
+            },
+            {
+                "version": "2.0.0-beta.11",
+                "downloadCount": 81,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.11/Mapset-Verifier-Installer.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.11/Mapset-Verifier-2.0.0-beta.11.AppImage",
+                    "macos": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.11/Mapset-Verifier-2.0.0-beta.11.dmg"
+                }
+            },
+            {
+                "version": "2.0.0-beta.10",
+                "downloadCount": 45,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.10/Mapset-Verifier-Installer.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.10/Mapset-Verifier-2.0.0-beta.10.AppImage",
+                    "macos": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.10/Mapset-Verifier-2.0.0-beta.10.dmg"
+                }
+            },
+            {
+                "version": "2.0.0-beta.9",
+                "downloadCount": 90,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.9/Mapset-Verifier-Installer.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.9/Mapset-Verifier-2.0.0-beta.9.AppImage",
+                    "macos": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.9/Mapset-Verifier-2.0.0-beta.9.dmg"
+                }
+            },
+            {
+                "version": "2.0.0-beta.8",
+                "downloadCount": 87,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.8/Mapset-Verifier-Installer.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.8/Mapset-Verifier-2.0.0-beta.8.AppImage",
+                    "macos": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.8/Mapset-Verifier-2.0.0-beta.8.dmg"
+                }
+            },
+            {
+                "version": "2.0.0-beta.7",
+                "downloadCount": 62,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.7/Mapset-Verifier-Installer.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.7/Mapset-Verifier-2.0.0-beta.7.AppImage",
+                    "macos": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.7/Mapset-Verifier-2.0.0-beta.7.dmg"
+                }
+            },
+            {
+                "version": "2.0.0-beta.6",
+                "downloadCount": 78,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.6/Mapset-Verifier-Installer.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.6/Mapset-Verifier-2.0.0-beta.6.AppImage",
+                    "macos": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.6/Mapset-Verifier-2.0.0-beta.6.dmg"
+                }
+            },
+            {
+                "version": "2.0.0-beta.5",
+                "downloadCount": 32,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.5/Mapset-Verifier-Installer.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.5/Mapset-Verifier-2.0.0-beta.5.AppImage",
+                    "macos": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.5/Mapset-Verifier-2.0.0-beta.5.dmg"
+                }
+            },
+            {
+                "version": "2.0.0-beta.4",
+                "downloadCount": 174,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.4/Mapset-Verifier-Installer.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.4/Mapset-Verifier-2.0.0-beta.4.AppImage",
+                    "macos": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.4/Mapset-Verifier-2.0.0-beta.4.dmg"
+                }
+            },
+            {
+                "version": "2.0.0-beta.3",
+                "downloadCount": 12,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.3/Mapset-Verifier-Installer.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.3/Mapset-Verifier-2.0.0-beta.3.AppImage",
+                    "macos": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.3/Mapset-Verifier-2.0.0-beta.3.dmg"
+                }
+            },
+            {
+                "version": "2.0.0-beta.2",
+                "downloadCount": 6,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.2/Mapset-Verifier-Installer.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.2/Mapset-Verifier-2.0.0-beta.2.AppImage",
+                    "macos": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-beta.2/Mapset-Verifier-2.0.0-beta.2.dmg"
+                }
+            },
+            {
+                "version": "2.0.0-RC.1",
+                "downloadCount": 119,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-RC.1/Mapset-Verifier-Installer.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0-RC.1/Mapset-Verifier-2.0.0-RC.1.AppImage",
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.1.1-c",
+                "downloadCount": 25,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.1.1-c/mapsetverifier-setup-1.1.1-c.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.1.1-c/mapsetverifier-1.1.1-c.tar.gz",
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.1.1-b",
+                "downloadCount": 16,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.1.1-b/mapsetverifier-setup-1.1.1-b.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.1.1-b/Mapset-Verifier-1.1.1-b.AppImage",
+                    "macos": null
+                }
+            },
+            {
+                "version": "1.1.1-a",
+                "downloadCount": 11,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.1.1-a/mapsetverifier-setup-1.1.0-a.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.1.1-a/Mapset-Verifier-1.1.0-a.AppImage",
+                    "macos": null
+                }
+            }
+        ]
     }
 }
