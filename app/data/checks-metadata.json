@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-19T12:02:30.0762131Z",
+  "generatedAt": "2026-07-20T00:55:17.4412717Z",
   "version": "1.0.0.0",
   "checks": [
     {
@@ -43,7 +43,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckDoubleBarlines",
@@ -93,7 +94,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckInconsistentBarLines",
@@ -128,7 +130,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckKiaiConsistency",
@@ -163,7 +166,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckKiaiFlash",
@@ -207,7 +211,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckLowDiffScrollSpeed",
@@ -239,7 +244,8 @@
       "difficulties": [
         "Easy",
         "Normal"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckDiffSettings",
@@ -299,7 +305,8 @@
         "Normal",
         "Hard",
         "Insane"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckBgOffsetIssues",
@@ -344,7 +351,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckLastNoteHidingBarline",
@@ -394,7 +402,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckPatternLength",
@@ -440,7 +449,8 @@
         "Normal",
         "Hard",
         "Insane"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckRestMoments",
@@ -486,7 +496,8 @@
         "Normal",
         "Hard",
         "Insane"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckSmallestSnap",
@@ -518,7 +529,8 @@
         "Normal",
         "Hard",
         "Insane"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckSpinnerReadability",
@@ -551,7 +563,8 @@
         "Hard",
         "Insane",
         "Expert"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckUnrankableFinishers",
@@ -593,7 +606,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckCloseOverlap",
@@ -638,7 +652,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckHardRockPerfectStacks",
@@ -679,7 +694,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckMultipleReverses",
@@ -717,7 +733,8 @@
       "difficulties": [
         "Easy",
         "Normal"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckShortSliders",
@@ -748,7 +765,8 @@
       ],
       "difficulties": [
         "Easy"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckSpaceVariation",
@@ -791,7 +809,8 @@
       "difficulties": [
         "Easy",
         "Normal"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckSpinnerRecovery",
@@ -857,7 +876,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckStackLeniency",
@@ -908,7 +928,45 @@
         "Normal",
         "Hard",
         "Insane"
-      ]
+      ],
+      "beta": false
+    },
+    {
+      "name": "CheckDiffSettings",
+      "fullName": "MapsetVerifier.Checks.Standard.Settings.CheckDiffSettings",
+      "checkType": "Beatmap",
+      "category": "Settings",
+      "message": "Difficulty settings outside of the guideline range",
+      "author": "Greaper",
+      "applicableModes": "Standard",
+      "documentation": {
+        "Purpose": "Preventing difficulties from straying far outside of the recommended\nAR/OD/HP/CS guideline ranges present in the ranking criteria.",
+        "Reasoning": "                    Settings that are far outside of the guideline range for a difficulty's\n                    name can cause gameplay expectations to not line up with the actual\n                    difficulty of the map, so make sure to apply your own judgment as well.\n\n### Recommended settings\n\n| Difficulty | AR | OD | HP | CS |\n|---|---|---|---|---|\n| Easy | 5 or lower | 1~3 | 1~3 | 4 or lower |\n| Normal | 4~6 | 3~5 | 3~5 | 5 or lower |\n| Hard | 6~8 | 5~7 | 4~6 | 6 or lower |\n| Insane | 7~9.3 | 7~9 | 5~8 | 7 or lower |\n| Expert | 8 or higher | 8 or higher | 5 or higher | 7 or lower |"
+      },
+      "templates": {
+        "outOfRange": {
+          "level": "Minor",
+          "formatString": "{0} is recommended to be {1} for {2} difficulties, currently {3}.",
+          "defaultArguments": [
+            "setting",
+            "range",
+            "difficulty",
+            "current"
+          ],
+          "cause": "A difficulty setting is outside of the recommended guideline range for this difficulty's name."
+        }
+      },
+      "modes": [
+        "Standard"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert"
+      ],
+      "beta": true
     },
     {
       "name": "CheckAbnormalSpacing",
@@ -964,7 +1022,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckAmbiguity",
@@ -1007,7 +1066,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckBurai",
@@ -1049,7 +1109,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckNinjaSpinner",
@@ -1091,7 +1152,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckObscuredReverse",
@@ -1124,7 +1186,8 @@
         "Normal",
         "Hard",
         "Insane"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckOffscreen",
@@ -1176,7 +1239,41 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
+    },
+    {
+      "name": "CheckSliderOnlySections",
+      "fullName": "MapsetVerifier.Checks.Standard.Compose.CheckSliderOnlySections",
+      "checkType": "Beatmap",
+      "category": "Compose",
+      "message": "Slider only section",
+      "author": "Greaper",
+      "applicableModes": "Standard",
+      "documentation": {
+        "Purpose": "Avoiding slider-only sections in easy and normal difficulties.",
+        "Reasoning": "Having a slider-only section in lower difficulties can be tiring for new players, since\nthey have to juggle clicking and holding, as opposed to only clicking."
+      },
+      "templates": {
+        "SliderSection": {
+          "level": "Minor",
+          "formatString": "{0} Section is slider only ({1} objects, spanning {2} s). Ensure this includes plenty of time between objects.",
+          "defaultArguments": [
+            "timestamp -",
+            "num",
+            "duration"
+          ],
+          "cause": "Slider-only sections should only exist given that there's enough time between objects to make sure the player has time to reset."
+        }
+      },
+      "modes": [
+        "Standard"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal"
+      ],
+      "beta": true
     },
     {
       "name": "CheckEasySliderVelocity",
@@ -1209,7 +1306,8 @@
       "difficulties": [
         "Easy",
         "Normal"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckVariableBpm",
@@ -1261,7 +1359,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckSeven",
@@ -1295,7 +1394,8 @@
         "Normal",
         "Hard",
         "Insane"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckDiffSettingsLowerDifficulties",
@@ -1348,7 +1448,8 @@
         "Easy",
         "Normal",
         "Hard"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckHitNormalUsage",
@@ -1386,7 +1487,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckColumnDistribution",
@@ -1452,7 +1554,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckSliderLength",
@@ -1496,7 +1599,45 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
+    },
+    {
+      "name": "CheckDiffSettings",
+      "fullName": "MapsetVerifier.Checks.Catch.Settings.CheckDiffSettings",
+      "checkType": "Beatmap",
+      "category": "Settings",
+      "message": "Difficulty settings outside of the guideline range",
+      "author": "Greaper",
+      "applicableModes": "Catch",
+      "documentation": {
+        "Purpose": "Preventing difficulties from straying far outside of the recommended\nAR/OD/HP/CS guideline ranges present in the ranking criteria.",
+        "Reasoning": "                    Settings that are far outside of the guideline range for a difficulty's\n                    name can cause gameplay expectations to not line up with the actual\n                    difficulty of the map, so make sure to apply your own judgment as well.\n\n### Recommended settings\n\n| Difficulty | AR/OD | HP | CS |\n|---|---|---|---|\n| Easy | 6 or lower | 2~3 | 2.5 or lower |\n| Normal | 7 or lower | 3~4 | 3 or lower |\n| Hard | 8 or lower | 4~5 | 3.5 or lower |\n| Insane | 9 or lower | 5~6 | 4 or lower |\n| Expert | 9 or higher | 5 or higher | 4 or higher |"
+      },
+      "templates": {
+        "outOfRange": {
+          "level": "Minor",
+          "formatString": "{0} is recommended to be {1} for {2} difficulties, currently {3}.",
+          "defaultArguments": [
+            "setting",
+            "range",
+            "difficulty",
+            "current"
+          ],
+          "cause": "A difficulty setting is outside of the recommended guideline range for this difficulty's name."
+        }
+      },
+      "modes": [
+        "Catch"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert"
+      ],
+      "beta": true
     },
     {
       "name": "CheckConsecutiveHyperdash",
@@ -1548,7 +1689,8 @@
       "difficulties": [
         "Hard",
         "Insane"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckHasEdgeDash",
@@ -1613,7 +1755,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckHasHyperdash",
@@ -1654,7 +1797,8 @@
         "Easy",
         "Normal",
         "Hard"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckHasSpinner",
@@ -1686,7 +1830,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckHyperdashSnap",
@@ -1718,7 +1863,8 @@
       "difficulties": [
         "Hard",
         "Insane"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckMaxCombo",
@@ -1764,7 +1910,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckSpinnerGap",
@@ -1810,7 +1957,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckRainConsistentHyperdashSnaps",
@@ -1839,7 +1987,8 @@
       ],
       "difficulties": [
         "Insane"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckRainHyperdashSlider",
@@ -1869,7 +2018,8 @@
       ],
       "difficulties": [
         "Insane"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckPlatterHigherSnappedHyperdash",
@@ -1898,7 +2048,8 @@
       ],
       "difficulties": [
         "Hard"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckBeforeLine",
@@ -1946,7 +2097,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckConcurrentLines",
@@ -1995,7 +2147,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckFirstLine",
@@ -2046,7 +2199,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckInconsistentLines",
@@ -2119,7 +2273,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckInvalidVolume",
@@ -2157,7 +2312,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckKiaiUnsnap",
@@ -2213,7 +2369,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckPreview",
@@ -2256,7 +2413,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckRedLineSnapping",
@@ -2296,7 +2454,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckUnsnaps",
@@ -2320,16 +2479,6 @@
             "unsnap"
           ],
           "cause": "A hit object is snapped at least 2 ms too early or late for either of the 1/5, 1/7, 1/9, 1/12, or 1/16 beat snap divisors."
-        },
-        "AiMod False Positive": {
-          "level": "Info",
-          "formatString": "{0} {1} unsnapped by {2} ms. AiMod will claim that this is an issue, but that is a false-positive. So you can ignore that.",
-          "defaultArguments": [
-            "timestamp -",
-            "object",
-            "unsnap"
-          ],
-          "cause": "Same as the other check, but only for slider tails snapped > 1 ms and < 2 ms late."
         },
         "Minor": {
           "level": "Minor",
@@ -2355,7 +2504,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckUnusedLines",
@@ -2409,9 +2559,17 @@
           "formatString": "{0} Inherited line changes {1}.",
           "defaultArguments": [
             "timestamp -",
-            "nothing(, other than SV/sample settings, but affects nothing)"
+            "SV and sample settings, but affects nothing"
           ],
-          "cause": "An inherited line changes no settings."
+          "cause": "An inherited line changes settings, but there are no objects for those changes to affect."
+        },
+        "Minor Inherited Same Values": {
+          "level": "Minor",
+          "formatString": "{0} Inherited line uses the same values as the previous timing line.",
+          "defaultArguments": [
+            "timestamp -"
+          ],
+          "cause": "An inherited line changes no settings compared to the previous timing line."
         }
       },
       "modes": [
@@ -2427,7 +2585,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckWrongSnapping",
@@ -2516,7 +2675,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckLowestDiff",
@@ -2557,7 +2717,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckDefaultColours",
@@ -2590,7 +2751,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckDiffSettings",
@@ -2647,7 +2809,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckInconsistentSettings",
@@ -2709,7 +2872,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckLuminosity",
@@ -2773,7 +2937,45 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
+    },
+    {
+      "name": "CheckScoreOverflow",
+      "fullName": "MapsetVerifier.Checks.AllModes.Settings.CheckScoreOverflow",
+      "checkType": "Beatmap",
+      "category": "Settings",
+      "message": "Score overflow",
+      "author": "Hivie",
+      "applicableModes": "Standard Taiko Catch",
+      "documentation": {
+        "Purpose": "Warning when a difficulty's maximum ScoreV1 (HDHRDTFL SS) exceeds the signed 32-bit integer limit.",
+        "Reasoning": "Stable stores ScoreV1 as a signed 32-bit integer (max 2,147,483,647). If a perfect HD+HR+DT+FL play\nwould exceed that, it would cause ScoreV2 mod to be automatically enabled for stable, therefore\nrendering the map unplayable. This mostly happens on long, high-combo maps.\n\nHD+HR+DT+FL is the highest ScoreV1 mod multiplier product available in osu!, osu!taiko, and osu!catch.\n\nTo address this, a 'lazer-only' flag can be added to the map, which users can request the NAT to add\nprior to having the map nominated.\n\nosu!mania is excluded because its ScoreV1 is already capped at 1,000,000."
+      },
+      "templates": {
+        "Overflow": {
+          "level": "Problem",
+          "formatString": "Score overflows in osu!(stable) ({0}). Ensure the map has the 'lazer-only' flag.",
+          "defaultArguments": [
+            "overflowing score"
+          ],
+          "cause": "The maximum ScoreV1 achievable with an HDHRDTFL SS exceeds the 32-bit integer limit (2,147,483,647)."
+        }
+      },
+      "modes": [
+        "Standard",
+        "Taiko",
+        "Catch"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ],
+      "beta": true
     },
     {
       "name": "CheckTickRate",
@@ -2811,7 +3013,71 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
+    },
+    {
+      "name": "CheckHitSoundConsistency",
+      "fullName": "MapsetVerifier.Checks.AllModes.HitSounds.CheckHitSoundConsistency",
+      "checkType": "BeatmapSet",
+      "category": "Hit Sounds",
+      "message": "Inconsistent hit sounds between difficulties",
+      "author": "Greaper",
+      "applicableModes": "Standard Catch",
+      "documentation": {
+        "Purpose": "Ensuring hit sounds are copied down consistently between difficulties of the same\nbeatmapset.",
+        "Reasoning": "Hit sounds are usually mapped out on one difficulty and then copied over to the rest.\nIt's easy to miss an addition (whistle, finish or clap) on one or more difficulties\nwhile doing so, which this check aims to point out. Sliderbody additions are also\nflagged since they're rarely intentional and easy to miss.",
+        "Exceptions": "Difficulties which appear to use their own, unrelated hit sounding (for example a\nguest difficulty using hit sounds from a different set) are excluded from the\ncomparison, since they're expected to be inconsistent with the rest."
+      },
+      "templates": {
+        "Missing": {
+          "level": "Warning",
+          "formatString": "{0} is missing ({1}) which exists in {2}.",
+          "defaultArguments": [
+            "timestamp -",
+            "hit sound",
+            "other difficulties"
+          ],
+          "cause": "A hit sound addition exists at this time in another difficulty, but not this one."
+        },
+        "Missing Minor": {
+          "level": "Minor",
+          "formatString": "{0} is missing ({1}) which exists in {2}.",
+          "defaultArguments": [
+            "timestamp -",
+            "hit sound",
+            "other difficulties"
+          ],
+          "cause": "Same as the warning, but only a minority of the other difficulties have this addition, so it's more likely to be intentional."
+        },
+        "Slider Body": {
+          "level": "Minor",
+          "formatString": "{0} This sliderbody has additions, ensure this is intentional.",
+          "defaultArguments": [
+            "timestamp -"
+          ],
+          "cause": "A slider has a whistle, finish or clap addition on its body."
+        },
+        "Unique Hit Sounds": {
+          "level": "Warning",
+          "formatString": "This difficulty appears to have its own hit sounding, so it was excluded from the consistency comparison. Make sure this makes sense.",
+          "defaultArguments": [],
+          "cause": "This difficulty's hit sounds differ from the rest of the beatmapset far more than usual."
+        }
+      },
+      "modes": [
+        "Standard",
+        "Catch"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ],
+      "beta": true
     },
     {
       "name": "CheckHitSounds",
@@ -2865,7 +3131,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckMuted",
@@ -2934,7 +3201,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckSilentHitSounds",
@@ -2965,7 +3233,8 @@
           ],
           "cause": "There was an error parsing a hit sound file."
         }
-      }
+      },
+      "beta": false
     },
     {
       "name": "CheckBgPresence",
@@ -3003,7 +3272,8 @@
           ],
           "cause": "A background file path is present, but no file exists where it is pointing."
         }
-      }
+      },
+      "beta": false
     },
     {
       "name": "CheckBgResolution",
@@ -3071,7 +3341,30 @@
           ],
           "cause": "An exception occurred trying to parse a background file."
         }
-      }
+      },
+      "beta": false
+    },
+    {
+      "name": "CheckMappersGuildBackground",
+      "fullName": "MapsetVerifier.Checks.AllModes.General.Resources.CheckMappersGuildBackground",
+      "checkType": "General",
+      "category": "Resources",
+      "message": "Mappers' Guild tag present",
+      "author": "Greaper",
+      "applicableModes": "General",
+      "documentation": {
+        "Purpose": "Informing that this beatmapset was created as part of a Mappers' Guild project, and\nthat its background needs to be free to use.",
+        "Reasoning": "Beatmapsets tagged with \"mpg\", \"mappers guild\", or \"mappers' guild\" were made\nthrough a mappersguild.com community project. These projects require the background\nimage to be free to use, so this is useful context to be aware of during\nmodding/nomination."
+      },
+      "templates": {
+        "tag": {
+          "level": "Info",
+          "formatString": "Make sure this background is free to use, or that you have permission from the artist.",
+          "defaultArguments": [],
+          "cause": "The tags field contains a Mappers' Guild tag (\"mpg\", \"mappers guild\", or \"mappers' guild\")."
+        }
+      },
+      "beta": true
     },
     {
       "name": "CheckMultipleVideo",
@@ -3104,7 +3397,8 @@
           ],
           "cause": "Difficulties of separate modes (except taiko) do not share the same video."
         }
-      }
+      },
+      "beta": false
     },
     {
       "name": "CheckOverlayLayer",
@@ -3128,7 +3422,8 @@
           ],
           "cause": "A storyboard sprite or animation is using the overlay layer."
         }
-      }
+      },
+      "beta": false
     },
     {
       "name": "CheckSpriteResolution",
@@ -3183,7 +3478,8 @@
           ],
           "cause": "An exception occurred trying to parse a storyboard image."
         }
-      }
+      },
+      "beta": false
     },
     {
       "name": "CheckVideoOffset",
@@ -3206,7 +3502,8 @@
           ],
           "cause": "There is more than one video offset used between all difficulties."
         }
-      }
+      },
+      "beta": false
     },
     {
       "name": "CheckVideoResolution",
@@ -3255,7 +3552,8 @@
           ],
           "cause": "An exception occurred trying to parse a video."
         }
-      }
+      },
+      "beta": false
     },
     {
       "name": "CheckGenreLanguage",
@@ -3282,7 +3580,8 @@
           "defaultArguments": [],
           "cause": "None of the following tags were found (case insensitive):- \"English\"\n- \"Chinese\"\n- \"French\"\n- \"German\"\n- \"Italian\"\n- \"Japanese\"\n- \"Korean\"\n- \"Spanish\"\n- \"Swedish\"\n- \"Russian\"\n- \"Polish\"\n- \"Instrumental\"\n- \"Conlang\"\n- \"Hindi\"\n- \"Arabic\"\n- \"Portugese\"\n- \"Turkish\"\n- \"Vietnamese\"\n- \"Persian\"\n- \"Indonesian\"\n- \"Ukrainian\"\n- \"Romanian\"\n- \"Dutch\"\n- \"Thai\"\n- \"Greek\"\n- \"Somali\"\n- \"Malay\"\n- \"Hungarian\"\n- \"Czech\"\n- \"Norwegian\"\n- \"Finnish\"\n- \"Danish\"\n- \"Latvia\"\n- \"Lithuanian\"\n- \"Estonian\"\n- \"Punjabi\"\n- \"Bengali\"\n"
         }
-      }
+      },
+      "beta": false
     },
     {
       "name": "CheckGuestTags",
@@ -3306,7 +3605,8 @@
           ],
           "cause": "A difficulty name is prefixed by text containing an apostrophe (') before or after the character \"s\", which is not in the tags."
         }
-      }
+      },
+      "beta": false
     },
     {
       "name": "CheckInconsistentMetadata",
@@ -3343,7 +3643,8 @@
           ],
           "cause": "A metadata field is not consistent between all difficulties."
         }
-      }
+      },
+      "beta": false
     },
     {
       "name": "CheckMarkerFormat",
@@ -3369,7 +3670,8 @@
           ],
           "cause": "The artist or title field of a difficulty includes an incorrect format of \"CV:\", \"vs.\" or \"feat.\"."
         }
-      }
+      },
+      "beta": false
     },
     {
       "name": "CheckMarkerSpacing",
@@ -3404,7 +3706,8 @@
           ],
           "cause": "Same as the other check, but can involve any type of characters."
         }
-      }
+      },
+      "beta": false
     },
     {
       "name": "CheckTitleMarkers",
@@ -3479,7 +3782,8 @@
           ],
           "cause": "When a version marker is present in one title field, the same marker should appear in the other title field as well."
         }
-      }
+      },
+      "beta": false
     },
     {
       "name": "CheckUnicode",
@@ -3514,7 +3818,8 @@
           ],
           "cause": "The difficulty name field contains unicode characters."
         }
-      }
+      },
+      "beta": false
     },
     {
       "name": "CheckHitsoundDiff",
@@ -3551,7 +3856,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckUnusedFiles",
@@ -3593,7 +3899,8 @@
           ],
           "cause": "A beatmap skin file documented as Lazer-only (e.g. fountain-shoot, grade-specific applause, slider miss indicators). See https://osu.ppy.sh/wiki/en/Skinning/Sounds and https://osu.ppy.sh/wiki/en/Skinning/osu!"
         }
-      }
+      },
+      "beta": false
     },
     {
       "name": "CheckUpdateValidity",
@@ -3626,7 +3933,8 @@
           ],
           "cause": "A .osu file has a file name longer than 130 characters."
         }
-      }
+      },
+      "beta": false
     },
     {
       "name": "CheckZeroBytes",
@@ -3657,7 +3965,8 @@
           ],
           "cause": "A file which was attempted to be checked could not be opened."
         }
-      }
+      },
+      "beta": false
     },
     {
       "name": "CheckAudioFormat",
@@ -3699,7 +4008,8 @@
           ],
           "cause": "An error occurred trying to check the format of a song audio file."
         }
-      }
+      },
+      "beta": false
     },
     {
       "name": "CheckAudioInVideo",
@@ -3746,7 +4056,8 @@
           ],
           "cause": "An exception occurred trying to parse a video file."
         }
-      }
+      },
+      "beta": false
     },
     {
       "name": "CheckAudioUsage",
@@ -3785,7 +4096,8 @@
           ],
           "cause": "There was an error parsing the audio file."
         }
-      }
+      },
+      "beta": false
     },
     {
       "name": "CheckBitrate",
@@ -3827,7 +4139,8 @@
           ],
           "cause": "A file which was attempted to be checked could not be opened."
         }
-      }
+      },
+      "beta": false
     },
     {
       "name": "CheckCommonFinish",
@@ -3873,7 +4186,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckHitSoundDelay",
@@ -3928,7 +4242,8 @@
           ],
           "cause": "There was an error parsing a hit sound file."
         }
-      }
+      },
+      "beta": false
     },
     {
       "name": "CheckHitSoundFormat",
@@ -3979,7 +4294,8 @@
           ],
           "cause": "An error occurred trying to check the format of a hit sound file."
         }
-      }
+      },
+      "beta": false
     },
     {
       "name": "CheckHitSoundImbalance",
@@ -4040,7 +4356,8 @@
           ],
           "cause": "There was an error parsing a hit sound file."
         }
-      }
+      },
+      "beta": false
     },
     {
       "name": "CheckHitSoundLength",
@@ -4073,7 +4390,8 @@
           ],
           "cause": "There was an error parsing a hit sound file."
         }
-      }
+      },
+      "beta": false
     },
     {
       "name": "CheckMultipleAudio",
@@ -4102,7 +4420,8 @@
           "defaultArguments": [],
           "cause": "There is no audio file used in any difficulty."
         }
-      }
+      },
+      "beta": false
     },
     {
       "name": "CheckBreaks",
@@ -4150,7 +4469,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckStoryHitSounds",
@@ -4189,7 +4509,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckAbnormalNodes",
@@ -4227,7 +4548,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckConcurrent",
@@ -4274,7 +4596,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckDrainTime",
@@ -4311,7 +4634,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     },
     {
       "name": "CheckInvisibleSlider",
@@ -4356,7 +4680,8 @@
         "Insane",
         "Expert",
         "Ultra"
-      ]
+      ],
+      "beta": false
     }
   ]
 }
