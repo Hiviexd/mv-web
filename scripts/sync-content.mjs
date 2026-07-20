@@ -103,28 +103,43 @@ function rewriteChecksMetadata(filePath) {
 }
 
 function exportChecksMetadata(mapsetVerifierRoot, destFile) {
-    const exportScript = join(mapsetVerifierRoot, metadata.locations["checks-metadata-script"].replace(/^\//, ""));
+    const projectPath = join(mapsetVerifierRoot, "MapsetVerifier.Exports/MapsetVerifier.Exports.csproj");
+    if (!existsSync(projectPath)) {
+        throw new Error(`Exports project not found: ${projectPath}`);
+    }
     mkdirSync(dirname(destFile), { recursive: true });
-    execSync(`bash "${exportScript}" "${destFile}"`, {
+    execSync(`dotnet build "${projectPath}" -c Release --verbosity quiet`, {
+        cwd: mapsetVerifierRoot,
+        stdio: "inherit",
+    });
+    execSync(`dotnet run --project "${projectPath}" -c Release --no-build -- "${destFile}"`, {
         cwd: mapsetVerifierRoot,
         stdio: "inherit",
     });
 }
 
-function markBetaOnlyChecks(checksMetadataDest) {
+function markBetaOnlyChecks(checksMetadataDest, { requireStableComparison = false } = {}) {
     const data = JSON.parse(readFileSync(checksMetadataDest, "utf8"));
     const checks = data.checks ?? [];
     const stableRoot = process.env.MAPSETVERIFIER_STABLE_ROOT;
+    const hasStableRoot = Boolean(stableRoot && existsSync(stableRoot));
+
+    if (requireStableComparison && !hasStableRoot) {
+        throw new Error(
+            "Clone tag is a prerelease but MAPSETVERIFIER_STABLE_ROOT is missing; cannot mark beta-only checks"
+        );
+    }
 
     let stableNames = null;
-    if (stableRoot && existsSync(stableRoot)) {
+    if (hasStableRoot) {
         const tempDir = mkdtempSync(join(tmpdir(), "mv-stable-checks-"));
         const stableExportPath = join(tempDir, "checks-metadata.json");
         try {
             console.log(`Exporting stable checks metadata for beta comparison from ${stableRoot}`);
             exportChecksMetadata(stableRoot, stableExportPath);
             const stableData = JSON.parse(readFileSync(stableExportPath, "utf8"));
-            stableNames = new Set((stableData.checks ?? []).map((check) => check.name));
+            stableNames = new Set((stableData.checks ?? []).map((check) => check.fullName));
+            console.log(`Stable export has ${stableNames.size} check(s); latest export has ${checks.length}`);
         } finally {
             rmSync(tempDir, { recursive: true, force: true });
         }
@@ -133,12 +148,17 @@ function markBetaOnlyChecks(checksMetadataDest) {
     }
 
     for (const check of checks) {
-        check.beta = stableNames ? !stableNames.has(check.name) : false;
+        check.beta = stableNames ? !stableNames.has(check.fullName) : false;
     }
 
     writeFileSync(checksMetadataDest, JSON.stringify(data, null, 2) + "\n");
     const betaChecksCount = checks.filter((check) => check.beta).length;
-    console.log(`Marked ${betaChecksCount} beta-only check(s)`);
+    if (betaChecksCount > 0) {
+        const betaNames = checks.filter((check) => check.beta).map((check) => check.fullName);
+        console.log(`Marked ${betaChecksCount} beta-only check(s): ${betaNames.join(", ")}`);
+    } else {
+        console.log("Marked 0 beta-only check(s)");
+    }
     return betaChecksCount;
 }
 
@@ -261,12 +281,27 @@ function countFiles(dir) {
     return count;
 }
 
+function findReleaseByTag(releases, tag) {
+    if (!tag) return null;
+    const normalized = stripTag(tag);
+    return (
+        releases.find((release) => release.tag_name === tag) ??
+        releases.find((release) => stripTag(release.tag_name) === normalized) ??
+        null
+    );
+}
+
+const { owner, repo } = parseRepo(metadata.repository);
+const releases = await fetchReleases(owner, repo);
+const cloneRelease = findReleaseByTag(releases, process.env.SYNC_CLONE_TAG);
+const requireStableComparison = Boolean(cloneRelease?.prerelease);
+
 // --- Export checks metadata ---
 const checksMetadataDest = destPath("checks-metadata");
 console.log(`Exporting checks metadata to ${checksMetadataDest}`);
 exportChecksMetadata(MAPSETVERIFIER_ROOT, checksMetadataDest);
 rewriteChecksMetadata(checksMetadataDest);
-const betaChecksCount = markBetaOnlyChecks(checksMetadataDest);
+const betaChecksCount = markBetaOnlyChecks(checksMetadataDest, { requireStableComparison });
 
 // --- Mirror assets and changelogs ---
 console.log("Mirroring check assets...");
@@ -300,8 +335,6 @@ if (existsSync(changelogSrc)) {
 rewriteChangelogFiles(changelogDest);
 
 // --- Update release.json ---
-const { owner, repo } = parseRepo(metadata.repository);
-const releases = await fetchReleases(owner, repo);
 const stableReleases = releases.filter((r) => !r.prerelease);
 const betaReleases = releases.filter((r) => r.prerelease);
 
