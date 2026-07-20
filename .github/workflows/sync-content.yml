@@ -2,11 +2,6 @@ name: Sync MapsetVerifier content
 
 on:
     workflow_dispatch:
-        inputs:
-            use_stable_release:
-                description: Clone/sync from latest stable (non-prerelease) tag
-                type: boolean
-                default: false
     repository_dispatch:
         types:
             - mapsetverifier-release
@@ -40,59 +35,50 @@ jobs:
                     gh api "repos/${repo}/contents/scripts/export-checks-metadata.sh?ref=${tag}" >/dev/null 2>&1
                   }
 
-                  pick_stable_sync_tag() {
+                  is_prerelease_tag() {
                     local repo="$1"
-                    local fallback_tag="$2"
+                    local tag="$2"
+                    local prerelease
+                    prerelease=$(gh api "repos/${repo}/releases/tags/${tag}" --jq '.prerelease')
+                    case "${prerelease,,}" in
+                      true|1) return 0 ;;
+                      *) return 1 ;;
+                    esac
+                  }
+
+                  pick_stable_compare_tag() {
+                    local repo="$1"
                     local stable_tag
                     stable_tag=$(gh api "repos/${repo}/releases" --paginate \
                       --jq '[.[] | select(.prerelease == false)] | first | .tag_name')
                     if [ -z "$stable_tag" ] || [ "$stable_tag" = "null" ]; then
-                      echo "No stable release found; using ${fallback_tag}" >&2
-                      echo "$fallback_tag"
-                      return
+                      echo "No stable release found for beta comparison" >&2
+                      return 1
                     fi
-                    if is_sync_compatible_tag "$repo" "$stable_tag"; then
-                      echo "$stable_tag"
-                      return
+                    if ! is_sync_compatible_tag "$repo" "$stable_tag"; then
+                      echo "Latest stable (${stable_tag}) lacks website sync tooling; skipping beta comparison" >&2
+                      return 1
                     fi
-                    echo "Latest stable (${stable_tag}) lacks website sync tooling; using ${fallback_tag}" >&2
-                    echo "$fallback_tag"
+                    echo "$stable_tag"
                   }
 
                   REPO=$(node -p "JSON.parse(require('fs').readFileSync('app/data/metadata.json','utf8')).repository.replace(/.*github\\.com\\//,'').replace(/\\.git$/,'')")
 
                   if [ "${{ github.event_name }}" = "repository_dispatch" ]; then
-                    DISPATCH_TAG="${{ github.event.client_payload.tag }}"
+                    TAG="${{ github.event.client_payload.tag }}"
                     DISPATCH_PRERELEASE="${{ github.event.client_payload.prerelease }}"
                     echo "repository_dispatch payload:"
-                    echo "  tag=${DISPATCH_TAG}"
+                    echo "  tag=${TAG}"
                     echo "  prerelease=${DISPATCH_PRERELEASE}"
-                    if [ -z "$DISPATCH_TAG" ] || [ "$DISPATCH_TAG" = "null" ]; then
+                    if [ -z "$TAG" ] || [ "$TAG" = "null" ]; then
                       echo "repository_dispatch payload is missing client_payload.tag"
                       exit 1
                     fi
-                    case "${DISPATCH_PRERELEASE,,}" in
-                      true|1|yes)
-                        TAG=$(pick_stable_sync_tag "$REPO" "$DISPATCH_TAG")
-                        echo "Prerelease dispatch (${DISPATCH_TAG}): syncing content from ${TAG}"
-                        ;;
-                      *)
-                        TAG="$DISPATCH_TAG"
-                        echo "Stable release dispatch: syncing content from ${TAG}"
-                        ;;
-                    esac
-                    echo "tag=$TAG" >> "$GITHUB_OUTPUT"
-                    exit 0
-                  fi
-
-                  if [ "${{ inputs.use_stable_release }}" = "true" ]; then
-                    LATEST_TAG=$(gh api "repos/${REPO}/releases" --paginate \
-                      --jq '[.[]] | first | .tag_name')
-                    TAG=$(pick_stable_sync_tag "$REPO" "$LATEST_TAG")
                   else
                     TAG=$(gh api "repos/${REPO}/releases" --paginate \
                       --jq '[.[]] | first | .tag_name')
                   fi
+
                   if [ -z "$TAG" ] || [ "$TAG" = "null" ]; then
                     echo "No matching release found for repos/${REPO}"
                     exit 1
@@ -101,8 +87,21 @@ jobs:
                     echo "Resolved tag ${TAG} is not compatible with website sync (missing export tooling)."
                     exit 1
                   fi
+
                   echo "tag=$TAG" >> "$GITHUB_OUTPUT"
                   echo "Resolved clone tag: $TAG"
+
+                  STABLE_TAG=""
+                  if is_prerelease_tag "$REPO" "$TAG"; then
+                    if STABLE_TAG=$(pick_stable_compare_tag "$REPO"); then
+                      echo "Prerelease clone; stable comparison tag: ${STABLE_TAG}"
+                    else
+                      STABLE_TAG=""
+                    fi
+                  else
+                    echo "Stable clone; no beta comparison needed"
+                  fi
+                  echo "stable_tag=$STABLE_TAG" >> "$GITHUB_OUTPUT"
 
             - name: Checkout MapsetVerifier at release tag
               uses: actions/checkout@v4
@@ -110,6 +109,14 @@ jobs:
                   repository: Naxesss/MapsetVerifier
                   ref: ${{ steps.tag.outputs.tag }}
                   path: vendor/MapsetVerifier
+
+            - name: Checkout MapsetVerifier stable for beta comparison
+              if: steps.tag.outputs.stable_tag != ''
+              uses: actions/checkout@v4
+              with:
+                  repository: Naxesss/MapsetVerifier
+                  ref: ${{ steps.tag.outputs.stable_tag }}
+                  path: vendor/MapsetVerifier-stable
 
             - name: Setup .NET
               uses: actions/setup-dotnet@v4
@@ -121,8 +128,14 @@ jobs:
                   MAPSETVERIFIER_ROOT: ${{ github.workspace }}/vendor/MapsetVerifier
                   WORKSPACE_ROOT: ${{ github.workspace }}
                   SYNC_CLONE_TAG: ${{ steps.tag.outputs.tag }}
+                  STABLE_COMPARE_TAG: ${{ steps.tag.outputs.stable_tag }}
                   GITHUB_TOKEN: ${{ github.token }}
-              run: node scripts/sync-content.mjs
+              run: |
+                  set -euo pipefail
+                  if [ -n "${STABLE_COMPARE_TAG}" ]; then
+                    export MAPSETVERIFIER_STABLE_ROOT="${GITHUB_WORKSPACE}/vendor/MapsetVerifier-stable"
+                  fi
+                  node scripts/sync-content.mjs
 
             - name: Verify non-check assets preserved
               run: |
@@ -138,16 +151,16 @@ jobs:
             - name: Prepare PR body
               env:
                   CLONE_TAG: ${{ steps.tag.outputs.tag }}
+                  STABLE_COMPARE_TAG: ${{ steps.tag.outputs.stable_tag }}
                   RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
                   SOURCE_RUN_URL: ${{ github.event.client_payload.source_run_url }}
-                  DISPATCH_TAG: ${{ github.event.client_payload.tag }}
-                  DISPATCH_PRERELEASE: ${{ github.event.client_payload.prerelease }}
               run: |
                   set -euo pipefail
                   mkdir -p .github
                   RELEASE=$(jq -r .release .sync-summary.json)
                   BETA=$(jq -r .beta .sync-summary.json)
                   CHECKS=$(jq -r .checksCount .sync-summary.json)
+                  BETA_CHECKS=$(jq -r .betaChecksCount .sync-summary.json)
                   ASSETS=$(jq -r .assetFiles .sync-summary.json)
                   IMAGES=$(jq -r .changelogImages .sync-summary.json)
                   CHANGELOGS=$(jq -r .changelogFiles .sync-summary.json)
@@ -155,12 +168,13 @@ jobs:
                     echo "## MapsetVerifier content sync"
                     echo ""
                     echo "- **Clone tag:** ${CLONE_TAG}"
-                    if [ -n "$DISPATCH_TAG" ] && [ "$DISPATCH_TAG" != "null" ] && [ "$DISPATCH_TAG" != "$CLONE_TAG" ]; then
-                      echo "- **Release tag:** ${DISPATCH_TAG} (prerelease published; content synced from ${CLONE_TAG})"
+                    if [ -n "$STABLE_COMPARE_TAG" ] && [ "$STABLE_COMPARE_TAG" != "null" ]; then
+                      echo "- **Stable comparison tag:** ${STABLE_COMPARE_TAG}"
                     fi
                     echo "- **Stable release:** ${RELEASE}"
                     echo "- **Beta release:** ${BETA}"
                     echo "- **Checks:** ${CHECKS}"
+                    echo "- **Beta-only checks:** ${BETA_CHECKS}"
                     echo "- **Check asset files:** ${ASSETS}"
                     echo "- **Changelog images:** ${IMAGES}"
                     echo "- **Changelog files:** ${CHANGELOGS}"

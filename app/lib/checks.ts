@@ -33,6 +33,7 @@ export interface CheckEntry {
     difficulties?: string[];
     documentation: CheckDocumentation;
     templates: CheckTemplate[];
+    beta: boolean;
 }
 
 export interface CategoryGroup {
@@ -91,6 +92,7 @@ export const allChecks: CheckEntry[] = checksMetadata.checks.map((check) => {
             reasoning: normalizeMarkdown(check.documentation?.Reasoning),
         },
         templates,
+        beta: Boolean((check as { beta?: boolean }).beta),
     } satisfies CheckEntry;
 });
 

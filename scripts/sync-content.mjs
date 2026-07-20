@@ -8,12 +8,14 @@ import {
     cpSync,
     existsSync,
     mkdirSync,
+    mkdtempSync,
     readdirSync,
     readFileSync,
     rmSync,
     statSync,
     writeFileSync,
 } from "node:fs";
+import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { execSync } from "node:child_process";
 
@@ -98,6 +100,46 @@ function rewriteChecksMetadata(filePath) {
         }
     }
     writeFileSync(filePath, JSON.stringify(data, null, 2) + "\n");
+}
+
+function exportChecksMetadata(mapsetVerifierRoot, destFile) {
+    const exportScript = join(mapsetVerifierRoot, metadata.locations["checks-metadata-script"].replace(/^\//, ""));
+    mkdirSync(dirname(destFile), { recursive: true });
+    execSync(`bash "${exportScript}" "${destFile}"`, {
+        cwd: mapsetVerifierRoot,
+        stdio: "inherit",
+    });
+}
+
+function markBetaOnlyChecks(checksMetadataDest) {
+    const data = JSON.parse(readFileSync(checksMetadataDest, "utf8"));
+    const checks = data.checks ?? [];
+    const stableRoot = process.env.MAPSETVERIFIER_STABLE_ROOT;
+
+    let stableNames = null;
+    if (stableRoot && existsSync(stableRoot)) {
+        const tempDir = mkdtempSync(join(tmpdir(), "mv-stable-checks-"));
+        const stableExportPath = join(tempDir, "checks-metadata.json");
+        try {
+            console.log(`Exporting stable checks metadata for beta comparison from ${stableRoot}`);
+            exportChecksMetadata(stableRoot, stableExportPath);
+            const stableData = JSON.parse(readFileSync(stableExportPath, "utf8"));
+            stableNames = new Set((stableData.checks ?? []).map((check) => check.name));
+        } finally {
+            rmSync(tempDir, { recursive: true, force: true });
+        }
+    } else if (stableRoot) {
+        console.warn(`MAPSETVERIFIER_STABLE_ROOT is set but missing: ${stableRoot}`);
+    }
+
+    for (const check of checks) {
+        check.beta = stableNames ? !stableNames.has(check.name) : false;
+    }
+
+    writeFileSync(checksMetadataDest, JSON.stringify(data, null, 2) + "\n");
+    const betaChecksCount = checks.filter((check) => check.beta).length;
+    console.log(`Marked ${betaChecksCount} beta-only check(s)`);
+    return betaChecksCount;
 }
 
 function rewriteChangelogFiles(dir) {
@@ -220,15 +262,11 @@ function countFiles(dir) {
 }
 
 // --- Export checks metadata ---
-const exportScript = sourcePath("checks-metadata-script");
 const checksMetadataDest = destPath("checks-metadata");
-mkdirSync(dirname(checksMetadataDest), { recursive: true });
 console.log(`Exporting checks metadata to ${checksMetadataDest}`);
-execSync(`bash "${exportScript}" "${checksMetadataDest}"`, {
-    cwd: MAPSETVERIFIER_ROOT,
-    stdio: "inherit",
-});
+exportChecksMetadata(MAPSETVERIFIER_ROOT, checksMetadataDest);
 rewriteChecksMetadata(checksMetadataDest);
+const betaChecksCount = markBetaOnlyChecks(checksMetadataDest);
 
 // --- Mirror assets and changelogs ---
 console.log("Mirroring check assets...");
@@ -285,6 +323,7 @@ const summary = {
     release: releaseData.release.latestVersion,
     beta: releaseData.beta.latestVersion,
     checksCount: JSON.parse(readFileSync(checksMetadataDest, "utf8")).checks?.length ?? 0,
+    betaChecksCount,
     assetFiles: countFiles(destPath("assets-checks")),
     changelogImages: countFiles(destPath("assets-changelog")),
     changelogFiles: existsSync(changelogDest)

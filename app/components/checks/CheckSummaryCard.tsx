@@ -26,6 +26,11 @@ export const CheckSummaryCard = memo(function CheckSummaryCard({ check }: CheckS
                             <Badge size="sm" variant="light" color="gray">
                                 {check.checkType}
                             </Badge>
+                            {check.beta ? (
+                                <Badge size="sm" variant="light" color="yellow">
+                                    Beta
+                                </Badge>
+                            ) : null}
                         </Group>
                     </Stack>
 

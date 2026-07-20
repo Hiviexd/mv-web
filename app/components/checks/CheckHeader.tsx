@@ -17,6 +17,11 @@ export function CheckHeader({ check }: CheckHeaderProps) {
                 <Badge size="sm" variant="light" color="gray">
                     {check.checkType}
                 </Badge>
+                {check.beta ? (
+                    <Badge size="sm" variant="light" color="yellow">
+                        Beta
+                    </Badge>
+                ) : null}
             </Group>
             {(check.modes?.length ?? 0) > 0 || (check.difficulties?.length ?? 0) > 0 ? (
                 <GameModeDisplay modes={check.modes} difficulties={check.difficulties} />

@@ -11,6 +11,7 @@ interface CheckCardProps {
         message: string;
         checkType: string;
         modes?: string[];
+        beta?: boolean;
     };
 }
 
@@ -41,6 +42,11 @@ export function CheckCard({ check }: CheckCardProps) {
                         <Badge size="sm" variant="light" color="primary.2">
                             {check.checkType}
                         </Badge>
+                        {check.beta ? (
+                            <Badge size="sm" variant="light" color="yellow">
+                                Beta
+                            </Badge>
+                        ) : null}
                     </Group>
                 </Stack>
             </Card>
