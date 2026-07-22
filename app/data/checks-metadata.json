@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-20T00:55:17.4412717Z",
+  "generatedAt": "2026-07-22T20:25:57.2789562Z",
   "version": "1.0.0.0",
   "checks": [
     {
@@ -248,8 +248,52 @@
       "beta": false
     },
     {
-      "name": "CheckDiffSettings",
-      "fullName": "MapsetVerifier.Checks.Taiko.Settings.CheckDiffSettings",
+      "name": "CheckSkinningTaiko",
+      "fullName": "MapsetVerifier.Checks.Taiko.Skinning.CheckSkinningTaiko",
+      "checkType": "BeatmapSet",
+      "category": "Skinning",
+      "message": "Incomplete or incorrect skin element sets",
+      "author": "Greaper",
+      "applicableModes": "Taiko",
+      "documentation": {
+        "Purpose": "Ensuring that beatmap-specific skin elements are complete sets and use appropriate file formats.",
+        "Reasoning": "When skinning a gameplay element, complete sets of elements need to be skinned in order to\navoid conflicts between user-specific and beatmap-specific skins. If a required element of a\npartially-skinned set is missing, the user-specific skin's version of that element may be\nused instead, which can look inconsistent or even unreadable together with the rest of the\nbeatmap skin."
+      },
+      "templates": {
+        "Incomplete Set": {
+          "level": "Problem",
+          "formatString": "The \"{0}\" skin set is only partially skinned, missing: {1}.",
+          "defaultArguments": [
+            "set",
+            "missing elements"
+          ],
+          "cause": "One or more elements of a skin set are present, but a required element of the same set is missing."
+        },
+        "Non Png": {
+          "level": "Warning",
+          "formatString": "\"{0}\" should be a .png file if it uses transparency.",
+          "defaultArguments": [
+            "path"
+          ],
+          "cause": "A skinned gameplay element does not use the .png format, which is required for elements that utilise transparency."
+        }
+      },
+      "modes": [
+        "Taiko"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ],
+      "beta": true
+    },
+    {
+      "name": "CheckDiffSettingsTaiko",
+      "fullName": "MapsetVerifier.Checks.Taiko.Settings.CheckDiffSettingsTaiko",
       "checkType": "Beatmap",
       "category": "Settings",
       "message": "OD/HP values too high/low",
@@ -306,7 +350,7 @@
         "Hard",
         "Insane"
       ],
-      "beta": false
+      "beta": true
     },
     {
       "name": "CheckBgOffsetIssues",
@@ -932,8 +976,102 @@
       "beta": false
     },
     {
-      "name": "CheckDiffSettings",
-      "fullName": "MapsetVerifier.Checks.Standard.Settings.CheckDiffSettings",
+      "name": "CheckSkinningStandard",
+      "fullName": "MapsetVerifier.Checks.Standard.Skinning.CheckSkinningStandard",
+      "checkType": "BeatmapSet",
+      "category": "Skinning",
+      "message": "Incomplete or incorrect skin element sets",
+      "author": "Greaper",
+      "applicableModes": "Standard",
+      "documentation": {
+        "Purpose": "Ensuring that beatmap-specific skin elements are complete sets, use appropriate file formats,\nand follow the osu! ranking criteria's skinning rules.",
+        "Reasoning": "When skinning a gameplay element, complete sets of elements need to be skinned in order to\navoid conflicts between user-specific and beatmap-specific skins. If a required element of a\npartially-skinned set is missing, the user-specific skin's version of that element may be\nused instead, which can look inconsistent or even unreadable together with the rest of the\nbeatmap skin.\n\nHit100/hit300 must remain distinguishable from their geki/katu counterparts so players can tell\na perfect hit from a regular one, and a custom slider border colour must be defined whenever\nhitcircle or slider elements are skinned, so the beatmap's colour scheme doesn't conflict with a\nplayer's own skin."
+      },
+      "templates": {
+        "Incomplete Set": {
+          "level": "Problem",
+          "formatString": "The \"{0}\" skin set is only partially skinned, missing: {1}.",
+          "defaultArguments": [
+            "set",
+            "missing elements"
+          ],
+          "cause": "One or more elements of a skin set are present, but a required element of the same set is missing."
+        },
+        "Mixed Spinner Style": {
+          "level": "Problem",
+          "formatString": "Both old (\"{0}\") and new (\"{1}\") spinner style elements are present; the old style will take priority.",
+          "defaultArguments": [
+            "old file",
+            "new file"
+          ],
+          "cause": "Elements exclusive to both the old and new spinner styles are present at the same time."
+        },
+        "Duplicate Hitburst": {
+          "level": "Problem",
+          "formatString": "\"{0}\" and \"{1}\" are identical; hit100/hit300 hitbursts must be visually distinguishable from their geki/katu counterparts.",
+          "defaultArguments": [
+            "path",
+            "path"
+          ],
+          "cause": "hit100 or hit300 shares the exact same file as its corresponding katu/geki hitburst."
+        },
+        "Missing Slider Border": {
+          "level": "Problem",
+          "formatString": "{0} skins hitcircle or slider elements but does not define a custom slider border colour (SliderBorder under [Colours]).",
+          "defaultArguments": [
+            "difficulty"
+          ],
+          "cause": "A custom slider border colour must be selected when a beatmap contains skin elements from the hit circle or slider sets."
+        },
+        "Similar Slider Colours": {
+          "level": "Problem",
+          "formatString": "{0}'s slider body colour (SliderTrackOverride) is too similar to its slider border colour (SliderBorder).",
+          "defaultArguments": [
+            "difficulty"
+          ],
+          "cause": "The slider body colour is too close to the slider border colour, making the border lose its purpose as a visual boundary."
+        },
+        "New Spinner Style": {
+          "level": "Warning",
+          "formatString": "\"{0}\": usage of the new style spinner is discouraged; it only displays correctly if the player's \"Preferred Skin\" is set to Default.",
+          "defaultArguments": [
+            "path"
+          ],
+          "cause": "Elements exclusive to the new spinner style are used, which is only recommended when a default skin is forced."
+        },
+        "Deprecated Spinner Osu": {
+          "level": "Warning",
+          "formatString": "\"{0}\" only displays for players using skin version 1.0, which is extremely rare; consider removing it.",
+          "defaultArguments": [
+            "path"
+          ],
+          "cause": "spinner-osu.png only works with skin version 1.0, while essentially all modern user and default skins use version 2.0 or higher."
+        },
+        "Non Png": {
+          "level": "Warning",
+          "formatString": "\"{0}\" should be a .png file if it uses transparency.",
+          "defaultArguments": [
+            "path"
+          ],
+          "cause": "A skinned gameplay element does not use the .png format, which is required for elements that utilise transparency."
+        }
+      },
+      "modes": [
+        "Standard"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ],
+      "beta": true
+    },
+    {
+      "name": "CheckDiffSettingsStandard",
+      "fullName": "MapsetVerifier.Checks.Standard.Settings.CheckDiffSettingsStandard",
       "checkType": "Beatmap",
       "category": "Settings",
       "message": "Difficulty settings outside of the guideline range",
@@ -1398,6 +1536,50 @@
       "beta": false
     },
     {
+      "name": "CheckSkinningMania",
+      "fullName": "MapsetVerifier.Checks.Mania.Skinning.CheckSkinningMania",
+      "checkType": "BeatmapSet",
+      "category": "Skinning",
+      "message": "Incomplete or incorrect skin element sets",
+      "author": "Greaper",
+      "applicableModes": "Mania",
+      "documentation": {
+        "Purpose": "Ensuring that beatmap-specific skin elements are complete sets and use appropriate file formats.",
+        "Reasoning": "When skinning a gameplay element, complete sets of elements need to be skinned in order to\navoid conflicts between user-specific and beatmap-specific skins. If a required element of a\npartially-skinned set is missing, the user-specific skin's version of that element may be\nused instead, which can look inconsistent or even unreadable together with the rest of the\nbeatmap skin."
+      },
+      "templates": {
+        "Incomplete Set": {
+          "level": "Problem",
+          "formatString": "The \"{0}\" skin set is only partially skinned, missing: {1}.",
+          "defaultArguments": [
+            "set",
+            "missing elements"
+          ],
+          "cause": "One or more elements of a skin set are present, but a required element of the same set is missing."
+        },
+        "Non Png": {
+          "level": "Warning",
+          "formatString": "\"{0}\" should be a .png file if it uses transparency.",
+          "defaultArguments": [
+            "path"
+          ],
+          "cause": "A skinned gameplay element does not use the .png format, which is required for elements that utilise transparency."
+        }
+      },
+      "modes": [
+        "Mania"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ],
+      "beta": true
+    },
+    {
       "name": "CheckDiffSettingsLowerDifficulties",
       "fullName": "MapsetVerifier.Checks.Mania.Settings.CheckDiffSettingsLowerDifficulties",
       "checkType": "Beatmap",
@@ -1603,8 +1785,70 @@
       "beta": false
     },
     {
-      "name": "CheckDiffSettings",
-      "fullName": "MapsetVerifier.Checks.Catch.Settings.CheckDiffSettings",
+      "name": "CheckSkinningCatch",
+      "fullName": "MapsetVerifier.Checks.Catch.Skinning.CheckSkinningCatch",
+      "checkType": "BeatmapSet",
+      "category": "Skinning",
+      "message": "Incomplete or incorrect skin element sets",
+      "author": "Greaper",
+      "applicableModes": "Catch",
+      "documentation": {
+        "Purpose": "Ensuring that beatmap-specific skin elements are complete sets, use appropriate file formats,\nand follow the osu!catch ranking criteria's skinning rules.",
+        "Reasoning": "When skinning a gameplay element, complete sets of elements need to be skinned in order to\navoid conflicts between user-specific and beatmap-specific skins. If a required element of a\npartially-skinned set is missing, the user-specific skin's version of that element may be\nused instead, which can look inconsistent or even unreadable together with the rest of the\nbeatmap skin.\n\nFruits, drops, and the catcher must also match their default skin dimensions exactly, since\nthey represent the in-game hitbox and altering their size can change gameplay, and custom\ncatchers require the skin.ini to declare a v2 (or higher) skin format."
+      },
+      "templates": {
+        "Incomplete Set": {
+          "level": "Problem",
+          "formatString": "The \"{0}\" skin set is only partially skinned, missing: {1}.",
+          "defaultArguments": [
+            "set",
+            "missing elements"
+          ],
+          "cause": "One or more elements of a skin set are present, but a required element of the same set is missing."
+        },
+        "Incorrect Dimensions": {
+          "level": "Problem",
+          "formatString": "\"{0}\" is {1}x{2}, but must be exactly {3}x{4}.",
+          "defaultArguments": [
+            "path",
+            "actual width",
+            "actual height",
+            "expected width",
+            "expected height"
+          ],
+          "cause": "A skinned fruit, drop, or catcher element does not match its default skin counterpart's dimensions."
+        },
+        "Old Skin Version": {
+          "level": "Problem",
+          "formatString": "A custom catcher is skinned, but skin.ini does not declare a v2 (or higher) skin format.",
+          "defaultArguments": [],
+          "cause": "Custom catchers must be included in the v2 skin format, declared via \"Version\" under [General] in skin.ini."
+        },
+        "Non Png": {
+          "level": "Warning",
+          "formatString": "\"{0}\" should be a .png file if it uses transparency.",
+          "defaultArguments": [
+            "path"
+          ],
+          "cause": "A skinned gameplay element does not use the .png format, which is required for elements that utilise transparency."
+        }
+      },
+      "modes": [
+        "Catch"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ],
+      "beta": true
+    },
+    {
+      "name": "CheckDiffSettingsCatch",
+      "fullName": "MapsetVerifier.Checks.Catch.Settings.CheckDiffSettingsCatch",
       "checkType": "Beatmap",
       "category": "Settings",
       "message": "Difficulty settings outside of the guideline range",
@@ -2755,8 +2999,8 @@
       "beta": false
     },
     {
-      "name": "CheckDiffSettings",
-      "fullName": "MapsetVerifier.Checks.AllModes.Settings.CheckDiffSettings",
+      "name": "CheckDiffSettingsAllModes",
+      "fullName": "MapsetVerifier.Checks.AllModes.Settings.CheckDiffSettingsAllModes",
       "checkType": "Beatmap",
       "category": "Settings",
       "message": "Abnormal difficulty settings",
@@ -2810,7 +3054,7 @@
         "Expert",
         "Ultra"
       ],
-      "beta": false
+      "beta": true
     },
     {
       "name": "CheckInconsistentSettings",
@@ -2945,27 +3189,36 @@
       "fullName": "MapsetVerifier.Checks.AllModes.Settings.CheckScoreOverflow",
       "checkType": "Beatmap",
       "category": "Settings",
-      "message": "Score overflow",
+      "message": "Score/Combo overflow",
       "author": "Hivie",
-      "applicableModes": "Standard Taiko Catch",
+      "applicableModes": "All Modes",
       "documentation": {
-        "Purpose": "Warning when a difficulty's maximum ScoreV1 (HDHRDTFL SS) exceeds the signed 32-bit integer limit.",
-        "Reasoning": "Stable stores ScoreV1 as a signed 32-bit integer (max 2,147,483,647). If a perfect HD+HR+DT+FL play\nwould exceed that, it would cause ScoreV2 mod to be automatically enabled for stable, therefore\nrendering the map unplayable. This mostly happens on long, high-combo maps.\n\nHD+HR+DT+FL is the highest ScoreV1 mod multiplier product available in osu!, osu!taiko, and osu!catch.\n\nTo address this, a 'lazer-only' flag can be added to the map, which users can request the NAT to add\nprior to having the map nominated.\n\nosu!mania is excluded because its ScoreV1 is already capped at 1,000,000."
+        "Purpose": "Warning when a difficulty's maximum ScoreV1 (HDHRDTFL SS) exceeds the signed 32-bit integer limit,\nor when its maximum combo exceeds the 16-bit unsigned integer limit.",
+        "Reasoning": "Stable stores ScoreV1 as a signed 32-bit integer (max 2,147,483,647). If a perfect play\nwould exceed that, it would cause ScoreV2 mod to be automatically enabled for stable, therefore\nrendering scores unsubmittable. This mostly happens on long, high-combo maps.\n\nHD+HR+DT+FL is the highest ScoreV1 mod multiplier product available in osu!, osu!taiko, and osu!catch, so\nit's used as a reference for the maximum achievable score.\nosu!mania is excluded from the score check because its ScoreV1 is already capped at 1,000,000.\n\nStable also stores combo as a 16-bit unsigned integer (max 65,535). Maps whose maximum combo exceeds\nthat will overflow the combo counter. This applies to all game modes.\n\nTo address overflow issues, a 'lazer-only' flag should be added to the map, which users should request\nthe NAT to add prior to having the map nominated."
       },
       "templates": {
-        "Overflow": {
+        "ScoreOverflow": {
           "level": "Problem",
           "formatString": "Score overflows in osu!(stable) ({0}). Ensure the map has the 'lazer-only' flag.",
           "defaultArguments": [
             "overflowing score"
           ],
           "cause": "The maximum ScoreV1 achievable with an HDHRDTFL SS exceeds the 32-bit integer limit (2,147,483,647)."
+        },
+        "ComboOverflow": {
+          "level": "Problem",
+          "formatString": "Combo overflows in osu!(stable) ({0}). Ensure the map has the 'lazer-only' flag.",
+          "defaultArguments": [
+            "max combo"
+          ],
+          "cause": "The maximum achievable combo exceeds the 16-bit unsigned integer limit (65,535)."
         }
       },
       "modes": [
         "Standard",
         "Taiko",
-        "Catch"
+        "Catch",
+        "Mania"
       ],
       "difficulties": [
         "Easy",
@@ -4657,6 +4910,14 @@
             "timestamp -"
           ],
           "cause": "A slider has no nodes."
+        },
+        "Single Node": {
+          "level": "Problem",
+          "formatString": "{0} has no curve points, only its start node, and so has no visible path.",
+          "defaultArguments": [
+            "timestamp -"
+          ],
+          "cause": "A slider has only its start node and no other curve points."
         },
         "Negative Length": {
           "level": "Problem",
