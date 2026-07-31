@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-22T20:25:57.2789562Z",
+  "generatedAt": "2026-07-31T17:58:57.1804000Z",
   "version": "1.0.0.0",
   "checks": [
     {
@@ -1634,6 +1634,44 @@
       "beta": false
     },
     {
+      "name": "CheckDoubleHitSounds",
+      "fullName": "MapsetVerifier.Checks.Mania.HitSounds.CheckDoubleHitSounds",
+      "checkType": "Beatmap",
+      "category": "Hit Sounds",
+      "message": "The same sample played multiple times at once",
+      "author": "Greaper",
+      "applicableModes": "Mania",
+      "documentation": {
+        "Purpose": "Preventing a chord from stacking the same sample on top of itself.",
+        "Reasoning": "Notes hit at the same time all play their samples at the same time, so putting the same\naddition on two notes of a chord plays that sample twice and roughly doubles its volume.\nMania hit sounding convention is to place an addition on a single note of the chord, so\nthis is usually an accident from copying a note or from selecting a whole column.",
+        "Exceptions": "The hit normal is ignored, since every note plays one and stacking those is unavoidable\nrather than a mistake."
+      },
+      "templates": {
+        "Double": {
+          "level": "Warning",
+          "formatString": "{0} {1} is played {2} times at once, ensure this is intentional.",
+          "defaultArguments": [
+            "timestamp -",
+            "sample",
+            "amount"
+          ],
+          "cause": "Multiple notes hit at the same time play the same sample, doubling its volume."
+        }
+      },
+      "modes": [
+        "Mania"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ],
+      "beta": true
+    },
+    {
       "name": "CheckHitNormalUsage",
       "fullName": "MapsetVerifier.Checks.Mania.HitSounds.CheckHitNormalUsage",
       "checkType": "BeatmapSet",
@@ -1671,6 +1709,106 @@
         "Ultra"
       ],
       "beta": false
+    },
+    {
+      "name": "CheckManiaHitSoundConsistency",
+      "fullName": "MapsetVerifier.Checks.Mania.HitSounds.CheckManiaHitSoundConsistency",
+      "checkType": "BeatmapSet",
+      "category": "Hit Sounds",
+      "message": "Inconsistent hit sounds between difficulties",
+      "author": "Greaper",
+      "applicableModes": "Mania",
+      "documentation": {
+        "Purpose": "Ensuring hit sounds are copied down consistently between difficulties of the same\nbeatmapset.",
+        "Reasoning": "Mania difficulties are usually hit sounded once and then copied over to the rest of the\nset. Notes that exist in both difficulties are expected to sound the same, so a sample\nwhich one difficulty plays and another doesn't is usually an addition that was missed\nwhile copying.",
+        "Exceptions": "Only points in time where both difficulties actually have a note are compared, since a\ndifficulty can't play a sample where it has nothing to hit.\n\nThe hit normal is left out of the comparison. It's driven by the timing lines rather\nthan by individual notes, and inconsistencies there are already pointed out by the\ninconsistent timing lines check.\n\nDifficulties which appear to use their own, unrelated hit sounding (for example a guest\ndifficulty using samples from a different set) are excluded from the comparison, since\nthey're expected to be inconsistent with the rest."
+      },
+      "templates": {
+        "Missing": {
+          "level": "Warning",
+          "formatString": "{0} is missing ({1}) which exists in {2}.",
+          "defaultArguments": [
+            "timestamp -",
+            "sample",
+            "other difficulties"
+          ],
+          "cause": "A sample is played at this time in another difficulty which also has a note here, but not in this one."
+        },
+        "Missing Minor": {
+          "level": "Minor",
+          "formatString": "{0} is missing ({1}) which exists in {2}.",
+          "defaultArguments": [
+            "timestamp -",
+            "sample",
+            "other difficulties"
+          ],
+          "cause": "Same as the warning, but only a minority of the other difficulties play this sample, so it's more likely to be intentional."
+        },
+        "Unique Hit Sounds": {
+          "level": "Warning",
+          "formatString": "This difficulty appears to have its own hit sounding, so it was excluded from the consistency comparison. Make sure this makes sense.",
+          "defaultArguments": [],
+          "cause": "This difficulty's hit sounds differ from the rest of the beatmapset far more than usual."
+        }
+      },
+      "modes": [
+        "Mania"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ],
+      "beta": true
+    },
+    {
+      "name": "CheckMissingHitSoundFiles",
+      "fullName": "MapsetVerifier.Checks.Mania.HitSounds.CheckMissingHitSoundFiles",
+      "checkType": "BeatmapSet",
+      "category": "Hit Sounds",
+      "message": "Hit sounds referenced without the file being present",
+      "author": "Greaper",
+      "applicableModes": "Mania",
+      "documentation": {
+        "Purpose": "Ensuring every sample a difficulty asks for is actually included in the mapset.",
+        "Reasoning": "Mania hit sounding is built almost entirely out of custom samples, so a sample that was\nrenamed, moved out of the folder or never included in the first place silently plays\nsomething else than intended. Since nothing about it is audible as an error, it's easy\nto miss until someone plays the map with a different skin.",
+        "Exceptions": "Samples on custom index 0 or 1 are left alone, as those intentionally fall back to the\nplayer's skin or the game's own samples rather than coming from the mapset."
+      },
+      "templates": {
+        "Missing File": {
+          "level": "Problem",
+          "formatString": "{0} is used at {1}, but no such file exists in the mapset.",
+          "defaultArguments": [
+            "file name",
+            "timestamp -"
+          ],
+          "cause": "A hit object references a hit sound file which isn't present in the song folder."
+        },
+        "Missing Sample": {
+          "level": "Warning",
+          "formatString": "{0} is used at {1}, but no such file exists in the mapset, so the default is played instead.",
+          "defaultArguments": [
+            "file name",
+            "timestamp -"
+          ],
+          "cause": "A custom sample index is used at this point in time, but the mapset contains no sample for that combination of sampleset, addition and index."
+        }
+      },
+      "modes": [
+        "Mania"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ],
+      "beta": true
     },
     {
       "name": "CheckColumnDistribution",
@@ -4073,6 +4211,30 @@
         }
       },
       "beta": false
+    },
+    {
+      "name": "CheckEmptyDifficultyFile",
+      "fullName": "MapsetVerifier.Checks.AllModes.General.Files.CheckEmptyDifficultyFile",
+      "checkType": "General",
+      "category": "Files",
+      "message": "Empty difficulty file",
+      "author": "Greaper",
+      "applicableModes": "General",
+      "documentation": {
+        "Purpose": "Ensuring every .osu file in the song folder is a valid, complete difficulty.",
+        "Reasoning": "A .osu file with no content at all is not a usable difficulty; it has no metadata, no\nhit objects, and cannot be loaded by the game."
+      },
+      "templates": {
+        "Empty": {
+          "level": "Problem",
+          "formatString": "\"{0}\" is empty.",
+          "defaultArguments": [
+            "path"
+          ],
+          "cause": "A .osu file in the song folder contains no data."
+        }
+      },
+      "beta": true
     },
     {
       "name": "CheckHitsoundDiff",
