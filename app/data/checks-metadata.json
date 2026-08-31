@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-31T17:58:57.1804000Z",
+  "generatedAt": "2026-08-31T03:12:33.5743673Z",
   "version": "1.0.0.0",
   "checks": [
     {
@@ -47,41 +47,35 @@
       "beta": false
     },
     {
-      "name": "CheckDoubleBarlines",
-      "fullName": "MapsetVerifier.Checks.Taiko.Timing.CheckDoubleBarlines",
+      "name": "CheckCloseBarlines",
+      "fullName": "MapsetVerifier.Checks.Taiko.Timing.CheckCloseBarlines",
       "checkType": "Beatmap",
       "category": "Timing",
-      "message": "Double barlines",
-      "author": "Hivie, Phob",
+      "message": "Close barlines",
+      "author": "Hivie",
       "applicableModes": "Taiko",
       "documentation": {
-        "Purpose": "Ensuring that there are no two barlines within 50ms of each other.",
-        "Reasoning": "Double barlines are caused by rounding errors. They are visually disruptive and confusing in the representation of a song's downbeat."
+        "Purpose": "Ensuring that a barline from the previous red line is not within one metronome of the next red line, with a problem when it is within half a metronome.",
+        "Reasoning": "Double barlines are visually disruptive and confusing in the representation of a song's downbeat. Incomplete measures before a new red line place a barline close to that red line's barline."
       },
       "templates": {
         "Problem": {
           "level": "Problem",
-          "formatString": "{0} Double barline",
+          "formatString": "{0} Barline is very close to the previous barline ({1}).",
           "defaultArguments": [
-            "timestamp -"
+            "timestamp -",
+            "x/1"
           ],
-          "cause": "Red line is extremely close to a downbeat from the previous red line"
+          "cause": "Red line is within half a metronome of a downbeat from the previous red line."
         },
         "Warning": {
           "level": "Warning",
-          "formatString": "{0} Potential double barline, doublecheck manually",
+          "formatString": "{0} Barline is close to the previous barline ({1}), ensure this makes sense.",
           "defaultArguments": [
-            "timestamp -"
+            "timestamp -",
+            "x/1"
           ],
-          "cause": "Red line is extremely close to a downbeat from the previous red line"
-        },
-        "roundingErrorWarning": {
-          "level": "Warning",
-          "formatString": "{0} Potential double barline due to rounding error, doublecheck manually",
-          "defaultArguments": [
-            "timestamp -"
-          ],
-          "cause": "Rounding error"
+          "cause": "Red line is within one metronome of a downbeat from the previous red line."
         }
       },
       "modes": [
@@ -95,7 +89,7 @@
         "Expert",
         "Ultra"
       ],
-      "beta": false
+      "beta": true
     },
     {
       "name": "CheckInconsistentBarLines",
@@ -184,19 +178,19 @@
       "templates": {
         "Minor": {
           "level": "Minor",
-          "formatString": "{0} Kiai flash (1/{1}).",
+          "formatString": "{0} Kiai flash ({1}).",
           "defaultArguments": [
             "timestamp -",
-            "X"
+            "1/X"
           ],
           "cause": "A kiai flash exists, but is not too drastic"
         },
         "Warning": {
           "level": "Warning",
-          "formatString": "{0} Kiai flash (1/{1}).",
+          "formatString": "{0} Kiai flash ({1}).",
           "defaultArguments": [
             "timestamp -",
-            "X"
+            "1/X"
           ],
           "cause": "A kiai flash that's too drastic exists"
         }
@@ -276,6 +270,44 @@
             "path"
           ],
           "cause": "A skinned gameplay element does not use the .png format, which is required for elements that utilise transparency."
+        }
+      },
+      "modes": [
+        "Taiko"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ],
+      "beta": true
+    },
+    {
+      "name": "CheckBaseSvProgression",
+      "fullName": "MapsetVerifier.Checks.Taiko.Settings.CheckBaseSvProgression",
+      "checkType": "BeatmapSet",
+      "category": "Settings",
+      "message": "Illogical base SV progression",
+      "author": "Hivie",
+      "applicableModes": "Taiko",
+      "documentation": {
+        "Purpose": "Ensuring base slider velocity follows a one-directional progression across osu!taiko difficulties.",
+        "Reasoning": "High-BPM sets often lower base SV on easier difficulties, while double-BPM sets often raise it on\nharder ones. Low-SV gimmick sets may decrease base SV as difficulty increases. Equal values are fine.\nA zig-zag (decreasing then increasing, or the reverse) is usually unintentional and should be checked."
+      },
+      "templates": {
+        "Warning": {
+          "level": "Warning",
+          "formatString": "{0} Base SV {1}x breaks the set's progression from {2}x on {3}. Ensure this is intentional.",
+          "defaultArguments": [
+            "version",
+            "currentSV",
+            "previousSV",
+            "previousVersion"
+          ],
+          "cause": "SliderMultiplier does not follow a one-directional progression when difficulties are ordered by interpreted difficulty and star rating."
         }
       },
       "modes": [
@@ -1337,7 +1369,7 @@
       "applicableModes": "Standard",
       "documentation": {
         "Purpose": "Preventing the border of hit objects from even partially becoming offscreen in 4:3 aspect ratios.\n\n> 4:3 is included in 16:9 and 16:10, the only difference is the width, so you can check for offscreens along the top and bottom in any of these aspect ratios and it will look the same.\n\n![](/assets/checks/standard-compose-offscreen-1.png \"A slider end which is partially offscreen along the bottom of the screen.\")",
-        "Reasoning": "Although everything is technically readable and playable if an object is only partially offscreen, it trips up players using relative movement input (for example mouse) when their cursor hits the side of the screen, since the game will offset the cursor back into the screen which is difficult to correct while in the middle of gameplay.\n\nSince objects partially offscreen also have a smaller area to hit, if not hitting the screen causing the problems above, it makes those objects need more precision to play which isn't consistent with how the rest of the game works, especially considering that the punishment for overshooting is getting your cursor offset slightly but still hitting the object and not missing like you probably would otherwise."
+        "Reasoning": "Although everything is technically readable and playable if an object is only partially offscreen, it trips up players using relative movement input (for example mouse) when their cursor hits the side of the screen, since the game will offset the cursor back into the screen which is difficult to correct while in the middle of gameplay.\n\nSince objects partially offscreen also have a smaller area to hit, if not hitting the screen causing the problems above, it makes those objects need more precision to play which isn't consistent with how the rest of the game works, especially considering that the punishment for overshooting is getting your cursor offset slightly but still hitting the object and not missing like you probably would otherwise.\n\nThe screen limits used here are measured values rather than exact ones, and the game rounds object positions when rendering them, so objects ending up within a pixel of those limits are pointed out as something to verify manually rather than being ignored."
       },
       "templates": {
         "Offscreen": {
@@ -1357,6 +1389,16 @@
             "object"
           ],
           "cause": "The .osu code implies the hit object is in a place where it would be off the 512x512 playfield area, but the game has moved it back inside the screen automatically."
+        },
+        "Borderline": {
+          "level": "Warning",
+          "formatString": "{0} {1} is only {2} px away from being offscreen, ensure the entire white border is visible on a 4:3 aspect ratio.",
+          "defaultArguments": [
+            "timestamp -",
+            "object",
+            "amount"
+          ],
+          "cause": "The border of a hit object is within a pixel of the screen edge in 4:3 aspect ratios, which due to the rounding the game applies can still end up offscreen."
         },
         "Bezier Margin": {
           "level": "Warning",
@@ -1823,7 +1865,7 @@
         "Reasoning": "Maps that do not use all columns somewhat evenly may have major handbalancing issues."
       },
       "templates": {
-        "Underused column warning": {
+        "Underused column": {
           "level": "Warning",
           "formatString": "Column {0} is underused",
           "defaultArguments": [
@@ -1831,29 +1873,13 @@
           ],
           "cause": "A column is being underused."
         },
-        "Overused column warning": {
+        "Overused column": {
           "level": "Warning",
           "formatString": "Column {0} is overused",
           "defaultArguments": [
             "column"
           ],
           "cause": "A column is being overused."
-        },
-        "Underused column problem": {
-          "level": "Problem",
-          "formatString": "Column {0} is severely underused",
-          "defaultArguments": [
-            "column"
-          ],
-          "cause": "A column is being severely underused."
-        },
-        "Overused column problem": {
-          "level": "Problem",
-          "formatString": "Column {0} is severely overused",
-          "defaultArguments": [
-            "column"
-          ],
-          "cause": "A column is being severely overused."
         },
         "Unused column": {
           "level": "Problem",
@@ -4524,7 +4550,7 @@
       "applicableModes": "General",
       "documentation": {
         "Purpose": "Preventing audio quality from being noticably low or unnoticably high to save on file size.\n\n![](/assets/checks/all-modes-general-audio-bitrate-1.png \"Audio bitrate as shown in the properties of a file. For some files this is not visible.\")",
-        "Reasoning": "Once you get lower than 128 kbps the quality loss is usually quite noticeable. After 192 kbps, with the\nsetup of the average player, it would be difficult to tell a difference and as such would also be a\nwaste of resources.\n\n> Should no higher quality be available anywhere, less than 128 kbps may be acceptable depending on how noticeable it is.\n---\nAudio files in the OGG container format using the Q6 setting will typically land around 192 kbps,\nsomtimes inconveniently a little above that, so the upper limit for OGG is instead 208 kbps.\n\n> Q6 generally reads as 192 kbps in tools like Spek. These programs actually just approximate the bitrate by rounding to the closest 32 kbps step. 192 kbps is one such step. Therefore, any file > 208 kbps will show as 224 kbps in these tools.\n\nOGG and MP3 files are typically compressed, unlike Wave, making too low bitrate a concern even for\nhit sounds using those formats. An upper limit for hit sound quality is not enforced due to their short\nlength and small impact on file size, even with uncompressed formats like Wave."
+        "Reasoning": "Once you get lower than 128 kbps the quality loss is usually quite noticeable. After 192 kbps, with the\nsetup of the average player, it would be difficult to tell a difference and as such would also be a\nwaste of resources.\n\n> Should no higher quality be available anywhere, less than 128 kbps may be acceptable depending on how noticeable it is.\n---\nAudio files in the OGG container format using the Q6 setting will typically land around 192 kbps,\nsomtimes inconveniently a little above that, so the upper limit for OGG is instead 208 kbps.\n\n> Q6 generally reads as 192 kbps in tools like Spek. These programs actually just approximate the bitrate by rounding to the closest 32 kbps step. 192 kbps is one such step. Therefore, any file > 208 kbps will show as 224 kbps in these tools."
       },
       "templates": {
         "Bitrate": {
@@ -4536,15 +4562,6 @@
             "high/low"
           ],
           "cause": "The average bitrate of an audio file is either higher than 192/208 kbps for MP3/OGG respectively or lower than 128 kbps."
-        },
-        "Hit Sound": {
-          "level": "Warning",
-          "formatString": "Average audio bitrate for \"{0}\", {1} kbps, is really low.",
-          "defaultArguments": [
-            "path",
-            "bitrate"
-          ],
-          "cause": "Same as the other check, except only applies to hit sounds using the lower threshold."
         },
         "Exception": {
           "level": "Error",
