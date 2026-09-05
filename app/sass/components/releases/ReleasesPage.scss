@@ -59,9 +59,16 @@ $beta-logo-bg: color.adjust($dark-7, $hue: -171deg);
     }
 
     &__older-scroll {
+        display: flex;
+        flex-direction: column;
         border-radius: var(--mantine-radius-sm);
         background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-7));
         padding: var(--mantine-spacing-xs);
+
+        .mantine-ScrollArea-root {
+            flex: 1;
+            min-height: 0;
+        }
     }
 
     &__older-row {
@@ -72,6 +79,12 @@ $beta-logo-bg: color.adjust($dark-7, $hue: -171deg);
         &:last-child {
             border-bottom: none;
         }
+    }
+
+    &__older-legacy-note {
+        flex-shrink: 0;
+        margin-top: auto;
+        padding-top: 4px;
     }
 }
 

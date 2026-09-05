@@ -1,3 +1,4 @@
+import { coerce, major } from "semver";
 import releaseData from "../data/release.json";
 
 export interface ReleaseDownloads {
@@ -55,4 +56,11 @@ export function getDownloadUrl(
 
 export function formatDownloadCount(count: number): string {
     return new Intl.NumberFormat().format(count);
+}
+
+const MIN_DISPLAYED_RELEASE_MAJOR = 2;
+
+export function isDisplayedReleaseVersion(version: string): boolean {
+    const parsed = coerce(version);
+    return parsed != null && major(parsed) >= MIN_DISPLAYED_RELEASE_MAJOR;
 }

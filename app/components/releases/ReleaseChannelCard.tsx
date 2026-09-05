@@ -5,6 +5,7 @@ import {
     Button,
     Card,
     Collapse,
+    Divider,
     Group,
     Paper,
     ScrollArea,
@@ -16,7 +17,12 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 import { IconChevronDown, IconDownload } from "@tabler/icons-react";
 import { Logo } from "../base/Logo";
-import { buildPlatforms, formatDownloadCount, type ReleaseChannel } from "../../lib/release";
+import {
+    buildPlatforms,
+    formatDownloadCount,
+    isDisplayedReleaseVersion,
+    type ReleaseChannel,
+} from "../../lib/release";
 
 const OLDER_VERSIONS_SCROLL_HEIGHT = 180;
 
@@ -70,7 +76,11 @@ export function ReleaseChannelCard({ label, channel }: ReleaseChannelCardProps) 
     const platforms = buildPlatforms(channel.downloads);
     const primary = platforms[0];
     const isBeta = label === "Beta";
-    const olderVersions = channel.versions ?? [];
+    const olderVersions = (channel.versions ?? []).filter((entry) =>
+        isDisplayedReleaseVersion(entry.version)
+    );
+    const showLegacyWarning = !isBeta;
+    const showOlderSection = olderVersions.length > 0 || showLegacyWarning;
     const [olderOpened, { toggle: toggleOlder }] = useDisclosure(false);
 
     return (
@@ -139,7 +149,7 @@ export function ReleaseChannelCard({ label, channel }: ReleaseChannelCardProps) 
                     </Group>
                 )}
 
-                {olderVersions.length > 0 && (
+                {showOlderSection && (
                     <Stack gap="xs" className="release-channel-card__older">
                         <UnstyledButton
                             type="button"
@@ -149,7 +159,8 @@ export function ReleaseChannelCard({ label, channel }: ReleaseChannelCardProps) 
                             className="release-channel-card__older-trigger">
                             <Group justify="space-between" wrap="nowrap" gap="sm">
                                 <Text size="sm" c="dimmed">
-                                    Older versions ({olderVersions.length})
+                                    Older versions
+                                    {olderVersions.length > 0 ? ` (${olderVersions.length})` : ""}
                                 </Text>
                                 <IconChevronDown
                                     size={16}
@@ -160,33 +171,46 @@ export function ReleaseChannelCard({ label, channel }: ReleaseChannelCardProps) 
                         </UnstyledButton>
 
                         <Collapse in={olderOpened}>
-                            <ScrollArea
-                                type="always"
-                                scrollbarSize={6}
-                                offsetScrollbars
-                                overscrollBehavior="contain"
+                            <Box
                                 h={OLDER_VERSIONS_SCROLL_HEIGHT}
                                 className="release-channel-card__older-scroll">
-                                <Stack gap="xs" pr="xs">
-                                    {olderVersions.map((entry) => (
-                                        <Group
-                                            key={entry.version}
-                                            justify="space-between"
-                                            align="center"
-                                            wrap="nowrap"
-                                            gap="sm"
-                                            className="release-channel-card__older-row">
-                                            <Stack gap={2}>
-                                                <Text size="sm" fw={600}>
-                                                    v{entry.version}
-                                                </Text>
-                                                <DownloadCount count={entry.downloadCount} />
-                                            </Stack>
-                                            <PlatformLinks downloads={entry.downloads} />
-                                        </Group>
-                                    ))}
-                                </Stack>
-                            </ScrollArea>
+                                {olderVersions.length > 0 && (
+                                    <ScrollArea
+                                        type="always"
+                                        scrollbarSize={6}
+                                        offsetScrollbars
+                                        overscrollBehavior="contain">
+                                        <Stack gap="xs" pr="xs">
+                                            {olderVersions.map((entry) => (
+                                                <Group
+                                                    key={entry.version}
+                                                    justify="space-between"
+                                                    align="center"
+                                                    wrap="nowrap"
+                                                    gap="sm"
+                                                    className="release-channel-card__older-row">
+                                                    <Stack gap={2}>
+                                                        <Text size="sm" fw={600}>
+                                                            v{entry.version}
+                                                        </Text>
+                                                        <DownloadCount count={entry.downloadCount} />
+                                                    </Stack>
+                                                    <PlatformLinks downloads={entry.downloads} />
+                                                </Group>
+                                            ))}
+                                        </Stack>
+                                    </ScrollArea>
+                                )}
+
+                                {showLegacyWarning && (
+                                    <Stack gap={6} className="release-channel-card__older-legacy-note">
+                                        <Divider />
+                                        <Text size="sm" c="dimmed" ta="center">
+                                            v1 releases no longer work as they auto-update to v2
+                                        </Text>
+                                    </Stack>
+                                )}
+                            </Box>
                         </Collapse>
                     </Stack>
                 )}
