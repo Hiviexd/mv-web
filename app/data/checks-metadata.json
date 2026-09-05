@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-31T03:12:33.5743673Z",
+  "generatedAt": "2026-09-05T01:08:14.4839159Z",
   "version": "1.0.0.0",
   "checks": [
     {
@@ -3995,7 +3995,7 @@
           "level": "Warning",
           "formatString": "Missing language tag (\"english\", \"japanese\", \"instrumental\", etc), ignore if none fit.",
           "defaultArguments": [],
-          "cause": "None of the following tags were found (case insensitive):- \"English\"\n- \"Chinese\"\n- \"French\"\n- \"German\"\n- \"Italian\"\n- \"Japanese\"\n- \"Korean\"\n- \"Spanish\"\n- \"Swedish\"\n- \"Russian\"\n- \"Polish\"\n- \"Instrumental\"\n- \"Conlang\"\n- \"Hindi\"\n- \"Arabic\"\n- \"Portugese\"\n- \"Turkish\"\n- \"Vietnamese\"\n- \"Persian\"\n- \"Indonesian\"\n- \"Ukrainian\"\n- \"Romanian\"\n- \"Dutch\"\n- \"Thai\"\n- \"Greek\"\n- \"Somali\"\n- \"Malay\"\n- \"Hungarian\"\n- \"Czech\"\n- \"Norwegian\"\n- \"Finnish\"\n- \"Danish\"\n- \"Latvia\"\n- \"Lithuanian\"\n- \"Estonian\"\n- \"Punjabi\"\n- \"Bengali\"\n"
+          "cause": "None of the following tags were found (case insensitive):- \"English\"\n- \"Chinese\"\n- \"French\"\n- \"German\"\n- \"Italian\"\n- \"Japanese\"\n- \"Korean\"\n- \"Spanish\"\n- \"Swedish\"\n- \"Russian\"\n- \"Polish\"\n- \"Instrumental\"\n- \"Conlang\"\n- \"Hindi\"\n- \"Arabic\"\n- \"Portuguese\"\n- \"Turkish\"\n- \"Vietnamese\"\n- \"Persian\"\n- \"Indonesian\"\n- \"Ukrainian\"\n- \"Romanian\"\n- \"Dutch\"\n- \"Thai\"\n- \"Greek\"\n- \"Somali\"\n- \"Malay\"\n- \"Hungarian\"\n- \"Czech\"\n- \"Norwegian\"\n- \"Finnish\"\n- \"Danish\"\n- \"Latvia\"\n- \"Lithuanian\"\n- \"Estonian\"\n- \"Punjabi\"\n- \"Bengali\"\n"
         }
       },
       "beta": false
