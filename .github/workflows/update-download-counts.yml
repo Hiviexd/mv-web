@@ -1,0 +1,53 @@
+name: Update download counts
+
+on:
+    schedule:
+        - cron: "0 2 * * *"
+    workflow_dispatch:
+
+permissions:
+    contents: write
+    actions: write
+
+concurrency:
+    group: update-download-counts
+    cancel-in-progress: false
+
+jobs:
+    update:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "22"
+
+            - name: Update download counts
+              env:
+                  GITHUB_TOKEN: ${{ github.token }}
+              run: node scripts/update-download-counts.mjs
+
+            - name: Commit and push
+              id: commit
+              run: |
+                  set -euo pipefail
+                  git config user.name "github-actions[bot]"
+                  git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+                  git add app/data/release.json
+                  if git diff --staged --quiet; then
+                    echo "No download count changes"
+                    echo "changed=false" >> "$GITHUB_OUTPUT"
+                    exit 0
+                  fi
+                  git commit -m "chore: update release download counts"
+                  git push
+                  echo "changed=true" >> "$GITHUB_OUTPUT"
+
+            - name: Deploy updated counts
+              if: steps.commit.outputs.changed == 'true'
+              env:
+                  GH_TOKEN: ${{ github.token }}
+              run: gh workflow run deploy-pages.yml --ref "${{ github.ref_name }}"

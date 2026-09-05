@@ -18,6 +18,13 @@ import {
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { execSync } from "node:child_process";
+import {
+    fetchReleases,
+    findReleaseByTag,
+    parseRepo,
+    pickDownloads,
+    stripTag,
+} from "./lib/github-releases.mjs";
 
 const WORKSPACE_ROOT = process.env.WORKSPACE_ROOT ?? process.cwd();
 const MAPSETVERIFIER_ROOT = process.env.MAPSETVERIFIER_ROOT;
@@ -36,18 +43,6 @@ function sourcePath(key) {
 
 function destPath(key) {
     return join(WORKSPACE_ROOT, metadata.destinations[key]);
-}
-
-function parseRepo(repositoryUrl) {
-    const match = repositoryUrl.match(/github\.com\/([^/]+)\/([^/]+?)(?:\.git)?$/i);
-    if (!match) {
-        throw new Error(`Cannot parse GitHub repository from: ${repositoryUrl}`);
-    }
-    return { owner: match[1], repo: match[2] };
-}
-
-function stripTag(tag) {
-    return tag.replace(/^v/i, "");
 }
 
 function mirrorDir(src, dest) {
@@ -172,40 +167,6 @@ function rewriteChangelogFiles(dir) {
     }
 }
 
-function pickDownloads(assets) {
-    const downloads = { windows: null, linux: null, macos: null };
-    const picked = [];
-
-    const appImage = assets.find((a) => a.name.toLowerCase().endsWith(".appimage"));
-    const tarGz = assets.find((a) => a.name.toLowerCase().endsWith(".tar.gz"));
-    const linuxAsset = appImage ?? tarGz;
-    if (linuxAsset) {
-        downloads.linux = linuxAsset.browser_download_url;
-        picked.push(linuxAsset);
-    }
-
-    for (const asset of assets) {
-        const name = asset.name;
-        const lower = name.toLowerCase();
-        const url = asset.browser_download_url;
-
-        if (lower.endsWith(".blockmap")) continue;
-
-        if (lower.endsWith(".exe") && !downloads.windows) {
-            downloads.windows = url;
-            picked.push(asset);
-        }
-
-        if (lower.endsWith(".dmg") && !lower.includes("arm64") && !downloads.macos) {
-            downloads.macos = url;
-            picked.push(asset);
-        }
-    }
-
-    const downloadCount = picked.reduce((sum, asset) => sum + (asset.download_count ?? 0), 0);
-    return { downloads, downloadCount };
-}
-
 function versionEntryFromRelease(release) {
     const { downloads, downloadCount } = pickDownloads(release.assets ?? []);
     return {
@@ -254,19 +215,6 @@ function applyIsLatest(releaseChannel, betaChannel, stableHead, betaHead) {
     betaChannel.isLatest = Boolean(betaPublished) && !stablePublished;
 }
 
-async function fetchReleases(owner, repo) {
-    const url = `https://api.github.com/repos/${owner}/${repo}/releases?per_page=100`;
-    const headers = { Accept: "application/vnd.github+json" };
-    if (process.env.GITHUB_TOKEN) {
-        headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
-    }
-    const response = await fetch(url, { headers });
-    if (!response.ok) {
-        throw new Error(`GitHub API ${response.status}: ${await response.text()}`);
-    }
-    return response.json();
-}
-
 function countFiles(dir) {
     if (!existsSync(dir)) return 0;
     let count = 0;
@@ -279,16 +227,6 @@ function countFiles(dir) {
         }
     }
     return count;
-}
-
-function findReleaseByTag(releases, tag) {
-    if (!tag) return null;
-    const normalized = stripTag(tag);
-    return (
-        releases.find((release) => release.tag_name === tag) ??
-        releases.find((release) => stripTag(release.tag_name) === normalized) ??
-        null
-    );
 }
 
 const { owner, repo } = parseRepo(metadata.repository);
