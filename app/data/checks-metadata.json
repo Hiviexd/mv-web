@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-06T22:47:04.3075755Z",
+  "generatedAt": "2026-09-27T16:54:07.1063435Z",
   "version": "1.0.0.0",
   "checks": [
     {
@@ -89,7 +89,7 @@
         "Expert",
         "Ultra"
       ],
-      "beta": true
+      "beta": false
     },
     {
       "name": "CheckInconsistentBarLines",
@@ -283,7 +283,7 @@
         "Expert",
         "Ultra"
       ],
-      "beta": true
+      "beta": false
     },
     {
       "name": "CheckBaseSvProgression",
@@ -321,7 +321,7 @@
         "Expert",
         "Ultra"
       ],
-      "beta": true
+      "beta": false
     },
     {
       "name": "CheckDiffSettingsTaiko",
@@ -382,7 +382,7 @@
         "Hard",
         "Insane"
       ],
-      "beta": true
+      "beta": false
     },
     {
       "name": "CheckBgOffsetIssues",
@@ -390,11 +390,11 @@
       "checkType": "BeatmapSet",
       "category": "Design",
       "message": "Background offset issues",
-      "author": "Nostril, Hivie",
+      "author": "Hivie, Nostril",
       "applicableModes": "Taiko",
       "documentation": {
         "Purpose": "Pointing out background offset issues between osu!taiko difficulties.",
-        "Reasoning": "Background offset should generally be consistent across osu!taiko difficulties that share the same background.\n\nIn addition, horizontal (X axis) offset is very rare and often leaves black gaps in the playfield, so it should be double-checked when present."
+        "Reasoning": "Background offset should generally be consistent across osu!taiko difficulties that share the same background.\n\nIn addition, horizontal (X axis) offset is very rare and often leaves black gaps in the playfield, so it should be double-checked when present.\n\nVertical offset also can't be too high, as it will cause a gap under the playfield. The limit changes depending on the aspect ratio, for example:\n- 16:9: 115\n- 4:3: 200\n\nA negative offset gaps from the other side. -136 is still safe for 16:9 and -215 is still safe for 4:3; the next step past either of those leaves a gap.\n\nLimit is intentionally slightly lower than the maximum possible value, to account for potential miscalculations."
       },
       "templates": {
         "Inconsistent": {
@@ -415,6 +415,26 @@
             "X offset"
           ],
           "cause": "Horizontal background offset is rare in osu!taiko and often leaves black gaps in the playfield."
+        },
+        "YOffset": {
+          "level": "Warning",
+          "formatString": "\"{0}\"'s vertical offset ({1}) may cause a gap under the playfield. Consider using a value below {2}.",
+          "defaultArguments": [
+            "Filename",
+            "Vertical offset",
+            "Limit"
+          ],
+          "cause": "Vertical offset is high enough that the background no longer covers the playfield for its aspect ratio."
+        },
+        "YOffsetLow": {
+          "level": "Warning",
+          "formatString": "\"{0}\"'s vertical offset ({1}) may cause a gap below the background. Consider using a value above {2}.",
+          "defaultArguments": [
+            "Filename",
+            "Vertical offset",
+            "Limit"
+          ],
+          "cause": "Vertical offset is low enough that the background no longer covers the bottom of the screen for its aspect ratio."
         }
       },
       "modes": [
@@ -1099,7 +1119,7 @@
         "Expert",
         "Ultra"
       ],
-      "beta": true
+      "beta": false
     },
     {
       "name": "CheckDiffSettingsStandard",
@@ -1136,7 +1156,7 @@
         "Insane",
         "Expert"
       ],
-      "beta": true
+      "beta": false
     },
     {
       "name": "CheckAbnormalSpacing",
@@ -1453,7 +1473,7 @@
         "Easy",
         "Normal"
       ],
-      "beta": true
+      "beta": false
     },
     {
       "name": "CheckEasySliderVelocity",
@@ -1552,7 +1572,7 @@
       "applicableModes": "Mania",
       "documentation": {
         "Purpose": "Prevent abnormally big chords from being used in lower difficulties.",
-        "Reasoning": "Due to how many players do not dispose of keyboards capable of registering more than 6-7 keystrokes at once (A.K.A Ghosting), lower difficulties should not allow for more than 7 notes to be pressed at once to be as accessible as possible.\n<br><br>\nMoreover, bigger chords in lower difficulties might be too daunting for players to read at their given skill level. Those should exclusively be used in >=Extra difficulties."
+        "Reasoning": "Due to how many players do not dispose of keyboards capable of registering more than 6-7 keystrokes at once (A.K.A Ghosting), lower difficulties should not allow for more than 7 notes to be pressed at once to be as accessible as possible.\n\nMoreover, bigger chords in lower difficulties might be too daunting for players to read at their given skill level. Those should exclusively be used in >=Extra difficulties."
       },
       "templates": {
         "Warning": {
@@ -1619,7 +1639,7 @@
         "Expert",
         "Ultra"
       ],
-      "beta": true
+      "beta": false
     },
     {
       "name": "CheckDiffSettingsLowerDifficulties",
@@ -1711,7 +1731,7 @@
         "Expert",
         "Ultra"
       ],
-      "beta": true
+      "beta": false
     },
     {
       "name": "CheckHitNormalUsage",
@@ -1804,7 +1824,7 @@
         "Expert",
         "Ultra"
       ],
-      "beta": true
+      "beta": false
     },
     {
       "name": "CheckMissingHitSoundFiles",
@@ -1850,7 +1870,7 @@
         "Expert",
         "Ultra"
       ],
-      "beta": true
+      "beta": false
     },
     {
       "name": "CheckColumnDistribution",
@@ -2008,7 +2028,7 @@
         "Expert",
         "Ultra"
       ],
-      "beta": true
+      "beta": false
     },
     {
       "name": "CheckDiffSettingsCatch",
@@ -2045,7 +2065,7 @@
         "Insane",
         "Expert"
       ],
-      "beta": true
+      "beta": false
     },
     {
       "name": "CheckConsecutiveHyperdash",
@@ -3091,11 +3111,11 @@
       "fullName": "MapsetVerifier.Checks.AllModes.Spread.CheckLowestDiff",
       "checkType": "BeatmapSet",
       "category": "Spread",
-      "message": "Lowest difficulty too difficult for the given drain/play time(s)",
-      "author": "Naxess",
+      "message": "Lowest difficulty too difficult for the given drain time(s)",
+      "author": "Greaper",
       "applicableModes": "All Modes",
       "documentation": {
-        "Purpose": "Ensuring that newer players still have new content to play at the same time as encouraging mappers to map longer songs.\n\n![](/assets/checks/all-modes-spread-lowest-diff-1.png \"The drain time thresholds determining the highest difficulty level for the lowest difficulty in the set.\")",
+        "Purpose": "Ensuring that newer players still have new content to play at the same time as encouraging mappers to map longer songs.\n\n![](/assets/checks/all-modes-spread-lowest-diff-1.png \"The drain time thresholds determining the highest difficulty level for the lowest difficulty in the set.\")\n\nThe thresholds are as follows:\n- osu!, osu!taiko, and osu!catch: below 2:30 at most Normal, below 3:15 at most Hard, below 4:00 at most Insane.\n- osu!mania: below 2:00 at most Normal, below 2:45 at most Hard, below 3:30 at most Insane, for each key mode separately.\n\nIn osu!taiko and osu!catch, break times may be combined with drain time, limited to at most 30 seconds for the highest difficulty. This does not apply to difficulties with less than 30 seconds of drain time.\n\nIn osu!catch and osu!mania, a proper spread of at least 4, 3, or 2 difficulties (for each respective threshold) can be provided instead. Since whether a spread is proper cannot be determined automatically, this is left as a warning to verify manually.",
         "Reasoning": "Newer players usually struggle with especially long songs, so encouraging them to try shorter songs first at lower difficulty levels allows them to learn the basics before trying to train their stamina or similar. This is done by requiring that shorter songs have lower difficulties, while longer songs can have less of them. This also reduces the workload on mappers and as such introduces a larger variety of songs into the game that otherwise wouldn't be so common due to their length."
       },
       "templates": {
@@ -3104,12 +3124,25 @@
           "formatString": "With a lowest difficulty {0}, the {1} time of {2} must be at least {3}, currently {4}.",
           "defaultArguments": [
             "lowest diff",
-            "drain/play",
+            "drain/drain + break",
             "beatmap",
             "lowest drain",
             "current drain"
           ],
-          "cause": "The lowest difficulty of a beatmapset is too high of a difficulty level considering the drain time of the other difficulties, alternatively play time if their drain is 80% or more of it and it isn't the top difficulty."
+          "cause": "The lowest difficulty of a beatmapset (or key mode, for osu!mania) is too high of a difficulty level considering the drain time of the difficulties, and there are not enough difficulties to rely on a proper spread instead."
+        },
+        "Spread": {
+          "level": "Warning",
+          "formatString": "With a lowest difficulty {0}, the {1} time of {2} must be at least {3}, currently {4}. Ensure the {5} difficulties form a proper spread.",
+          "defaultArguments": [
+            "lowest diff",
+            "drain/drain + break",
+            "beatmap",
+            "lowest drain",
+            "current drain",
+            "difficulty count"
+          ],
+          "cause": "Same as the problem, except there are enough difficulties that a proper spread (osu!catch and osu!mania only) could satisfy the requirement instead."
         }
       },
       "modes": [
@@ -3218,7 +3251,7 @@
         "Expert",
         "Ultra"
       ],
-      "beta": true
+      "beta": false
     },
     {
       "name": "CheckInconsistentSettings",
@@ -3392,7 +3425,7 @@
         "Expert",
         "Ultra"
       ],
-      "beta": true
+      "beta": false
     },
     {
       "name": "CheckTickRate",
@@ -3494,7 +3527,7 @@
         "Expert",
         "Ultra"
       ],
-      "beta": true
+      "beta": false
     },
     {
       "name": "CheckHitSounds",
@@ -3781,7 +3814,7 @@
           "cause": "The tags field contains a Mappers' Guild tag (\"mpg\", \"mappers guild\", or \"mappers' guild\")."
         }
       },
-      "beta": true
+      "beta": false
     },
     {
       "name": "CheckMultipleVideo",
@@ -4260,7 +4293,7 @@
           "cause": "A .osu file in the song folder contains no data."
         }
       },
-      "beta": true
+      "beta": false
     },
     {
       "name": "CheckHitsoundDiff",
