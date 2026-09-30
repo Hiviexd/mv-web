@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-27T16:54:07.1063435Z",
+  "generatedAt": "2026-09-30T20:23:13.0235207Z",
   "version": "1.0.0.0",
   "checks": [
     {
@@ -3115,7 +3115,7 @@
       "author": "Greaper",
       "applicableModes": "All Modes",
       "documentation": {
-        "Purpose": "Ensuring that newer players still have new content to play at the same time as encouraging mappers to map longer songs.\n\n![](/assets/checks/all-modes-spread-lowest-diff-1.png \"The drain time thresholds determining the highest difficulty level for the lowest difficulty in the set.\")\n\nThe thresholds are as follows:\n- osu!, osu!taiko, and osu!catch: below 2:30 at most Normal, below 3:15 at most Hard, below 4:00 at most Insane.\n- osu!mania: below 2:00 at most Normal, below 2:45 at most Hard, below 3:30 at most Insane, for each key mode separately.\n\nIn osu!taiko and osu!catch, break times may be combined with drain time, limited to at most 30 seconds for the highest difficulty. This does not apply to difficulties with less than 30 seconds of drain time.\n\nIn osu!catch and osu!mania, a proper spread of at least 4, 3, or 2 difficulties (for each respective threshold) can be provided instead. Since whether a spread is proper cannot be determined automatically, this is left as a warning to verify manually.",
+        "Purpose": "Ensuring that newer players still have new content to play at the same time as encouraging mappers to map longer songs.\n\n![](/assets/checks/all-modes-spread-lowest-diff-1.png \"The drain time thresholds determining the highest difficulty level for the lowest difficulty in the set.\")\n\nThe thresholds are as follows:\n- osu!, osu!taiko, and osu!catch: below 2:30 at most Normal, below 3:15 at most Hard, below 4:00 at most Insane.\n- osu!mania: below 2:00 at most Normal, below 2:45 at most Hard, below 3:30 at most Insane, for each key mode separately.\n\nIn osu!, osu!taiko and osu!catch, break times may be combined with drain time, limited to at most 30 seconds for the highest difficulty. This does not apply to difficulties with less than 30 seconds of drain time.\n\nIn osu!catch and osu!mania, a proper spread of at least 4, 3, or 2 difficulties (for each respective threshold) can be provided instead. Since whether a spread is proper cannot be determined automatically, this is left as a warning to verify manually.",
         "Reasoning": "Newer players usually struggle with especially long songs, so encouraging them to try shorter songs first at lower difficulty levels allows them to learn the basics before trying to train their stamina or similar. This is done by requiring that shorter songs have lower difficulties, while longer songs can have less of them. This also reduces the workload on mappers and as such introduces a larger variety of songs into the game that otherwise wouldn't be so common due to their length."
       },
       "templates": {
