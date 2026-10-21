@@ -2,7 +2,7 @@
     "release": {
         "latestVersion": "2.1.1",
         "isLatest": true,
-        "downloadCount": 1140,
+        "downloadCount": 1181,
         "downloads": {
             "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.1.1/Mapset-Verifier-Installer.exe",
             "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.1.1/Mapset-Verifier-2.1.1.AppImage",
@@ -11,7 +11,7 @@
         "versions": [
             {
                 "version": "2.1.0",
-                "downloadCount": 370,
+                "downloadCount": 372,
                 "downloads": {
                     "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.1.0/Mapset-Verifier-Installer.exe",
                     "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.1.0/Mapset-Verifier-2.1.0.AppImage",
@@ -20,7 +20,7 @@
             },
             {
                 "version": "2.0.0",
-                "downloadCount": 3069,
+                "downloadCount": 3070,
                 "downloads": {
                     "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0/Mapset-Verifier-Installer.exe",
                     "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.0.0/Mapset-Verifier-2.0.0.AppImage",
@@ -29,7 +29,7 @@
             },
             {
                 "version": "1.8.2",
-                "downloadCount": 33952,
+                "downloadCount": 33954,
                 "downloads": {
                     "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.8.2/mapsetverifier-setup-1.8.2.exe",
                     "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.8.2/mapsetverifier-1.8.2.tar.gz",
@@ -47,7 +47,7 @@
             },
             {
                 "version": "1.8.0",
-                "downloadCount": 886,
+                "downloadCount": 887,
                 "downloads": {
                     "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.8.0/mapsetverifier-setup-1.8.0.exe",
                     "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.8.0/mapsetverifier-1.8.0.tar.gz",
@@ -56,7 +56,7 @@
             },
             {
                 "version": "1.7.2",
-                "downloadCount": 5028,
+                "downloadCount": 5029,
                 "downloads": {
                     "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.7.2/mapsetverifier-setup-1.7.2.exe",
                     "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.7.2/mapsetverifier-1.7.2.tar.gz",
@@ -74,7 +74,7 @@
             },
             {
                 "version": "1.7.0",
-                "downloadCount": 473,
+                "downloadCount": 474,
                 "downloads": {
                     "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.7.0/mapsetverifier-setup-1.7.0.exe",
                     "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.7.0/mapsetverifier-1.7.0.tar.gz",
@@ -83,7 +83,7 @@
             },
             {
                 "version": "1.6.6",
-                "downloadCount": 1721,
+                "downloadCount": 1722,
                 "downloads": {
                     "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.6.6/mapsetverifier-setup-1.6.6.exe",
                     "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.6.6/mapsetverifier-1.6.6.tar.gz",
@@ -92,7 +92,7 @@
             },
             {
                 "version": "1.6.5",
-                "downloadCount": 1279,
+                "downloadCount": 1280,
                 "downloads": {
                     "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.6.5/mapsetverifier-setup-1.6.5.exe",
                     "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v1.6.5/mapsetverifier-1.6.5.tar.gz",
