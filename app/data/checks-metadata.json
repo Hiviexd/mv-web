@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-29T19:37:28.0570019Z",
+  "generatedAt": "2026-11-10T22:27:59.8929467Z",
   "version": "1.0.0.0",
   "checks": [
     {
@@ -1521,6 +1521,43 @@
       "beta": false
     },
     {
+      "name": "CheckBrokenStacks",
+      "fullName": "MapsetVerifier.Checks.Standard.Compose.CheckBrokenStacks",
+      "checkType": "Beatmap",
+      "category": "Compose",
+      "message": "Broken stacks",
+      "author": "Greaper",
+      "applicableModes": "Standard",
+      "documentation": {
+        "Purpose": "Pointing out objects which are placed almost, but not quite, on top of each other, so the\ngame does not stack them.",
+        "Reasoning": "The game only stacks objects that are less than 3 pixels apart. Objects placed a few pixels\nfurther apart than that are drawn nearly on top of each other without the usual stack offset,\nwhich looks like a stack that went wrong. This usually comes from moving one object of a\nstack slightly by accident, but can be intentional, so make sure it is."
+      },
+      "templates": {
+        "Broken Stack": {
+          "level": "Warning",
+          "formatString": "{0} Broken stack, objects are {1} px apart, ensure this is intentional.",
+          "defaultArguments": [
+            "timestamp -",
+            "distance"
+          ],
+          "cause": "Objects close in time are at least 3 px apart, so they do not stack, but are still within a third of a circle radius of each other.",
+          "ruleIds": []
+        }
+      },
+      "modes": [
+        "Standard"
+      ],
+      "difficulties": [
+        "Easy",
+        "Normal",
+        "Hard",
+        "Insane",
+        "Expert",
+        "Ultra"
+      ],
+      "beta": true
+    },
+    {
       "name": "CheckBurai",
       "fullName": "MapsetVerifier.Checks.Standard.Compose.CheckBurai",
       "checkType": "Beatmap",
@@ -2144,7 +2181,7 @@
       "documentation": {
         "Purpose": "Ensuring hit sounds are copied down consistently between difficulties of the same\nbeatmapset.",
         "Reasoning": "Mania difficulties are usually hit sounded once and then copied over to the rest of the\nset. Notes that exist in both difficulties are expected to sound the same, so a sample\nwhich one difficulty plays and another doesn't is usually an addition that was missed\nwhile copying.",
-        "Exceptions": "Only points in time where both difficulties actually have a note are compared, since a\ndifficulty can't play a sample where it has nothing to hit.\n\nThe hit normal is left out of the comparison. It's driven by the timing lines rather\nthan by individual notes, and inconsistencies there are already pointed out by the\ninconsistent timing lines check.\n\nDifficulties which appear to use their own, unrelated hit sounding (for example a guest\ndifficulty using samples from a different set) are excluded from the comparison, since\nthey're expected to be inconsistent with the rest."
+        "Exceptions": "Only points in time where both difficulties actually have a note are compared, since a\ndifficulty can't play a sample where it has nothing to hit.\n\nStoryboarded samples in a difficulty count as played at their time too, since lower\ndifficulties often storyboard the samples of notes they leave out of a chord.\n\nThe hit normal is left out of the comparison. It's driven by the timing lines rather\nthan by individual notes, and inconsistencies there are already pointed out by the\ninconsistent timing lines check.\n\nDifficulties which appear to use their own, unrelated hit sounding (for example a guest\ndifficulty using samples from a different set) are excluded from the comparison, since\nthey're expected to be inconsistent with the rest."
       },
       "templates": {
         "Missing": {
@@ -2676,7 +2713,7 @@
       "applicableModes": "Catch",
       "documentation": {
         "Purpose": "Every difficulty should have a spinner if possible to create fluctuation among scores.\nHowever, if a spinner just doesn't fit anywhere in the song, then there's no need to force one.",
-        "Reasoning": "Scoring in catch is based on the amount of fruits, droplets. Because of this getting 100% accuracy is fairly easy to get.\n\nBananas are an exception since they are the bonus fruit in catch, this means that you won't be punished if you miss any of them, although they get only generated with a spinner."
+        "Reasoning": "Scoring in catch is based on the amount of fruits, drops and droplets. Because of this getting 100% accuracy is fairly easy to get.\n\nBananas are an exception since they are the bonus fruit in catch, this means that you won't be punished if you miss any of them, although they get only generated with a spinner."
       },
       "templates": {
         "NoSpinner": {
@@ -2747,7 +2784,7 @@
       "applicableModes": "Catch",
       "documentation": {
         "Purpose": "Combos should not reach unreasonable lengths.",
-        "Reasoning": "Caught fruits will stack up on the plate and can potentially obstruct the player's view.\nBear in mind that slider tails, repeats and spinner bananas also count as fruits."
+        "Reasoning": "Caught fruits will stack up on the plate and can potentially obstruct the player's view.\nBear in mind that slider tails, repeats, drops and spinner bananas also count towards combo.\nA combo made of a single slider can't be split up, so it is only pointed out as a minor issue."
       },
       "templates": {
         "MaxComboSignificantly": {
@@ -2775,6 +2812,22 @@
             "combo"
           ],
           "cause": "The combo amount exceeds the guideline.",
+          "ruleIds": [
+            "catch/combos-not-reach-unreasonable-lengths",
+            "catch/cup/combos-not-exceed-8-fruits",
+            "catch/salad/combos-not-exceed-10-fruits",
+            "catch/platter/combos-not-exceed-12-fruits"
+          ]
+        },
+        "MaxComboSingleSlider": {
+          "level": "Minor",
+          "formatString": "{0} The amount of combo exceeds the guideline of {1}, currently it has {2}. This combo is a single slider.",
+          "defaultArguments": [
+            "timestamp -",
+            "guideline combo",
+            "combo"
+          ],
+          "cause": "The combo amount of a single slider exceeds the guideline.",
           "ruleIds": [
             "catch/combos-not-reach-unreasonable-lengths",
             "catch/cup/combos-not-exceed-8-fruits",
@@ -2895,12 +2948,12 @@
       "fullName": "MapsetVerifier.Checks.Catch.Compose.Rain.CheckRainHyperdashSlider",
       "checkType": "Beatmap",
       "category": "Compose",
-      "message": "Contains hyperdashes on repeat or droplet",
+      "message": "Contains hyperdashes on repeat or drop",
       "author": "Greaper",
       "applicableModes": "Catch",
       "documentation": {
-        "Purpose": "Hyperdashes on slider droplets or repeats in Rains are discouraged.",
-        "Reason": "Players should be somewhat comfortable with hyperdashes on Rains, it is still discouraged to use any repeat or droplet hyperdashes maintain a manageable difficulty progression."
+        "Purpose": "Hyperdashes on slider drops or repeats in Rains are discouraged.",
+        "Reason": "Players should be somewhat comfortable with hyperdashes on Rains, it is still discouraged to use any repeat or drop hyperdashes maintain a manageable difficulty progression."
       },
       "templates": {
         "SliderHyperRain": {
@@ -2910,7 +2963,7 @@
             "timestamp -",
             "object"
           ],
-          "cause": "Hyperdash is put on a droplet or slider repeat.",
+          "cause": "Hyperdash is put on a drop or slider repeat.",
           "ruleIds": [
             "catch/rain/hyperdashes-not-used-individual-drops"
           ]
@@ -4071,7 +4124,7 @@
       "author": "Naxess",
       "applicableModes": "All Modes",
       "documentation": {
-        "Purpose": "Ensuring that slider ticks align with the song's beat structure.\n\n![](/assets/checks/all-modes-settings-tick-rate-1.png \"A 1/1 slider with an asymmetric tick rate (neither a tick in the middle nor two equally distanced from it).",
+        "Purpose": "Ensuring that slider ticks align with the song's beat structure.\n\n![](/assets/checks/all-modes-settings-tick-rate-1.png)\nA 1/1 slider with an asymmetric tick rate (neither a tick in the middle nor two equally distanced from it).",
         "Reasoning": "Slider ticks, just like any other object, should align with the song in some way. If slider ticks are going after a 1/5 beat\nstructure, for instance, that's either extremely rare or much more likely a mistake."
       },
       "templates": {
@@ -4488,6 +4541,33 @@
       "beta": false
     },
     {
+      "name": "CheckImageFileFormat",
+      "fullName": "MapsetVerifier.Checks.AllModes.General.Resources.CheckImageFileFormat",
+      "checkType": "General",
+      "category": "Resources",
+      "message": "Image file format differs from its file name",
+      "author": "Greaper",
+      "applicableModes": "General",
+      "documentation": {
+        "Purpose": "Ensuring image files are named after the format they actually are in, for example not a PNG named `white.jpg`.",
+        "Reasoning": "The game looks at the content of an image, so such a file still shows up in-game. Other programs often go by the\nfile name instead, and can fail to open it or treat it incorrectly.\n\nWhen renaming the file, make sure to also update wherever it is referenced, such as in the storyboard."
+      },
+      "templates": {
+        "Format": {
+          "level": "Warning",
+          "formatString": "\"{0}\" is a {1} file, but its name says {2}. Rename it to match its format.",
+          "defaultArguments": [
+            "file name",
+            "actual format",
+            "format in the name"
+          ],
+          "cause": "The content of an image file is a different format than its extension.",
+          "ruleIds": []
+        }
+      },
+      "beta": true
+    },
+    {
       "name": "CheckMappersGuildBackground",
       "fullName": "MapsetVerifier.Checks.AllModes.General.Resources.CheckMappersGuildBackground",
       "checkType": "General",
@@ -4721,6 +4801,56 @@
         }
       },
       "beta": false
+    },
+    {
+      "name": "CheckContentUsagePermissions",
+      "fullName": "MapsetVerifier.Checks.AllModes.General.Metadata.CheckContentUsagePermissions",
+      "checkType": "General",
+      "category": "Metadata",
+      "message": "Artist restricts the use of their songs",
+      "author": "Greaper",
+      "applicableModes": "General",
+      "documentation": {
+        "Purpose": "Pointing out songs from artists who do not allow, or only partly allow, their songs to be used\nin osu!, according to the [content usage permissions](https://osu.ppy.sh/wiki/en/Rules/Content_usage_permissions#artist-permissions).",
+        "Reasoning": "Beatmaps using songs without permission can be removed. Many mappers do not know which artists\nrestrict their songs, so it is easy to map one by accident.\n\nThe artist and source fields are compared against the artists listed as *allowed, with\nexceptions* and *disallowed*. Featured Artist tracks are always allowed, even from these\nartists, which this check cannot tell apart; ignore it for those.\n\nNames found only in the tags are pointed out as minor issues. Music labels and the composers\nof covers often only appear there, but so do the names of mappers and others."
+      },
+      "templates": {
+        "Disallowed": {
+          "level": "Problem",
+          "formatString": "\"{0}\" does not allow their songs to be used. This can only be ranked with explicit permission for the song, shown in the description or discussion.",
+          "defaultArguments": [
+            "artist"
+          ],
+          "cause": "The artist or source names an artist listed as disallowed in the content usage permissions.",
+          "ruleIds": [
+            "general/beatmap-content-cleared-regarding-content"
+          ]
+        },
+        "Exceptions": {
+          "level": "Warning",
+          "formatString": "\"{0}\" only allows some of their songs to be used: {1}",
+          "defaultArguments": [
+            "artist",
+            "conditions"
+          ],
+          "cause": "The artist or source names an artist listed as allowed, with exceptions in the content usage permissions.",
+          "ruleIds": [
+            "general/beatmap-content-cleared-regarding-content"
+          ]
+        },
+        "Tags": {
+          "level": "Minor",
+          "formatString": "Tags mention \"{0}\", who restricts the use of their songs. Make sure this song is allowed, see the content usage permissions.",
+          "defaultArguments": [
+            "artist"
+          ],
+          "cause": "A restricted artist or label appears in the tags but not in the artist or source, as with music labels and covers. Tags also hold other names, such as mappers, so this may not be about the song at all.",
+          "ruleIds": [
+            "general/beatmap-content-cleared-regarding-content"
+          ]
+        }
+      },
+      "beta": true
     },
     {
       "name": "CheckGenreLanguage",
@@ -6067,9 +6197,9 @@
   "rankingCriteria": {
     "source": {
       "repository": "ppy/osu-wiki",
-      "commit": "517121c18abca0768d9ed36c8603396d70b4c862",
-      "commitDate": "2026-10-06T18:39:18+00:00",
-      "fetchedAt": "2026-10-06T18:42:57.3024092+00:00"
+      "commit": "d70f1fe4fa2443a114d7e17be144d8900247fca4",
+      "commitDate": "2026-11-04T02:33:32+00:00",
+      "fetchedAt": "2026-11-09T14:45:52.3865684+00:00"
     },
     "pages": [
       {
@@ -6141,6 +6271,17 @@
         "key": "difficulty-naming",
         "title": "Difficulty naming",
         "wikiUrl": "https://osu.ppy.sh/wiki/en/Ranking_criteria/Difficulty_naming",
+        "modes": [
+          "Standard",
+          "Taiko",
+          "Catch",
+          "Mania"
+        ]
+      },
+      {
+        "key": "content-usage",
+        "title": "Content usage permissions",
+        "wikiUrl": "https://osu.ppy.sh/wiki/en/Rules/Content_usage_permissions",
         "modes": [
           "Standard",
           "Taiko",
@@ -7100,6 +7241,18 @@
         "intro": false,
         "difficulties": [],
         "automation": "Manual"
+      },
+      {
+        "id": "general/skinning/not-know-who-made-elements",
+        "page": "general",
+        "kind": "Rule",
+        "lead": "If you do not know who made the elements you plan on using, you must not use them.",
+        "path": [
+          "Skinning"
+        ],
+        "intro": false,
+        "difficulties": [],
+        "automation": "Unknown"
       },
       {
         "id": "general/skinning/gameplay-elements-visible",
