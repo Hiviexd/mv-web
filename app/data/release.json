@@ -2,7 +2,7 @@
     "release": {
         "latestVersion": "2.1.1",
         "isLatest": false,
-        "downloadCount": 1853,
+        "downloadCount": 1860,
         "downloads": {
             "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.1.1/Mapset-Verifier-Installer.exe",
             "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.1.1/Mapset-Verifier-2.1.1.AppImage",
@@ -399,15 +399,24 @@
         ]
     },
     "beta": {
-        "latestVersion": "2.2.0-beta.2",
+        "latestVersion": "2.2.0-beta.3",
         "isLatest": true,
-        "downloadCount": 210,
+        "downloadCount": 0,
         "downloads": {
-            "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.2.0-beta.2/Mapset-Verifier-Installer.exe",
-            "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.2.0-beta.2/Mapset-Verifier-2.2.0-beta.2.AppImage",
-            "macos": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.2.0-beta.2/Mapset-Verifier-2.2.0-beta.2.dmg"
+            "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.2.0-beta.3/Mapset-Verifier-Installer.exe",
+            "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.2.0-beta.3/Mapset-Verifier-2.2.0-beta.3.AppImage",
+            "macos": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.2.0-beta.3/Mapset-Verifier-2.2.0-beta.3.dmg"
         },
         "versions": [
+            {
+                "version": "2.2.0-beta.2",
+                "downloadCount": 211,
+                "downloads": {
+                    "windows": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.2.0-beta.2/Mapset-Verifier-Installer.exe",
+                    "linux": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.2.0-beta.2/Mapset-Verifier-2.2.0-beta.2.AppImage",
+                    "macos": "https://github.com/Naxesss/MapsetVerifier/releases/download/v2.2.0-beta.2/Mapset-Verifier-2.2.0-beta.2.dmg"
+                }
+            },
             {
                 "version": "2.2.0-beta.1",
                 "downloadCount": 263,
