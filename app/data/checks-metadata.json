@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-10T22:27:59.8929467Z",
+  "generatedAt": "2026-11-18T18:55:23.6972913Z",
   "version": "1.0.0.0",
   "checks": [
     {
@@ -2394,7 +2394,7 @@
       "applicableModes": "Catch",
       "documentation": {
         "Purpose": "Ensuring that beatmap-specific skin elements are complete sets, use appropriate file formats,\nand follow the osu!catch ranking criteria's skinning rules.",
-        "Reasoning": "When skinning a gameplay element, complete sets of elements need to be skinned in order to\navoid conflicts between user-specific and beatmap-specific skins. If a required element of a\npartially-skinned set is missing, the user-specific skin's version of that element may be\nused instead, which can look inconsistent or even unreadable together with the rest of the\nbeatmap skin.\n\nFruits, drops, and the catcher must also match their default skin dimensions exactly, since\nthey represent the in-game hitbox and altering their size can change gameplay, and custom\ncatchers require the skin.ini to declare a v2 (or higher) skin format."
+        "Reasoning": "When skinning a gameplay element, complete sets of elements need to be skinned in order to\navoid conflicts between user-specific and beatmap-specific skins. If a required element of a\npartially-skinned set is missing, the user-specific skin's version of that element may be\nused instead, which can look inconsistent or even unreadable together with the rest of the\nbeatmap skin.\n\nFruits, drops, and the catcher must also match their default skin dimensions exactly, since\nthey represent the in-game hitbox and altering their size can change gameplay. Custom catchers\nalso need the v2 (or higher) skin format. Without a skin.ini the latest version is used, but a\nskin.ini without a Version command falls back to 1.0, so it must then declare v2 or higher."
       },
       "templates": {
         "Incomplete Set": {
@@ -2429,7 +2429,7 @@
           "level": "Problem",
           "formatString": "A custom catcher is skinned, but skin.ini does not declare a v2 (or higher) skin format.",
           "defaultArguments": [],
-          "cause": "Custom catchers must be included in the v2 skin format, declared via \"Version\" under [General] in skin.ini.",
+          "cause": "Custom catchers must be included in the v2 skin format. A skin.ini is present, but its \"Version\" under [General] is missing or below 2.",
           "ruleIds": [
             "catch/skinning/custom-catchers-included-v2-skin"
           ]
@@ -5067,6 +5067,19 @@
             "metadata/markers/short-ver-used-mark-shorter",
             "metadata/markers/game-ver-used-mark-game",
             "metadata/markers/movie-ver-used-mark-movie"
+          ]
+        },
+        "Stylised Marker": {
+          "level": "Warning",
+          "formatString": "\"{0}\" is written in capitals instead of \"{1}\", ensure this matches how the song is stylised.",
+          "defaultArguments": [
+            "title marker",
+            "standard marker"
+          ],
+          "cause": "A standard version marker is written in full capitals, the same way in both title fields, while the rest of the title is not. This is likely a stylistic choice, but should match the song's own stylisation.",
+          "ruleIds": [
+            "metadata/markers/songs-version-markers-fully-replaced",
+            "metadata/markers/similar-markers-song-title-replace"
           ]
         },
         "Nightcore Tag": {
