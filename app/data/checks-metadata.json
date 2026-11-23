@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-18T18:55:23.6972913Z",
+  "generatedAt": "2026-11-22T21:22:10.0580801Z",
   "version": "1.0.0.0",
   "checks": [
     {
@@ -1555,7 +1555,7 @@
         "Expert",
         "Ultra"
       ],
-      "beta": true
+      "beta": false
     },
     {
       "name": "CheckBurai",
@@ -4565,7 +4565,7 @@
           "ruleIds": []
         }
       },
-      "beta": true
+      "beta": false
     },
     {
       "name": "CheckMappersGuildBackground",
@@ -4850,7 +4850,7 @@
           ]
         }
       },
-      "beta": true
+      "beta": false
     },
     {
       "name": "CheckGenreLanguage",
